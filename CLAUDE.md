@@ -6,3 +6,4 @@ Follow `AGENTS.md` and `docs/PROJECT_BRIEF.md` (v3.0).
 - Data: `uv run python scripts/fetch_data.py --list | --pull` (needs the env vars from `.env.example`).
 - Tests: `uv run pytest`. Lint: `uv run ruff check .`
 - Advisor reviews: write the envelope first, then spawn the `advisor` subagent with the envelope path only.
+- Network: read `config/network.yaml` before researching. Fetch only from allowlisted hosts.

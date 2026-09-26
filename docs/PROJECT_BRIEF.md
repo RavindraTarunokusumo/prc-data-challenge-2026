@@ -146,6 +146,10 @@ The cloud environment's network policy must allow the competition hosts
 (`prc-data-challenge-2026.netlify.app` and `s3.opensky-network.org`). Resolved in the preamble; see
 `docs/incidents/INC-0002` (closed).
 
+The full allowlist (data and literature hosts) and the web-access rules live in
+**`config/network.yaml`**. Every session reads it at startup before any research.
+Fetching from an unlisted host is not allowed; the researcher records a `HOLD` naming the host instead.
+
 ### 5.4 Import procedure
 
 1. `uv run python scripts/fetch_data.py --list`: inventory the bucket and record it in `data/manifests/remote_inventory.json`.

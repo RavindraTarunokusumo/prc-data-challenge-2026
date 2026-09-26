@@ -1,0 +1,29 @@
+schema: network-allowlist-v1
+# Mirrors the cloud environment's network allowlist (set by the owner in the
+# environment settings). Read at every session start, BEFORE any research or
+# literature lookup (AGENTS.md). Changing it requires an owner decision logged in
+# docs/incidents/.
+allowed_hosts:
+  data:
+    - host: s3.opensky-network.org
+      purpose: Competition MinIO store (bucket prc-2026-datasets); submission bucket forbidden until FROZEN
+    - host: prc-data-challenge-2026.netlify.app
+      purpose: Official challenge documentation (data, rules, submission format)
+  literature:
+    - host: arxiv.org
+      purpose: Papers (general methodology only)
+    - host: export.arxiv.org
+      purpose: arXiv API / PDF export
+    - host: api.semanticscholar.org
+      purpose: Paper metadata and citation lookup
+    - host: dspace.mit.edu
+      purpose: MIT open-access papers (e.g. departure queueing models)
+    - host: www.mit.edu
+      purpose: MIT author-hosted papers
+    - host: ansperformance.eu
+      purpose: PRC/PRU taxi-out methodology and definitions (general methodology)
+package_indexes: [pypi.org, files.pythonhosted.org]   # allowed by the platform by default
+rules:
+  - Web search is allowed for general methodology. Always exclude github.com and kaggle.com, and never search for other PRC 2026 teams, solutions or leaderboards (LEADERBOARD_POLICY).
+  - Only fetch pages from the hosts above. If a needed source is on another host, record a HOLD with the exact host in docs/incidents/ and continue without it.
+  - Cite every literature source used in the proposal or journal entry that relies on it.
