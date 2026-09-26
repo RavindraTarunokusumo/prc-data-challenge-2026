@@ -1,0 +1,15 @@
+schema: resources-v1
+host: claude-code-cloud-container
+calibrated: false   # Day 1 calibration replaces these defaults (tightening only)
+cpu_count: 4
+ram_total_gb: 15
+swap_gb: 0
+gpu: none
+limits:
+  ram_hard_gb_per_experiment: 11
+  data_disk_budget_gb: 20
+classes:
+  CLASS-S: {runtime_min: 5,  ram_gb: 4}
+  CLASS-M: {runtime_min: 30, ram_gb: 8}
+  CLASS-L: {runtime_min: 90, ram_gb: 11, requires_advisor_justification: true}
+failure_statuses: [RESOURCE_FAILURE, TIMEOUT, INVALID]

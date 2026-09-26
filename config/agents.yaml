@@ -1,0 +1,17 @@
+schema: agents-config-v3
+frozen_at: preamble
+researcher:
+  runtime: claude-code-cloud-main-session
+  model_id: claude-opus-5-5
+  effort: high
+  writable_scope: [src/, scripts/, tests/, config/ (except frozen files), research/ (except advisor/), experiments/, data/, models/, checkpoints/, predictions/, orchestration/]
+advisor:
+  runtime: claude-code-subagent
+  definition: .claude/agents/advisor.md
+  definition_sha256: 30fff5dd3c545a574af3151c7fcf58d305d9ab9748eb831ef83052f72b8d0d19
+  model_alias: opus
+  effort: max
+  policy_version: advisor-policy-v3.0
+  review_schema: advisor-review-v1
+  writable_scope: [research/day-*/advisor/, orchestration/advisor-exchanges/]
+communication_contract: docs/governance/COMMUNICATION_CONTRACT.md
