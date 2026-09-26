@@ -1,0 +1,50 @@
+# --- Secrets: never commit (repository is PUBLIC) ---
+.env
+.env.*
+!.env.example
+*.pem
+*credentials*
+.aws/
+.mc/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+
+# --- Data and heavy artifacts (tracked via manifests only) ---
+data/raw/*
+data/processed/*
+data/cache/*
+!data/**/.gitkeep
+models/candidates/*
+models/champion/*
+!models/champion/CURRENT.json
+checkpoints/training/
+checkpoints/optimizer/
+predictions/validation/*
+predictions/final/*
+!predictions/**/.gitkeep
+runtime/*
+!runtime/.gitkeep
+!runtime/ledger.sqlite.schema.sql
+*.parquet
+*.arrow
+*.feather
+*.duckdb
+*.sqlite
+*.pkl
+*.joblib
+*.cbm
+*.ubj
+*.pt
+*.ckpt
+mlruns/
+
+# --- OS / editor ---
+.DS_Store
+.vscode/
+.idea/
