@@ -116,7 +116,7 @@ not a nicety.
 ### 5.1 Sources
 
 - Competition data page: <https://prc-data-challenge-2026.netlify.app/data.html>
-- Competition object storage: OpenSky MinIO/S3 (endpoint to be confirmed during the Day 1 audit; default `s3.opensky-network.org`)
+- Competition object storage: OpenSky MinIO/S3, endpoint `s3.opensky-network.org`, data bucket **`prc-2026-datasets`** (confirmed at import, see `docs/methodology/DATASET_IMPORT.md`)
 - Team submission bucket: `prc-2026-genuine-cabbage` (**write-only at freeze; never read or written during Days 1–4**)
 - OpenSky account: used only if a pre-registered hypothesis needs OpenSky data the competition does not ship, and only for data available at prediction time
 
@@ -143,8 +143,8 @@ The session mirror redacts any value matching a known secret before writing.
 ### 5.3 Network
 
 The cloud environment's network policy must allow the competition hosts
-(`prc-data-challenge-2026.netlify.app` and the MinIO endpoint). Until then the
-dataset import is `HOLD`, recorded in `docs/incidents/INC-0002`.
+(`prc-data-challenge-2026.netlify.app` and `s3.opensky-network.org`). Resolved in the preamble; see
+`docs/incidents/INC-0002` (closed).
 
 ### 5.4 Import procedure
 

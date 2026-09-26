@@ -7,5 +7,5 @@
 - **Accepted findings:** none
 - **Rejected hypotheses:** none
 - **Known leakage hazards:** to be established by the Day 1 prediction-time availability audit
-- **Open blockers:** INC-0002 (dataset import on HOLD: network policy)
-- **Next action:** Day 1 — resolve INC-0002, import and audit the data, freeze splits
+- **Open blockers:** none (INC-0002 closed; dataset imported and verified)
+- **Next action:** Day 1 — environment check, dataset audit + prediction-time availability audit, freeze splits (Advisor review), evaluator, baselines
