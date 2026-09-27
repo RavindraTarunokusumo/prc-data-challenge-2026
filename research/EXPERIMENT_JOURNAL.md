@@ -17,8 +17,10 @@ Append-only. One entry per experiment; negative results are kept.
 - Development mean **548.42**. Against E002: mean dRMSE −5.31 s (q95 −4.90). Folds: 4 WIN, W1 TIE; twins WIN. Tail share 0.065.
 - Reproduction E008 exact. The gain (0.96 %) is just below the predicted 1–3 %. The takeoff-hour effect mixes diurnal demand with taxi-duration mechanics (label T).
 
-### E004 · H005 anchor `MVT − AOBT_3` · COMPLETE (comparison pending)
-- Development mean 550.65. This is far worse than the audit's all-row 384.9 s. See its analysis once compared.
+### E004 · H005 anchor `MVT − AOBT_3` · COMPLETE → REJECT
+- Development mean 550.65. Against champion E003: mean +2.22 s; R1 and R2 LOSS, W1 WIN (−50 s); criterion 3 fails (EDDM, LTFM, EHAM). Falsified.
+- **Dominant row:** the day-scale LIRF row (anchor 87,181 s) has target **87,002 s**. The raw anchor is exact on it, and bounded models miss by about 86,000 s. It alone decides the S1 outcome (S1 bulk +51.8 s).
+- The anchor helps strongly in winter (W1 bulk −47 s) and hurts in the bulk elsewhere.
 
 ### E005 · H004 ridge FS0 · COMPLETE (comparison pending)
 - Development mean 482.73. Within CLASS-S (94 s, 3.76 GB peak, under the 4 GB target).
