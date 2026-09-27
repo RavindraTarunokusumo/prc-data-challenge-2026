@@ -13,8 +13,9 @@ Append-only. One entry per experiment; negative results are kept.
 - Development mean **553.74**. Against E001: mean dRMSE −27.05 s (q95 −24.51). All 7 folds WIN; tail share 0.037; no row concentration.
 - Reproduction E007 (seed 43) is identical. LFPG shows the expected small forward exposure (S1 400.5 against S1c 412.6).
 
-### E003 · H003 airport × hour median · COMPLETE (comparison pending)
-- Development mean 548.42.
+### E003 · H003 airport × hour median · COMPLETE → PROMOTE (champion)
+- Development mean **548.42**. Against E002: mean dRMSE −5.31 s (q95 −4.90). Folds: 4 WIN, W1 TIE; twins WIN. Tail share 0.065.
+- Reproduction E008 exact. The gain (0.96 %) is just below the predicted 1–3 %. The takeoff-hour effect mixes diurnal demand with taxi-duration mechanics (label T).
 
 ### E004 · H005 anchor `MVT − AOBT_3` · COMPLETE (comparison pending)
 - Development mean 550.65. This is far worse than the audit's all-row 384.9 s. See its analysis once compared.
