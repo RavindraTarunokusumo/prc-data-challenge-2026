@@ -26,3 +26,19 @@ Append-only. One entry per experiment; negative results are kept.
 - Development mean **482.73** (predicted 400–470 s: a miss). Against E003: mean −65.70 s, all 7 WIN, tail share 0.254.
 - Against H005: all WIN. Rows beyond the winsorisation clip carry 5–40 % of that margin, so the fitted combination is the main mechanism and clipping a secondary one.
 - Reproduction E009 exact. CLASS-S (3.76 GB).
+
+### E006 · H006 LightGBM FS0 · COMPLETE → INCONCLUSIVE (not promoted)
+- Development mean **377.87**, the lowest of Day 1. Against ridge E005: mean −104.86 s, all 7 WIN; the ablation (H008) passes.
+- **Standing rule 1 fails.** The tail share of the SSE change is 0.991. The bulk is worse on S1 (+46 s) and R1 (+5 s), and 10 rows carry 66–83 % of the change.
+- **The gain comes from tail rows without NM data** (0.40–1.04 of the change), not from the pre-registered anchor mechanism.
+- NM-unmatched DEP rows have a 4.9 % tail rate against 0.15 %. At LIRF the rate is 49 % (mean 6,457 s). Candidate hypothesis for Day 2.
+
+### E010 · H008 LightGBM without deltas (ablation of H006) · COMPLETE
+- Development mean 502.34. H006 beats it by 124.5 s (all WIN): the deltas are used. The Expected Result was inconsistent and is not scored.
+
+### E011 · H007 XGBoost FS0 · COMPLETE → REJECT
+- Development mean 424.67. Against ridge: S1 TIE, so criterion 2 fails. It is 12.4 % worse than H006 (configuration, per review).
+- The same NM-missing tail pattern appears. S1's dominant row is a second day-scale LIRF record (target 87,186 s) without NM data.
+
+### Day 1 chain result
+Incumbent H001 → H002 PROMOTE → H003 PROMOTE → H005 REJECT → H004 PROMOTE → H006 INCONCLUSIVE → H007 REJECT. **Initial champion: E005 (H004 ridge FS0), development mean 482.73.** The phase-close holdout check is pending.
