@@ -56,6 +56,25 @@ def kill_tree(proc: psutil.Process) -> None:
             pass
 
 
+def check_config(eid: str, cfg: dict, purpose: str) -> None:
+    """Seed by purpose and fold coverage (Advisor recommendations, SPLITS v2 review)."""
+    from prc.splits import load_splits
+
+    splits = load_splits()
+    rep = splits["promotion"]["reproduction"]
+    want_seed = rep["reproduction_seed"] if purpose == "reproduction" else rep["primary_seed"]
+    if cfg.get("seed") != want_seed:
+        sys.exit(f"refused: {eid} ({purpose}) must use seed {want_seed}, config has "
+                 f"{cfg.get('seed')}")
+    if any(splits["final"].get(f) for f in cfg["folds"]):
+        return  # final (SUBMIT) runs have their own fold list
+    required = (list(splits["development_folds"]) + list(splits["diagnostic_folds"])
+                + list(splits["protected_holdout"]))
+    missing = [f for f in required if f not in cfg["folds"]]
+    if missing:
+        sys.exit(f"refused: {eid} must cover all scored folds plus H; missing {missing}")
+
+
 def now() -> str:
     return dt.datetime.now(dt.UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
 
@@ -71,6 +90,7 @@ def main(eid: str) -> None:
     gate.check_advisor_definition()
     gate.check_frozen()
     cfg = yaml.safe_load((exp / "config.yaml").read_text())
+    check_config(eid, cfg, json.loads((exp / "gate.json").read_text())["purpose"])
     res = yaml.safe_load(RESOURCES.read_text())
     klass = res["classes"][cfg["job_class"]]
     hard_gb = min(res["limits"]["ram_hard_gb_per_experiment"], klass.get("ram_hard_gb", 1e9))

@@ -11,7 +11,8 @@ import pytest
 
 SRC = Path(__file__).resolve().parents[1] / "src" / "prc"
 FORBIDDEN_FOR_MODELS = {"prc.data", "prc.evaluate", "eval_rows", "truth_frame", "load_silver",
-                        "_truth", "holdout_compare"}
+                        "_truth", "holdout_compare", "prc.paths", "SILVER"}
+FORBIDDEN_CALLS = {"read_parquet", "scan_parquet", "read_csv", "scan_csv", "open"}
 FROZEN_MODULES = {"prc.splits", "prc.metrics", "prc.evaluate"}
 FROZEN_ALLOWED = {"prc", "prc.splits", "prc.metrics"}
 
@@ -34,6 +35,16 @@ MODEL_FILES = [SRC / "features.py", *sorted((SRC / "models").glob("*.py"))]
 @pytest.mark.parametrize("path", MODEL_FILES, ids=lambda p: p.name)
 def test_models_do_not_import_truth(path):
     assert not imports(path) & FORBIDDEN_FOR_MODELS
+
+
+@pytest.mark.parametrize("path", MODEL_FILES, ids=lambda p: p.name)
+def test_models_do_not_read_files(path):
+    calls = set()
+    for node in ast.walk(ast.parse(path.read_text())):
+        if isinstance(node, ast.Call):
+            f = node.func
+            calls.add(f.attr if isinstance(f, ast.Attribute) else getattr(f, "id", ""))
+    assert not calls & FORBIDDEN_CALLS
 
 
 @pytest.mark.parametrize("module", sorted(FROZEN_MODULES))

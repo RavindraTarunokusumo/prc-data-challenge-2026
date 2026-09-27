@@ -11,9 +11,10 @@ import datetime as dt
 import json
 
 import polars as pl
+import yaml
 
-from prc.paths import ROOT, SILVER, SILVER_MANIFEST, sha256_file
-from prc.splits import BLANKED_DEP_COLS, holdout_months
+from prc.paths import EXPERIMENTS, ROOT, SILVER, SILVER_MANIFEST, sha256_file
+from prc.splits import BLANKED_DEP_COLS, get_fold, holdout_months
 
 TASK_LEDGER = ROOT / "orchestration" / "task-ledger.jsonl"
 
@@ -31,6 +32,12 @@ def load_silver(columns: list[str] | None = None, verify: bool = True,
             raise RuntimeError("silver.parquet does not match data/manifests/silver_manifest.json")
     df = pl.read_parquet(SILVER, columns=columns)
     if unmask_holdout_for is not None:
+        exp = EXPERIMENTS / unmask_holdout_for
+        if not (exp / "gate.json").exists():
+            raise PermissionError(f"{unmask_holdout_for} was not allocated by scripts/gate.py")
+        folds = yaml.safe_load((exp / "config.yaml").read_text())["folds"]
+        if not any(get_fold(f).kind == "final" for f in folds):
+            raise PermissionError(f"{unmask_holdout_for} lists no final fold")
         with open(TASK_LEDGER, "a") as f:
             f.write(json.dumps({
                 "event": "holdout_targets_unmasked_for_final_training",

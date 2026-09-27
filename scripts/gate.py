@@ -178,6 +178,7 @@ def cmd_allocate(a: argparse.Namespace) -> None:
     (exp_dir / "gate.json").write_text(json.dumps(
         {**rec, "proposal": rel(proposal), "review": rel(review), "ack": rel(ack),
          "advisor_definition_sha256": adv_sha, "gate_sha256": sha256_file(Path(__file__)),
+         "uv_lock_sha256": sha256_file(ROOT / "uv.lock"),
          "git_dirty_at_allocation": git_dirty()},
         indent=1) + "\n")
     ledger.insert(rec)

@@ -3,7 +3,7 @@
     uv run python scripts/holdout_check.py NEW_EID REFERENCE_EID --reason "..."
 
 At most one access per phase; the phase comes from NEW_EID's gate record. Writes
-research/<day>/holdout/holdout_<new>_vs_<ref>.json (aggregates only).
+research/<day>/holdout/holdout_<new>_vs_<ref>.json (decision quantities only).
 """
 
 from __future__ import annotations
@@ -28,7 +28,11 @@ def main() -> None:
     r = holdout_compare(a.new, a.reference, a.reason)
     out = ROOT / "research" / r["phase"] / "holdout" / f"holdout_{a.new}_vs_{a.reference}.json"
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(json.dumps(r, indent=1) + "\n")
+    # Persist only the decision quantities (Advisor recommendation, SPLITS v2 review).
+    keep = {k: r[k] for k in ("phase", "new", "reference", "delta_rmse", "delta_q10_q90",
+                              "outcome", "revert")}
+    keep["rmse_new"], keep["rmse_reference"] = r["score_new"]["rmse"], r["score_reference"]["rmse"]
+    out.write_text(json.dumps(keep, indent=1) + "\n")
     print(json.dumps({k: r[k] for k in ("phase", "delta_rmse", "delta_q10_q90", "outcome",
                                          "revert")}, indent=1))
     print("H rmse:", a.new, round(r["score_new"]["rmse"], 2), "|", a.reference,

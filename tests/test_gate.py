@@ -24,7 +24,7 @@ def gate(tmp_path, monkeypatch):
 
     root = tmp_path
     for rel in [*g.FROZEN_FILES, "config/agents.yaml", ".claude/agents/advisor.md",
-                "runtime/ledger.sqlite.schema.sql"]:
+                "runtime/ledger.sqlite.schema.sql", "uv.lock"]:
         (root / rel).parent.mkdir(parents=True, exist_ok=True)
         shutil.copy(REPO / rel, root / rel)
     for d in ("orchestration", "experiments", "research/day-01/proposals",
