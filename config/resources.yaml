@@ -1,15 +1,25 @@
 schema: resources-v1
 host: claude-code-cloud-container
-calibrated: false   # Day 1 calibration replaces these defaults (tightening only)
+calibrated: true   # Day 1, D01-S01; evidence: research/day-01/calibration/calibration.json
+# Calibration may only tighten the defaults (brief §4). Day 1 change: added a hard
+# per-class timeout (timeout_factor x class runtime target); nothing was loosened.
 cpu_count: 4
 ram_total_gb: 15
 swap_gb: 0
 gpu: none
 limits:
-  ram_hard_gb_per_experiment: 11
+  ram_hard_gb_per_experiment: 11      # enforced by scripts/run_experiment.py (child-tree RSS)
+  timeout_factor: 1.5                 # TIMEOUT after 1.5 x the class runtime target
   data_disk_budget_gb: 20
 classes:
   CLASS-S: {runtime_min: 5,  ram_gb: 4}
   CLASS-M: {runtime_min: 30, ram_gb: 8}
   CLASS-L: {runtime_min: 90, ram_gb: 11, requires_advisor_justification: true}
 failure_statuses: [RESOURCE_FAILURE, TIMEOUT, INVALID]
+calibration:
+  # Measured on the S1 fold (largest training set: 1,537,475 DEP rows), FS0 features.
+  load_silver: {s: 1.0, peak_gb: 2.0}
+  fs0_build: {s: 0.9, peak_gb: 3.1}
+  ridge_fit_predict: {s: 14.6, peak_gb: 3.3}
+  lightgbm_s_per_round: 0.070     # num_leaves 255, 4 threads
+  xgboost_s_per_round: 0.169      # hist, max_depth 10, 4 threads

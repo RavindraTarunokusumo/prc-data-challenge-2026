@@ -1,0 +1,19 @@
+{
+ "experiment_id": "E009",
+ "status": "COMPLETE",
+ "exit_code": 0,
+ "runtime_s": 150.1,
+ "peak_rss_gb": 3.624,
+ "job_class": "CLASS-S",
+ "class_limits": {
+  "runtime_min": 5,
+  "ram_gb": 4
+ },
+ "hard_ram_gb": 11,
+ "timeout_s": 450.0,
+ "within_class": true,
+ "cpu_count": 4,
+ "run_commit": "2d47ec2041638545d9250340c5a68f8b0acc2f6f",
+ "git_dirty_at_run": true,
+ "finished_utc": "2026-09-27T12:46:40Z"
+}

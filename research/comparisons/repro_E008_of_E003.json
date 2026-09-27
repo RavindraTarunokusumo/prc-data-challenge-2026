@@ -1,0 +1,28 @@
+{
+ "reproduction": "E008",
+ "primary": "E003",
+ "rmse_diff_by_fold": {
+  "R1": 0.0,
+  "R2": 0.0,
+  "R3": 0.0,
+  "S1": 0.0,
+  "W1": 0.0
+ },
+ "within_tolerance": true,
+ "criteria_vs_champion": {
+  "criterion_1": true,
+  "criterion_2": true,
+  "criterion_3": true,
+  "fold_outcome": {
+   "R1": "WIN",
+   "R2": "WIN",
+   "R3": "WIN",
+   "S1": "WIN",
+   "W1": "TIE",
+   "S1c": "WIN",
+   "W1c": "WIN"
+  }
+ },
+ "criteria_hold": true,
+ "passes": true
+}

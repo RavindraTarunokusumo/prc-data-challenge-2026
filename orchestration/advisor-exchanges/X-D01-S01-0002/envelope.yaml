@@ -1,0 +1,31 @@
+schema: advisor-task-envelope-v1
+exchange_id: X-D01-S01-0002
+session: D01-S01
+sender: claude-researcher
+recipient: advisor-subagent
+purpose: split_freeze_review
+proposal_ids: [SPLITS]
+proposal_paths: [research/day-01/proposals/SPLITS_v2.md]
+proposal_sha256: [827e0319241fb5da37aa9eb956ca7073c5323756439212a03567e9af2d65d561]
+review_output_dir: research/day-01/advisor/
+context_paths:
+  - research/day-01/advisor/SPLITS_review_v1.md
+  - research/day-01/acks/SPLITS_ack_v1.md
+  - docs/methodology/DATASET_AUDIT.md
+  - research/day-01/audit/regime_stats.json
+  - config/splits.yaml
+  - src/prc/__init__.py
+  - src/prc/metrics.py
+  - src/prc/splits.py
+  - src/prc/evaluate.py
+  - src/prc/data.py
+  - src/prc/worker.py
+  - scripts/gate.py
+  - scripts/run_experiment.py
+  - scripts/audit_regimes.py
+  - tests/
+constraints:
+  - Review file name is SPLITS_review_v2.md (advisor-review-v1 schema; hypothesis_id field = SPLITS).
+  - Read-only checks allowed (uv run pytest, uv run python). Do not read December 2025 DEP targets (protected holdout, DATASET_AUDIT §6.6); prc.data.load_silver masks them.
+  - Draft proposals H001-H008 in research/day-01/proposals/ are out of scope (not yet revised or submitted).
+created_utc: 2026-09-27T11:34:45Z

@@ -1,0 +1,26 @@
+schema: advisor-task-envelope-v1
+exchange_id: X-D01-S01-0001
+session: D01-S01
+sender: claude-researcher
+recipient: advisor-subagent
+purpose: split_freeze_review
+proposal_ids: [SPLITS]
+proposal_paths: [research/day-01/proposals/SPLITS_v1.md]
+proposal_sha256: [4cf31a97946c010de04856d82e041c9f3c3755697ea7d467841a31c4bd7dc022]
+review_output_dir: research/day-01/advisor/
+context_paths:
+  - docs/methodology/DATASET_AUDIT.md
+  - research/day-01/audit/audit_stats.json
+  - config/splits.yaml
+  - src/prc/metrics.py
+  - src/prc/splits.py
+  - src/prc/evaluate.py
+  - scripts/gate.py
+  - scripts/build_silver.py
+  - data/manifests/silver_manifest.json
+  - tests/
+  - research/STATE.md
+constraints:
+  - Review file name is SPLITS_review_v1.md (advisor-review-v1 schema; hypothesis_id field = SPLITS).
+  - Silver data is present at data/processed/silver.parquet; you may run read-only checks (uv run pytest, uv run python) but must not modify any file outside your writable scope.
+created_utc: 2026-09-27T11:07:28Z

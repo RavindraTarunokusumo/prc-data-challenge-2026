@@ -1,0 +1,17 @@
+hypothesis_id: H002
+proposal_version: 1
+purpose: primary
+model: airport_median
+feature_set: FS0
+params: {}
+folds:
+- R1
+- R2
+- R3
+- S1
+- W1
+- S1c
+- W1c
+- H
+seed: 42
+job_class: CLASS-S

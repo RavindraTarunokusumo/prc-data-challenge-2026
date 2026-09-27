@@ -1,0 +1,66 @@
+{
+ "schema": "artifact-manifest-v1",
+ "producing_experiment": "E003",
+ "artifacts": [
+  {
+   "path": "predictions/validation/E003/R1.parquet",
+   "fold": "R1",
+   "rows": 183950,
+   "size": 306319,
+   "sha256": "32542cbe79aefae9d754f329681448899d5779d4c7bca5507e19252fd660006a"
+  },
+  {
+   "path": "predictions/validation/E003/R2.parquet",
+   "fold": "R2",
+   "rows": 185674,
+   "size": 305810,
+   "sha256": "1cfce2a253de64ff916681adc9f43da5ec9227083989331a6e858631254bc041"
+  },
+  {
+   "path": "predictions/validation/E003/R3.parquet",
+   "fold": "R3",
+   "rows": 162332,
+   "size": 257294,
+   "sha256": "ae229f0f3eb40a225a9fe22f052a2cd9cb035c59a93c923a25502fd0dc5a1d0f"
+  },
+  {
+   "path": "predictions/validation/E003/S1.parquet",
+   "fold": "S1",
+   "rows": 190713,
+   "size": 343560,
+   "sha256": "158f65c2ea77f98f680c5f21a5c5dbd76198434c93bd561e1635edb879bc9800"
+  },
+  {
+   "path": "predictions/validation/E003/W1.parquet",
+   "fold": "W1",
+   "rows": 143732,
+   "size": 249731,
+   "sha256": "d83efd828c0633d5eabbcda77c961fd4738fa2f7cc428d6b51f252f1b09430fe"
+  },
+  {
+   "path": "predictions/validation/E003/S1c.parquet",
+   "fold": "S1c",
+   "rows": 190713,
+   "size": 342423,
+   "sha256": "9186283d621db37b3b369d21e52542e4a97fe42c186e85c318fe240db2742f8a"
+  },
+  {
+   "path": "predictions/validation/E003/W1c.parquet",
+   "fold": "W1c",
+   "rows": 143732,
+   "size": 249584,
+   "sha256": "a13ea18cd70e04d0cb63934e950bf29f2b72022dee627786088eb9b69ba3b868"
+  },
+  {
+   "path": "predictions/validation/E003/H.parquet",
+   "fold": "H",
+   "rows": 165677,
+   "size": 269408,
+   "sha256": "9dfd764d2a418017150e6cb064e88d394df518cdc3bace8c164295d680745671"
+  }
+ ],
+ "format": "parquet [MVT_ID_mvt, pred]",
+ "code_commit": "ab8f1cd681055cd9cc149b7283da4ca64f96f294",
+ "silver_sha256": "efde426225040cd657e2a8c1be7576c6dd03cb2729fea5b303b6c4b9e9ec9c60",
+ "reproduce": "uv run python scripts/run_experiment.py E003  (a reproduction needs a fresh E### from scripts/gate.py)"
+}

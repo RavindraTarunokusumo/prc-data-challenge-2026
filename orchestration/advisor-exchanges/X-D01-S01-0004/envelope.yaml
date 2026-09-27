@@ -1,0 +1,27 @@
+schema: advisor-task-envelope-v1
+exchange_id: X-D01-S01-0004
+session: D01-S01
+sender: claude-researcher
+recipient: advisor-subagent
+purpose: phase_close_review
+proposal_ids: [PHASE_CLOSE_D01]
+proposal_paths: [research/day-01/proposals/PHASE_CLOSE_D01_v1.md]
+proposal_sha256: [811b313c18a93a2f91751e145f961ed1cd8f253c3fda850c058f4872da7ef770]
+review_output_dir: research/day-01/advisor/
+context_paths:
+  - research/EXPERIMENT_JOURNAL.md
+  - research/STATE.md
+  - experiments/ledger.jsonl
+  - experiments/
+  - research/comparisons/
+  - research/day-01/acks/
+  - config/splits.yaml
+  - scripts/compare.py
+  - scripts/tail_mechanism.py
+  - scripts/holdout_check.py
+constraints:
+  - Review file name is PHASE_CLOSE_D01_review_v1.md (advisor-review-v1 schema; hypothesis_id field = PHASE_CLOSE_D01).
+  - Phase-close review: be especially adversarial (advisor policy). Attack the champion and the H006 decision.
+  - Do not read December 2025 targets and do not run holdout_check.py; the researcher performs the single access only after an ACCEPT.
+  - Read-only; you may run compare.py or tail_mechanism.py-style read-only analyses on development folds.
+created_utc: 2026-09-27T13:21:05Z

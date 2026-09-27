@@ -1,0 +1,87 @@
+{
+ "schema": "artifact-manifest-v1",
+ "path": "data/processed/silver.parquet",
+ "layer": "silver",
+ "producing_experiment": null,
+ "format": "parquet/zstd",
+ "rows": 4857331,
+ "rows_by_src_phase": [
+  [
+   "rank",
+   "ARR",
+   344693
+  ],
+  [
+   "rank",
+   "DEP",
+   344841
+  ],
+  [
+   "train",
+   "ARR",
+   2082750
+  ],
+  [
+   "train",
+   "DEP",
+   2085047
+  ]
+ ],
+ "columns": {
+  "MVT_ID_mvt": "Int64",
+  "FLIGHT_ID_mvt": "Int64",
+  "FLIGHT_mvt": "String",
+  "FLIGHT_RULE_mvt": "String",
+  "ADEP_mvt": "String",
+  "ADES_mvt": "String",
+  "PHASE_mvt": "String",
+  "MVT_TIME_UTC_mvt": "Datetime(time_unit='us', time_zone='UTC')",
+  "BLOCK_TIME_UTC_mvt": "Datetime(time_unit='us', time_zone='UTC')",
+  "SCHED_TIME_UTC_mvt": "Datetime(time_unit='us', time_zone='UTC')",
+  "AIRCRAFT_TYPE_mvt": "String",
+  "RUNWAY_mvt": "String",
+  "STAND_mvt": "String",
+  "TAXITIME_SEC_mvt": "Int32",
+  "LOBT_flt": "Datetime(time_unit='us', time_zone='UTC')",
+  "CALLSIGN_flt": "String",
+  "ADEP_flt": "String",
+  "ADES_flt": "String",
+  "ADES_FILED_flt": "String",
+  "MARKET_SEGMENT_flt": "String",
+  "IOBT_flt": "Datetime(time_unit='us', time_zone='UTC')",
+  "FLIGHT_RULE_flt": "String",
+  "FLIGHT_TYPE_flt": "String",
+  "AIRCRAFT_TYPE_flt": "String",
+  "WK_TBL_CAT_flt": "String",
+  "AIRCRAFT_OPERATOR_flt": "String",
+  "EOBT_1_flt": "Datetime(time_unit='us', time_zone='UTC')",
+  "ARVT_1_flt": "Datetime(time_unit='us', time_zone='UTC')",
+  "AOBT_3_flt": "Datetime(time_unit='us', time_zone='UTC')",
+  "ARVT_3_flt": "Datetime(time_unit='us', time_zone='UTC')",
+  "src": "String",
+  "month": "String"
+ },
+ "size": 232837360,
+ "sha256": "efde426225040cd657e2a8c1be7576c6dd03cb2729fea5b303b6c4b9e9ec9c60",
+ "inputs_sha256": {
+  "data/raw/prc-2026-datasets/ranking.parquet": "9db75e3a56fa09b87aab72e191a53da3fe763d9887ad2b23aea9cde6a6325f86",
+  "data/raw/prc-2026-datasets/submitting.parquet": "0d383408ed5ac27bfcfd12d6b961cee77c8a6364b10dad9fe3ec81115c79652b",
+  "data/raw/prc-2026-datasets/training_2025-01-01_2025-02-01.parquet": "a4dc8f152c082c650cd7eb745fe9c641089f34f74df127e6944a188990a0ed94",
+  "data/raw/prc-2026-datasets/training_2025-02-01_2025-03-01.parquet": "b6f9ff2cdb1cfe07c5442f4e1f11bbcdbeafe52852dcb0b8175f62ab84c6a066",
+  "data/raw/prc-2026-datasets/training_2025-03-01_2025-04-01.parquet": "58fde7e5f8b539546af63b41d7f6ec0f2884fdc3d3dd9b6bfca7c59a420dcdd3",
+  "data/raw/prc-2026-datasets/training_2025-04-01_2025-05-01.parquet": "9ffe0cf5741c4863799c41be81475dfaecedabe0ba687b8f8e4eacba992f9390",
+  "data/raw/prc-2026-datasets/training_2025-05-01_2025-06-01.parquet": "5481c0642a8fbb4dc395f93bc713c57f4cc16854fb361d404967077e1fce2ff9",
+  "data/raw/prc-2026-datasets/training_2025-06-01_2025-07-01.parquet": "c3ef5080f2cc636c3416baf1555f7d0ee3519f9046e8043c1c0c8f017a244025",
+  "data/raw/prc-2026-datasets/training_2025-07-01_2025-08-01.parquet": "34d1c5bba7c8596a1c20c09edd3cb2f63277b5a684fa801911660fe0eaf63c9d",
+  "data/raw/prc-2026-datasets/training_2025-08-01_2025-09-01.parquet": "6c8d2aa7a1b6c9dff9a0305a37eb02de1e87a68d07557264f41b77738272c540",
+  "data/raw/prc-2026-datasets/training_2025-09-01_2025-10-01.parquet": "955308a4000947e32a00586d3ee13928949d2231b67f84f6dfb0631893f3754a",
+  "data/raw/prc-2026-datasets/training_2025-10-01_2025-11-01.parquet": "4a31a35601c1bdcd74b8cd6379231ba516a48324e4c2478bf1c9360cd23e687f",
+  "data/raw/prc-2026-datasets/training_2025-11-01_2025-12-01.parquet": "ac36b17db7a537e3baeb682fa4763dacaa1fcc5d9bfa6bf32b3ee5d9f91300b0",
+  "data/raw/prc-2026-datasets/training_2025-12-01_2026-01-01.parquet": "2d357f2f403a86778a69e93f72d8754effe77f1ac0942399b3d1b7728241f724"
+ },
+ "code_sha256": "29e103155870dbb9f0f862373f1c7324b26bef496d79d9df056b354a46d818f1",
+ "code_commit": "e2b2bf2c8278b0fe615e704cbad233728a6ed701",
+ "code_dirty": true,
+ "created_utc": "2026-09-27T11:04:05Z",
+ "reproduce": "uv run python scripts/build_silver.py"
+}

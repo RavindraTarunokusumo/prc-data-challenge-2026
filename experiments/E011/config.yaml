@@ -1,0 +1,26 @@
+hypothesis_id: H007
+proposal_version: 1
+purpose: primary
+model: xgboost
+feature_set: FS0
+params:
+  objective: reg:squarederror
+  eta: 0.05
+  max_depth: 10
+  min_child_weight: 10
+  subsample: 0.8
+  colsample_bytree: 0.9
+  max_cat_to_onehot: 1
+  nthread: 4
+  num_boost_round: 1000
+folds:
+- R1
+- R2
+- R3
+- S1
+- W1
+- S1c
+- W1c
+- H
+seed: 42
+job_class: CLASS-M
