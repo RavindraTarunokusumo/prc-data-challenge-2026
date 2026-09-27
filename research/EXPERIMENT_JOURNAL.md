@@ -22,5 +22,7 @@ Append-only. One entry per experiment; negative results are kept.
 - **Dominant row:** the day-scale LIRF row (anchor 87,181 s) has target **87,002 s**. The raw anchor is exact on it, and bounded models miss by about 86,000 s. It alone decides the S1 outcome (S1 bulk +51.8 s).
 - The anchor helps strongly in winter (W1 bulk −47 s) and hurts in the bulk elsewhere.
 
-### E005 · H004 ridge FS0 · COMPLETE (comparison pending)
-- Development mean 482.73. Within CLASS-S (94 s, 3.76 GB peak, under the 4 GB target).
+### E005 · H004 ridge FS0 · COMPLETE → PROMOTE (champion)
+- Development mean **482.73** (predicted 400–470 s: a miss). Against E003: mean −65.70 s, all 7 WIN, tail share 0.254.
+- Against H005: all WIN. Rows beyond the winsorisation clip carry 5–40 % of that margin, so the fitted combination is the main mechanism and clipping a secondary one.
+- Reproduction E009 exact. CLASS-S (3.76 GB).

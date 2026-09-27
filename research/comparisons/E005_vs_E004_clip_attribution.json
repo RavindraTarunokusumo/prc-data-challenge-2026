@@ -1,0 +1,42 @@
+{
+ "R1": {
+  "clip": [
+   299.0,
+   2430.0
+  ],
+  "rows_beyond": 1865,
+  "share_of_sse_change_beyond_clip": 0.395
+ },
+ "R2": {
+  "clip": [
+   298.0,
+   2405.0
+  ],
+  "rows_beyond": 1673,
+  "share_of_sse_change_beyond_clip": 0.35
+ },
+ "R3": {
+  "clip": [
+   298.0,
+   2402.0
+  ],
+  "rows_beyond": 1690,
+  "share_of_sse_change_beyond_clip": 0.263
+ },
+ "S1": {
+  "clip": [
+   298.0,
+   2420.0
+  ],
+  "rows_beyond": 1905,
+  "share_of_sse_change_beyond_clip": 0.048
+ },
+ "W1": {
+  "clip": [
+   298.0,
+   2394.0
+  ],
+  "rows_beyond": 2144,
+  "share_of_sse_change_beyond_clip": 0.106
+ }
+}

@@ -1,0 +1,21 @@
+hypothesis_id: H004
+proposal_version: 1
+purpose: reproduction
+model: ridge
+feature_set: FS0
+params:
+  alpha: 1.0
+  winsor:
+  - 0.005
+  - 0.995
+folds:
+- R1
+- R2
+- R3
+- S1
+- W1
+- S1c
+- W1c
+- H
+seed: 43
+job_class: CLASS-S
