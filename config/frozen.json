@@ -1,0 +1,25 @@
+{
+ "schema": "frozen-artifacts-v1",
+ "frozen_utc": "2026-09-27T11:59:57Z",
+ "files": {
+  "config/splits.yaml": "4a5e97a116101846d1b20e88f08be983d2a9f0538008b51416371472a75e3db7",
+  "src/prc/__init__.py": "284ffb4bae5b598969c711c2e8faf49a6c75e3e4e73b5aef1b1b3b564d0fdf2a",
+  "src/prc/metrics.py": "13d5f90917b0756d57afb17c52108ed9dc03fd6a3b8a98af47eadf549e76dd89",
+  "src/prc/splits.py": "9e380eee64e9474960b384836fff02bff4183e7d873ab99b286ab38fc7305c18",
+  "src/prc/evaluate.py": "256a87ec3fad5b2cbdcc5dacf8b1390ce72ad0050d373262643b3da3101e9005",
+  "docs/methodology/DATASET_AUDIT.md": "56b3b49dcc6bf102315ea574aa8dc8e3b68e07319383744a15c118274b0a13d3"
+ },
+ "proposal": {
+  "path": "research/day-01/proposals/SPLITS_v2.md",
+  "sha256": "827e0319241fb5da37aa9eb956ca7073c5323756439212a03567e9af2d65d561"
+ },
+ "review": {
+  "path": "research/day-01/advisor/SPLITS_review_v2.md",
+  "sha256": "7d42b7a0538db68d719e0a750bc56333b7c51e8d2a52206eb9b2a7d41ce587dc"
+ },
+ "ack": {
+  "path": "research/day-01/acks/SPLITS_ack_v2.md",
+  "sha256": "9c7bb642b19c1b2cef8ce04a3346bc2edfb0dc9780b88102cb2ace7f9b3441c3"
+ },
+ "code_commit": "a9d0b18f85e9f73e3b28d8705a4ee86150acd34a"
+}
