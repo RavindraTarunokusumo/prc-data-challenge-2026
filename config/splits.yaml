@@ -1,0 +1,52 @@
+schema: splits-v1
+# Frozen at the Day 1 freeze commit (brief §9). Immutable afterwards; scripts/gate.py
+# verifies its SHA-256 before every experiment. Interpreted by src/prc/splits.py.
+# Months are UTC calendar months of MVT_TIME_UTC_mvt (silver column `month`).
+# Evaluation population of every fold: ALL DEP rows of its validation months
+# (DATA_POLICY §10). Feature input: splits.masked_view (DATASET_AUDIT §6.4).
+
+development_folds:
+  # Rolling expanding-window folds: analogue of the Jan-2026 test (no gap after training).
+  R1:
+    kind: rolling
+    train_months: [2025-01, 2025-02, 2025-03, 2025-04, 2025-05, 2025-06, 2025-07, 2025-08]
+    val_months: [2025-09]
+  R2:
+    kind: rolling
+    train_months: [2025-01, 2025-02, 2025-03, 2025-04, 2025-05, 2025-06, 2025-07, 2025-08, 2025-09]
+    val_months: [2025-10]
+  R3:
+    kind: rolling
+    train_months: [2025-01, 2025-02, 2025-03, 2025-04, 2025-05, 2025-06, 2025-07, 2025-08, 2025-09, 2025-10]
+    val_months: [2025-11]
+  # Seasonal fold: analogue of the Jul-2026 test. Validates July; trains on the rest of
+  # the development year except August (one-month post-validation embargo) and the
+  # protected holdout (December).
+  S1:
+    kind: seasonal
+    train_months: [2025-01, 2025-02, 2025-03, 2025-04, 2025-05, 2025-06, 2025-09, 2025-10, 2025-11]
+    embargo_months: [2025-08]
+    val_months: [2025-07]
+
+protected_holdout:
+  # Winter month adjacent to the Jan-2026 test. Accessed at most once per phase; every
+  # access is logged in orchestration/task-ledger.jsonl (DATA_POLICY §6).
+  H:
+    kind: holdout
+    train_months: [2025-01, 2025-02, 2025-03, 2025-04, 2025-05, 2025-06, 2025-07, 2025-08, 2025-09, 2025-10, 2025-11]
+    val_months: [2025-12]
+    max_access_per_phase: 1
+
+final:
+  # Not a validation fold: fits on all training data and predicts the ranking months.
+  SUBMIT:
+    kind: final
+    train_months: [2025-01, 2025-02, 2025-03, 2025-04, 2025-05, 2025-06, 2025-07, 2025-08, 2025-09, 2025-10, 2025-11, 2025-12]
+    val_months: [2026-01, 2026-07]
+
+promotion:
+  # Brief §10 criteria that depend on the folds.
+  folds_required: [R1, R2, R3, S1]
+  majority_rule: "improves on >= 3 of 4 development folds, S1 among them"
+  airport_rmse_tolerance: 0.03   # no airport may degrade by more than +3 % pooled RMSE
+  reproduction_tolerance_rmse_s: 1.0

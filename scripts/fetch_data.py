@@ -100,7 +100,7 @@ def sha256(path: Path) -> str:
 
 
 def now() -> str:
-    return dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    return dt.datetime.now(dt.UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def main() -> None:
@@ -123,7 +123,7 @@ def main() -> None:
         else:
             names = [b["Name"] for b in s3.list_buckets().get("Buckets", [])]
             buckets = [b for b in names if b != submission]
-    except Exception as exc:  # network / auth errors must not leak secrets
+    except Exception as exc:  # noqa: BLE001  (network / auth errors must not leak secrets)
         sys.exit(redact(f"S3 error: {exc}"))
 
     inventory = {b: list_objects(s3, b, args.prefix) for b in buckets}
