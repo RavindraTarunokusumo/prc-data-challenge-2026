@@ -1,13 +1,19 @@
-schema: splits-v1
+schema: splits-v2
 # Frozen at the Day 1 freeze commit (brief §9). Immutable afterwards; scripts/gate.py
-# verifies its SHA-256 before every experiment. Interpreted by src/prc/splits.py.
-# Months are UTC calendar months of MVT_TIME_UTC_mvt (silver column `month`).
+# verifies its SHA-256 before every experiment. Interpreted by src/prc/splits.py and
+# src/prc/evaluate.py (both frozen). Months are UTC calendar months of MVT_TIME_UTC_mvt.
 # Evaluation population of every fold: ALL DEP rows of its validation months
 # (DATA_POLICY §10). Feature input: splits.masked_view (DATASET_AUDIT §6.4).
 
+evaluation_population:
+  # R1: the evaluator loads silver itself and refuses unless both match.
+  silver_sha256: efde426225040cd657e2a8c1be7576c6dd03cb2729fea5b303b6c4b9e9ec9c60
+  eval_rows: {R1: 183950, R2: 185674, R3: 162332, S1: 190713, W1: 143732, S1c: 190713,
+              W1c: 143732, H: 165677}
+
 development_folds:
-  # Rolling expanding-window folds: analogue of the Jan-2026 test (no gap after training).
-  R1:
+  # Promotion folds (promotion.development_folds).
+  R1:  # rolling, expanding window, no gap: temporal analogue of Jan 2026
     kind: rolling
     train_months: [2025-01, 2025-02, 2025-03, 2025-04, 2025-05, 2025-06, 2025-07, 2025-08]
     val_months: [2025-09]
@@ -19,18 +25,34 @@ development_folds:
     kind: rolling
     train_months: [2025-01, 2025-02, 2025-03, 2025-04, 2025-05, 2025-06, 2025-07, 2025-08, 2025-09, 2025-10]
     val_months: [2025-11]
-  # Seasonal fold: analogue of the Jul-2026 test. Validates July; trains on the rest of
-  # the development year except August (one-month post-validation embargo) and the
-  # protected holdout (December).
-  S1:
+  S1:  # seasonal analogue of Jul 2026; Aug embargoed; post-validation months Sep-Nov
     kind: seasonal
     train_months: [2025-01, 2025-02, 2025-03, 2025-04, 2025-05, 2025-06, 2025-09, 2025-10, 2025-11]
     embargo_months: [2025-08]
     val_months: [2025-07]
+  W1:  # winter analogue of Jan 2026 (R4); Mar embargoed; post-validation months Apr-Nov
+    kind: winter
+    train_months: [2025-01, 2025-04, 2025-05, 2025-06, 2025-07, 2025-08, 2025-09, 2025-10, 2025-11]
+    embargo_months: [2025-03]
+    val_months: [2025-02]
+
+diagnostic_folds:
+  # R5: causal twins of S1 and W1 (training strictly before validation). Not promotion
+  # folds on their own; they gate whether an S1 / W1 WIN counts (promotion.criterion_2).
+  S1c:
+    kind: diagnostic
+    twin_of: S1
+    train_months: [2025-01, 2025-02, 2025-03, 2025-04, 2025-05, 2025-06]
+    val_months: [2025-07]
+  W1c:
+    kind: diagnostic
+    twin_of: W1
+    train_months: [2025-01]
+    val_months: [2025-02]
 
 protected_holdout:
-  # Winter month adjacent to the Jan-2026 test. Accessed at most once per phase; every
-  # access is logged in orchestration/task-ledger.jsonl (DATA_POLICY §6).
+  # Winter month adjacent to the Jan-2026 test. December DEP targets are masked by the
+  # data layer (prc.data.load_silver) and read only by evaluate.holdout_compare.
   H:
     kind: holdout
     train_months: [2025-01, 2025-02, 2025-03, 2025-04, 2025-05, 2025-06, 2025-07, 2025-08, 2025-09, 2025-10, 2025-11]
@@ -38,15 +60,57 @@ protected_holdout:
     max_access_per_phase: 1
 
 final:
-  # Not a validation fold: fits on all training data and predicts the ranking months.
-  SUBMIT:
+  # No truth. One fold per ranking month, so a January prediction can never see July 2026
+  # rows and vice versa (DATASET_AUDIT §6.2: cross-month information is inadmissible).
+  SUBMIT_JAN:
     kind: final
     train_months: [2025-01, 2025-02, 2025-03, 2025-04, 2025-05, 2025-06, 2025-07, 2025-08, 2025-09, 2025-10, 2025-11, 2025-12]
-    val_months: [2026-01, 2026-07]
+    val_months: [2026-01]
+  SUBMIT_JUL:
+    kind: final
+    train_months: [2025-01, 2025-02, 2025-03, 2025-04, 2025-05, 2025-06, 2025-07, 2025-08, 2025-09, 2025-10, 2025-11, 2025-12]
+    val_months: [2026-07]
 
 promotion:
-  # Brief §10 criteria that depend on the folds.
-  folds_required: [R1, R2, R3, S1]
-  majority_rule: "improves on >= 3 of 4 development folds, S1 among them"
-  airport_rmse_tolerance: 0.03   # no airport may degrade by more than +3 % pooled RMSE
-  reproduction_tolerance_rmse_s: 1.0
+  # Brief §10 criteria 1-3 and 6. Read only by metrics/evaluate; callers cannot override.
+  development_folds: [R1, R2, R3, S1, W1]
+  seasonal_fold: S1
+  winter_fold: W1
+  causal_twins: {S1: S1c, W1: W1c}
+  bootstrap:
+    # Paired cluster bootstrap of dRMSE = RMSE(candidate) - RMSE(champion) on the same rows.
+    cluster: airport_utc_day          # ADEP_mvt x UTC date of MVT_TIME_UTC_mvt
+    resamples: 2000
+    seed: 20260927
+  fold_outcome:
+    # WIN  if the 90 % one-sided upper bound (q0.90) of dRMSE_f < 0
+    # LOSS if the 90 % one-sided lower bound (q0.10) of dRMSE_f > 0
+    # TIE  otherwise
+    win_upper_quantile: 0.90
+    loss_lower_quantile: 0.10
+  criterion_1:
+    # mean dRMSE over development folds (folds resampled independently)
+    min_mean_improvement_s: 1.0       # point estimate must be <= -1.0 s
+    mean_upper_quantile: 0.95         # and its q0.95 must be < 0
+  criterion_2:
+    min_wins: 3                       # >= 3 WIN among the 5 development folds
+    seasonal_must_win: true           # S1 must be WIN
+    no_losses: true                   # no development fold may be LOSS
+    twin_rule: "an S1 or W1 WIN counts only if its causal twin (S1c / W1c) is not LOSS"
+  criterion_3:
+    airport_rmse_tolerance: 0.03      # pooled over development-fold rows, per airport
+  reproduction:
+    # Criterion 6: a gate-allocated `reproduction` run of the same proposal with
+    # seed = primary seed + 1 and everything else identical.
+    primary_seed: 42
+    reproduction_seed: 43
+    rmse_tolerance_s: 1.0             # every development-fold RMSE within 1.0 s of primary
+    criteria_must_hold_on_reproduction: true   # criteria 1-3 re-checked vs the champion
+
+phase_close:
+  # R4 / R2: decision use of the protected holdout. At most one access per phase: one
+  # paired comparison of the phase-closing champion vs the phase-opening champion
+  # (Day 1: vs the global-mean baseline) with the bootstrap above on H's rows.
+  # If the outcome is LOSS for the phase-closing champion, the phase's promotions are
+  # reverted and the phase-opening champion is restored. WIN or TIE: promotions stand.
+  revert_on: LOSS

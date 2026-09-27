@@ -35,6 +35,7 @@ def test_score_matches_numpy_and_segments_partition():
     s = metrics.score(df)
     y, p = df["TAXITIME_SEC_mvt"].to_numpy(), df["pred"].to_numpy()
     assert s["rmse"] == pytest.approx(np.sqrt(np.mean((p - y) ** 2)), rel=1e-12)
+    assert sum(v["n"] for v in s["by_airport_bulk"].values()) == (y < metrics.BULK_MAX_S).sum()
     for key in ("by_airport", "by_traffic", "by_wake", "by_taxi_band", "by_month"):
         assert sum(v["n"] for v in s[key].values()) == df.height
     assert set(s["by_taxi_band"]) <= set(metrics.TAXI_BAND_LABELS)
@@ -73,15 +74,3 @@ def test_validate_predictions_rejects(mutate, msg):
     metrics.validate_predictions(pred, truth)
     with pytest.raises(ValueError, match=msg):
         metrics.validate_predictions(mutate(pred), truth)
-
-
-def test_promotion_check_requires_seasonal_and_majority():
-    champ = {f: {"rmse": 100.0} for f in ("R1", "R2", "R3", "S1")}
-    cand = {"R1": {"rmse": 90.0}, "R2": {"rmse": 90.0}, "R3": {"rmse": 90.0}, "S1": {"rmse": 101.0}}
-    air = {"EDDF": 100.0}
-    r = metrics.promotion_check(cand, champ, air, air)
-    assert r["overall_improves"] and not r["majority_with_seasonal"] and not r["passes_fold_criteria"]
-    cand["S1"] = {"rmse": 99.0}
-    assert metrics.promotion_check(cand, champ, air, air)["passes_fold_criteria"]
-    r = metrics.promotion_check(cand, champ, {"EDDF": 103.5}, air)
-    assert "EDDF" in r["airports_degraded_beyond_tolerance"] and not r["passes_fold_criteria"]

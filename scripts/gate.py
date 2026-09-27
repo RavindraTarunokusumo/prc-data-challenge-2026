@@ -32,6 +32,7 @@ AGENTS = ROOT / "config" / "agents.yaml"
 TASK_LEDGER = ROOT / "orchestration" / "task-ledger.jsonl"
 FROZEN_FILES = (
     "config/splits.yaml",
+    "src/prc/__init__.py",
     "src/prc/metrics.py",
     "src/prc/splits.py",
     "src/prc/evaluate.py",
@@ -176,7 +177,8 @@ def cmd_allocate(a: argparse.Namespace) -> None:
     exp_dir.mkdir(parents=True, exist_ok=False)
     (exp_dir / "gate.json").write_text(json.dumps(
         {**rec, "proposal": rel(proposal), "review": rel(review), "ack": rel(ack),
-         "advisor_definition_sha256": adv_sha, "git_dirty_at_allocation": git_dirty()},
+         "advisor_definition_sha256": adv_sha, "gate_sha256": sha256_file(Path(__file__)),
+         "git_dirty_at_allocation": git_dirty()},
         indent=1) + "\n")
     ledger.insert(rec)
     append_task_ledger({"event": "allocate", "utc": rec["allocated_utc"],

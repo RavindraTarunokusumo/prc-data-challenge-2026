@@ -1,22 +1,23 @@
 """Interpretation of the frozen config/splits.yaml and the validation masking protocol.
 
-Frozen together with config/splits.yaml and src/prc/metrics.py (hashes checked by
-scripts/gate.py). See docs/methodology/DATASET_AUDIT.md §6.4.
+Frozen together with config/splits.yaml, src/prc/metrics.py and src/prc/evaluate.py
+(hashes checked by scripts/gate.py). Imports no other prc module: its config path is
+resolved from this file's own location. See docs/methodology/DATASET_AUDIT.md §6.4.
 """
 
 from __future__ import annotations
 
 from dataclasses import dataclass
 from functools import lru_cache
+from pathlib import Path
 
 import polars as pl
 import yaml
 
-from prc.paths import SPLITS
-
+SPLITS_PATH = Path(__file__).resolve().parents[2] / "config" / "splits.yaml"
 TARGET = "TAXITIME_SEC_mvt"
 BLANKED_DEP_COLS = ("BLOCK_TIME_UTC_mvt", "TAXITIME_SEC_mvt")
-DEVELOPMENT = ("R1", "R2", "R3", "S1")
+SECTIONS = ("development_folds", "diagnostic_folds", "protected_holdout", "final")
 
 
 @dataclass(frozen=True)
@@ -34,12 +35,25 @@ class Fold:
 
 @lru_cache(maxsize=1)
 def load_splits() -> dict:
-    return yaml.safe_load(SPLITS.read_text())
+    return yaml.safe_load(SPLITS_PATH.read_text())
+
+
+def promotion_config() -> dict:
+    return load_splits()["promotion"]
+
+
+def development_folds() -> tuple[str, ...]:
+    return tuple(promotion_config()["development_folds"])
+
+
+def holdout_months() -> tuple[str, ...]:
+    cfg = load_splits()["protected_holdout"]
+    return tuple(str(m) for f in cfg.values() for m in f["val_months"])
 
 
 def get_fold(fold_id: str) -> Fold:
     cfg = load_splits()
-    for section in ("development_folds", "protected_holdout", "final"):
+    for section in SECTIONS:
         if fold_id in cfg.get(section, {}):
             f = cfg[section][fold_id]
             fold = Fold(
@@ -85,10 +99,9 @@ def train_targets(silver: pl.DataFrame | pl.LazyFrame, fold: Fold) -> pl.LazyFra
 
 
 def eval_rows(silver: pl.DataFrame | pl.LazyFrame, fold: Fold) -> pl.LazyFrame:
-    """The fixed evaluation population: all DEP rows of the validation months, with truth.
+    """The fixed evaluation population: all DEP rows of the validation months.
 
-    Only the evaluator may call this for validation folds; model code receives
-    `masked_view` and `train_targets`.
+    Used by prc.evaluate; feature and model code must not import it (tests/test_isolation.py).
     """
     lf = silver.lazy() if isinstance(silver, pl.DataFrame) else silver
     return lf.filter(

@@ -30,6 +30,11 @@ def rmse(e: np.ndarray) -> float:
 
 
 def main() -> None:
+    if (ROOT / "config" / "frozen.json").exists():
+        # This pre-freeze audit read the full training year, December included
+        # (DATASET_AUDIT §6.6). After the freeze no audit may read holdout targets.
+        raise SystemExit("refused: pre-freeze audit; December targets are protected after "
+                         "the freeze (use prc.data.load_silver, which masks them)")
     train = pl.read_parquet(sorted(glob.glob(str(RAW / "training_*.parquet"))))
     rank = pl.read_parquet(RAW / "ranking.parquet")
     dep = train.filter(pl.col("PHASE_mvt") == "DEP")
