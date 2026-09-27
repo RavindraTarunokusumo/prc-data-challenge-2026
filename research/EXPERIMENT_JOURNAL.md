@@ -42,3 +42,11 @@ Append-only. One entry per experiment; negative results are kept.
 
 ### Day 1 chain result
 Incumbent H001 → H002 PROMOTE → H003 PROMOTE → H005 REJECT → H004 PROMOTE → H006 INCONCLUSIVE → H007 REJECT. **Initial champion: E005 (H004 ridge FS0), development mean 482.73.** The phase-close holdout check is pending.
+
+### Day 1 phase close (X-D01-S01-0004: ACCEPT)
+- **Holdout access** (the single Day 1 access): E005 411.29 against E001 514.74 on December; dRMSE −103.45 (q10…q90 −122.60…−90.21) → **WIN**, and the promotions stand.
+- **Record corrections C1–C7** (`research/day-01/acks/PHASE_CLOSE_D01_ack_v1.md`):
+  - H006's tail share nets a real bulk gain on NM-present rows;
+  - the LIRF tail is largely a block-at-schedule recording convention (label T);
+  - NM-missing rows carry 14–66 % of the SSE;
+  - there are 15 day-scale records in Jan–Nov.

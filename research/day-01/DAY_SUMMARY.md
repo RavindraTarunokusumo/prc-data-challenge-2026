@@ -1,6 +1,8 @@
 # Day 1 summary: infrastructure, audit, frozen validation, baselines
 
-**Session:** D01-S01 · **Branch:** `day-1` · **Status:** DRAFT. The phase-close review (X-D01-S01-0004) and the holdout check are pending.
+**Session:** D01-S01 · **Branch:** `day-1` · **Status:** FINAL. Phase-close review X-D01-S01-0004: ACCEPT. Holdout check: WIN.
+
+The draft of this file (commit `bad75b6`) contained errors that the phase-close review identified. They are corrected below per `research/day-01/acks/PHASE_CLOSE_D01_ack_v1.md` (C1–C4), and the draft stays in history.
 
 ## 1. What was built
 
@@ -17,7 +19,7 @@
 - X-D01-S01-0001: SPLITS v1, **REVISE** (six defects).
 - X-D01-S01-0002: SPLITS v2, **ACCEPT**, then frozen.
 - X-D01-S01-0003: H001–H008, all **ACCEPT** with batch conditions B1–B4.
-- X-D01-S01-0004: phase close, *pending*.
+- X-D01-S01-0004: phase close, **ACCEPT**, with record corrections C1–C7 and new standing rules 7–8.
 
 ## 2. Baseline chain (pre-registered order; frozen promotion rule)
 
@@ -40,21 +42,39 @@ Reproductions E007, E008 and E009 (seed 43) are exact. Every run was within its 
 2. **The anchor `MVT − AOBT_3` is a strong but noisy input.**
    - Raw, it loses to a median in the bulk (R1 +53 s) and wins strongly in winter (W1 −47 s bulk).
    - Linearly corrected (ridge), it beats every Tier 0 model on every fold. The winsorisation clip carries only 5–40 % of that margin.
-3. **Day-scale records exist and are partly predictable.** At LIRF, one row has anchor 87,181 s against target 87,002 s (the anchor is exact), and another has no NM data and target 87,186 s. Each alone decides single-fold outcomes.
-4. **NM-unmatched departures carry a heavy tail.** Their tail rate (y ≥ 3,600 s) is 4.9 %, against 0.15 % for matched rows; at **LIRF it is 49 %** (mean 6,457 s).
-   - LightGBM exploits this. Its margin over ridge (−104.9 s) is 99 % tail, and it comes mostly from these rows, not from the pre-registered anchor mechanism.
-   - H006 is therefore INCONCLUSIVE, not promoted (standing rule 1). It is the strongest Day 2 lead.
+3. **Day-scale records exist and are partly predictable.**
+   - Jan–Nov contains **15** DEP rows with targets ≥ 80,000 s: 13 at LIRF, 14 without NM data, and 5 in July 2025.
+   - One of them (LIRF, anchor 87,181 s, target 87,002 s) has an exact anchor.
+   - Single records like these decide single-fold outcomes (see the B4 dominant-row reports).
+4. **NM-unmatched rows carry the metric, and at LIRF the tail is a recording convention.**
+   - NM-missing rows are 0.8–2.1 % of each fold but carry 14–66 % of every model's SSE (C3). Their tail rate is 4.9 %, against 0.15 % for matched rows, and **49 % at LIRF**.
+   - At LIRF, block time is within 120 s of the scheduled time in **83 %** of tail rows (base rate 26 %). The long "taxi-out" is therefore largely `MVT − SCHED`, a **block-at-schedule recording convention**, not taxi duration (C2). It is label T, not P.
+   - H006's 0.991 tail share against ridge **nets** three pieces (C1): a bulk gain of 31–40 s on NM-present rows (every fold), a bulk loss on LIRF NM-missing rows, and a tail gain. On NM-present rows (98–99 % of each fold), LightGBM beats ridge by 40–57 s on every fold.
+   - H006 is INCONCLUSIVE because its margin does not run through its pre-registered mechanism, not because trees are weaker in the bulk. That draft claim was wrong.
 5. **Seasonality and regime effects are visible.** LTFM's winter tail (W1 RMSE 909 s under the global mean). A DST reversal between W1 and W1c for the hour key (H003). LFPG forward exposure on S1 (H002: 400.5 against 412.6 on S1c).
-6. **Pre-registered magnitudes often missed.** Ridge 482.7 against 400–470 predicted; H003 0.96 % against 1–3 %; H006 tail share 0.991 against < 0.5. Direction predictions held, except H005 against H003.
+6. **Pre-registered magnitudes often missed** (explained largely by C3: NM-missing rows carry the SSE, and the audit's 385 s proxy excluded them). Ridge 482.7 against 400–470 predicted; H003 0.96 % against 1–3 %; H006 tail share 0.991 against < 0.5. Direction predictions held, except H005 against H003.
 
 ## 4. Champion
 
-**E005: H004 ridge on FS0** (development mean 482.73). Holdout check against E001: *pending*.
+**E005: H004 ridge on FS0** (development mean 482.73; RMSE on NM-present rows 289 / 288 / 271 / 395 / 307 s for R1, R2, R3, S1, W1).
+
+**Phase-close holdout check** (the single Day 1 access, logged 2026-09-27T13:42:35Z; `research/day-01/holdout/holdout_E005_vs_E001.json`):
+
+| | H RMSE (Dec 2025) |
+|---|---|
+| E005 ridge | **411.29** |
+| E001 global mean | 514.74 |
+| dRMSE (q10…q90) | **−103.45** (−122.60…−90.21) → **WIN**, no revert |
+
+The result is inside the Advisor's predicted range (−60 to −125 s). As the Advisor noted, this check can catch only a gross failure.
 
 ## 5. Open questions for Day 2
 
-1. **The NM-unmatched tail mechanism** (LIRF above all). Pre-register it as its own hypothesis, with P-labelled inputs.
+1. **The LIRF block-at-schedule convention and NM-missing rows.** Pre-register a hypothesis under standing rule 8:
+   - state whether the mechanism is taxi duration or the recording convention;
+   - label `d_sched`-derived inputs T;
+   - give separate tail and bulk expectations for that subpopulation, plus an S1 expectation.
 2. **Day-scale anchors and targets.** Should a model trust anchors above 20,000 s? n = 1 in training; July 2026 has one such row.
-3. **Robustness in the bulk.** Tree models are worse than ridge in the bulk on S1 and R1. Candidates: tail-aware losses, or a two-stage model (tail classifier + bulk regressor). These are Tier 2 structural alternatives.
+3. **Structural separation.** LightGBM is already better than ridge on NM-present rows. Candidate Tier 2 designs separate the populations that behave differently, e.g. NM-present vs NM-missing, LIRF convention rows, day-scale records. Every comparison discloses NM × LIRF subgroups (standing rule 7).
 4. **Static structure (the brief's Day 2 theme).** Stand, aircraft type, operator, destination, local time (a P-labelled time key instead of the takeoff hour, per the H003 review).
 5. **January 2026 anchor tail.** 0.375 % of rows have anchors ≥ 3,600 s, 3× any 2025 month, mostly EHAM 3–9 Jan. No fold reproduces it.
