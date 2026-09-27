@@ -4,7 +4,8 @@ evaluation truth, and returns one row per DEP movement with `role` and the targe
 
 FS0 (Day 1 baseline set): row-level columns of the movement itself only. No cross-row
 information, no target statistics, no high-cardinality categoricals. All inputs are
-admissible under DATASET_AUDIT §6.2; all are `static` (row-own) in the §6.2 labelling.
+admissible under DATASET_AUDIT §6.2 and row-own. Labels: categoricals and flt_missing
+are P; hour_utc, weekday and the d_* deltas are T (they use the row's own takeoff time).
 """
 
 from __future__ import annotations
