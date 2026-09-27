@@ -1,0 +1,45 @@
+{
+ "cpu_count": 4,
+ "ram_total_gb": 15.72,
+ "load_silver": {
+  "s": 0.8,
+  "peak_gb": 2.044,
+  "rows": 4857331
+ },
+ "fs0_R1": {
+  "s": 0.51,
+  "peak_gb": 2.969,
+  "rows": 1571364,
+  "train_rows": 1387414
+ },
+ "fs0_S1": {
+  "s": 0.91,
+  "peak_gb": 3.125,
+  "rows": 1728188,
+  "train_rows": 1537475
+ },
+ "ridge_S1": {
+  "s": 14.6,
+  "peak_gb": 3.276
+ },
+ "lightgbm_S1_50r": {
+  "s": 4.78,
+  "peak_gb": 2.986
+ },
+ "lightgbm_S1_200r": {
+  "s": 15.28,
+  "peak_gb": 2.954
+ },
+ "xgboost_S1_50r": {
+  "s": 12.28,
+  "peak_gb": 3.131
+ },
+ "xgboost_S1_200r": {
+  "s": 37.55,
+  "peak_gb": 3.137
+ },
+ "lightgbm_s_per_round": 0.07,
+ "lightgbm_fixed_s": 1.28,
+ "xgboost_s_per_round": 0.1685,
+ "xgboost_fixed_s": 3.86
+}
