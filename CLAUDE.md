@@ -7,3 +7,4 @@ Follow `AGENTS.md` and `docs/PROJECT_BRIEF.md` (v3.0).
 - Tests: `uv run pytest`. Lint: `uv run ruff check .`
 - Advisor reviews: write the envelope first, then spawn the `advisor` subagent with the envelope path only.
 - Network: read `config/network.yaml` before researching. Fetch only from allowlisted hosts.
+- Branches: one per research phase, named `day-N` (e.g. `day-1`, `day-2`), branched from `main`. PRs go from `day-N` into `main`.
