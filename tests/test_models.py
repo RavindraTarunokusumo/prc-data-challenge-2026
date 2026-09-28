@@ -74,3 +74,19 @@ def test_gbm_uses_only_present_columns():
     feats = synthetic(seed=3).drop(DELTAS)
     pred = REGISTRY["lightgbm"](feats, PARAMS["lightgbm"], 42)
     assert pred.height == feats.filter(pl.col("role") == "val").height
+
+
+def test_lightgbm_without_subsampling_is_seed_invariant():
+    """With bagging and feature subsampling off, LightGBM does not consume the seed:
+    two seeds give identical predictions (basis of the H013 design)."""
+    feats = synthetic(n=2000)
+    p = {"objective": "regression", "num_boost_round": 30, "num_leaves": 15,
+         "num_threads": 1, "bagging_fraction": 1.0, "bagging_freq": 0,
+         "feature_fraction": 1.0, "min_data_in_leaf": 20}
+    a = REGISTRY["lightgbm"](feats, p, 42)["pred"].to_numpy()
+    b = REGISTRY["lightgbm"](feats, p, 43)["pred"].to_numpy()
+    assert np.array_equal(a, b)
+    bag = {**p, "bagging_fraction": 0.8, "bagging_freq": 1, "feature_fraction": 0.9}
+    c = REGISTRY["lightgbm"](feats, bag, 42)["pred"].to_numpy()
+    d = REGISTRY["lightgbm"](feats, bag, 43)["pred"].to_numpy()
+    assert not np.array_equal(c, d)  # the Day 1/2 configuration does consume the seed
