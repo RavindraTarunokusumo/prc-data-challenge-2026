@@ -19,6 +19,9 @@ def test_subgroup_shares_sum_to_one_and_signs():
     shares = [out[g]["share_of_sse_change"] for g in
               ("NM_present_other", "NM_present_LIRF", "NM_missing_other", "NM_missing_LIRF")]
     assert sum(shares) == pytest.approx(1.0)
+    for g in ("NM_present_other", "NM_present_LIRF", "NM_missing_other", "NM_missing_LIRF"):
+        assert out[g]["share_of_sse_change_tail"] + out[g]["share_of_sse_change_bulk"] == \
+            pytest.approx(out[g]["share_of_sse_change"])
     assert out["NM_missing_LIRF"]["rows"] == 2 and out["NM_missing_LIRF"]["tail_rows"] == 1
     # bulk: candidate better at EDDF, worse on the LIRF NM-missing bulk row
     assert out["NM_present_other"]["delta_rmse_bulk"] < 0
@@ -29,3 +32,13 @@ def test_subgroup_shares_sum_to_one_and_signs():
     assert out["pooled"]["delta_rmse_full"] == pytest.approx(
         np.sqrt(((frame["pred_cand"] - frame["y"]) ** 2).mean())
         - np.sqrt(((frame["pred_champ"] - frame["y"]) ** 2).mean()))
+
+
+def test_population_masks():
+    from prc.attribution import population_mask
+    f = pl.DataFrame({"ADEP_mvt": ["LIRF", "LIRF", "EDDF", "EDDF"],
+                      "nm_missing": [True, False, True, False]})
+    assert population_mask(f, "NM_present").to_list() == [False, True, False, True]
+    assert population_mask(f, "LIRF_NM_missing").to_list() == [True, False, False, False]
+    assert population_mask(f, "excl_LIRF_NM_missing").to_list() == [False, True, True, True]
+    assert population_mask(f, "all").to_list() == [True] * 4

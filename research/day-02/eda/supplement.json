@@ -1,0 +1,71 @@
+{
+ "fit_months": [
+  "2025-01",
+  "2025-03",
+  "2025-04",
+  "2025-05",
+  "2025-06"
+ ],
+ "ranking_dep_unseen_share_vs_jan_nov_training": {
+  "stand": 0.0009830617588975788,
+  "actype": 5.219796949898649e-05,
+  "op_prefix": 0.00267949576761464,
+  "ades": 0.000693073039458765
+ },
+ "nm_missing_dep_jan_nov": {
+  "rows": 20821,
+  "present_share": {
+   "FLIGHT_mvt": 0.9974064646270592,
+   "ADES_mvt": 0.9982229479852073,
+   "STAND_mvt": 0.9994716872388454,
+   "AIRCRAFT_TYPE_mvt": 0.9318956822438884
+  }
+ },
+ "finding5_lirf_nm_missing_fit": {
+  "rows": 473,
+  "convention_tail_rate": 0.4989429175475687,
+  "definition": "|y - d_sched| < 120 s and y >= 3600 s; the <= 3600 s band is 0 by construction (y >= 3600 and |y - d_sched| < 120 need d_sched > 3480)",
+  "by_d_sched_band": {
+   "(-inf, 3600]": {
+    "rows": 47,
+    "rate": 0.0
+   },
+   "(3600, 7200]": {
+    "rows": 231,
+    "rate": 0.4329004329004329
+   },
+   "(7200, inf]": {
+    "rows": 195,
+    "rate": 0.6974358974358974
+   }
+  }
+ },
+ "fs1_build_check_S1": {
+  "build_s": 3.16,
+  "rows": 1728188,
+  "columns": 21,
+  "peak_rss_gb_process": 4.270104,
+  "levels": {
+   "stand": {
+    "train_levels": 1316,
+    "rare_share_train": 0.0076053269158848115,
+    "rare_share_val": 0.008651743719620582
+   },
+   "actype": {
+    "train_levels": 118,
+    "rare_share_train": 0.0014374217466950681,
+    "rare_share_val": 0.0015363399453629275
+   },
+   "op_prefix": {
+    "train_levels": 489,
+    "rare_share_train": 0.01580903754532594,
+    "rare_share_val": 0.017827835543460593
+   },
+   "ades": {
+    "train_levels": 589,
+    "rare_share_train": 0.007960454641538887,
+    "rare_share_val": 0.009527405053667028
+   }
+  }
+ }
+}

@@ -75,3 +75,35 @@ Both residuals have a baseline RMSE of ≈ 350 s (346.5 and 352.8 s). The raw an
   | actype | 118 | 0.14 % | 0.15 % |
   | op_prefix | 489 | 1.58 % | 1.78 % |
   | ades | 589 | 0.80 % | 0.95 % |
+
+## Corrections (appended after review X-D02-S01-0001; the text above is kept as written)
+
+Producing code: `scripts/eda_day2_supplement.py` → `supplement.json`. Items 1, 2 and 4 read no target. Item 3 reads FIT-month targets only.
+
+1. **Ranking coverage (Results table, Finding 4).** The "0 % unseen" figures are an artifact. `eda_day2.py` built its vocabulary over all of silver, including December and both ranking months.
+   - Against the **Jan–Nov 2025 training vocabulary**, ranking DEP rows have these unseen shares:
+
+     | Key | Unseen share |
+     |---|---|
+     | stand | 0.098 % |
+     | actype | 0.005 % |
+     | op_prefix | 0.268 % |
+     | ades | 0.069 % |
+
+   - These rows map to `__RARE__` in FS1, so the availability conclusion stands.
+   - The `EVAL unseen` column of the table was computed correctly (FIT vocabulary against August).
+2. **NM-missing count (Finding 4).** 27,760 was the all-silver count. Jan–Nov 2025 training DEP rows contain **20,821** NM-missing rows.
+   - Presence shares on those rows:
+
+     | Column | Present |
+     |---|---|
+     | `FLIGHT_mvt` | 99.74 % |
+     | `ADES_mvt` | 99.82 % |
+     | `STAND_mvt` | 99.95 % |
+     | `AIRCRAFT_TYPE_mvt` | 93.19 % |
+
+3. **Finding 5.** The 0 % convention-tail rate in the `d_sched` ≤ 3,600 s band holds **by definition** (y ≥ 3,600 and |y − `d_sched`| < 120 need `d_sched` > 3,480 s). It is not a finding.
+   - The informative contrast is 0.43 (1–2 h) against 0.70 (> 2 h).
+   - Finding 5 omits a second route to the schedule delay. The takeoff hour or weekday against the scheduled local hour or weekday gives the delay at hour resolution. On LIRF NM-missing rows it recovers most of the separation exact `d_sched` gives (review X-D02-S01-0001: 9,289 → 8,855 s, against 8,758 s for 1 h `d_sched` bins).
+4. **FS1 build check.** Re-measured by the supplement script at 3.2 s. The process peak is 4.27 GB, including the silver load. The levels and rare shares are unchanged.
+5. **`ades` label.** P for scheduled flights, but **F** for diverted flights (641 of 2,070 diversions; ~0.03 % of rows). Noted for the causal-only variant.

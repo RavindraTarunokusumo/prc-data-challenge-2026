@@ -17,6 +17,19 @@ def _drmse(ea: np.ndarray, eb: np.ndarray) -> float | None:
     return float(np.sqrt(ea.mean()) - np.sqrt(eb.mean())) if ea.size else None
 
 
+POPULATIONS = ("all", "NM_present", "LIRF_NM_missing", "excl_LIRF_NM_missing")
+
+
+def population_mask(frame: pl.DataFrame, population: str) -> pl.Series:
+    """Row mask of a named sub-population (needs ADEP_mvt and nm_missing)."""
+    if population == "all":
+        return pl.Series("m", [True] * frame.height)
+    lirf_miss = (pl.col("ADEP_mvt") == "LIRF") & pl.col("nm_missing")
+    expr = {"NM_present": ~pl.col("nm_missing"), "LIRF_NM_missing": lirf_miss,
+            "excl_LIRF_NM_missing": ~lirf_miss}[population]
+    return frame.select(expr.alias("m"))["m"]
+
+
 def subgroup_disclosure(frame: pl.DataFrame) -> dict:
     """`frame`: one fold's rows with columns y, pred_cand, pred_champ, ADEP_mvt, nm_missing.
 
@@ -38,6 +51,8 @@ def subgroup_disclosure(frame: pl.DataFrame) -> dict:
             "rows": int(m.sum()),
             "tail_rows": int((m & ~bulk).sum()),
             "share_of_sse_change": float(d[m].sum() / total) if total else None,
+            "share_of_sse_change_tail": float(d[m & ~bulk].sum() / total) if total else None,
+            "share_of_sse_change_bulk": float(d[mb].sum() / total) if total else None,
             "delta_rmse_full": _drmse(ea[m], eb[m]),
             "delta_rmse_bulk": _drmse(ea[mb], eb[mb]),
         }

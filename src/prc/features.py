@@ -121,8 +121,26 @@ def fs1_no_dsched(view: pl.LazyFrame) -> pl.DataFrame:
     return fs1(view).drop("d_sched")
 
 
+ANCHOR = ["d_aobt3", "d_eobt1"]
+SCHED_LOCAL = ["sched_hour_local", "sched_weekday_local"]
+
+
+def fs1_no_anchor(view: pl.LazyFrame) -> pl.DataFrame:
+    """FS1 minus the NM anchor deltas d_aobt3 and d_eobt1; d_sched and flt_missing kept
+    (H012: M2 ablation with d_sched held fixed)."""
+    return fs1(view).drop(ANCHOR)
+
+
+def fs1_static_no_deltas(view: pl.LazyFrame) -> pl.DataFrame:
+    """FS0_NO_DELTAS plus the four static FS1 keys, without the local scheduled time, so that
+    no hour-resolution schedule-delay proxy (takeoff hour vs scheduled hour) exists
+    (H011 v2)."""
+    return fs1(view).drop(DELTAS + SCHED_LOCAL)
+
+
 FEATURE_SETS = {"FS0": fs0, "FS0_NO_DELTAS": fs0_no_deltas, "FS1": fs1,
-                "FS1_NO_DELTAS": fs1_no_deltas, "FS1_NO_DSCHED": fs1_no_dsched}
+                "FS1_NO_DELTAS": fs1_no_deltas, "FS1_NO_DSCHED": fs1_no_dsched,
+                "FS1_NO_ANCHOR": fs1_no_anchor, "FS1_STATIC_NO_DELTAS": fs1_static_no_deltas}
 
 
 def columns(feats: pl.DataFrame) -> tuple[list[str], list[str]]:

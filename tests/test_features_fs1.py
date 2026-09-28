@@ -67,5 +67,17 @@ def test_fs1_extends_fs0_on_real_silver(silver, fold_id):
         assert f1[c].null_count() == 0, c
     assert f1["sched_hour_local"].is_between(0, 23).all()
     for name, drop in (("FS1_NO_DELTAS", {"d_aobt3", "d_eobt1", "d_sched", "flt_missing"}),
-                       ("FS1_NO_DSCHED", {"d_sched"})):
+                       ("FS1_NO_DSCHED", {"d_sched"}),
+                       ("FS1_NO_ANCHOR", {"d_aobt3", "d_eobt1"}),
+                       ("FS1_STATIC_NO_DELTAS", {"d_aobt3", "d_eobt1", "d_sched", "flt_missing",
+                                                 "sched_hour_local", "sched_weekday_local"})):
         assert set(f1.columns) - set(FEATURE_SETS[name](view).columns) == drop
+
+
+@pytest.mark.parametrize("fold_id", ["R1"])
+def test_static_no_deltas_is_fs0_no_deltas_plus_four_keys(silver, fold_id):
+    view = masked_view(silver, get_fold(fold_id))
+    base = FEATURE_SETS["FS0_NO_DELTAS"](view)
+    st = FEATURE_SETS["FS1_STATIC_NO_DELTAS"](view)
+    assert set(st.columns) - set(base.columns) == set(FS1_EXTRA_CATEGORICAL)
+    assert st.select(base.columns).equals(base)
