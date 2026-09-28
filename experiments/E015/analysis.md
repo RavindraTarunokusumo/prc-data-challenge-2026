@@ -41,3 +41,8 @@ H009 v3 **cannot be promoted**: criterion 6 fails, and the frozen rule gives no 
 - No re-run with another seed. That would be seed selection, and a re-run is authorized only after an infrastructure failure.
 
 **Implication for every Tier 1 candidate.** Any bagged tree model that uses `d_sched` on LIRF NM-missing rows will face the same criterion 6 exposure. This is a Day 2 finding for the phase-close review, to be addressed by a pre-registered design, not by tuning.
+
+## Appended notes (after review X-D02-S01-0004)
+
+1. **Attribution correction.** Two random components differ between E015 and E012, not one: the subsampling draws (`bagging_fraction`, `feature_fraction`) and the **bin-construction sample**. Above 200,000 training rows, LightGBM draws the bin-construction sample from a seed derived from `seed` (`bin_construct_sample_cnt`, default 200,000); every fold except W1c exceeds this. The instability "carried by the bagged mixture predictions" above is therefore attributable to **both** random components, and they are not separated.
+2. **Dirty tree.** E015 ran from a dirty working tree (`git_dirty_at_run: true`, run commit `6b84350`). Only output files changed around it (E016's records and the ledger, written while E016 ran before E015 in the same job). No code changed.

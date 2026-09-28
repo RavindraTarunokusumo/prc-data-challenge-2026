@@ -113,3 +113,12 @@ The chain runs sequentially: H009, then H010, then H012, then H011.
 - Clauses 1–4 are not met, so H009 is not falsified. Criteria 1–3, 5 and 7 pass, and the criterion 8 LIRF objection is resolved.
 - **Criterion 6 (reproduction) fails.**
 - The failure is carried by LIRF convention records, not by the static or anchor mechanisms. It is a structural exposure of every bagged Tier 1 model that uses `d_sched` on those rows, for the phase-close review.
+
+### X-D02-S01-0004 · H013 v1 REVISE, H014 v1 ACCEPT (conditional; lapses under H013 v2)
+
+- **H013 v1's premise was false.** LightGBM without subsampling still consumes the seed above 200,000 training rows, through the bin-construction sample. Seven of eight folds exceed that.
+- **The researcher's supporting check was a false negative** (small, simple synthetic data), and its commit citation was wrong: the check was never committed.
+- **Corrections.** E015's instability is not attributable to subsampling alone. A committed test now covers the regime above the threshold.
+- **Rulings.**
+  - A training procedure with **no random component** satisfies criterion 6; one that fixes a random step independently of the seed does not.
+  - E015's spread becomes a standing disclosure if an H013 version is promoted.

@@ -90,3 +90,44 @@ def test_lightgbm_without_subsampling_is_seed_invariant():
     c = REGISTRY["lightgbm"](feats, bag, 42)["pred"].to_numpy()
     d = REGISTRY["lightgbm"](feats, bag, 43)["pred"].to_numpy()
     assert not np.array_equal(c, d)  # the Day 1/2 configuration does consume the seed
+
+
+def realistic(n_train, n_val=5000, seed=0):
+    """Continuous, heavy-tailed synthetic FS1-like frame (after the X-D02-S01-0004
+    review's check): simple synthetic features bin identically whatever the bin sample,
+    which hid the bin-construction seed dependence in the test above."""
+    rng = np.random.default_rng(seed)
+    n = n_train + n_val
+    role = np.where(np.arange(n) < n_train, "train", "val")
+    base = rng.gamma(4.0, 250.0, n)
+    d_sched = base + rng.exponential(900, n)
+    y = base
+    lv = lambda k, p: np.array([f"{p}{i}" for i in rng.integers(0, k, n)])
+    return pl.DataFrame({
+        "MVT_ID_mvt": np.arange(n, dtype=np.int64), "role": role, "month": "2025-09",
+        "y": np.where(role == "train", y, np.nan),
+        "ADEP_mvt": rng.choice(["EDDF", "EGLL", "LIRF"], n), "airport_runway": lv(40, "R"),
+        "WK_TBL_CAT_flt": rng.choice(["M", "H"], n), "MARKET_SEGMENT_flt": lv(3, "M"),
+        "FLIGHT_TYPE_flt": lv(2, "F"), "hour_utc": rng.integers(0, 24, n).astype(np.int32),
+        "weekday": rng.integers(1, 8, n).astype(np.int32),
+        "d_aobt3": y + rng.normal(0, 150, n), "d_eobt1": y + rng.normal(0, 400, n),
+        "d_sched": d_sched, "flt_missing": np.zeros(n, dtype=np.int32),
+    }).with_columns(pl.col("y").fill_nan(None))
+
+
+def test_lightgbm_seed_invariance_above_bin_sample_threshold():
+    """Above LightGBM's bin_construct_sample_cnt (default 200,000 rows) the seed also draws
+    the bin-construction sample. Without subsampling that is the only random component;
+    binning from all rows (H013 v2) removes it. Committed evidence for H013 v2."""
+    feats = realistic(n_train=260_000)
+    p = {"objective": "regression", "num_boost_round": 15, "num_leaves": 63,
+         "num_threads": 4, "bagging_fraction": 1.0, "bagging_freq": 0,
+         "feature_fraction": 1.0, "min_data_in_leaf": 100}
+    a = REGISTRY["lightgbm"](feats, p, 42)["pred"].to_numpy()
+    b = REGISTRY["lightgbm"](feats, p, 43)["pred"].to_numpy()
+    assert not np.array_equal(a, b)  # H013 v1 configuration: the bin sample follows the seed
+    full = {**p, "bin_construct_sample_cnt": 5_000_000}
+    c = REGISTRY["lightgbm"](feats, full, 42)["pred"].to_numpy()
+    d = REGISTRY["lightgbm"](feats, full, 43)["pred"].to_numpy()
+    e = REGISTRY["lightgbm"](feats, full, 42)["pred"].to_numpy()
+    assert np.array_equal(c, d) and np.array_equal(c, e)  # H013 v2: no random component
