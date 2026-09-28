@@ -1,0 +1,307 @@
+{
+ "fit_months": [
+  "2025-01",
+  "2025-03",
+  "2025-04",
+  "2025-05",
+  "2025-06"
+ ],
+ "eval_months": [
+  "2025-08"
+ ],
+ "bulk_max_s": 3600,
+ "shrink_pseudocount": 50,
+ "eval_rows_bulk": 190840,
+ "eval_rows_bulk_nm_present": 188611,
+ "keys": {
+  "stand": {
+   "label": "P",
+   "levels_train_jan_nov": 1930,
+   "ranking_dep_unseen_share": 0.0,
+   "r_apt": {
+    "rmse_before": 346.4581445701724,
+    "rmse_after": 303.45951846675257,
+    "gain_s": 42.99862610341984,
+    "eval_unseen_share": 0.0019230769230769232
+   },
+   "r_anch_nm_present": {
+    "rmse_before": 352.7539724728199,
+    "rmse_after": 338.1517460096752,
+    "gain_s": 14.602226463144689,
+    "eval_unseen_share": 0.0019298980441225591
+   }
+  },
+  "stand_group": {
+   "label": "P",
+   "levels_train_jan_nov": 61,
+   "ranking_dep_unseen_share": 0.0,
+   "r_apt": {
+    "rmse_before": 346.4581445701724,
+    "rmse_after": 327.6000359849918,
+    "gain_s": 18.858108585180617,
+    "eval_unseen_share": 2.0959966464053657e-05
+   },
+   "r_anch_nm_present": {
+    "rmse_before": 352.7539724728199,
+    "rmse_after": 342.87233504374035,
+    "gain_s": 9.881637429079547,
+    "eval_unseen_share": 2.1207670814533616e-05
+   }
+  },
+  "stand_runway": {
+   "label": "P",
+   "levels_train_jan_nov": 12367,
+   "ranking_dep_unseen_share": 0.0,
+   "r_apt": {
+    "rmse_before": 346.4581445701724,
+    "rmse_after": 293.5206580687237,
+    "gain_s": 52.93748650144869,
+    "eval_unseen_share": 0.030198071683085307
+   },
+   "r_anch_nm_present": {
+    "rmse_before": 352.7539724728199,
+    "rmse_after": 338.31500773139095,
+    "gain_s": 14.438964741428947,
+    "eval_unseen_share": 0.030088382968119567
+   }
+  },
+  "actype": {
+   "label": "P",
+   "levels_train_jan_nov": 278,
+   "ranking_dep_unseen_share": 0.0,
+   "r_apt": {
+    "rmse_before": 346.4581445701724,
+    "rmse_after": 317.7304181702753,
+    "gain_s": 28.727726399897108,
+    "eval_unseen_share": 0.00028295954726472437
+   },
+   "r_anch_nm_present": {
+    "rmse_before": 352.7539724728199,
+    "rmse_after": 341.8439921956278,
+    "gain_s": 10.909980277192119,
+    "eval_unseen_share": 0.00024919013207077
+   }
+  },
+  "wake": {
+   "label": "P",
+   "levels_train_jan_nov": 5,
+   "ranking_dep_unseen_share": 0.0,
+   "r_apt": {
+    "rmse_before": 346.4581445701724,
+    "rmse_after": 328.4239493264278,
+    "gain_s": 18.03419524374459,
+    "eval_unseen_share": 0.0
+   },
+   "r_anch_nm_present": {
+    "rmse_before": 352.7539724728199,
+    "rmse_after": 345.3765964950508,
+    "gain_s": 7.377375977769077,
+    "eval_unseen_share": 0.0
+   }
+  },
+  "op_prefix": {
+   "label": "P",
+   "levels_train_jan_nov": 2501,
+   "ranking_dep_unseen_share": 0.0,
+   "r_apt": {
+    "rmse_before": 346.4581445701724,
+    "rmse_after": 313.01427799996475,
+    "gain_s": 33.44386657020766,
+    "eval_unseen_share": 0.0028243554810312302
+   },
+   "r_anch_nm_present": {
+    "rmse_before": 352.7539724728199,
+    "rmse_after": 340.81727921314496,
+    "gain_s": 11.93669325967494,
+    "eval_unseen_share": 0.0027994125475184375
+   }
+  },
+  "operator_nm": {
+   "label": "P",
+   "levels_train_jan_nov": 707,
+   "ranking_dep_unseen_share": 0.0,
+   "r_apt": {
+    "rmse_before": 346.4581445701724,
+    "rmse_after": 314.90525853811715,
+    "gain_s": 31.552886032055255,
+    "eval_unseen_share": 0.0014357577027876755
+   },
+   "r_anch_nm_present": {
+    "rmse_before": 352.7539724728199,
+    "rmse_after": 340.79797023826177,
+    "gain_s": 11.956002234558127,
+    "eval_unseen_share": 0.0014527254507955528
+   }
+  },
+  "ades": {
+   "label": "P",
+   "levels_train_jan_nov": 1631,
+   "ranking_dep_unseen_share": 0.0,
+   "r_apt": {
+    "rmse_before": 346.4581445701724,
+    "rmse_after": 314.94047168603714,
+    "gain_s": 31.517672884135266,
+    "eval_unseen_share": 0.0026723957241668412
+   },
+   "r_anch_nm_present": {
+    "rmse_before": 352.7539724728199,
+    "rmse_after": 340.04210559356255,
+    "gain_s": 12.711866879257343,
+    "eval_unseen_share": 0.002608543510187635
+   }
+  },
+  "ades_region": {
+   "label": "P",
+   "levels_train_jan_nov": 234,
+   "ranking_dep_unseen_share": 0.0,
+   "r_apt": {
+    "rmse_before": 346.4581445701724,
+    "rmse_after": 318.14178215196756,
+    "gain_s": 28.316362418204847,
+    "eval_unseen_share": 0.00027247956403269756
+   },
+   "r_anch_nm_present": {
+    "rmse_before": 352.7539724728199,
+    "rmse_after": 341.06194717156603,
+    "gain_s": 11.692025301253864,
+    "eval_unseen_share": 0.0002703978028853036
+   }
+  },
+  "runway": {
+   "label": "P",
+   "levels_train_jan_nov": 53,
+   "ranking_dep_unseen_share": 0.0,
+   "r_apt": {
+    "rmse_before": 346.4581445701724,
+    "rmse_after": 326.9674756101569,
+    "gain_s": 19.490668960015512,
+    "eval_unseen_share": 0.0
+   },
+   "r_anch_nm_present": {
+    "rmse_before": 352.7539724728199,
+    "rmse_after": 344.7670247991119,
+    "gain_s": 7.986947673708016,
+    "eval_unseen_share": 0.0
+   }
+  },
+  "flight_rule": {
+   "label": "P",
+   "levels_train_jan_nov": 3,
+   "ranking_dep_unseen_share": 0.0,
+   "r_apt": {
+    "rmse_before": 346.4581445701724,
+    "rmse_after": 339.22292759440757,
+    "gain_s": 7.235216975764843,
+    "eval_unseen_share": 0.0
+   },
+   "r_anch_nm_present": {
+    "rmse_before": 352.7539724728199,
+    "rmse_after": 347.90319908566545,
+    "gain_s": 4.850773387154447,
+    "eval_unseen_share": 0.0
+   }
+  },
+  "market": {
+   "label": "P",
+   "levels_train_jan_nov": 9,
+   "ranking_dep_unseen_share": 0.0,
+   "r_apt": {
+    "rmse_before": 346.4581445701724,
+    "rmse_after": 333.17954667776377,
+    "gain_s": 13.27859789240864,
+    "eval_unseen_share": 0.0
+   },
+   "r_anch_nm_present": {
+    "rmse_before": 352.7539724728199,
+    "rmse_after": 344.90276491480665,
+    "gain_s": 7.851207558013243,
+    "eval_unseen_share": 0.0
+   }
+  },
+  "sched_hour_local": {
+   "label": "P",
+   "levels_train_jan_nov": 24,
+   "ranking_dep_unseen_share": 0.0,
+   "r_apt": {
+    "rmse_before": 346.4581445701724,
+    "rmse_after": 330.8555966770946,
+    "gain_s": 15.602547893077826,
+    "eval_unseen_share": 0.0
+   },
+   "r_anch_nm_present": {
+    "rmse_before": 352.7539724728199,
+    "rmse_after": 345.20508452749186,
+    "gain_s": 7.548887945328033,
+    "eval_unseen_share": 0.0
+   }
+  },
+  "sched_hour_utc": {
+   "label": "P",
+   "levels_train_jan_nov": 24,
+   "ranking_dep_unseen_share": 0.0,
+   "r_apt": {
+    "rmse_before": 346.4581445701724,
+    "rmse_after": 331.44002008150983,
+    "gain_s": 15.018124488662579,
+    "eval_unseen_share": 0.0
+   },
+   "r_anch_nm_present": {
+    "rmse_before": 352.7539724728199,
+    "rmse_after": 345.40252559974,
+    "gain_s": 7.351446873079908,
+    "eval_unseen_share": 0.0
+   }
+  },
+  "sched_weekday_local": {
+   "label": "P",
+   "levels_train_jan_nov": 7,
+   "ranking_dep_unseen_share": 0.0,
+   "r_apt": {
+    "rmse_before": 346.4581445701724,
+    "rmse_after": 339.7612487725354,
+    "gain_s": 6.696895797637012,
+    "eval_unseen_share": 0.0
+   },
+   "r_anch_nm_present": {
+    "rmse_before": 352.7539724728199,
+    "rmse_after": 347.99671396186847,
+    "gain_s": 4.757258510951431,
+    "eval_unseen_share": 0.0
+   }
+  },
+  "sched_weekhour_local": {
+   "label": "P",
+   "levels_train_jan_nov": 168,
+   "ranking_dep_unseen_share": 0.0,
+   "r_apt": {
+    "rmse_before": 346.4581445701724,
+    "rmse_after": 331.19764026017367,
+    "gain_s": 15.260504309998737,
+    "eval_unseen_share": 8.907985747222805e-05
+   },
+   "r_anch_nm_present": {
+    "rmse_before": 352.7539724728199,
+    "rmse_after": 345.5416977537705,
+    "gain_s": 7.21227471904939,
+    "eval_unseen_share": 8.483068325813446e-05
+   }
+  },
+  "mvt_hour_utc": {
+   "label": "T",
+   "levels_train_jan_nov": 24,
+   "ranking_dep_unseen_share": 0.0,
+   "r_apt": {
+    "rmse_before": 346.4581445701724,
+    "rmse_after": 329.2877547197977,
+    "gain_s": 17.170389850374704,
+    "eval_unseen_share": 0.0
+   },
+   "r_anch_nm_present": {
+    "rmse_before": 352.7539724728199,
+    "rmse_after": 344.4113260948027,
+    "gain_s": 8.342646378017207,
+    "eval_unseen_share": 0.0
+   }
+  }
+ }
+}
