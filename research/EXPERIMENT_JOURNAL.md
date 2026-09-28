@@ -122,3 +122,16 @@ The chain runs sequentially: H009, then H010, then H012, then H011.
 - **Rulings.**
   - A training procedure with **no random component** satisfies criterion 6; one that fixes a random step independently of the seed does not.
   - E015's spread becomes a standing disclosure if an H013 version is promoted.
+
+### E017 · H013 v2 LightGBM FS1, no random component (candidate) · COMPLETE → INCONCLUSIVE
+
+- **Development mean 378.82.** 668 s, faster than the bagged model.
+- **Clause 1:** −103.90 s against E005, 7/7 WIN.
+- **Criterion 8 NOT resolved:** LIRF NM-missing bulk on S1 is +7,104 s, above +6,500. Without bagging, the convention-row predictions are more extreme (Alternative Explanation 1).
+- **Clauses 2(a), 2(b), 3 and 4 are not met;** objection T does not stand. Not falsified, not promotable, and no reproduction run.
+- **Deterministic against bagged on NM-present rows: −0.75 s** (every fold within ±2.4 s). All material differences are on LIRF NM-missing rows.
+
+### E018 · H014 v2 LightGBM FS0, no random component (M1 reference) · COMPLETE
+
+- **Development mean 380.95** (+3.08 s against the bagged E006).
+- **M1 replicated:** H013 v2 − H014 v2 on NM-present rows outside LIRF is −7.27 s (bagged: −7.16), and W1c is LOSS again.

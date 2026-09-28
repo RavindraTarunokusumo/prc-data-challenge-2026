@@ -72,3 +72,23 @@ R2 is inadmissible, as the review predicted, and counts as a failing fold under 
 
 - **Not promotable** (criterion 8 unresolved). The reproduction is therefore **not run**: it is conditional on criterion 8 being resolved.
 - Clauses 2–4 are computed as registered, with H014 v2 next, for the record and for the Day 3–4 training-procedure question.
+
+## Chain steps 2–3 (after E018)
+
+| Clause | Source | Result | Verdict |
+|---|---|---|---|
+| **2(a)** | `mechanism_check.py E017 E018 NM_present_excl_LIRF` | −7.27 s (q95 −6.49), criteria 1–2 True, 4 counted WINs (W1c LOSS voids W1) | **not met** |
+| **2(b)** | `… E017 E018 NM_present` | Bulk < 0 on all five development folds (−9.0 to −16.4 s) | **not met** |
+| **3** | `… E017 E013 LIRF_NM_missing` | Full dRMSE −953.9, −767.7, −2,610.0, −1,620.1 and −2,082.3 s: none ≥ 0. R2 is inadmissible and counts as failing, so 1 failing fold < 3 | **not met**; M3 re-established on four admissible folds |
+| **4** | `… E017 E014 NM_present` | −52.05 s (q95 −48.24), 7/7 WIN; all development folds admissible | **not met**; M2 re-established |
+
+**Objection T** does not stand (S1c 1.68 s, W1c 2.38 s).
+
+**Disclosure comparisons** (`compare.py`): E017 against E013, −36.21 s; against E014, −34.58 s; against E018, −2.13 s.
+
+## Decision: H013 v2 **INCONCLUSIVE** (not promoted; E005 remains champion)
+
+- Clauses 1–4 are not met and objection T does not stand, so H013 v2 is **not falsified**. Criteria 1–3 pass against E005.
+- **Criterion 8 is not resolved:** `NM_missing_LIRF.delta_rmse_bulk` on S1 is +7,104.4 s, above +6,500 s. That alone blocks promotion.
+- **The reproduction is not run.** It is conditional on criterion 8.
+- **Mechanism replication across training procedures** (bagged → deterministic): M1 −7.16 → −7.27 s; M2 −51.30 → −52.05 s. M3 holds on every admissible fold.
