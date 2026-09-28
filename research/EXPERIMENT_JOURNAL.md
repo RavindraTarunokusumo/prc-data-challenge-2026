@@ -91,3 +91,5 @@ The chain runs sequentially: H009, then H010, then H012, then H011.
   - The anchor is worth about 51 s beyond `d_sched`, most in winter (W1 −84 s).
 - The feared dominant row (192622644) carried only 0.16 on S1.
 - **H009 v3 is not falsified on any clause (1–4).** The seed-43 reproduction is authorized.
+
+**Ordering note (D02-S01).** The H009 reproduction was allocated as **E015** before H011 (step 4 of the registered chain), a researcher slip. The **run order** follows the registration: H011 (**E016**) runs before E015. The two are independent. H011's preconditions need only E012, E013 and E014, and the reproduction's condition (clauses 1–4 not met) was already settled. E-number order is therefore not run order for these two.
