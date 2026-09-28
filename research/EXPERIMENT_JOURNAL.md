@@ -83,3 +83,11 @@ The chain runs sequentially: H009, then H010, then H012, then H011.
   - The LIRF NM-missing bulk was recovered only on R1 and S1; it got worse on R2, R3 and W1.
   - S1 was the largest net H010 loss, not the smallest.
 - NM-present bulk: `d_sched` is worth 1–8 s (within the prediction).
+
+### E014 · H012 v1 LightGBM FS1 − {`d_aobt3`, `d_eobt1`} (M2 ablation) · COMPLETE — clause 4
+
+- **Development mean 413.40.** On NM-present rows, 305.9 (predicted 300–350).
+- **Clause 4 not met:** H009 − H012 on NM-present rows is −51.30 s (q95 −47.49), 7/7 WIN. **M2 is supported.**
+  - The anchor is worth about 51 s beyond `d_sched`, most in winter (W1 −84 s).
+- The feared dominant row (192622644) carried only 0.16 on S1.
+- **H009 v3 is not falsified on any clause (1–4).** The seed-43 reproduction is authorized.
