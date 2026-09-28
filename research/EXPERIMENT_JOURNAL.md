@@ -50,3 +50,26 @@ Incumbent H001 → H002 PROMOTE → H003 PROMOTE → H005 REJECT → H004 PROMOT
   - the LIRF tail is largely a block-at-schedule recording convention (label T);
   - NM-missing rows carry 14–66 % of the SSE;
   - there are 15 day-scale records in Jan–Nov.
+
+## Day 2 — static and temporal structure (exchanges X-D02-S01-0001 to 0003)
+
+Proposal history:
+- H009: v1 REVISE, v2 REVISE, **v3 ACCEPT**.
+- H010 v1: ACCEPT.
+- H011: v1 REVISE, **v2 ACCEPT**.
+- H012 v1: ACCEPT.
+
+The chain runs sequentially: H009, then H010, then H012, then H011.
+
+### E012 · H009 v3 LightGBM FS1 (candidate) · COMPLETE — chain step 1
+
+- **Development mean 376.15** (E006: 377.87; E005: 482.73). 906 s, 4.14 GB, CLASS-M.
+- **Clause 1 (against E005):** passes, −106.58 s (q95 −84.41), 7/7 WIN, criterion 3 met. NM-present bulk dRMSE −41 to −50 s (E006: −31 to −40).
+- **Clause 2(a), M1** on NM-present rows outside LIRF: passes.
+  - Mean −7.16 s (q95 −6.25). Four counted WINs.
+  - W1c is LOSS, which voids the W1 WIN (flagged residual exposure).
+  - No row concentration.
+- **Clause 2(b):** passes. NM-present bulk dRMSE is −8 to −14 s on all five development folds.
+- **v2's population would have falsified H009 through row 192622644 alone** (S1 TIE on NM-present rows, top-1 share −8.93).
+- **LIRF NM-missing.** Static keys dilute the convention signal: bulk gains on 4/5 folds, losses on day-scale records.
+- **Pending:** clause 3 (H010) and clause 4 (H012), then the conditional reproduction.
