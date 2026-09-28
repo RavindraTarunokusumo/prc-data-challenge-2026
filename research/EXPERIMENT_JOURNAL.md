@@ -135,3 +135,17 @@ The chain runs sequentially: H009, then H010, then H012, then H011.
 
 - **Development mean 380.95** (+3.08 s against the bagged E006).
 - **M1 replicated:** H013 v2 − H014 v2 on NM-present rows outside LIRF is −7.27 s (bagged: −7.16), and W1c is LOSS again.
+
+### Day 2 phase close (X-D02-S01-0006: ACCEPT)
+
+- **No promotion. E005 remains champion by rule** (not the most accurate: the Tier 1 fits beat it by 51.5–59.6 s on NM-present rows on every development fold).
+  - H009 v3: INCONCLUSIVE (criterion 6).
+  - H013 v2: INCONCLUSIVE (criterion 8).
+- **Holdout: Day 2 0 of 1, closed unused** (ruling H).
+- **Record corrections D2-C1 to D2-C10** (`research/day-02/acks/PHASE_CLOSE_D02_ack_v1.md`). Among them:
+  - on all rows, FS1 is not distinguishable from FS0 (−1.72 s, q95 +9.39);
+  - the "30 s vs 7 s" comparison mixed populations; the matched NM-present figures are −29.6 s without deltas and −9.1 / −8.7 s with them;
+  - static keys worsen July's convention statistic;
+  - seed variance is not confined to LIRF NM-missing rows (S1 +1.33, W1 −1.94 s outside them);
+  - deterministic training costs about 3 s on all rows.
+- **Standing rules 9–11 adopted.** Rulings B (the +6,500 s bound stands) and R (comparison base = a matched reference).

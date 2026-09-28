@@ -1,52 +1,56 @@
 # Research State
 
-*Updated 2026-09-28T21:49:50Z (measured with `date -u` at writing; D02-S01, after X-D02-S01-0005).*
+*Updated 2026-09-28T22:36:20Z (measured with `date -u` at writing; D02-S01, Day 2 phase close).*
 
-- **Phase:** Day 2 — static and temporal structure. Splits, metric and availability definition are **FROZEN** (`config/frozen.json`).
-- **Current session:** D02-S01 (branch `day-2`, from `main` @ `d909de9`)
-- **Last completed exchange:** X-D02-S01-0005: H013 v2 **ACCEPT** (0.80); H014 v2 **ACCEPT** (0.85, conditional).
-  - X-D02-S01-0004: H013 v1 REVISE (the bin-construction sample consumes the seed above 200,000 rows); H014 v1 ACCEPT, lapsed.
-  - X-D02-S01-0003: H009 v3 ACCEPT. X-D02-S01-0002: H009 v2 REVISE; H011 v2 and H012 v1 ACCEPT. X-D02-S01-0001: H009 v1 REVISE; H010 v1 ACCEPT; H011 v1 REVISE.
-- **Champion:** **E005, H004 ridge on FS0** (unchanged by Day 2 so far).
-  - Development mean 482.73 (R1 477.8, R2 323.5, R3 431.6, S1 670.0, W1 510.7).
-  - Day 1 holdout: WIN.
-- **Accepted findings:** H002, H003 and H004 (Day 1 chain).
-- **Rejected:** H005, H007. **Inconclusive:** H006 (LightGBM FS0, 377.87; margin via the LIRF convention).
-- **Day 2 chain: complete.** All runs sequential and within class.
+- **Phase:** Day 2 **CLOSED** (phase-close review X-D02-S01-0006: ACCEPT). Next: Day 3, congestion reconstruction, on a new `day-3` branch. Splits, metric and availability definition are **FROZEN** (`config/frozen.json`).
+- **Last session:** D02-S01 (branch `day-2`). **Last completed exchange:** X-D02-S01-0006 (phase close).
+- **Champion: E005, H004 ridge on FS0, by rule. It is not the most accurate model.**
+  - Development mean 482.73 (R1 477.8, R2 323.5, R3 431.6, S1 670.0, W1 510.7). Day 1 holdout: WIN.
+  - **Deficit.** On NM-present rows, every Day 2 Tier 1 fit beats E005 by 51.5–59.6 s on every development fold.
+  - On all rows the margin is −60.9 to −131.9 s. On S1 and S1c it rests on a few LIRF convention rows (DAY_SUMMARY §5).
+- **Day 2 decisions:**
+  - **H009 v3 INCONCLUSIVE:** E012, development mean 376.15; E015 reproduction failed criterion 6 (R3 1.73 s, S1 3.50 s).
+  - **H013 v2 INCONCLUSIVE:** E017, 378.82; criterion 8 not resolved (S1 +7,104 > +6,500); not reproduced.
+  - **Ablations and references:**
+    - E013 (H010): M3 supported.
+    - E014 (H012): M2 supported, −51.3 s on NM-present rows.
+    - E016 (H011 v2): static keys without deltas, −29.6 s on NM-present rows and −28.0 s on all rows.
+    - E018 (H014 v2): M1 replicated.
+- **Day 2 headline** (rule 11: restricted next to all rows):
+  - Static FS1 keys on top of the delta set: **−9.1 s** on NM-present rows (bagged), but **−1.72 s (q95 +9.39) on all rows**. FS1 is not distinguishable from FS0 on the metric.
+  - Deterministic training: −0.75 s on NM-present rows against **+2.67 s on all rows**. Its real-data determinism is untested.
+- **Earlier:** Day 1 accepted H002, H003 and H004; rejected H005 and H007; H006 INCONCLUSIVE.
+- **Holdout:** Day 1 used (WIN). **Day 2: 0 of 1, closed unused** (ruling H). E012–E018 may never be NEW in a holdout access (rule 9).
+- **Standing Advisor rules:**
+  1. tail attribution;
+  2. forward exposure;
+  3. holdout only via phase close;
+  4. calendar-month identity;
+  5. all folds + H;
+  6. row concentration;
+  7. NM × LIRF subgroup disclosure;
+  8. recording-convention disclosure;
+  9. holdout access named by the phase-close review; NEW allocated in that phase; an unused access does not carry over;
+  10. no re-adjudication (no unchanged re-submission of E006/E012/E015/E017/E018 configurations as candidates; no post-hoc threshold, population or counting changes, including any criterion 8 threshold);
+  11. headline figures: restricted next to all rows, one population per comparison, all development folds when localising.
 
-  | Run | Hypothesis | Development mean | Outcome |
-  |---|---|---|---|
-  | E012 | H009 v3, LightGBM FS1 (candidate) | 376.15 | Clauses 1–4 not met (not falsified); against E005 −106.58 s, 7/7 WIN |
-  | E013 | H010, − `d_sched` | 415.03 | M3 supported |
-  | E014 | H012, − anchor | 413.40 | M2 supported (−51.3 s on NM-present rows) |
-  | E016 | H011 v2, static keys without deltas | 474.33 | Static claim holds (−30.0 s against E010) |
-  | E015 | H009 reproduction, seed 43 | — | **Criterion 6 FAILS** (R3 1.73 s, S1 3.50 s against a 1.0 s tolerance) |
-
-  - The E015 failure is carried by LIRF NM-missing convention records.
-  - Outside them, the seed shifts are 0.23 s (R3) and 1.33 s (S1); on NM-present rows outside LIRF, 0.21 s and 0.91 s.
-  - **H009: INCONCLUSIVE**, not promoted.
-- **Day 2 findings:**
-  - The static keys are worth about 30 s without the anchor and about 7 s with it.
-  - The anchor (M2) is worth about 51 s on NM-present rows beyond `d_sched`.
-  - The exact `d_sched` convention route (M3) is real, and even the static keys alone partly reach it.
-  - Bagged Tier 1 models are seed-unstable on LIRF day-scale convention records, which exposes every such candidate to criterion 6.
-- **Standing Advisor rules:** 1–8. Batch conditions B1–B4 carried. The criterion 8 resolution rule is recorded in `research/day-02/acks/H009_ack_v3.md`.
+  Batch conditions B1–B4 are carried.
+- **Rulings (X-D02-S01-0006):**
+  - **H:** Day 2 holdout closed unused.
+  - **B:** the +6,500 s criterion 8 bound is not re-derived. An alternative resolution needs a forward-risk rationale that does not rest on E006–E018.
+  - **R:** a comparison base is a matched reference sharing the candidate's training procedure. Criterion 4 carries every mechanism claim.
 - **Known leakage hazards:**
   - P/T/F labels. `MVT − AOBT_3` and `d_sched` are T.
-  - The hour-resolution schedule-delay proxy (takeoff hour/weekday against scheduled local hour/weekday) is T.
+  - The hour-resolution schedule-delay proxy is T.
   - `ades` is F on diversions (~0.03 % of rows).
   - Cross-month information is inadmissible.
 - **Key data facts:**
   - NM-missing rows are 0.8–2.1 % of each fold and carry 14–66 % of the SSE; there are 20,821 in Jan–Nov.
   - LIRF: 83 % of tail rows are block-at-schedule, and 931 of 932 NM-present ones have a normal anchor.
-  - LIRF rows 192622644 (S1, y 87,002 s, day-scale) and 183910286 (W1, y 13,865 s) dominate NM-present comparisons.
-- **Open incidents:** INC-0003 (researcher effort: `--effort medium` launch argument against `high` in the session metadata). Owner to resolve; not blocking.
-- **Holdout:** 0 of 1 Day 2 accesses used.
-- **H013 v2 chain (authorized, sequential):**
-  1. H013 v2 primary (FS1; no subsampling; `bin_construct_sample_cnt` 5,000,000; no random component).
-  2. Comparisons: against E005 (clause 1), against E012 (admissibility inputs and objection T).
-  3. H014 v2 (M1 matched reference).
-  4. Clauses 3 and 4 by reuse of E013 and E014.
-  5. Conditional reproduction, with prediction identity checked from the manifests.
-- **Clause tooling frozen** (`compare.py`, `mechanism_check.py`, `attribution.py` as at `5ba9230`) until clauses 1–4 and objection T are computed.
-- **Next action:** `gate.py allocate H013 v2` → run.
+  - Every fold except W1c trains on more than 200,000 rows, the LightGBM bin-sample threshold.
+- **Open incidents:** **INC-0003** (researcher effort: `--effort medium` launch argument against `high` in the session metadata). It covers all D02-S01 work. Owner to resolve.
+- **Open blockers:** none.
+- **Next action:** Day 3 session start on branch `day-3` (from `main` after the Day 2 PR merges). First questions:
+  - a structural treatment of the LIRF NM-missing convention (paired with deterministic training);
+  - congestion features;
+  - both under standing rules 9–11 and ruling R.
