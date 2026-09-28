@@ -1,0 +1,28 @@
+{
+ "reproduction": "E015",
+ "primary": "E012",
+ "rmse_diff_by_fold": {
+  "R1": -0.35128326537881094,
+  "R2": 0.9056421556393275,
+  "R3": 1.726640273821431,
+  "S1": 3.5031888827198827,
+  "W1": -0.07346515171263945
+ },
+ "within_tolerance": false,
+ "criteria_vs_champion": {
+  "criterion_1": true,
+  "criterion_2": true,
+  "criterion_3": true,
+  "fold_outcome": {
+   "R1": "WIN",
+   "R2": "WIN",
+   "R3": "WIN",
+   "S1": "WIN",
+   "W1": "WIN",
+   "S1c": "WIN",
+   "W1c": "WIN"
+  }
+ },
+ "criteria_hold": true,
+ "passes": false
+}

@@ -93,3 +93,23 @@ The chain runs sequentially: H009, then H010, then H012, then H011.
 - **H009 v3 is not falsified on any clause (1–4).** The seed-43 reproduction is authorized.
 
 **Ordering note (D02-S01).** The H009 reproduction was allocated as **E015** before H011 (step 4 of the registered chain), a researcher slip. The **run order** follows the registration: H011 (**E016**) runs before E015. The two are independent. H011's preconditions need only E012, E013 and E014, and the reproduction's condition (clauses 1–4 not met) was already settled. E-number order is therefore not run order for these two.
+
+### E016 · H011 v2 LightGBM FS0-no-deltas + 4 static keys · COMPLETE — the Day 2 question
+
+- **Development mean 474.33** (E010: 502.34; predicted 470–495).
+- **Not falsified:** on rows excluding LIRF NM-missing, −30.03 s (q95 −28.46), 5/5 WIN; W1c TIE.
+- **Answer.** Static keys are worth about 30 s without the anchor and about 7 s with it; the anchor absorbs roughly three-quarters of the static signal.
+- **Missed rule 8 pre-registration.** The static keys still reach the LIRF convention (R3 and W1 tail share 0.5; bulk up to +3,082 s), likely via operator × destination × takeoff hour.
+
+### E015 · H009 v3 reproduction (seed 43) · COMPLETE → criterion 6 FAILS
+
+- **|Δ| against E012:** R1 0.35, R2 0.91, **R3 1.73**, **S1 3.50**, W1 0.07 s. The tolerance is 1.0 s, so it fails.
+- The criteria against E005 still hold (7/7 WIN).
+- **Localised.** Excluding LIRF NM-missing rows, R3 moves 0.23 s and S1 1.33 s. On NM-present rows outside LIRF, 0.21 and 0.91 s.
+  - The seed variance is the bagged mixture prediction on a handful of day-scale LIRF convention records (e.g. 200300302: 16,148 against 13,746 s).
+
+### H009 v3 · decision: **INCONCLUSIVE** (not promoted; E005 remains champion)
+
+- Clauses 1–4 are not met, so H009 is not falsified. Criteria 1–3, 5 and 7 pass, and the criterion 8 LIRF objection is resolved.
+- **Criterion 6 (reproduction) fails.**
+- The failure is carried by LIRF convention records, not by the static or anchor mechanisms. It is a structural exposure of every bagged Tier 1 model that uses `d_sched` on those rows, for the phase-close review.
