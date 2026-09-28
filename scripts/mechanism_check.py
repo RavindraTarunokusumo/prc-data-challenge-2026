@@ -2,7 +2,8 @@
 
     uv run python scripts/mechanism_check.py CANDIDATE_EID REFERENCE_EID POPULATION
 
-POPULATION: all | NM_present | LIRF_NM_missing | excl_LIRF_NM_missing (prc.attribution).
+POPULATION: all | NM_present | LIRF_NM_missing | excl_LIRF_NM_missing | NM_present_excl_LIRF
+(prc.attribution). Also reports standing rule 6 (row concentration) on the population.
 Applies the frozen paired bootstrap and criteria 1-3 (prc.metrics.promotion_check,
 unchanged) to the rows of each development fold and twin that belong to POPULATION, and
 reports per fold the full and bulk (y < 3600 s) dRMSE on that population. A mechanism
@@ -23,7 +24,7 @@ import numpy as np
 import polars as pl
 
 from prc import ledger
-from prc.attribution import POPULATIONS, population_mask
+from prc.attribution import POPULATIONS, population_mask, row_concentration
 from prc.data import load_silver
 from prc.evaluate import _join, _predictions, truth_frame
 from prc.metrics import BULK_MAX_S, PRED, TARGET, promotion_check
@@ -43,10 +44,16 @@ def main() -> None:
             sys.exit(f"refused: {eid} is not COMPLETE in the ledger")
     cfg = promotion_config()
     folds = list(cfg["development_folds"]) + list(cfg["causal_twins"].values())
-    nm = (load_silver(columns=["MVT_ID_mvt", "AOBT_3_flt", "PHASE_mvt", "month"])
-          .filter(pl.col("PHASE_mvt") == "DEP")
-          .select("MVT_ID_mvt", pl.col("AOBT_3_flt").is_null().alias("nm_missing")))
-    cand, ref, per_fold = {}, {}, {}
+    silver = (load_silver(columns=["MVT_ID_mvt", "AOBT_3_flt", "MVT_TIME_UTC_mvt",
+                                   "SCHED_TIME_UTC_mvt", "PHASE_mvt", "month"])
+              .filter(pl.col("PHASE_mvt") == "DEP"))
+    nm = silver.select("MVT_ID_mvt", pl.col("AOBT_3_flt").is_null().alias("nm_missing"))
+    detail = silver.select(
+        "MVT_ID_mvt",
+        (pl.col("MVT_TIME_UTC_mvt") - pl.col("AOBT_3_flt")).dt.total_seconds().alias("d_aobt3"),
+        (pl.col("MVT_TIME_UTC_mvt") - pl.col("SCHED_TIME_UTC_mvt")).dt.total_seconds()
+        .alias("d_sched"))
+    cand, ref, per_fold, conc = {}, {}, {}, {}
     for f in folds:
         t = truth_frame(f).join(nm, on="MVT_ID_mvt", how="left")
         keep = population_mask(t, a.population)
@@ -65,8 +72,15 @@ def main() -> None:
             "delta_rmse_bulk": float(np.sqrt(ec[b].mean()) - np.sqrt(er[b].mean()))
             if b.any() else None,
         }
+        rows = (cand[f].select("MVT_ID_mvt", "ADEP_mvt", pl.col(TARGET).cast(pl.Float64)
+                               .alias("y"), pl.col(PRED).alias("pred_cand"))
+                .join(ref[f].select("MVT_ID_mvt", pl.col(PRED).alias("pred_champ")),
+                      on="MVT_ID_mvt")
+                .join(detail, on="MVT_ID_mvt", how="left"))
+        conc[f] = row_concentration(rows, ("ADEP_mvt", "d_aobt3", "d_sched"))
     r = {"candidate": a.candidate, "reference": a.reference, "population": a.population,
-         "per_fold": per_fold, **promotion_check(cand, ref)}
+         "per_fold": per_fold, "row_concentration_rule6": conc,
+         **promotion_check(cand, ref)}
     out = ROOT / "research" / "comparisons" / \
         f"{a.candidate}_vs_{a.reference}_mech_{a.population}.json"
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -77,8 +91,12 @@ def main() -> None:
     for f in folds:
         p = per_fold[f]
         bulk = "n/a" if p["delta_rmse_bulk"] is None else f"{p['delta_rmse_bulk']:+.2f}"
+        c = conc[f]
+        top = "n/a" if c["top1_share"] is None else f"{c['top1_share']:+.2f}/{c['top10_share']:+.2f}"
         print(f"  {f:4s} n={p['rows']:6d} full {p['delta_rmse_full']:+8.2f} bulk {bulk:>8s} "
-              f"{r['fold_outcome'][f]}")
+              f"{r['fold_outcome'][f]:4s} top1/top10 {top}")
+        if "dominant_row" in c:
+            print(f"       DOMINANT ROW: {c['dominant_row']}")
 
 
 if __name__ == "__main__":

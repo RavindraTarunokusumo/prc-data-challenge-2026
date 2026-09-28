@@ -17,7 +17,8 @@ def _drmse(ea: np.ndarray, eb: np.ndarray) -> float | None:
     return float(np.sqrt(ea.mean()) - np.sqrt(eb.mean())) if ea.size else None
 
 
-POPULATIONS = ("all", "NM_present", "LIRF_NM_missing", "excl_LIRF_NM_missing")
+POPULATIONS = ("all", "NM_present", "LIRF_NM_missing", "excl_LIRF_NM_missing",
+               "NM_present_excl_LIRF")
 
 
 def population_mask(frame: pl.DataFrame, population: str) -> pl.Series:
@@ -26,7 +27,9 @@ def population_mask(frame: pl.DataFrame, population: str) -> pl.Series:
         return pl.Series("m", [True] * frame.height)
     lirf_miss = (pl.col("ADEP_mvt") == "LIRF") & pl.col("nm_missing")
     expr = {"NM_present": ~pl.col("nm_missing"), "LIRF_NM_missing": lirf_miss,
-            "excl_LIRF_NM_missing": ~lirf_miss}[population]
+            "excl_LIRF_NM_missing": ~lirf_miss,
+            "NM_present_excl_LIRF": ~pl.col("nm_missing") & (pl.col("ADEP_mvt") != "LIRF")
+            }[population]
     return frame.select(expr.alias("m"))["m"]
 
 
@@ -66,3 +69,21 @@ def subgroup_disclosure(frame: pl.DataFrame) -> dict:
              if k in SUBGROUPS and v["delta_rmse_bulk"] is not None and v["rows"] >= 1}
     out["bulk_sign_disagreement"] = len(signs - {0.0}) > 1
     return out
+
+
+def row_concentration(frame: pl.DataFrame, detail_cols: tuple[str, ...] = ()) -> dict:
+    """Standing rule 6 on one fold's rows (columns y, pred_cand, pred_champ, MVT_ID_mvt):
+    signed shares of the SSE change carried by the largest row and the 10 largest rows by
+    |change|; the dominant row's details when one row carries >= 50 %."""
+    d = frame.with_columns(((pl.col("pred_cand") - pl.col("y")) ** 2
+                            - (pl.col("pred_champ") - pl.col("y")) ** 2).alias("d"))
+    total = float(d["d"].sum())
+    top = d.with_columns(pl.col("d").abs().alias("absd")).sort("absd", descending=True)
+    rec = {"delta_sse": total,
+           "top1_share": float(top["d"][0]) / total if total and top.height else None,
+           "top10_share": float(top["d"][:10].sum()) / total if total and top.height else None}
+    if rec["top1_share"] is not None and abs(rec["top1_share"]) >= 0.5:
+        r = top.row(0, named=True)
+        rec["dominant_row"] = {k: r[k] for k in ("MVT_ID_mvt", "y", "pred_cand", "pred_champ",
+                                                 *detail_cols) if k in r}
+    return rec

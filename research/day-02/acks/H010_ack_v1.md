@@ -18,3 +18,15 @@
 **Shared evidence corrections.**
 - The ranking-unseen shares are not 0 %: stand 0.08 %, operator prefix 0.26 %, destination 0.05 % against the Jan–Nov training vocabulary. They map to `__RARE__`.
 - `created_utc` 2026-09-28T18:24:00Z was not a measured time. It postdates the commit (18:22:24Z) and the envelope (18:22:07Z).
+
+## Appended correction (after X-D02-S01-0002)
+
+The shares above (stand 0.08 %, operator prefix 0.26 %, destination 0.05 %) were labelled "against the Jan–Nov training vocabulary". They are the **January–December** vocabulary figures. Against the January–November training vocabulary they are:
+
+| Key | Unseen share |
+|---|---|
+| stand | 0.098 % |
+| op_prefix | 0.268 % |
+| ades | 0.069 % |
+
+Source: `research/day-02/eda/supplement.json`.

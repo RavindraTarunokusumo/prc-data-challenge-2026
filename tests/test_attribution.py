@@ -42,3 +42,18 @@ def test_population_masks():
     assert population_mask(f, "LIRF_NM_missing").to_list() == [True, False, False, False]
     assert population_mask(f, "excl_LIRF_NM_missing").to_list() == [False, True, True, True]
     assert population_mask(f, "all").to_list() == [True] * 4
+    assert population_mask(f, "NM_present_excl_LIRF").to_list() == [False, False, False, True]
+
+
+def test_row_concentration_dominant_row():
+    from prc.attribution import row_concentration
+    f = pl.DataFrame({"MVT_ID_mvt": [1, 2, 3], "y": [100.0, 100.0, 87000.0],
+                      "pred_cand": [110.0, 90.0, 20000.0], "pred_champ": [100.0, 100.0, 1000.0],
+                      "ADEP_mvt": ["LIRF"] * 3})
+    rc = row_concentration(f, ("ADEP_mvt",))
+    assert rc["top1_share"] == pytest.approx(1.0, abs=1e-6)
+    assert rc["dominant_row"]["MVT_ID_mvt"] == 3 and rc["dominant_row"]["ADEP_mvt"] == "LIRF"
+    even = pl.DataFrame({"MVT_ID_mvt": [1, 2, 3], "y": [100.0] * 3,
+                         "pred_cand": [110.0] * 3, "pred_champ": [100.0] * 3})
+    rc2 = row_concentration(even)  # three equal rows: top1 share 1/3
+    assert "dominant_row" not in rc2
