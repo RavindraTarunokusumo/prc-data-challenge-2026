@@ -73,3 +73,13 @@ The chain runs sequentially: H009, then H010, then H012, then H011.
 - **v2's population would have falsified H009 through row 192622644 alone** (S1 TIE on NM-present rows, top-1 share −8.93).
 - **LIRF NM-missing.** Static keys dilute the convention signal: bulk gains on 4/5 folds, losses on day-scale records.
 - **Pending:** clause 3 (H010) and clause 4 (H012), then the conditional reproduction.
+
+### E013 · H010 v1 LightGBM FS1 − `d_sched` (M3 ablation) · COMPLETE — clause 3
+
+- **Development mean 415.03** (predicted 395–440). 843 s, 4.18 GB.
+- **Clause 3 not met:** H009 − H010 on LIRF NM-missing rows is −314 to −2,493 s on all five development folds. **M3 is supported**, and exact `d_sched` adds well beyond the hour-resolution proxy.
+- **The criterion 8 rule for H009 is satisfied, and the LIRF bulk-trade objection is resolved.**
+- **Missed predictions:**
+  - The LIRF NM-missing bulk was recovered only on R1 and S1; it got worse on R2, R3 and W1.
+  - S1 was the largest net H010 loss, not the smallest.
+- NM-present bulk: `d_sched` is worth 1–8 s (within the prediction).
