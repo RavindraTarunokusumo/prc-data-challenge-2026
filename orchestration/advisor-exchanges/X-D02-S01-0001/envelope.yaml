@@ -1,0 +1,48 @@
+schema: advisor-task-envelope-v1
+exchange_id: X-D02-S01-0001
+session: D02-S01
+sender: claude-researcher
+recipient: advisor-subagent
+purpose: proposal_review
+proposal_ids: [H009, H010, H011]
+proposal_paths:
+  - research/day-02/proposals/H009_v1.md
+  - research/day-02/proposals/H010_v1.md
+  - research/day-02/proposals/H011_v1.md
+proposal_sha256:
+  - c5927ce1c589a0b85c50331ab11e3396ca6e552c2c72cb7dc1e219349af2242d
+  - 3e273bd053d99337e6877ed2b2a2212461feb620bb525c26697372a9790a3a4a
+  - 3a8b59483923c500b764dc326d0b014a7bc68b0d6689575a0d7e8530f66cbb70
+review_output_dir: research/day-02/advisor/
+context_paths:
+  - research/STATE.md
+  - research/day-01/DAY_SUMMARY.md
+  - research/day-01/advisor/PHASE_CLOSE_D01_review_v1.md
+  - research/day-01/acks/PHASE_CLOSE_D01_ack_v1.md
+  - research/day-01/advisor/H001_review_v1.md
+  - research/day-01/advisor/H006_review_v1.md
+  - research/day-01/advisor/SPLITS_review_v2.md
+  - research/day-02/eda/EDA_STATIC_TEMPORAL.md
+  - research/day-02/eda/static_temporal.json
+  - scripts/eda_day2.py
+  - config/frozen.json
+  - config/splits.yaml
+  - config/resources.yaml
+  - docs/methodology/DATASET_AUDIT.md
+  - src/prc/features.py
+  - src/prc/attribution.py
+  - src/prc/models/
+  - scripts/compare.py
+  - tests/test_features_fs1.py
+  - tests/test_attribution.py
+  - experiments/E006/
+  - experiments/E010/
+  - research/comparisons/E006_vs_E005.json
+  - research/comparisons/E006_vs_E010.json
+constraints:
+  - Batched review (brief §6.3). One review file per hypothesis, H###_review_v1.md, each with its own decision.
+  - H010 and H011 are ablations for H009 and are never promotion candidates.
+  - The Day 2 EDA read targets only for Jan, Mar-Jun and Aug 2025 (never-validation months). Please check that claim.
+  - Read-only checks only. Do not read December 2025 DEP targets. Do not score any model on real folds (no un-gated experiments).
+  - Please rule explicitly on reusing Day 1 experiments E006 and E010 as ablation references (H009_v1.md, Validation Plan).
+created_utc: 2026-09-28T18:22:07Z
