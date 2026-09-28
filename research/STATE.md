@@ -1,12 +1,12 @@
 # Research State
 
-*Updated 2026-09-28T20:57:38Z (measured with `date -u` at writing; D02-S01, Day 2 chain complete).*
+*Updated 2026-09-28T21:49:50Z (measured with `date -u` at writing; D02-S01, after X-D02-S01-0005).*
 
 - **Phase:** Day 2 — static and temporal structure. Splits, metric and availability definition are **FROZEN** (`config/frozen.json`).
 - **Current session:** D02-S01 (branch `day-2`, from `main` @ `d909de9`)
-- **Last completed exchange:** X-D02-S01-0003, H009 v3 **ACCEPT** (0.85).
-  - X-D02-S01-0002: H009 v2 REVISE; H011 v2 ACCEPT (conditional); H012 v1 ACCEPT (conditional).
-  - X-D02-S01-0001: H009 v1 REVISE; H010 v1 ACCEPT (conditional); H011 v1 REVISE.
+- **Last completed exchange:** X-D02-S01-0005: H013 v2 **ACCEPT** (0.80); H014 v2 **ACCEPT** (0.85, conditional).
+  - X-D02-S01-0004: H013 v1 REVISE (the bin-construction sample consumes the seed above 200,000 rows); H014 v1 ACCEPT, lapsed.
+  - X-D02-S01-0003: H009 v3 ACCEPT. X-D02-S01-0002: H009 v2 REVISE; H011 v2 and H012 v1 ACCEPT. X-D02-S01-0001: H009 v1 REVISE; H010 v1 ACCEPT; H011 v1 REVISE.
 - **Champion:** **E005, H004 ridge on FS0** (unchanged by Day 2 so far).
   - Development mean 482.73 (R1 477.8, R2 323.5, R3 431.6, S1 670.0, W1 510.7).
   - Day 1 holdout: WIN.
@@ -42,4 +42,11 @@
   - LIRF rows 192622644 (S1, y 87,002 s, day-scale) and 183910286 (W1, y 13,865 s) dominate NM-present comparisons.
 - **Open incidents:** INC-0003 (researcher effort: `--effort medium` launch argument against `high` in the session metadata). Owner to resolve; not blocking.
 - **Holdout:** 0 of 1 Day 2 accesses used.
-- **Next action:** decide how to handle the criterion 6 exposure (a pre-registered, seed-stable design), or proceed to the Day 2 phase close with E005 as champion.
+- **H013 v2 chain (authorized, sequential):**
+  1. H013 v2 primary (FS1; no subsampling; `bin_construct_sample_cnt` 5,000,000; no random component).
+  2. Comparisons: against E005 (clause 1), against E012 (admissibility inputs and objection T).
+  3. H014 v2 (M1 matched reference).
+  4. Clauses 3 and 4 by reuse of E013 and E014.
+  5. Conditional reproduction, with prediction identity checked from the manifests.
+- **Clause tooling frozen** (`compare.py`, `mechanism_check.py`, `attribution.py` as at `5ba9230`) until clauses 1–4 and objection T are computed.
+- **Next action:** `gate.py allocate H013 v2` → run.
