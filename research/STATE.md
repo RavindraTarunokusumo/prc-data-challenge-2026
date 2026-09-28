@@ -1,6 +1,6 @@
 # Research State
 
-*Updated 2026-09-28T19:37:00Z (measured with `date -u` at writing; D02-S01, after X-D02-S01-0003).*
+*Updated 2026-09-28T19:55:07Z (measured with `date -u` at writing; D02-S01, after E012).*
 
 - **Phase:** Day 2 — static and temporal structure. Splits, metric and availability definition are **FROZEN** (`config/frozen.json`).
 - **Current session:** D02-S01 (branch `day-2`, from `main` @ `d909de9`)
@@ -28,7 +28,12 @@
 - **Key data facts:**
   - NM-missing rows are 0.8–2.1 % of each fold and carry 14–66 % of the SSE; there are 20,821 in Jan–Nov.
   - LIRF: 83 % of tail rows are block-at-schedule, and 931 of 932 NM-present ones have a normal anchor.
-  - Day-scale rows 192622644 (S1) and 183910286 (W1) dominate NM-present comparisons at LIRF.
+  - LIRF rows 192622644 (S1, y 87,002 s, day-scale) and 183910286 (W1, y 13,865 s) dominate NM-present comparisons.
 - **Open incidents:** INC-0003 (researcher effort: `--effort medium` launch argument against `high` in the session metadata). Owner to resolve; not blocking.
 - **Holdout:** 0 of 1 Day 2 accesses used.
-- **Next action:** `gate.py allocate H009 v3` → run → chain step 1 comparisons.
+- **E012 (H009 v3):** COMPLETE, development mean 376.15.
+  - Clause 1: passes, −106.58 s against E005, 7/7 WIN.
+  - Clause 2(a): passes, −7.16 s on NM-present rows outside LIRF; W1c LOSS voids the W1 WIN.
+  - Clause 2(b): passes.
+  - Not falsified so far. Not yet promoted.
+- **Next action:** H010 v1 (E013) → clause 3; then H012 → clause 4; then H011 v2.
