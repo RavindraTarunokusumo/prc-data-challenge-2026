@@ -1,9 +1,14 @@
 # Research State
 
-*Updated 2026-09-29T14:03:03Z (measured with `date -u` at writing; D03-S01, Day 3 in progress).*
+*Updated 2026-09-29T16:32:41Z (measured with `date -u` at writing; D03-S01, Day 3 in progress).*
 
 - **Phase:** **Day 3 in progress** (congestion reconstruction), session D03-S01, branch `day-3` (PR #5). Day 2 CLOSED (X-D02-S01-0006: ACCEPT). Splits, metric and availability definition are **FROZEN** (`config/frozen.json`).
-- **Last session:** D03-S01 (open). **Last completed exchange:** X-D02-S01-0006 (phase close). **Pending:** X-D03-S01-0001 (H015 candidate, H016 and H017 references).
+- **Last session:** D03-S01 (open). **Last completed exchange:** X-D03-S01-0002 (H015 v2, H016 v2, H017 v2: all ACCEPT). **Pending:** none; next is the H015 v2 chain.
+- **Day 3 exchanges:**
+  - X-D03-S01-0001 (attempt 2 after a container restart): H015 v1, H016 v1 and H017 v1 all **REVISE**. The blocking defects were false LIRF NM-missing forward-risk figures, and row 192622644 able to decide the C clause on S1.
+  - Commit `63923e2`: the five P counts that included the row itself now remove its own contribution exactly (no P feature depends on the row's own takeoff). Masking invariance was re-verified on 1,919,370 rows (`scripts/check_fs2_v2.py`).
+  - X-D03-S01-0002: H015 v2 (0.85), H016 v2 (0.88) and H017 v2 (0.85) all **ACCEPT**. The C clauses are on `NM_present_excl_LIRF`. Code is frozen under `src/`, `scripts/`, `pyproject.toml` and `uv.lock` from the H015 allocation to the chain's last comparison.
+  - Advisor's pre-run forecast: clause 1 passes (0.93); C probably −3 to −5 s, above the −6.0 s floor; P(H015 promotable) 0.20.
 - **Day 3 so far (no experiment yet):** congestion block `prc.congestion` (10 P + 5 T features; FS2, FS2_P), verified bit-identical under DEP block/target masking on real data; EDA `research/day-03/eda/congestion.json`; routed Tier 2 model `models/routed.py` (LIRF NM-missing rows → fold-local E005 ridge; byte-identical to E005 on W1c and R2); `scripts/route_check.py`.
 - **Champion: E005, H004 ridge on FS0, by rule. It is not the most accurate model.**
   - Development mean 482.73 (R1 477.8, R2 323.5, R3 431.6, S1 670.0, W1 510.7). Day 1 holdout: WIN.
@@ -49,7 +54,7 @@
   - NM-missing rows are 0.8–2.1 % of each fold and carry 14–66 % of the SSE; there are 20,821 in Jan–Nov.
   - LIRF: 83 % of tail rows are block-at-schedule, and 931 of 932 NM-present ones have a normal anchor.
   - Every fold except W1c trains on more than 200,000 rows, the LightGBM bin-sample threshold.
-- **Open incidents:** **INC-0004** (open, non-blocking): D03-S01 launch arguments `--model claude-sonnet-5-5 --effort medium` against metadata `claude-opus-5-5` / `high`; owner decision. INC-0003 (researcher effort: `--effort medium` launch argument against `high` in the session metadata) is **closed**: owner accepted as is, no remedial action, Day 2 results stand. See `docs/incidents/INC-0003-researcher-effort-discrepancy.md`.
+- **Open incidents:** **INC-0004** (D03 launch arguments `--model claude-sonnet-5-5 --effort medium` against session metadata: served `claude-opus-5-5`, effort `high`). Open, non-blocking, owner to decide. INC-0003 closed.
 - **Open blockers:** none.
 - **Holdout:** Day 3: 0 of 1 used.
-- **Next action:** Advisor review X-D03-S01-0001 of H015 v1, H016 v1, H017 v1; on ACCEPT, acks, then the H015 chain (H015 → H016 → H017 → H015 reproduction), checkpoint after each.
+- **Next action:** `gate.py allocate H015 v2`, then the H015 primary run and chain step 1. After that, H016 v2 (chain step 2: `route_check.py`), then H017 v2. Reproduce H015 only under clause conditions. Checkpoint after each experiment.
