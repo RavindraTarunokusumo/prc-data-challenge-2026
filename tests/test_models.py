@@ -12,6 +12,9 @@ PARAMS = {
                  "num_threads": 1},
     "xgboost": {"objective": "reg:squarederror", "num_boost_round": 5, "max_depth": 3,
                 "nthread": 1},
+    "routed_lightgbm": {"objective": "regression", "num_boost_round": 5, "num_leaves": 7,
+                        "num_threads": 1,
+                        "route_ridge_params": {"alpha": 1.0, "winsor": [0.005, 0.995]}},
 }
 
 
@@ -131,3 +134,34 @@ def test_lightgbm_seed_invariance_above_bin_sample_threshold():
     d = REGISTRY["lightgbm"](feats, full, 43)["pred"].to_numpy()
     e = REGISTRY["lightgbm"](feats, full, 42)["pred"].to_numpy()
     assert np.array_equal(c, d) and np.array_equal(c, e)  # H013 v2: no random component
+
+
+def test_routed_lightgbm_routes_only_lirf_nm_missing():
+    """Routed rows take the FS0 ridge prediction, all others the LightGBM prediction, each
+    identical to the standalone model fitted on the same fold."""
+    feats = synthetic(n=2000, seed=5)
+    p = PARAMS["routed_lightgbm"]
+    out = REGISTRY["routed_lightgbm"](feats, p, 42).sort("MVT_ID_mvt")
+    gb = REGISTRY["lightgbm"](feats, {k: v for k, v in p.items() if k != "route_ridge_params"},
+                              42).sort("MVT_ID_mvt")
+    rd = REGISTRY["ridge"](feats, p["route_ridge_params"], 42).sort("MVT_ID_mvt")
+    va = feats.filter(pl.col("role") == "val").sort("MVT_ID_mvt")
+    route = ((va["ADEP_mvt"] == "LIRF") & (va["flt_missing"] == 1)).to_numpy()
+    assert 0 < route.sum() < route.size
+    got = out["pred"].to_numpy()
+    assert np.array_equal(got[route], rd["pred"].to_numpy()[route])
+    assert np.array_equal(got[~route], gb["pred"].to_numpy()[~route])
+
+
+def test_routed_ridge_sees_fs0_columns_only():
+    """Extra (FS1/FS2) columns change the LightGBM part but never the routed ridge part."""
+    feats = synthetic(n=2000, seed=6)
+    rng = np.random.default_rng(0)
+    extra = feats.with_columns(pl.Series("cg_dep_to_during", rng.normal(size=feats.height)),
+                               pl.Series("stand", rng.choice(["A", "B"], feats.height)))
+    p = PARAMS["routed_lightgbm"]
+    a = REGISTRY["routed_lightgbm"](feats, p, 42).sort("MVT_ID_mvt")
+    b = REGISTRY["routed_lightgbm"](extra, p, 42).sort("MVT_ID_mvt")
+    va = feats.filter(pl.col("role") == "val").sort("MVT_ID_mvt")
+    route = ((va["ADEP_mvt"] == "LIRF") & (va["flt_missing"] == 1)).to_numpy()
+    assert np.array_equal(a["pred"].to_numpy()[route], b["pred"].to_numpy()[route])
