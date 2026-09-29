@@ -1,0 +1,8 @@
+schema: advisor-exchange-retry-v1
+exchange_id: X-D03-S01-0001
+retry_of: X-D03-S01-0001
+attempt: 2
+reason: container restart killed the first Advisor run before it returned; no response.md or review file was written (COMMUNICATION_CONTRACT §6)
+envelope_unchanged: true
+proposal_hashes_reverified: true
+created_utc: 2026-09-29T15:30:04Z
