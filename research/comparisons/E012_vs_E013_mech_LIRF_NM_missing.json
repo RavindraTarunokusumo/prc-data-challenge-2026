@@ -1,0 +1,193 @@
+{
+ "candidate": "E012",
+ "reference": "E013",
+ "population": "LIRF_NM_missing",
+ "per_fold": {
+  "R1": {
+   "rows": 168,
+   "tail_rows": 74,
+   "delta_rmse_full": -1088.639887871368,
+   "delta_rmse_bulk": 613.6040147628482
+  },
+  "R2": {
+   "rows": 115,
+   "tail_rows": 57,
+   "delta_rmse_full": -314.202301589703,
+   "delta_rmse_bulk": -677.1192179816389
+  },
+  "R3": {
+   "rows": 52,
+   "tail_rows": 36,
+   "delta_rmse_full": -2492.9409754019016,
+   "delta_rmse_bulk": -2531.9886048286494
+  },
+  "S1": {
+   "rows": 337,
+   "tail_rows": 119,
+   "delta_rmse_full": -1976.2460945552448,
+   "delta_rmse_bulk": 1199.9432506905068
+  },
+  "W1": {
+   "rows": 58,
+   "tail_rows": 44,
+   "delta_rmse_full": -2475.158813659662,
+   "delta_rmse_bulk": -4302.343882682056
+  },
+  "S1c": {
+   "rows": 337,
+   "tail_rows": 119,
+   "delta_rmse_full": -2561.4897766482063,
+   "delta_rmse_bulk": 821.2152246953092
+  },
+  "W1c": {
+   "rows": 58,
+   "tail_rows": 44,
+   "delta_rmse_full": -2958.17982785369,
+   "delta_rmse_bulk": -533.0476331770747
+  }
+ },
+ "row_concentration_rule6": {
+  "R1": {
+   "delta_sse": -3461143280.834476,
+   "top1_share": 0.5332882578111533,
+   "top10_share": 0.36038007070011935,
+   "dominant_row": {
+    "MVT_ID_mvt": 196129531,
+    "y": 87543.0,
+    "pred_cand": 19316.144541376107,
+    "pred_champ": 6916.137999529252,
+    "ADEP_mvt": "LIRF",
+    "d_aobt3": null,
+    "d_sched": 50581
+   }
+  },
+  "R2": {
+   "delta_sse": -335853632.52448726,
+   "top1_share": -2.043148670078524,
+   "top10_share": -0.011618218127954405,
+   "dominant_row": {
+    "MVT_ID_mvt": 198939290,
+    "y": 18245.0,
+    "pred_cand": 44573.47008734986,
+    "pred_champ": 20888.753866574712,
+    "ADEP_mvt": "LIRF",
+    "d_aobt3": null,
+    "d_sched": 18242
+   }
+  },
+  "R3": {
+   "delta_sse": -3488098471.522767,
+   "top1_share": 0.41652274624484203,
+   "top10_share": 0.9229897324431775
+  },
+  "S1": {
+   "delta_sse": -14395612827.312172,
+   "top1_share": 0.223565442540924,
+   "top10_share": 0.8698492403650043
+  },
+  "W1": {
+   "delta_sse": -4391023639.314785,
+   "top1_share": 0.7872084568807884,
+   "top10_share": 0.9573001180916307,
+   "dominant_row": {
+    "MVT_ID_mvt": 183903219,
+    "y": 131167.0,
+    "pred_cand": 30028.808140176567,
+    "pred_champ": 14181.595799704517,
+    "ADEP_mvt": "LIRF",
+    "d_aobt3": null,
+    "d_sched": 131163
+   }
+  },
+  "S1c": {
+   "delta_sse": -19177958774.134605,
+   "top1_share": 0.17617347512370993,
+   "top10_share": 0.8444559099699347
+  },
+  "W1c": {
+   "delta_sse": -5652546309.970354,
+   "top1_share": 0.7060741495363071,
+   "top10_share": 0.9902044324188413,
+   "dominant_row": {
+    "MVT_ID_mvt": 183903219,
+    "y": 131167.0,
+    "pred_cand": 20238.413831535167,
+    "pred_champ": 3510.1629020151763,
+    "ADEP_mvt": "LIRF",
+    "d_aobt3": null,
+    "d_sched": 131163
+   }
+  }
+ },
+ "fold_delta_rmse": {
+  "R1": -1088.6398878713717,
+  "R2": -314.2023015897039,
+  "R3": -2492.9409754019052,
+  "S1": -1976.2460945552466,
+  "W1": -2475.15881365966,
+  "S1c": -2561.4897766482063,
+  "W1c": -2958.17982785369
+ },
+ "fold_delta_q10_q90": {
+  "R1": [
+   -2053.388938362606,
+   104.62186502421574
+  ],
+  "R2": [
+   -1213.0689358076702,
+   408.30118378155873
+  ],
+  "R3": [
+   -3482.3997990328976,
+   -1780.6911916042754
+  ],
+  "S1": [
+   -3158.0979448385388,
+   -622.8245719564202
+  ],
+  "W1": [
+   -3666.8899672681164,
+   -693.657867641308
+  ],
+  "S1c": [
+   -3559.6373771881945,
+   -1495.8130513051515
+  ],
+  "W1c": [
+   -4023.6561733227754,
+   -2434.6154829685725
+  ]
+ },
+ "fold_outcome": {
+  "R1": "TIE",
+  "R2": "TIE",
+  "R3": "WIN",
+  "S1": "WIN",
+  "W1": "WIN",
+  "S1c": "WIN",
+  "W1c": "WIN"
+ },
+ "fold_outcome_counted": {
+  "R1": "TIE",
+  "R2": "TIE",
+  "R3": "WIN",
+  "S1": "WIN",
+  "W1": "WIN"
+ },
+ "mean_delta_rmse": -1669.4376146155773,
+ "mean_delta_q95": -1032.0787433660926,
+ "criterion_1": true,
+ "criterion_2": true,
+ "pooled_airport_rmse_candidate": {
+  "LIRF": 9607.492474266404
+ },
+ "pooled_airport_rmse_champion": {
+  "LIRF": 11314.531046823631
+ },
+ "airports_degraded_beyond_tolerance": {},
+ "criterion_3": true,
+ "diagnostic_pooled_airport_bulk_delta": {
+  "LIRF": 602.6829548682781
+ },
+ "passes_criteria_1_to_3": true
+}

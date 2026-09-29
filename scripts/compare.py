@@ -20,6 +20,7 @@ import numpy as np
 import polars as pl
 
 from prc import ledger
+from prc.attribution import subgroup_disclosure
 from prc.data import load_silver
 from prc.evaluate import _join, _predictions, compare, truth_frame
 from prc.metrics import BULK_MAX_S, PRED, TARGET
@@ -89,6 +90,26 @@ def row_concentration(cand: str, champ: str) -> dict:
     return out
 
 
+def subgroups(cand: str, champ: str) -> dict:
+    """Standing rule 7 (X-D01-S01-0004): NM status x LIRF disclosure per development fold
+    and twin. Attribution only; fold outcomes are unchanged."""
+    cfg = promotion_config()
+    folds = list(cfg["development_folds"]) + list(cfg["causal_twins"].values())
+    nm = (load_silver(columns=["MVT_ID_mvt", "AOBT_3_flt", "PHASE_mvt", "month"])
+          .filter(pl.col("PHASE_mvt") == "DEP")
+          .select("MVT_ID_mvt", pl.col("AOBT_3_flt").is_null().alias("nm_missing")))
+    out = {}
+    for f in folds:
+        t = truth_frame(f)
+        a = _join(_predictions(cand, f), t).rename({PRED: "pred_cand"})
+        b = _join(_predictions(champ, f), t).select("MVT_ID_mvt", pl.col(PRED).alias(
+            "pred_champ"))
+        j = (a.join(b, on="MVT_ID_mvt").join(nm, on="MVT_ID_mvt", how="left")
+             .with_columns(pl.col(TARGET).cast(pl.Float64).alias("y")))
+        out[f] = subgroup_disclosure(j)
+    return out
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("candidate")
@@ -102,6 +123,7 @@ def main() -> None:
     r = compare(a.candidate, a.champion)
     r["tail_attribution"] = tail_attribution(a.candidate, a.champion)
     r["row_concentration"] = row_concentration(a.candidate, a.champion)
+    r["subgroups_rule7"] = subgroups(a.candidate, a.champion)
     out = ROOT / a.out / f"{a.candidate}_vs_{a.champion}.json"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(r, indent=1) + "\n")
@@ -121,6 +143,15 @@ def main() -> None:
     for f, v in rc.items():
         if "dominant_row" in v:
             print(f"  DOMINANT ROW {f}: {v['dominant_row']}")
+    print("  rule 7 (bulk dRMSE: NM-present other / NM-present LIRF / NM-missing other / "
+          "NM-missing LIRF; NM-present all):")
+    for f, v in r["subgroups_rule7"].items():
+        cells = " / ".join("n/a" if v[g]["delta_rmse_bulk"] is None
+                           else f"{v[g]['delta_rmse_bulk']:+.1f}"
+                           for g in ("NM_present_other", "NM_present_LIRF", "NM_missing_other",
+                                     "NM_missing_LIRF"))
+        flag = "  SIGN DISAGREEMENT" if v["bulk_sign_disagreement"] else ""
+        print(f"    {f:4s} {cells}; {v['NM_present_all']['delta_rmse_bulk']:+.1f}{flag}")
     share = r["tail_attribution"]["pooled_tail_share_of_sse_change"]
     print(f"  tail share of SSE change (dev folds): {share:.3f}" if share is not None else "")
     print(f"  criteria: 1={r['criterion_1']} 2={r['criterion_2']} 3={r['criterion_3']}  "

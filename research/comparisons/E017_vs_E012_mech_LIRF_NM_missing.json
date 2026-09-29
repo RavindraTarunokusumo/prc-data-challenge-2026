@@ -1,0 +1,202 @@
+{
+ "candidate": "E017",
+ "reference": "E012",
+ "population": "LIRF_NM_missing",
+ "per_fold": {
+  "R1": {
+   "rows": 168,
+   "tail_rows": 74,
+   "delta_rmse_full": 134.77696518923403,
+   "delta_rmse_bulk": 411.2794059498947
+  },
+  "R2": {
+   "rows": 115,
+   "tail_rows": 57,
+   "delta_rmse_full": -453.4535043695287,
+   "delta_rmse_bulk": -416.3422473740252
+  },
+  "R3": {
+   "rows": 52,
+   "tail_rows": 36,
+   "delta_rmse_full": -117.0540698822224,
+   "delta_rmse_bulk": 201.64969033027182
+  },
+  "S1": {
+   "rows": 337,
+   "tail_rows": 119,
+   "delta_rmse_full": 356.18316481210604,
+   "delta_rmse_bulk": 714.1041811017458
+  },
+  "W1": {
+   "rows": 58,
+   "tail_rows": 44,
+   "delta_rmse_full": 392.85308847022134,
+   "delta_rmse_bulk": 207.06898364406334
+  },
+  "S1c": {
+   "rows": 337,
+   "tail_rows": 119,
+   "delta_rmse_full": 28.434854281384105,
+   "delta_rmse_bulk": 2.3225969240074846
+  },
+  "W1c": {
+   "rows": 58,
+   "tail_rows": 44,
+   "delta_rmse_full": -700.2291082258726,
+   "delta_rmse_bulk": -37.8347312074859
+  }
+ },
+ "row_concentration_rule6": {
+  "R1": {
+   "delta_sse": 406902309.6155938,
+   "top1_share": -2.0163296347175383,
+   "top10_share": 0.7723700121564893,
+   "dominant_row": {
+    "MVT_ID_mvt": 196129531,
+    "y": 87543.0,
+    "pred_cand": 25620.026714966087,
+    "pred_champ": 19316.144541376107,
+    "ADEP_mvt": "LIRF",
+    "d_aobt3": null,
+    "d_sched": 50581
+   }
+  },
+  "R2": {
+   "delta_sse": -444669415.9521329,
+   "top1_share": 0.6503950183640145,
+   "top10_share": 1.1131220598237546,
+   "dominant_row": {
+    "MVT_ID_mvt": 198939290,
+    "y": 18245.0,
+    "pred_cand": 38344.19312276921,
+    "pred_champ": 44573.47008734986,
+    "ADEP_mvt": "LIRF",
+    "d_aobt3": null,
+    "d_sched": 18242
+   }
+  },
+  "R3": {
+   "delta_sse": -147894354.05779707,
+   "top1_share": 3.7349392090111895,
+   "top10_share": 1.1895635742863255,
+   "dominant_row": {
+    "MVT_ID_mvt": 200297323,
+    "y": 87480.0,
+    "pred_cand": 46640.73449650981,
+    "pred_champ": 40360.767953770584,
+    "ADEP_mvt": "LIRF",
+    "d_aobt3": null,
+    "d_sched": 56520
+   }
+  },
+  "S1": {
+   "delta_sse": 2400090658.962833,
+   "top1_share": -0.3160916657890282,
+   "top10_share": 0.811272929443777
+  },
+  "W1": {
+   "delta_sse": 649489632.1312547,
+   "top1_share": 0.4104894590789791,
+   "top10_share": 0.9961209967549597
+  },
+  "S1c": {
+   "delta_sse": 188619580.50053233,
+   "top1_share": 1.8121383507735633,
+   "top10_share": 0.3924776696422022,
+   "dominant_row": {
+    "MVT_ID_mvt": 192615553,
+    "y": 87361.0,
+    "pred_cand": 22913.765284150068,
+    "pred_champ": 25622.50887017066,
+    "ADEP_mvt": "LIRF",
+    "d_aobt3": null,
+    "d_sched": 73260
+   }
+  },
+  "W1c": {
+   "delta_sse": -1189431088.7778456,
+   "top1_share": 0.9874866977529188,
+   "top10_share": 0.979660036550143,
+   "dominant_row": {
+    "MVT_ID_mvt": 183903219,
+    "y": 131167.0,
+    "pred_cand": 25665.32299307924,
+    "pred_champ": 20238.413831535167,
+    "ADEP_mvt": "LIRF",
+    "d_aobt3": null,
+    "d_sched": 131163
+   }
+  }
+ },
+ "fold_delta_rmse": {
+  "R1": 134.77696518923585,
+  "R2": -453.4535043695282,
+  "R3": -117.0540698822224,
+  "S1": 356.18316481210604,
+  "W1": 392.8530884702195,
+  "S1c": 28.434854281384105,
+  "W1c": -700.2291082258726
+ },
+ "fold_delta_q10_q90": {
+  "R1": [
+   -307.3312666849679,
+   658.7445722577064
+  ],
+  "R2": [
+   -765.947724146665,
+   -61.82292259960603
+  ],
+  "R3": [
+   -1008.7693598340475,
+   476.8626363940498
+  ],
+  "S1": [
+   67.95656168194674,
+   614.1675332370596
+  ],
+  "W1": [
+   174.02006946494402,
+   1193.4996600204806
+  ],
+  "S1c": [
+   -126.94356636730281,
+   160.68747104456583
+  ],
+  "W1c": [
+   -1076.7591131774548,
+   107.6943274209164
+  ]
+ },
+ "fold_outcome": {
+  "R1": "TIE",
+  "R2": "WIN",
+  "R3": "TIE",
+  "S1": "LOSS",
+  "W1": "LOSS",
+  "S1c": "TIE",
+  "W1c": "TIE"
+ },
+ "fold_outcome_counted": {
+  "R1": "TIE",
+  "R2": "WIN",
+  "R3": "TIE",
+  "S1": "LOSS",
+  "W1": "LOSS"
+ },
+ "mean_delta_rmse": 62.66112884396216,
+ "mean_delta_q95": 373.07147071278484,
+ "criterion_1": false,
+ "criterion_2": false,
+ "pooled_airport_rmse_candidate": {
+  "LIRF": 9809.540668323682
+ },
+ "pooled_airport_rmse_champion": {
+  "LIRF": 9607.492474266404
+ },
+ "airports_degraded_beyond_tolerance": {},
+ "criterion_3": true,
+ "diagnostic_pooled_airport_bulk_delta": {
+  "LIRF": 525.7380023967235
+ },
+ "passes_criteria_1_to_3": false
+}

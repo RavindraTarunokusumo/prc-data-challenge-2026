@@ -1,0 +1,39 @@
+schema: advisor-task-envelope-v1
+exchange_id: X-D02-S01-0003
+session: D02-S01
+sender: claude-researcher
+recipient: advisor-subagent
+purpose: proposal_review
+proposal_ids: [H009]
+proposal_paths:
+  - research/day-02/proposals/H009_v3.md
+proposal_sha256:
+  - f013c86f75d0cfb3b8643862cf3829991ad095a38f045f2e965e1f298f303a20
+review_output_dir: research/day-02/advisor/
+context_paths:
+  - research/day-02/advisor/H009_review_v2.md
+  - research/day-02/advisor/H009_review_v1.md
+  - research/day-02/advisor/H010_review_v1.md
+  - research/day-02/advisor/H011_review_v2.md
+  - research/day-02/advisor/H012_review_v1.md
+  - research/day-02/acks/
+  - research/day-02/proposals/H009_v2.md
+  - orchestration/advisor-exchanges/X-D02-S01-0002/
+  - src/prc/attribution.py
+  - scripts/mechanism_check.py
+  - scripts/compare.py
+  - src/prc/features.py
+  - tests/test_attribution.py
+  - tests/test_features_fs1.py
+  - research/comparisons/E011_vs_E006_mech_NM_present_excl_LIRF.json
+  - research/comparisons/E011_vs_E006_mech_NM_present.json
+  - docs/incidents/INC-0003-researcher-effort-discrepancy.md
+  - research/STATE.md
+  - config/frozen.json
+  - config/splits.yaml
+constraints:
+  - Single-proposal review. Review file is H009_review_v3.md.
+  - Please confirm v3 keeps H010 preconditions (b) and (c) and H012 precondition (c) (clause 4) exactly.
+  - research/comparisons/E011_vs_E006_mech_*.json were produced while validating the new population and rule 6 output on Day 1 experiments only.
+  - Read-only checks only. Do not read December 2025 DEP targets. Do not score any model on real folds (no un-gated experiments).
+created_utc: 2026-09-28T19:21:13Z
