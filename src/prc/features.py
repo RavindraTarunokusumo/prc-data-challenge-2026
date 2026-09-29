@@ -28,7 +28,15 @@ FS0 = FS0_CATEGORICAL + FS0_NUMERIC
 FS1_EXTRA_CATEGORICAL = ["stand", "actype", "op_prefix", "ades"]
 FS1_EXTRA_NUMERIC = ["sched_hour_local", "sched_weekday_local"]
 CATEGORICAL = FS0_CATEGORICAL + FS1_EXTRA_CATEGORICAL
-NUMERIC = FS0_NUMERIC + FS1_EXTRA_NUMERIC
+# Day 3 congestion columns are appended after the FS1 columns (same names as
+# prc.congestion.FEATURES; test_features_fs2 checks they agree), so FS0/FS1 frames keep
+# their exact column order.
+CONGESTION_NUMERIC = ["cg_dep_taxiing", "cg_dep_taxiing_rwy", "cg_dep_to_p15", "cg_dep_to_p30",
+                      "cg_dep_to_rwy_p15", "cg_dep_off_p15", "cg_arr_land_p15",
+                      "cg_arr_taxiing", "cg_sched_dep_n30", "cg_sched_arr_n30",
+                      "cg_dep_to_during", "cg_dep_to_rwy_during", "cg_arr_land_during",
+                      "cg_rwy_gap_prev", "cg_dep_to_rwy_m15"]
+NUMERIC = FS0_NUMERIC + FS1_EXTRA_NUMERIC + CONGESTION_NUMERIC
 RARE_MIN = 100  # equals LightGBM's default min_data_per_group
 RARE = "__RARE__"
 AIRPORT_TZ = {"EDDF": "Europe/Berlin", "EDDM": "Europe/Berlin", "EGLL": "Europe/London",
@@ -138,9 +146,25 @@ def fs1_static_no_deltas(view: pl.LazyFrame) -> pl.DataFrame:
     return fs1(view).drop(DELTAS + SCHED_LOCAL)
 
 
+def fs2(view: pl.LazyFrame) -> pl.DataFrame:
+    """FS1 plus the Day 3 congestion block (prc.congestion: P and T groups)."""
+    from prc.congestion import congestion
+
+    return fs1(view).join(congestion(view), on="MVT_ID_mvt", how="left",
+                          validate="1:1").sort("MVT_ID_mvt")
+
+
+def fs2_p(view: pl.LazyFrame) -> pl.DataFrame:
+    """FS1 plus the P-labelled congestion features only (state at the off-block proxy)."""
+    from prc.congestion import T_FEATURES
+
+    return fs2(view).drop(T_FEATURES)
+
+
 FEATURE_SETS = {"FS0": fs0, "FS0_NO_DELTAS": fs0_no_deltas, "FS1": fs1,
                 "FS1_NO_DELTAS": fs1_no_deltas, "FS1_NO_DSCHED": fs1_no_dsched,
-                "FS1_NO_ANCHOR": fs1_no_anchor, "FS1_STATIC_NO_DELTAS": fs1_static_no_deltas}
+                "FS1_NO_ANCHOR": fs1_no_anchor, "FS1_STATIC_NO_DELTAS": fs1_static_no_deltas,
+                "FS2": fs2, "FS2_P": fs2_p}
 
 
 def columns(feats: pl.DataFrame) -> tuple[list[str], list[str]]:
