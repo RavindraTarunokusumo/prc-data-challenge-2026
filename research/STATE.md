@@ -1,9 +1,10 @@
 # Research State
 
-*Updated 2026-09-28T22:36:20Z (measured with `date -u` at writing; D02-S01, Day 2 phase close).*
+*Updated 2026-09-29T14:03:03Z (measured with `date -u` at writing; D03-S01, Day 3 in progress).*
 
-- **Phase:** Day 2 **CLOSED** (phase-close review X-D02-S01-0006: ACCEPT). Next: Day 3, congestion reconstruction, on a new `day-3` branch. Splits, metric and availability definition are **FROZEN** (`config/frozen.json`).
-- **Last session:** D02-S01 (branch `day-2`). **Last completed exchange:** X-D02-S01-0006 (phase close).
+- **Phase:** **Day 3 in progress** (congestion reconstruction), session D03-S01, branch `day-3` (PR #5). Day 2 CLOSED (X-D02-S01-0006: ACCEPT). Splits, metric and availability definition are **FROZEN** (`config/frozen.json`).
+- **Last session:** D03-S01 (open). **Last completed exchange:** X-D02-S01-0006 (phase close). **Pending:** X-D03-S01-0001 (H015 candidate, H016 and H017 references).
+- **Day 3 so far (no experiment yet):** congestion block `prc.congestion` (10 P + 5 T features; FS2, FS2_P), verified bit-identical under DEP block/target masking on real data; EDA `research/day-03/eda/congestion.json`; routed Tier 2 model `models/routed.py` (LIRF NM-missing rows → fold-local E005 ridge; byte-identical to E005 on W1c and R2); `scripts/route_check.py`.
 - **Champion: E005, H004 ridge on FS0, by rule. It is not the most accurate model.**
   - Development mean 482.73 (R1 477.8, R2 323.5, R3 431.6, S1 670.0, W1 510.7). Day 1 holdout: WIN.
   - **Deficit.** On NM-present rows, every Day 2 Tier 1 fit beats E005 by 51.5–59.6 s on every development fold.
@@ -48,9 +49,7 @@
   - NM-missing rows are 0.8–2.1 % of each fold and carry 14–66 % of the SSE; there are 20,821 in Jan–Nov.
   - LIRF: 83 % of tail rows are block-at-schedule, and 931 of 932 NM-present ones have a normal anchor.
   - Every fold except W1c trains on more than 200,000 rows, the LightGBM bin-sample threshold.
-- **Open incidents:** none. INC-0003 (researcher effort: `--effort medium` launch argument against `high` in the session metadata) is **closed**: owner accepted as is, no remedial action, Day 2 results stand. See `docs/incidents/INC-0003-researcher-effort-discrepancy.md`.
+- **Open incidents:** **INC-0004** (open, non-blocking): D03-S01 launch arguments `--model claude-sonnet-5-5 --effort medium` against metadata `claude-opus-5-5` / `high`; owner decision. INC-0003 (researcher effort: `--effort medium` launch argument against `high` in the session metadata) is **closed**: owner accepted as is, no remedial action, Day 2 results stand. See `docs/incidents/INC-0003-researcher-effort-discrepancy.md`.
 - **Open blockers:** none.
-- **Next action:** Day 3 session start on branch `day-3` (from `main` after the Day 2 PR merges). First questions:
-  - a structural treatment of the LIRF NM-missing convention (paired with deterministic training);
-  - congestion features;
-  - both under standing rules 9–11 and ruling R.
+- **Holdout:** Day 3: 0 of 1 used.
+- **Next action:** Advisor review X-D03-S01-0001 of H015 v1, H016 v1, H017 v1; on ACCEPT, acks, then the H015 chain (H015 → H016 → H017 → H015 reproduction), checkpoint after each.
