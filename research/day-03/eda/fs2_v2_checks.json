@@ -1,0 +1,159 @@
+{
+  "masking_invariance_jan_nov": {
+    "rows": 1919370,
+    "identical": true
+  },
+  "old_vs_new_jan_nov": {
+    "rows": 1919370,
+    "rows_any_feature_changed": 1645,
+    "rows_taking_off_at_or_before_proxy": 1651,
+    "per_feature": {
+      "cg_dep_taxiing": {
+        "rows_changed": 1632,
+        "all_changed_rows_take_off_at_or_before_proxy": true
+      },
+      "cg_dep_taxiing_rwy": {
+        "rows_changed": 1238,
+        "all_changed_rows_take_off_at_or_before_proxy": true
+      },
+      "cg_dep_to_p15": {
+        "rows_changed": 1021,
+        "all_changed_rows_take_off_at_or_before_proxy": true
+      },
+      "cg_dep_to_p30": {
+        "rows_changed": 1181,
+        "all_changed_rows_take_off_at_or_before_proxy": true
+      },
+      "cg_dep_to_rwy_p15": {
+        "rows_changed": 1021,
+        "all_changed_rows_take_off_at_or_before_proxy": true
+      },
+      "cg_dep_off_p15": {
+        "rows_changed": 0,
+        "all_changed_rows_take_off_at_or_before_proxy": true
+      },
+      "cg_arr_land_p15": {
+        "rows_changed": 0,
+        "all_changed_rows_take_off_at_or_before_proxy": true
+      },
+      "cg_arr_taxiing": {
+        "rows_changed": 0,
+        "all_changed_rows_take_off_at_or_before_proxy": true
+      },
+      "cg_sched_dep_n30": {
+        "rows_changed": 0,
+        "all_changed_rows_take_off_at_or_before_proxy": true
+      },
+      "cg_sched_arr_n30": {
+        "rows_changed": 0,
+        "all_changed_rows_take_off_at_or_before_proxy": true
+      },
+      "cg_dep_to_during": {
+        "rows_changed": 0,
+        "all_changed_rows_take_off_at_or_before_proxy": true
+      },
+      "cg_dep_to_rwy_during": {
+        "rows_changed": 0,
+        "all_changed_rows_take_off_at_or_before_proxy": true
+      },
+      "cg_arr_land_during": {
+        "rows_changed": 0,
+        "all_changed_rows_take_off_at_or_before_proxy": true
+      },
+      "cg_rwy_gap_prev": {
+        "rows_changed": 0,
+        "all_changed_rows_take_off_at_or_before_proxy": true
+      },
+      "cg_dep_to_rwy_m15": {
+        "rows_changed": 0,
+        "all_changed_rows_take_off_at_or_before_proxy": true
+      }
+    }
+  },
+  "lirf_nm_missing_by_month": [
+    {
+      "month": "2025-01",
+      "lirf_dep_rows": 11317,
+      "nm_missing_rows": 60,
+      "nm_missing_share": 0.005301758416541486
+    },
+    {
+      "month": "2025-02",
+      "lirf_dep_rows": 10703,
+      "nm_missing_rows": 58,
+      "nm_missing_share": 0.005419041390264412
+    },
+    {
+      "month": "2025-03",
+      "lirf_dep_rows": 12544,
+      "nm_missing_rows": 59,
+      "nm_missing_share": 0.00470344387755102
+    },
+    {
+      "month": "2025-04",
+      "lirf_dep_rows": 14028,
+      "nm_missing_rows": 70,
+      "nm_missing_share": 0.00499001996007984
+    },
+    {
+      "month": "2025-05",
+      "lirf_dep_rows": 14541,
+      "nm_missing_rows": 99,
+      "nm_missing_share": 0.006808335052609861
+    },
+    {
+      "month": "2025-06",
+      "lirf_dep_rows": 14696,
+      "nm_missing_rows": 185,
+      "nm_missing_share": 0.01258845944474687
+    },
+    {
+      "month": "2025-07",
+      "lirf_dep_rows": 15211,
+      "nm_missing_rows": 337,
+      "nm_missing_share": 0.022155019393859707
+    },
+    {
+      "month": "2025-08",
+      "lirf_dep_rows": 15459,
+      "nm_missing_rows": 197,
+      "nm_missing_share": 0.012743385729995471
+    },
+    {
+      "month": "2025-09",
+      "lirf_dep_rows": 14667,
+      "nm_missing_rows": 168,
+      "nm_missing_share": 0.011454285129883411
+    },
+    {
+      "month": "2025-10",
+      "lirf_dep_rows": 14142,
+      "nm_missing_rows": 115,
+      "nm_missing_share": 0.008131805968038468
+    },
+    {
+      "month": "2025-11",
+      "lirf_dep_rows": 11328,
+      "nm_missing_rows": 52,
+      "nm_missing_share": 0.004590395480225989
+    },
+    {
+      "month": "2025-12",
+      "lirf_dep_rows": 12068,
+      "nm_missing_rows": 88,
+      "nm_missing_share": 0.007292011932383162
+    },
+    {
+      "month": "2026-01",
+      "lirf_dep_rows": 11061,
+      "nm_missing_rows": 107,
+      "nm_missing_share": 0.009673628062562155
+    },
+    {
+      "month": "2026-07",
+      "lirf_dep_rows": 15838,
+      "nm_missing_rows": 276,
+      "nm_missing_share": 0.017426442732668267
+    }
+  ]
+}

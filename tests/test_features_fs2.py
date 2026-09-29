@@ -131,3 +131,25 @@ def test_numeric_names_agree_and_fs1_columns_unchanged(scene):
          "sched_hour_local", "sched_weekday_local"])
     _, nums = columns(fs2(scene))
     assert nums[-len(cg.FEATURES):] == cg.FEATURES
+
+
+@pytest.mark.parametrize("own_to", [-40, -20, -10, -1, 0, 1, 5, 20, 45])
+def test_p_features_invariant_to_own_takeoff(scene, own_to):
+    """A P feature is a count over other rows only: moving the subject's own takeoff time
+    (its t_off proxy held fixed) changes no P feature (H015 v1 review, Revision 4)."""
+    base = row(cg.congestion(scene), 1)
+    moved = scene.with_columns(
+        pl.when(pl.col("MVT_ID_mvt") == 1).then(pl.lit(at(own_to)))
+        .otherwise(pl.col("MVT_TIME_UTC_mvt")).alias("MVT_TIME_UTC_mvt"))
+    r = row(cg.congestion(moved), 1)
+    for f in cg.P_FEATURES:
+        assert r[f] == base[f], (f, own_to)
+
+
+def test_p_counts_exclude_self_when_takeoff_precedes_proxy():
+    # subject took off (t 2) before its off-block proxy (t 10): it is neither taxiing nor a
+    # recent takeoff of its own; row 2 is taxiing at 10 and row 3 took off at 4
+    v = frame([dep(1, 10, 2), dep(2, 5, 30), dep(3, -5, 4)])
+    r = row(cg.congestion(v), 1)
+    assert r["cg_dep_taxiing"] == 1 and r["cg_dep_taxiing_rwy"] == 1
+    assert r["cg_dep_to_p15"] == 1 and r["cg_dep_to_p30"] == 1 and r["cg_dep_to_rwy_p15"] == 1

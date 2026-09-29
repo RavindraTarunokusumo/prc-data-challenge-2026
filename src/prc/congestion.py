@@ -17,7 +17,11 @@ are simply not counted.
 Information labels (DATASET_AUDIT §6.2), relative to the row's own t_off proxy (P) and
 takeoff t_to (T). Features whose label depends on the t_off proxy say so via the proxy.
 
-P (known at t_off):
+P (known at t_off). Every P feature is a count over rows j != i only: the row's own
+contribution is removed exactly (it is not approximated by a constant), so a P feature's
+value does not depend on the row's own takeoff time (tests/test_features_fs2.py,
+test_p_features_invariant_to_own_takeoff; H015 v1 review, Revision 4).
+
   cg_dep_taxiing       DEP j != i with t_off_j <= t_off_i < t_to_j (airborne later): aircraft
                        already off-block and not yet airborne at my off-block.
   cg_dep_taxiing_rwy   the same, restricted to my runway (runway is P by assumption).
@@ -103,14 +107,17 @@ def _airport_block(dep: pl.DataFrame, arr: pl.DataFrame) -> dict[str, np.ndarray
     a_in_s = np.sort(np.maximum(a["t_in"].to_numpy(), a["t_land"].to_numpy()).astype(np.int64))
     a_sched = np.sort(arr["t_sched"].drop_nulls().to_numpy().astype(np.int64))
 
-    # Self term: row i always satisfies t_off_i <= t_off_i and is counted as taxiing unless
-    # t_to_i <= t_off_i. The count subtracts 1 unconditionally and clips at 0, so a P
-    # feature never reads the row's own takeoff time (rows with t_to_i <= t_off_i are
-    # undercounted by one).
+    # Self terms. The sorted arrays contain row i itself; each P count subtracts row i's
+    # own contribution exactly, so the result is a count over j != i and does not depend on
+    # t_to_i. Row i is "taxiing at t_off_i" iff t_to_i > t_off_i, and is a "recent takeoff"
+    # iff t_to_i lies in the window [t_off_i - w, t_off_i).
+    self_taxi = (np.maximum(t_to, t_off) > t_off).astype(np.int64)
+    self_p15 = ((t_to >= t_off - m15) & (t_to < t_off)).astype(np.int64)
+    self_p30 = ((t_to >= t_off - m30) & (t_to < t_off)).astype(np.int64)
     out = {
-        "cg_dep_taxiing": np.maximum(_count_le(s_off, t_off) - _count_le(s_end, t_off) - 1, 0),
-        "cg_dep_to_p15": _in_window(s_to, t_off - m15, t_off),
-        "cg_dep_to_p30": _in_window(s_to, t_off - m30, t_off),
+        "cg_dep_taxiing": _count_le(s_off, t_off) - _count_le(s_end, t_off) - self_taxi,
+        "cg_dep_to_p15": _in_window(s_to, t_off - m15, t_off) - self_p15,
+        "cg_dep_to_p30": _in_window(s_to, t_off - m30, t_off) - self_p30,
         # other off-blocks in [t_off - 15, t_off): self is at t_off, outside the window
         "cg_dep_off_p15": _in_window(s_off, t_off - m15, t_off),
         "cg_arr_land_p15": _in_window(land, t_off - m15, t_off),
@@ -134,9 +141,10 @@ def _airport_block(dep: pl.DataFrame, arr: pl.DataFrame) -> dict[str, np.ndarray
         rt_to, rt_off = t_to[idx], t_off[idx]
         rs_to, rs_off = np.sort(rt_to), np.sort(rt_off)
         rs_end = np.sort(np.maximum(rt_to, rt_off))
-        rwy_cols["cg_dep_taxiing_rwy"][idx] = np.maximum(
-            _count_le(rs_off, rt_off) - _count_le(rs_end, rt_off) - 1, 0)
-        rwy_cols["cg_dep_to_rwy_p15"][idx] = _in_window(rs_to, rt_off - m15, rt_off)
+        rwy_cols["cg_dep_taxiing_rwy"][idx] = (
+            _count_le(rs_off, rt_off) - _count_le(rs_end, rt_off) - self_taxi[idx])
+        rwy_cols["cg_dep_to_rwy_p15"][idx] = (
+            _in_window(rs_to, rt_off - m15, rt_off) - self_p15[idx])
         rwy_cols["cg_dep_to_rwy_during"][idx] = np.maximum(
             _in_window(rs_to, rt_off + 1, rt_to), 0)
         rwy_cols["cg_dep_to_rwy_m15"][idx] = _in_window(rs_to, rt_to - m15, rt_to)
