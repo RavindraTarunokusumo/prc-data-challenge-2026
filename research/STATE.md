@@ -48,7 +48,7 @@
   - NM-missing rows are 0.8–2.1 % of each fold and carry 14–66 % of the SSE; there are 20,821 in Jan–Nov.
   - LIRF: 83 % of tail rows are block-at-schedule, and 931 of 932 NM-present ones have a normal anchor.
   - Every fold except W1c trains on more than 200,000 rows, the LightGBM bin-sample threshold.
-- **Open incidents:** **INC-0003** (researcher effort: `--effort medium` launch argument against `high` in the session metadata). It covers all D02-S01 work. Owner to resolve.
+- **Open incidents:** none. INC-0003 (researcher effort: `--effort medium` launch argument against `high` in the session metadata) is **closed**: owner accepted as is, no remedial action, Day 2 results stand. See `docs/incidents/INC-0003-researcher-effort-discrepancy.md`.
 - **Open blockers:** none.
 - **Next action:** Day 3 session start on branch `day-3` (from `main` after the Day 2 PR merges). First questions:
   - a structural treatment of the LIRF NM-missing convention (paired with deterministic training);
