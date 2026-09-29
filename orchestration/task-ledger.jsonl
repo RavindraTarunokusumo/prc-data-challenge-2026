@@ -22,3 +22,4 @@
 {"ts":"2026-09-29T15:58:29Z","event":"advisor_result","exchange_id":"X-D03-S01-0001","decisions":{"H015":"REVISE","H016":"REVISE","H017":"REVISE"}}
 {"ts":"2026-09-29T16:05:53Z","event":"advisor_request","exchange_id":"X-D03-S01-0002","proposals":["H015_v2","H016_v2","H017_v2"]}
 {"ts":"2026-09-29T16:32:29Z","event":"advisor_result","exchange_id":"X-D03-S01-0002","decisions":{"H015":"ACCEPT","H016":"ACCEPT","H017":"ACCEPT"}}
+{"event": "allocate", "utc": "2026-09-29T16:32:55Z", "experiment_id": "E019", "hypothesis_id": "H015", "version": "v2", "purpose": "primary", "proposal_sha256": "468b442de9f20b3d16e676d1e3584fd0fec0e3efa442b83f7133e9c975ecf499", "review_sha256": "10b99752059e4f0b8a58a6a1d0f6d8154d86f9424b2e55966ced130d50d6e120"}

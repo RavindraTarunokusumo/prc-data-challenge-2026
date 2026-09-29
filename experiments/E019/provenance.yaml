@@ -1,0 +1,4 @@
+cpu_model: "Intel(R) Xeon(R) Processor @ 2.10GHz"
+kernel_boot_id: ac2b2cff-0ec4-425c-b162-69274af1cb2d
+container_restart_since_previous_chain_experiment: "n/a (first chain experiment); one restart occurred earlier in D03-S01, before X-D03-S01-0001 attempt 2"
+incidents: [INC-0004]
