@@ -19,3 +19,4 @@
 {"event": "allocate", "utc": "2026-09-28T21:50:06Z", "experiment_id": "E017", "hypothesis_id": "H013", "version": "v2", "purpose": "primary", "proposal_sha256": "13fc73618aba0d9a3e8ce9832e0896fa79bac6a177112714e9f2ebe09f7d20e9", "review_sha256": "d46b89761a5047b80d0060b83dba5f92b22c49cc8fb9cb6c9ec00e1e501b4091"}
 {"event": "allocate", "utc": "2026-09-28T22:02:31Z", "experiment_id": "E018", "hypothesis_id": "H014", "version": "v2", "purpose": "primary", "proposal_sha256": "49a8ec9036a62c59850a61c102119c17eb5b136a1941d8b09a63819374b441f4", "review_sha256": "4d6395c87af7c72effa2a6e4eaa854524519b85300e954b069fb0b8e57bb1c9a"}
 {"ts":"2026-09-29T15:30:04Z","event":"advisor_retry","exchange_id":"X-D03-S01-0001","attempt":2,"reason":"container restart; no response written"}
+{"ts":"2026-09-29T15:58:29Z","event":"advisor_result","exchange_id":"X-D03-S01-0001","decisions":{"H015":"REVISE","H016":"REVISE","H017":"REVISE"}}
