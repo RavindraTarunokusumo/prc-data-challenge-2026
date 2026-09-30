@@ -1,9 +1,16 @@
 # Research State
 
-*Updated 2026-09-30T07:05:02Z (measured with `date -u` at writing; D03-S01 closing, Day 3 CLOSED).*
+*Updated 2026-09-30T16:50:42Z (measured with `date -u` at writing; D04-S01, Day 4 in progress).*
 
-- **Phase:** **Day 3 CLOSED** (X-D03-S01-0003: ACCEPT, 0.82). Day 4 (historical priors and interactions) is next, on branch `day-4`. Splits, metric and availability definition are **FROZEN** (`config/frozen.json`).
-- **Last session:** D03-S01 (ended at this commit). **Last completed exchange:** X-D03-S01-0003 (phase close). **Pending:** none.
+- **Phase:** **Day 4 IN PROGRESS** (historical priors and interactions), session D04-S01 on branch `day-4`. Splits, metric and availability definition are **FROZEN** (`config/frozen.json`).
+- **Last session:** D03-S01 (closed). **Current:** D04-S01, started 2026-09-30T16:06:53Z after a container restart. **Last completed exchange:** X-D03-S01-0003. **Pending:** X-D04-S01-0001 (batch H018, H019, H020).
+- **Delegation (INC-0005, open):** by owner instruction, `claude-sonnet-5-5` worker subagents carry out verification, digests, implementation to specification and experiment launches. Proposals, acks, allocations and interpretation stay with the main session. The Advisor is unchanged.
+- **Day 4 so far (infrastructure, no experiment):**
+  - `scripts/range_check.py` implements rule 12 and reproduces D3-C2 and D3-C3 exactly.
+  - Prior EDA: stand × runway carries the prior signal (+0.19 R² over airport × hour; never-validation months).
+  - FS3 = FS2 + 5 fold-local LOMO priors (`src/prc/priors.py`).
+  - `route_train_exclude` option (H018).
+  - `gbm.catboost` and `routed_catboost`. CatBoost calibration: `max_ctr_complexity=1` is needed for CLASS-L.
 - **Champion: E019, H015 v2, since the Day 3 phase close.**
   - It is a routed LightGBM on FS2: congestion on top of FS1, with deterministic training. LIRF NM-missing rows are routed to a fold-local E005 ridge.
   - Development mean 444.49 (R1 446.40, R2 274.49, R3 397.25, S1 632.10, W1 472.22). −38.23 s against E005, with a WIN on all 7 folds.
@@ -68,8 +75,8 @@
   - Every fold except W1c trains on more than 200,000 rows, the LightGBM bin-sample threshold.
 - **Open incidents:** **INC-0004** (launch arguments against session metadata). From about 05:35Z on 30 September, after the second container restart, the process carries `--model claude-opus-5-5 --effort medium` (D3-C5); the metadata says `high`. Open, non-blocking, owner to decide. INC-0003 closed.
 - **Open blockers:** none.
-- **Next action:** Day 4 session start (D04-S01) on branch `day-4` from `main` after the Day 3 PR merges. Day 4 is historical priors and interactions (brief §11). Candidate questions (DAY_SUMMARY §8):
-  1. the out-of-range predictions on non-LIRF NM-missing rows (D3-C2), treated as its own hypothesis with an isolating ablation;
-  2. fold-local target statistics and interactions, with CatBoost;
-  3. optionally an unrouted candidate under the routing answer's conditions.
-  Rule 12 applies from the next proposal. Then the Day 4 hand-off package (brief §3: `HANDOFF_D04.md`).
+- **Next action:** X-D04-S01-0001 review of the chain:
+  1. H018: the D3-C2 treatment, excluding routed rows from the LightGBM training;
+  2. H019: FS3 priors on H018;
+  3. H020: routed CatBoost on H018's base.
+  Then the phase close and `HANDOFF_D04.md`.
