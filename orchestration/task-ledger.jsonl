@@ -30,3 +30,4 @@
 {"ts":"2026-09-30T07:03:56Z","event":"advisor_result","exchange_id":"X-D03-S01-0003","decisions":{"PHASE_CLOSE_D03":"ACCEPT"}}
 {"event": "holdout_access", "phase": "day-03", "utc": "2026-09-30T07:04:12Z", "experiments": ["E019", "E005"], "reason": "Day 3 phase close (X-D03-S01-0003): phase-closing champion E019 (H015 v2) vs phase-opening champion E005"}
 {"ts": "2026-09-30T07:06:50Z", "event": "champion_change", "from": "E005", "to": "E019", "phase": "day-03", "basis": "X-D03-S01-0003 ACCEPT; holdout WIN (-35.36 s)"}
+{"ts": "2026-09-30T17:19:57Z", "event": "advisor_result", "exchange_id": "X-D04-S01-0001", "decisions": {"H018": "REVISE", "H019": "REVISE", "H020": "REJECT"}}
