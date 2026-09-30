@@ -149,3 +149,75 @@ The chain runs sequentially: H009, then H010, then H012, then H011.
   - seed variance is not confined to LIRF NM-missing rows (S1 +1.33, W1 −1.94 s outside them);
   - deterministic training costs about 3 s on all rows.
 - **Standing rules 9–11 adopted.** Rulings B (the +6,500 s bound stands) and R (comparison base = a matched reference).
+
+## Day 3 (D03-S01)
+
+### Exchanges X-D03-S01-0001 and -0002
+
+- **X-D03-S01-0001** (attempt 2 after a container restart): H015 v1, H016 v1 and H017 v1 all REVISE.
+  - H015's routing rationale rested on false monthly counts.
+  - Row 192622644 could decide the C clause on S1.
+  - Five P features read the row's own takeoff on 0.086 % of rows.
+- **Commit `63923e2`:** the P features now remove the row's own contribution exactly. Masking invariance was re-verified on 1,919,370 rows.
+- **X-D03-S01-0002:** all three v2 proposals ACCEPT. The C clauses are on `NM_present_excl_LIRF`, and code is frozen for the chain.
+
+### E019 · H015 v2 routed LightGBM on FS2 (primary) · COMPLETE
+
+- **Development mean 444.49** (pre-registered 432–447). 954 s, 4.76 GB.
+- **Clause 1 not met:** −38.23 s against E005 (q95 −34.95), 7/7 WIN, criteria 1–3 pass, and no airport degraded.
+- **Clause 2 not met:**
+  - on `NM_present_excl_LIRF`, C is **−6.75 s** (q95 −5.97), 7/7 WIN, below the −6.0 s floor by 0.75 s;
+  - the NM-present bulk improves on every development fold;
+  - no dominant row (|top-1| ≤ 0.10).
+  - The Advisor had forecast −3 to −5 s.
+- **Clause 4 not met:** the criterion 8 statistic is 0.0 on every fold (routed).
+- **Clause 3 open:** it needs H016 v2.
+- **Reported:**
+  - on all rows, E019 is +65.67 s against E017 (LOSS 7/7), as pre-registered: routing forgoes the convention tail gain;
+  - on all rows, E019 is worse than E005 on the NM-missing rows at the other nine airports on four development folds, with extreme predictions there (e.g. −8,859 s on an EHAM row). This is a candidate Day 4 question.
+- **The container restarted after the run.** The predictions were re-verified, and H016's determinism check will be cross-container.
+
+### E020 · H016 v2 unrouted LightGBM on FS2 (R ablation) · COMPLETE
+
+- **Development mean 321.95** (pre-registered 360–380: outside, better). 1,181 s, 4.62 GB. **Cross-container** relative to E019.
+- **H015 v2 clause 3 not met:** routed rows equal E005 exactly, and E019 and E020 are **bit-identical outside the routed rows on all 8 folds across a container restart**. Cross-container determinism holds.
+- **H016 − E017 on all rows: −56.87 s** (pre-registered −2 to −15: outside, larger).
+  - Almost all of it is on LIRF NM-missing rows (tail share 0.72): FS2's in-taxi counts, anchored at SCHED for convention records, carry the schedule delay more finely.
+  - On `NM_present_excl_LIRF` it equals H015 − E017 (−6.75 s).
+- **R effect** (H015 − H016 on LIRF NM-missing): full > 0 on 5/5 development folds, bulk < 0 on all folds (S1 −4,292 s), as pre-registered.
+- **Criterion 8 statistic S1 +4,292 s** (pre-registered +6,000 to +8,000). It is below the +6,500 bound on every development fold, the first unrouted Tier 1 fit to be so. **Observation only:** H016 is not a candidate.
+
+### E021 · H017 v2 LightGBM on FS2_P (P/T decomposition) · COMPLETE
+
+- **Development mean 372.14** (pre-registered 370–385). 1,071 s, 4.86 GB.
+- **Reading 1, T given P** (E020 − E021 on `NM_present_excl_LIRF`): −3.28 s, 7/7 WIN, criteria 1–2 pass, but above the −6.0 s floor. **Not supported.**
+- **Reading 2, P beyond E017:** −3.47 s, 7/7 WIN, above the floor. **"P effect not distinguishable from training noise".**
+- **Reading 3, all rows:** −6.68 s (q95 −1.26); 3 WIN and 4 TIE, so criterion 2 fails.
+- **The decomposition adds exactly:** −3.47 + −3.28 = C = −6.75 s. Each half is consistent (7/7 WIN) but about half the floor.
+- **The EDA's T-dominance does not survive the anchor in the model.** For Days 5–7: about −3.5 s of the congestion gain is available at the off-block proxy (P).
+
+### E022 · H015 v2 reproduction (seed 43) · COMPLETE
+
+- **Criterion 6 PASS:** every development-fold RMSE equals E019's (Δ 0.0 s); criteria 1–3 hold against E005 (7/7 WIN).
+- **All 8 prediction files are byte-identical to E019's,** across a seed change and a container restart. Real-data determinism is confirmed.
+
+### H015 v2 outcome (pre-registered clauses and criteria)
+
+- **Clauses 1–4 are all not met; criterion 6 passes; criterion 8 is 0.0.** H015 v2 is **not falsified**, and every promotion condition verifiable before the phase close holds.
+- **Under authorization item 6, promotion is subject to the Day 3 phase-close review and to holdout access as that review names it (rule 9).** No promotion is recorded yet; the champion is still E005.
+
+### Day 3 phase close (X-D03-S01-0003: ACCEPT, 0.82)
+
+- **H015 v2 PROMOTE. E019 is champion.** Holdout H (December 2025), one access, E019 against E005: **WIN**, −35.36 s (375.93 against 411.29). No revert. The H figures are recorded only (ruling H3).
+- **Standing disclosures on the champion:**
+  - **D3-C1:** 95 % of the margin is routed FS1 structure; congestion as served is −1.90 s on all rows.
+  - **D3-C2:** out-of-range predictions on non-LIRF NM-missing rows, caused by the congestion block.
+  - **D3-C3:** January 2026 long-delay NM-missing counts are 2.0–2.6 times the 2025 maximum.
+- **Other corrections:**
+  - D3-C4: CPU strings; determinism held across two.
+  - D3-C5: INC-0004 scope, and the restarts recorded late.
+  - D3-C6: STATE.md stale.
+  - D3-C7: a figure.
+  - D3-C8: forecasts misquoted or omitted.
+  - D3-C9: the Advisor's own miss.
+- **Standing rule 12 adopted.** The routing answer allows an unrouted Day 4 candidate under conditions.

@@ -1,0 +1,51 @@
+schema: advisor-task-envelope-v1
+exchange_id: X-D03-S01-0002
+session: D03-S01
+sender: claude-researcher
+recipient: advisor-subagent
+purpose: proposal_review
+proposal_ids: [H015, H016, H017]
+proposal_paths:
+  - research/day-03/proposals/H015_v2.md
+  - research/day-03/proposals/H016_v2.md
+  - research/day-03/proposals/H017_v2.md
+proposal_sha256:
+  - 468b442de9f20b3d16e676d1e3584fd0fec0e3efa442b83f7133e9c975ecf499
+  - 7f44ac059e993f55a8a70913d011647737795e1e3a162068366fb574335ff58b
+  - 0ab06ef90d017dea8c6cbab4dac6f5bf221a29f9b1a7cf52eb5c31bfff151b83
+review_output_dir: research/day-03/advisor/
+context_paths:
+  - research/day-03/advisor/H015_review_v1.md
+  - research/day-03/advisor/H016_review_v1.md
+  - research/day-03/advisor/H017_review_v1.md
+  - research/day-03/acks/
+  - research/day-03/proposals/H015_v1.md
+  - research/day-02/advisor/PHASE_CLOSE_D02_review_v1.md
+  - research/day-02/advisor/H009_review_v3.md
+  - research/day-02/DAY_SUMMARY.md
+  - docs/incidents/INC-0004-researcher-launch-configuration-D03.md
+  - src/prc/congestion.py
+  - tests/test_features_fs2.py
+  - scripts/check_fs2_v2.py
+  - research/day-03/eda/fs2_v2_checks.json
+  - src/prc/features.py
+  - src/prc/models/routed.py
+  - scripts/route_check.py
+  - scripts/mechanism_check.py
+  - src/prc/attribution.py
+  - tests/test_attribution.py
+  - research/comparisons/E015_vs_E012_mech_NM_present_excl_LIRF.json
+  - research/comparisons/E017_vs_E012_mech_NM_present_excl_LIRF.json
+  - research/comparisons/E018_vs_E006_mech_NM_present_excl_LIRF.json
+  - research/comparisons/E017_vs_E018_mech_NM_present_excl_LIRF.json
+  - research/comparisons/E012_vs_E006_mech_NM_present_excl_LIRF.json
+  - research/STATE.md
+  - config/splits.yaml
+constraints:
+  - Batched review of the v2 revisions. Review files are H015_review_v2.md, H016_review_v2.md and H017_review_v2.md.
+  - H015 is the only promotion candidate. H016 and H017 are references/ablations, never promotion candidates and never NEW in a holdout access.
+  - Standing rules 1-11, batch conditions B1-B4 and rulings H, B, R apply (X-D02-S01-0006).
+  - Check each required revision of the v1 reviews against v2; the v1 'acceptable as is' items are unchanged.
+  - The FS2 P-feature re-implementation (commit 63923e2) is part of what is reviewed.
+  - Read-only checks only. Do not read December 2025 DEP targets. Do not fit or score any FS2 or FS2_P model on real folds. Comparing existing prediction files, target-free checks and synthetic tests are fine.
+created_utc: 2026-09-29T16:05:53Z

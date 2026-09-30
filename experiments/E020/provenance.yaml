@@ -1,0 +1,4 @@
+cpu_model: "Intel(R) Xeon(R) Processor @ 2.80GHz"
+kernel_boot_id: b973b4fe-59e3-4c83-9160-a7ca609078a1
+container_restart_since_previous_chain_experiment: "yes: after E019 completed (E019 boot id ac2b2cff-...); cross-container relative to E019"
+incidents: [INC-0004]
