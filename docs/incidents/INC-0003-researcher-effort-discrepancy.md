@@ -3,7 +3,7 @@ schema: incident-v1
 incident_id: INC-0003
 type: configuration_discrepancy
 created_utc: 2026-09-28T19:19:54Z
-status: open
+status: closed
 ---
 
 # Researcher effort tier: two sources disagree
@@ -36,3 +36,17 @@ Confirm which effort setting applies to this cloud session, and either:
 - record `medium` as the effective tier for the affected sessions, and decide whether to change the environment's setting.
 
 The researcher continues under the recorded configuration and does not change its own settings.
+
+## Resolution
+
+**Recorded:** 2026-09-29T13:35:30Z, in a session on `claude-sonnet-5-5`, on the owner's instruction: *"Please record the incident report. Nothing should be affected."*
+
+**Owner decision:** accept as is. No remedial action and no re-run.
+
+- **Nothing is affected.** The Day 2 results, the Advisor decisions (including the phase-close ACCEPT, X-D02-S01-0006), the INCONCLUSIVE outcomes of H009 v3 and H013 v2, and the champion (E005) stand unchanged.
+- **No frozen artifact was touched.** Splits, metric, evaluator and audit are unchanged, and no experiment is invalidated or re-labelled.
+- **Effective tier not determined.** It was never established whether `medium` (launch argument) or `high` (session metadata) governed the served D02-S01 turns. This record does not settle that. It records that the owner has accepted the uncertainty and that the Day 2 work stands either way.
+- **Provenance note.** For the final report, the D02-S01 effort tier is to be described as *"registered `high`; launch argument `medium`; effective tier not determinable"*. D01-S01 remains unverifiable, as stated above.
+- **Not addressed by this decision:** the effort setting for future sessions. That is unchanged by this record.
+
+The incident is closed. No other record was edited, other than this file's `status` line, the open-incident line in `research/STATE.md`, and one appended line in `research/PROJECT_LOG.md`.
