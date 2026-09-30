@@ -149,3 +149,30 @@ The chain runs sequentially: H009, then H010, then H012, then H011.
   - seed variance is not confined to LIRF NM-missing rows (S1 +1.33, W1 −1.94 s outside them);
   - deterministic training costs about 3 s on all rows.
 - **Standing rules 9–11 adopted.** Rulings B (the +6,500 s bound stands) and R (comparison base = a matched reference).
+
+## Day 3 (D03-S01)
+
+### Exchanges X-D03-S01-0001 and -0002
+
+- **X-D03-S01-0001** (attempt 2 after a container restart): H015 v1, H016 v1 and H017 v1 all REVISE.
+  - H015's routing rationale rested on false monthly counts.
+  - Row 192622644 could decide the C clause on S1.
+  - Five P features read the row's own takeoff on 0.086 % of rows.
+- **Commit `63923e2`:** the P features now remove the row's own contribution exactly. Masking invariance was re-verified on 1,919,370 rows.
+- **X-D03-S01-0002:** all three v2 proposals ACCEPT. The C clauses are on `NM_present_excl_LIRF`, and code is frozen for the chain.
+
+### E019 · H015 v2 routed LightGBM on FS2 (primary) · COMPLETE
+
+- **Development mean 444.49** (pre-registered 432–447). 954 s, 4.76 GB.
+- **Clause 1 not met:** −38.23 s against E005 (q95 −34.95), 7/7 WIN, criteria 1–3 pass, and no airport degraded.
+- **Clause 2 not met:**
+  - on `NM_present_excl_LIRF`, C is **−6.75 s** (q95 −5.97), 7/7 WIN, below the −6.0 s floor by 0.75 s;
+  - the NM-present bulk improves on every development fold;
+  - no dominant row (|top-1| ≤ 0.10).
+  - The Advisor had forecast −3 to −5 s.
+- **Clause 4 not met:** the criterion 8 statistic is 0.0 on every fold (routed).
+- **Clause 3 open:** it needs H016 v2.
+- **Reported:**
+  - on all rows, E019 is +65.67 s against E017 (LOSS 7/7), as pre-registered: routing forgoes the convention tail gain;
+  - on all rows, E019 is worse than E005 on the NM-missing rows at the other nine airports on four development folds, with extreme predictions there (e.g. −8,859 s on an EHAM row). This is a candidate Day 4 question.
+- **The container restarted after the run.** The predictions were re-verified, and H016's determinism check will be cross-container.

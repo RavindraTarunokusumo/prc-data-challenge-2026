@@ -1,6 +1,6 @@
 # Research State
 
-*Updated 2026-09-29T16:32:41Z (measured with `date -u` at writing; D03-S01, Day 3 in progress).*
+*Updated 2026-09-30T05:35:36Z (measured with `date -u` at writing; D03-S01, Day 3 in progress).*
 
 - **Phase:** **Day 3 in progress** (congestion reconstruction), session D03-S01, branch `day-3` (PR #5). Day 2 CLOSED (X-D02-S01-0006: ACCEPT). Splits, metric and availability definition are **FROZEN** (`config/frozen.json`).
 - **Last session:** D03-S01 (open). **Last completed exchange:** X-D03-S01-0002 (H015 v2, H016 v2, H017 v2: all ACCEPT). **Pending:** none; next is the H015 v2 chain.
@@ -57,4 +57,4 @@
 - **Open incidents:** **INC-0004** (D03 launch arguments `--model claude-sonnet-5-5 --effort medium` against session metadata: served `claude-opus-5-5`, effort `high`). Open, non-blocking, owner to decide. INC-0003 closed.
 - **Open blockers:** none.
 - **Holdout:** Day 3: 0 of 1 used.
-- **Next action:** `gate.py allocate H015 v2`, then the H015 primary run and chain step 1. After that, H016 v2 (chain step 2: `route_check.py`), then H017 v2. Reproduce H015 only under clause conditions. Checkpoint after each experiment.
+- **Next action:** E019 (H015 v2) chain step 1 is done. Clauses 1, 2 and 4 are not met (C −6.75 s on `NM_present_excl_LIRF`). Next: `gate.py allocate H016 v2` (cross-container after a restart), then chain step 2 (`route_check.py E019 <H016> E005`; `mechanism_check.py E019 <H016> LIRF_NM_missing`), then H017 v2, then the conditional reproduction of H015 v2.
