@@ -165,3 +165,27 @@ def test_routed_ridge_sees_fs0_columns_only():
     va = feats.filter(pl.col("role") == "val").sort("MVT_ID_mvt")
     route = ((va["ADEP_mvt"] == "LIRF") & (va["flt_missing"] == 1)).to_numpy()
     assert np.array_equal(a["pred"].to_numpy()[route], b["pred"].to_numpy()[route])
+
+
+def test_routed_train_exclude_drops_only_routed_training_rows():
+    """H018: with `route_train_exclude`, non-routed rows equal a LightGBM fitted without the
+    routed subgroup's training rows, routed rows still take the ridge fitted on every
+    training row, and absent/false reproduces the Day 3 procedure."""
+    feats = synthetic(n=2000, seed=7)
+    p = PARAMS["routed_lightgbm"]
+    gb_p = {k: v for k, v in p.items() if k != "route_ridge_params"}
+    base = REGISTRY["routed_lightgbm"](feats, p, 42).sort("MVT_ID_mvt")
+    off = REGISTRY["routed_lightgbm"](feats, {**p, "route_train_exclude": False}, 42)
+    assert np.array_equal(base["pred"].to_numpy(), off.sort("MVT_ID_mvt")["pred"].to_numpy())
+    out = REGISTRY["routed_lightgbm"](feats, {**p, "route_train_exclude": True}, 42)
+    out = out.sort("MVT_ID_mvt")
+    routed_train = (pl.col("role") == "train") & (pl.col("ADEP_mvt") == "LIRF") & (
+        pl.col("flt_missing") == 1)
+    assert feats.filter(routed_train).height > 0
+    gb = REGISTRY["lightgbm"](feats.filter(~routed_train), gb_p, 42).sort("MVT_ID_mvt")
+    rd = REGISTRY["ridge"](feats, p["route_ridge_params"], 42).sort("MVT_ID_mvt")
+    va = feats.filter(pl.col("role") == "val").sort("MVT_ID_mvt")
+    route = ((va["ADEP_mvt"] == "LIRF") & (va["flt_missing"] == 1)).to_numpy()
+    got = out["pred"].to_numpy()
+    assert np.array_equal(got[route], rd["pred"].to_numpy()[route])
+    assert np.array_equal(got[~route], gb["pred"].to_numpy()[~route])
