@@ -62,3 +62,7 @@
 ## Next
 
 H017 v2 (FS2_P, chain step 3). Then the conditional reproduction of H015 v2: clauses 1, 2, 3 and 4 are all not met, so the reproduction is due (Validation Plan step 4).
+
+## Correction D3-C4 (appended 2026-09-30T07:06:50Z; X-D03-S01-0003)
+
+The CPU model string for this run is **"Intel(R) Xeon(R) Processor @ 2.80GHz"**, not "@ 2.10GHz" as stated above (`provenance.yaml` is correct). E019 ran on "@ 2.10GHz", so the determinism results held across two CPU model strings.

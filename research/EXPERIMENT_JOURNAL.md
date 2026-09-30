@@ -205,3 +205,19 @@ The chain runs sequentially: H009, then H010, then H012, then H011.
 
 - **Clauses 1–4 are all not met; criterion 6 passes; criterion 8 is 0.0.** H015 v2 is **not falsified**, and every promotion condition verifiable before the phase close holds.
 - **Under authorization item 6, promotion is subject to the Day 3 phase-close review and to holdout access as that review names it (rule 9).** No promotion is recorded yet; the champion is still E005.
+
+### Day 3 phase close (X-D03-S01-0003: ACCEPT, 0.82)
+
+- **H015 v2 PROMOTE. E019 is champion.** Holdout H (December 2025), one access, E019 against E005: **WIN**, −35.36 s (375.93 against 411.29). No revert. The H figures are recorded only (ruling H3).
+- **Standing disclosures on the champion:**
+  - **D3-C1:** 95 % of the margin is routed FS1 structure; congestion as served is −1.90 s on all rows.
+  - **D3-C2:** out-of-range predictions on non-LIRF NM-missing rows, caused by the congestion block.
+  - **D3-C3:** January 2026 long-delay NM-missing counts are 2.0–2.6 times the 2025 maximum.
+- **Other corrections:**
+  - D3-C4: CPU strings; determinism held across two.
+  - D3-C5: INC-0004 scope, and the restarts recorded late.
+  - D3-C6: STATE.md stale.
+  - D3-C7: a figure.
+  - D3-C8: forecasts misquoted or omitted.
+  - D3-C9: the Advisor's own miss.
+- **Standing rule 12 adopted.** The routing answer allows an unrouted Day 4 candidate under conditions.

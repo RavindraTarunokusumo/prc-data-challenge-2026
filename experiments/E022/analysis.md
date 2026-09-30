@@ -28,3 +28,7 @@
 
 - **The determinism premise holds on real data,** across a seed change (42 → 43) and across container instances. The seed has no effect on the deterministic procedure: `bagging_fraction` 1.0, `feature_fraction` 1.0, and `bin_construct_sample_cnt` 5,000,000 above every fold's training size.
 - This closes Missing Control 2 and the Day 2 open question ("its real-data determinism is untested").
+
+## Correction D3-C4 (appended 2026-09-30T07:06:50Z; X-D03-S01-0003)
+
+The CPU model string for this run is **"Intel(R) Xeon(R) Processor @ 2.80GHz"**, not "@ 2.10GHz" as stated above (`provenance.yaml` is correct). E019 ran on "@ 2.10GHz", so the determinism results held across two CPU model strings.

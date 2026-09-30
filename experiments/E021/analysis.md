@@ -66,3 +66,7 @@
 ## Next
 
 The chain has three primaries done. **The reproduction of H015 v2 is due:** clauses 1–4 are all not met (Validation Plan step 4). One `reproduction` allocation of H015 v2 with seed 43, everything else identical; then `reproduce_check.py <repro> E019 --champion E005` and the prediction-file SHA-256 comparison on all 8 folds.
+
+## Correction D3-C4 (appended 2026-09-30T07:06:50Z; X-D03-S01-0003)
+
+The CPU model string for this run is **"Intel(R) Xeon(R) Processor @ 2.80GHz"**, not "@ 2.10GHz" as stated above (`provenance.yaml` is correct). E019 ran on "@ 2.10GHz", so the determinism results held across two CPU model strings.

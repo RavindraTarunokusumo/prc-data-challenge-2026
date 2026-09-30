@@ -94,3 +94,10 @@ Allocate H016 v2 (chain step 2), then `route_check.py` and `mechanism_check.py <
 - The container restarted after E019 completed and before this analysis was committed. The kernel boot id is now `b973b4fe-…` against the run's `ac2b2cff-…`.
 - The working tree and data persisted. All 8 E019 prediction files re-verified against `manifest.json` (SHA-256 match).
 - **Consequence (authorization item 8):** H016 v2 runs in a different container instance from E019. A clause 3(b) finding (identical predictions outside the routed subgroup) is therefore a **cross-container** determinism result, and is recorded as such.
+
+## Phase-close corrections (appended 2026-09-30T07:06:50Z; X-D03-S01-0003)
+
+- **D3-C1.** The `excl_LIRF_NM_missing` disclosure above omitted `criterion_3: false` (EHAM +7.2 %). Congestion as served (E019 − rE017, all rows) is −1.90 s (q95 −0.98), with R1 and R2 TIE. 95 % of the −38.23 s margin over E005 is routed FS1 structure.
+- **D3-C2.** Observation 1's explanation ("`d_sched` extremes") is withdrawn. The out-of-range predictions are caused by the congestion block carrying the LIRF convention learned in training to non-routed NM-missing rows.
+- **D3-C7.** The NM-present bulk range against E005 is −47.9 to −55.4 s (R2 −47.91), not −48.9 to −55.4 s.
+- **Outcome.** H015 v2 PROMOTE: phase close ACCEPT, holdout WIN (−35.36 s). E019 is champion.

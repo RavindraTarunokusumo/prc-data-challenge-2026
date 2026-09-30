@@ -1,0 +1,15 @@
+{
+  "champion": "E019",
+  "hypothesis_id": "H015",
+  "proposal_version": 2,
+  "since_utc": "2026-09-30T07:06:50Z",
+  "since_phase": "day-03",
+  "decided_by": "X-D03-S01-0003 (phase close ACCEPT) + holdout_E019_vs_E005 WIN",
+  "previous": "E005",
+  "reproduction": "E022 (byte-identical)",
+  "standing_disclosures": [
+    "D3-C1",
+    "D3-C2",
+    "D3-C3"
+  ]
+}

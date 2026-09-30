@@ -34,3 +34,10 @@ status: open
 Confirm the intended configuration for D03-S01, or accept the discrepancy as in INC-0003. Until then, D03-S01 work is described as: *"served `claude-opus-5-5` (metadata); launch argument `claude-sonnet-5-5`; effort registered `high`, launch argument `medium`; effective tier not determinable"*.
 
 The incident does not block work.
+
+## Addendum (2026-09-30T07:06:50Z): scope after the second container restart (D3-C5, X-D03-S01-0003)
+
+- The container restarted after E019 completed (kernel boot id `ac2b2cff-…` → `b973b4fe-…`). The researcher process was relaunched at **2026-09-30T05:34:34Z**.
+- The relaunched process carries **`--model claude-opus-5-5 --effort medium`** (read from `/proc/<pid>/cmdline`).
+- It covers: E020–E022, the Day 3 DAY_SUMMARY, the phase-close proposal, the holdout access and the phase-closing records.
+- The incident stays **open**, non-blocking, for the owner to decide.
