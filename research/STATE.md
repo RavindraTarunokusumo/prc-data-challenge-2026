@@ -1,6 +1,6 @@
 # Research State
 
-*Updated 2026-09-30T05:35:36Z (measured with `date -u` at writing; D03-S01, Day 3 in progress).*
+*Updated 2026-09-30T05:57:39Z (measured with `date -u` at writing; D03-S01, Day 3 in progress).*
 
 - **Phase:** **Day 3 in progress** (congestion reconstruction), session D03-S01, branch `day-3` (PR #5). Day 2 CLOSED (X-D02-S01-0006: ACCEPT). Splits, metric and availability definition are **FROZEN** (`config/frozen.json`).
 - **Last session:** D03-S01 (open). **Last completed exchange:** X-D03-S01-0002 (H015 v2, H016 v2, H017 v2: all ACCEPT). **Pending:** none; next is the H015 v2 chain.
@@ -57,4 +57,4 @@
 - **Open incidents:** **INC-0004** (D03 launch arguments `--model claude-sonnet-5-5 --effort medium` against session metadata: served `claude-opus-5-5`, effort `high`). Open, non-blocking, owner to decide. INC-0003 closed.
 - **Open blockers:** none.
 - **Holdout:** Day 3: 0 of 1 used.
-- **Next action:** E019 (H015 v2) chain step 1 is done. Clauses 1, 2 and 4 are not met (C −6.75 s on `NM_present_excl_LIRF`). Next: `gate.py allocate H016 v2` (cross-container after a restart), then chain step 2 (`route_check.py E019 <H016> E005`; `mechanism_check.py E019 <H016> LIRF_NM_missing`), then H017 v2, then the conditional reproduction of H015 v2.
+- **Next action:** H015 v2 chain steps 1–2 are done. Clauses 1–4 are all not met (C −6.75 s; routing exact; cross-container bit-identity). E020 (H016 v2) is done. Next: `gate.py allocate H017 v2` (chain step 3), then the reproduction of H015 v2 (seed 43; `reproduce_check.py <repro> E019 --champion E005` plus the SHA-256 comparison).

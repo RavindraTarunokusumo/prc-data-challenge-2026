@@ -176,3 +176,13 @@ The chain runs sequentially: H009, then H010, then H012, then H011.
   - on all rows, E019 is +65.67 s against E017 (LOSS 7/7), as pre-registered: routing forgoes the convention tail gain;
   - on all rows, E019 is worse than E005 on the NM-missing rows at the other nine airports on four development folds, with extreme predictions there (e.g. −8,859 s on an EHAM row). This is a candidate Day 4 question.
 - **The container restarted after the run.** The predictions were re-verified, and H016's determinism check will be cross-container.
+
+### E020 · H016 v2 unrouted LightGBM on FS2 (R ablation) · COMPLETE
+
+- **Development mean 321.95** (pre-registered 360–380: outside, better). 1,181 s, 4.62 GB. **Cross-container** relative to E019.
+- **H015 v2 clause 3 not met:** routed rows equal E005 exactly, and E019 and E020 are **bit-identical outside the routed rows on all 8 folds across a container restart**. Cross-container determinism holds.
+- **H016 − E017 on all rows: −56.87 s** (pre-registered −2 to −15: outside, larger).
+  - Almost all of it is on LIRF NM-missing rows (tail share 0.72): FS2's in-taxi counts, anchored at SCHED for convention records, carry the schedule delay more finely.
+  - On `NM_present_excl_LIRF` it equals H015 − E017 (−6.75 s).
+- **R effect** (H015 − H016 on LIRF NM-missing): full > 0 on 5/5 development folds, bulk < 0 on all folds (S1 −4,292 s), as pre-registered.
+- **Criterion 8 statistic S1 +4,292 s** (pre-registered +6,000 to +8,000). It is below the +6,500 bound on every development fold, the first unrouted Tier 1 fit to be so. **Observation only:** H016 is not a candidate.

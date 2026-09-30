@@ -1,0 +1,113 @@
+{
+ "routed": "E019",
+ "unrouted": "E020",
+ "champion": "E005",
+ "tolerance_champion_s": 1e-06,
+ "folds": {
+  "R1": {
+   "rows": 183950,
+   "routed_rows": 168,
+   "max_abs_diff_routed_vs_champion": 0.0,
+   "max_abs_diff_nonrouted_vs_unrouted": 0.0,
+   "routed_rows_differing_from_unrouted": 168,
+   "sha256": {
+    "E019": "32eb274461a35ea29d158d948795e6c93cd6fd2d45cd80f80680570d6a1b77f7",
+    "E020": "4cbb62fcf93514c27fdb8733eb93c158e676cde3dc56c321eee6761d8c885c4a",
+    "E005": "160f8e0967a4a3b7760c9bb85ab303910e75ccc29c9949b38ced166aef534739"
+   },
+   "passes": true
+  },
+  "R2": {
+   "rows": 185674,
+   "routed_rows": 115,
+   "max_abs_diff_routed_vs_champion": 0.0,
+   "max_abs_diff_nonrouted_vs_unrouted": 0.0,
+   "routed_rows_differing_from_unrouted": 115,
+   "sha256": {
+    "E019": "1285d926ccbc7ea705da8ce347454a97bed64d42640d8c9eed3e7e7feef139d1",
+    "E020": "4f4621992d33efa816fc2f8fb4b182d9619ae5ea679db84388fb5e74947819e7",
+    "E005": "e2bf52e9fd793f99cd56fb7c6c932c1216ed0c31cdcaf65f4f4c4bfb4dc92036"
+   },
+   "passes": true
+  },
+  "R3": {
+   "rows": 162332,
+   "routed_rows": 52,
+   "max_abs_diff_routed_vs_champion": 0.0,
+   "max_abs_diff_nonrouted_vs_unrouted": 0.0,
+   "routed_rows_differing_from_unrouted": 52,
+   "sha256": {
+    "E019": "c5c607c76c0ddf7131b99fac57da8b16d1fc60a208b5de652b7e7446dc6e8a67",
+    "E020": "67c7d38a9e9019290de2fee06e9fc5b5bea958c6dc69c236f17ca14a04776623",
+    "E005": "f71a62de0d6f652579ff180096243104fed2c7687f2c4f3a7faa875c27d15694"
+   },
+   "passes": true
+  },
+  "S1": {
+   "rows": 190713,
+   "routed_rows": 337,
+   "max_abs_diff_routed_vs_champion": 0.0,
+   "max_abs_diff_nonrouted_vs_unrouted": 0.0,
+   "routed_rows_differing_from_unrouted": 337,
+   "sha256": {
+    "E019": "48be32eba66c251b5649ae3f6c1f60ef88be3e4c4c1ab542710fad0b8721e289",
+    "E020": "9d3739d987c641ce0b053d04a878e776a79796e4cd65bcd39f20ebbff57a43f2",
+    "E005": "d49d2f667162cbb8dbe1e91384b1b78df0e1adcc208bc15ef924e6dcb8485821"
+   },
+   "passes": true
+  },
+  "W1": {
+   "rows": 143732,
+   "routed_rows": 58,
+   "max_abs_diff_routed_vs_champion": 0.0,
+   "max_abs_diff_nonrouted_vs_unrouted": 0.0,
+   "routed_rows_differing_from_unrouted": 58,
+   "sha256": {
+    "E019": "e70f403bee9633e671a85548c6f671592b08724d34f564bcb7f0a40b424902fc",
+    "E020": "d361a1d0ebc9e262fa655ec4b3f58211b0b3d9d02384227519b184d1b369f95d",
+    "E005": "eb603dd05fd57909115c5655c93c4c4791338412e9bb69a310b1167884b0c262"
+   },
+   "passes": true
+  },
+  "S1c": {
+   "rows": 190713,
+   "routed_rows": 337,
+   "max_abs_diff_routed_vs_champion": 0.0,
+   "max_abs_diff_nonrouted_vs_unrouted": 0.0,
+   "routed_rows_differing_from_unrouted": 337,
+   "sha256": {
+    "E019": "609a2a0a5dddf24f8ba7c928737ac0f3059dd785c6c6283c128d00fa4f301268",
+    "E020": "dcc3904d2f53071d608fbcba5f6f0a3cbd7a86ce786b35ec5cbdac5d3718b825",
+    "E005": "aad0744656dcfc6067748d0b599f14b34e99494acf5eb18065c70ba725140c2d"
+   },
+   "passes": true
+  },
+  "W1c": {
+   "rows": 143732,
+   "routed_rows": 58,
+   "max_abs_diff_routed_vs_champion": 0.0,
+   "max_abs_diff_nonrouted_vs_unrouted": 0.0,
+   "routed_rows_differing_from_unrouted": 58,
+   "sha256": {
+    "E019": "7dc49256bd4d1409c97d04ad946f3df905df488986956f4234da90115e223e6b",
+    "E020": "61bf48d0536561000a7d660f5eb2b87fe15069b76ae63cc3cc2b6571c6f49f9c",
+    "E005": "9eed4026595c375beb03bd17a12f61f6b2354c244a720794b7e0cf12bcdc479a"
+   },
+   "passes": true
+  },
+  "H": {
+   "rows": 165677,
+   "routed_rows": 88,
+   "max_abs_diff_routed_vs_champion": 0.0,
+   "max_abs_diff_nonrouted_vs_unrouted": 0.0,
+   "routed_rows_differing_from_unrouted": 88,
+   "sha256": {
+    "E019": "464cb57a01e55921d51eaa848f2c0c30baaa857b74f021df3eb227a57efc9a1a",
+    "E020": "72a4af7cf3969b8ba357062aed7f96e22f2c4f8dc70fcfe22acece4ab766bde1",
+    "E005": "66561c5d03b1d80ea7768c7560255a4e2aabfd8b7fce2ffbdaa60bb3a782b3c8"
+   },
+   "passes": true
+  }
+ },
+ "passes": true
+}
