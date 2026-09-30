@@ -49,3 +49,27 @@ def xgboost(feats: pl.DataFrame, params: dict, seed: int) -> pl.DataFrame:
     dva = xgb.DMatrix(x_va, enable_categorical=True)
     booster = xgb.train(p, dtr, num_boost_round=rounds)
     return pl.DataFrame({"MVT_ID_mvt": va["MVT_ID_mvt"], "pred": booster.predict(dva)})
+
+
+NULL_CAT = "__NULL__"
+
+
+def catboost(feats: pl.DataFrame, params: dict, seed: int) -> pl.DataFrame:
+    """CatBoost on the same columns and category vocabulary as `lightgbm`. Categoricals go
+    in as strings (unseen/null levels -> "__NULL__"), numerics as float with NaN."""
+    from catboost import CatBoostRegressor, Pool
+
+    tr, va, x_tr, x_va, cats = _frames(feats)
+
+    def prep(x):
+        x = x.copy()
+        for c in cats:
+            x[c] = x[c].astype(object).where(x[c].notna(), NULL_CAT).astype(str)
+        return x
+
+    p = dict(params)
+    p.update(random_seed=seed, allow_writing_files=False, verbose=False)
+    model = CatBoostRegressor(**p)
+    model.fit(Pool(prep(x_tr), label=tr["y"].to_numpy(), cat_features=cats))
+    pred = model.predict(Pool(prep(x_va), cat_features=cats))
+    return pl.DataFrame({"MVT_ID_mvt": va["MVT_ID_mvt"], "pred": pred})

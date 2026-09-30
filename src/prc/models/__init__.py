@@ -16,4 +16,6 @@ REGISTRY = {
     "lightgbm": gbm.lightgbm,
     "xgboost": gbm.xgboost,
     "routed_lightgbm": routed.routed_lightgbm,
+    "catboost": gbm.catboost,
+    "routed_catboost": routed.routed_catboost,
 }

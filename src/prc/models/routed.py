@@ -29,12 +29,12 @@ def route_mask() -> pl.Expr:
     return (pl.col("ADEP_mvt") == ROUTE_AIRPORT) & (pl.col("flt_missing") == 1)
 
 
-def routed_lightgbm(feats: pl.DataFrame, params: dict, seed: int) -> pl.DataFrame:
+def _routed(tier1_fn, feats: pl.DataFrame, params: dict, seed: int) -> pl.DataFrame:
     p = dict(params)
     ridge_params = p.pop("route_ridge_params")
     train_exclude = bool(p.pop("route_train_exclude", False))
     gbm_frame = feats.filter(~((pl.col("role") == "train") & route_mask())) if train_exclude else feats
-    tier1 = gbm.lightgbm(gbm_frame, p, seed).rename({"pred": "pred_tier1"})
+    tier1 = tier1_fn(gbm_frame, p, seed).rename({"pred": "pred_tier1"})
     fs0_frame = feats.select("MVT_ID_mvt", "role", "month", "y", *FS0)
     champ = linear.ridge(fs0_frame, ridge_params, seed).rename({"pred": "pred_route"})
     va = feats.filter(pl.col("role") == "val").select("MVT_ID_mvt", route_mask().alias("route"))
@@ -42,3 +42,12 @@ def routed_lightgbm(feats: pl.DataFrame, params: dict, seed: int) -> pl.DataFram
             .join(champ, on="MVT_ID_mvt", how="left", validate="1:1")
             .select("MVT_ID_mvt", pl.when(pl.col("route")).then(pl.col("pred_route"))
                     .otherwise(pl.col("pred_tier1")).alias("pred")))
+
+
+def routed_lightgbm(feats: pl.DataFrame, params: dict, seed: int) -> pl.DataFrame:
+    return _routed(gbm.lightgbm, feats, params, seed)
+
+
+def routed_catboost(feats: pl.DataFrame, params: dict, seed: int) -> pl.DataFrame:
+    """Same routing as `routed_lightgbm` with the Tier 1 model `gbm.catboost`."""
+    return _routed(gbm.catboost, feats, params, seed)
