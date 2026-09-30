@@ -1,0 +1,14 @@
+{
+ "phase": "day-03",
+ "new": "E019",
+ "reference": "E005",
+ "delta_rmse": -35.3603330805513,
+ "delta_q10_q90": [
+  -46.214883021182786,
+  -29.160817951222555
+ ],
+ "outcome": "WIN",
+ "revert": false,
+ "rmse_new": 375.9272105442546,
+ "rmse_reference": 411.28754362480583
+}
