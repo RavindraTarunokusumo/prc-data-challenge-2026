@@ -1,6 +1,6 @@
 # Research State
 
-*Updated 2026-09-30T06:17:13Z (measured with `date -u` at writing; D03-S01, Day 3 in progress).*
+*Updated 2026-09-30T06:40:20Z (measured with `date -u` at writing; D03-S01, Day 3 in progress).*
 
 - **Phase:** **Day 3 in progress** (congestion reconstruction), session D03-S01, branch `day-3` (PR #5). Day 2 CLOSED (X-D02-S01-0006: ACCEPT). Splits, metric and availability definition are **FROZEN** (`config/frozen.json`).
 - **Last session:** D03-S01 (open). **Last completed exchange:** X-D03-S01-0002 (H015 v2, H016 v2, H017 v2: all ACCEPT). **Pending:** none; next is the H015 v2 chain.
@@ -57,4 +57,4 @@
 - **Open incidents:** **INC-0004** (D03 launch arguments `--model claude-sonnet-5-5 --effort medium` against session metadata: served `claude-opus-5-5`, effort `high`). Open, non-blocking, owner to decide. INC-0003 closed.
 - **Open blockers:** none.
 - **Holdout:** Day 3: 0 of 1 used.
-- **Next action:** Primaries E019 (H015 v2), E020 (H016 v2) and E021 (H017 v2) are done. H015 v2 clauses 1–4 are all not met. Next: the reproduction of H015 v2 (`gate.py allocate H015 v2 --purpose reproduction`, seed 43), then `reproduce_check.py <repro> E019 --champion E005` plus the SHA-256 comparison. Then the Day 3 decision and the phase close.
+- **Next action:** The H015 v2 chain is complete: E019 primary, E020 (H016 v2), E021 (H017 v2), E022 reproduction. **H015 v2 is not falsified**: clauses 1–4 not met, criterion 6 PASS with byte-identical predictions, criterion 8 0.0. It is the promotion candidate, pending the Day 3 phase-close review and holdout access (rule 9). Next: write `research/day-03/DAY_SUMMARY.md` and the phase-close proposal, then envelope X-D03-S01-0003. The code freeze ends with this last comparison.

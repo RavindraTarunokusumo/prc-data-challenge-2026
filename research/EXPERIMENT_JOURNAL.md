@@ -195,3 +195,13 @@ The chain runs sequentially: H009, then H010, then H012, then H011.
 - **Reading 3, all rows:** −6.68 s (q95 −1.26); 3 WIN and 4 TIE, so criterion 2 fails.
 - **The decomposition adds exactly:** −3.47 + −3.28 = C = −6.75 s. Each half is consistent (7/7 WIN) but about half the floor.
 - **The EDA's T-dominance does not survive the anchor in the model.** For Days 5–7: about −3.5 s of the congestion gain is available at the off-block proxy (P).
+
+### E022 · H015 v2 reproduction (seed 43) · COMPLETE
+
+- **Criterion 6 PASS:** every development-fold RMSE equals E019's (Δ 0.0 s); criteria 1–3 hold against E005 (7/7 WIN).
+- **All 8 prediction files are byte-identical to E019's,** across a seed change and a container restart. Real-data determinism is confirmed.
+
+### H015 v2 outcome (pre-registered clauses and criteria)
+
+- **Clauses 1–4 are all not met; criterion 6 passes; criterion 8 is 0.0.** H015 v2 is **not falsified**, and every promotion condition verifiable before the phase close holds.
+- **Under authorization item 6, promotion is subject to the Day 3 phase-close review and to holdout access as that review names it (rule 9).** No promotion is recorded yet; the champion is still E005.
