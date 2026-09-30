@@ -186,3 +186,12 @@ The chain runs sequentially: H009, then H010, then H012, then H011.
   - On `NM_present_excl_LIRF` it equals H015 − E017 (−6.75 s).
 - **R effect** (H015 − H016 on LIRF NM-missing): full > 0 on 5/5 development folds, bulk < 0 on all folds (S1 −4,292 s), as pre-registered.
 - **Criterion 8 statistic S1 +4,292 s** (pre-registered +6,000 to +8,000). It is below the +6,500 bound on every development fold, the first unrouted Tier 1 fit to be so. **Observation only:** H016 is not a candidate.
+
+### E021 · H017 v2 LightGBM on FS2_P (P/T decomposition) · COMPLETE
+
+- **Development mean 372.14** (pre-registered 370–385). 1,071 s, 4.86 GB.
+- **Reading 1, T given P** (E020 − E021 on `NM_present_excl_LIRF`): −3.28 s, 7/7 WIN, criteria 1–2 pass, but above the −6.0 s floor. **Not supported.**
+- **Reading 2, P beyond E017:** −3.47 s, 7/7 WIN, above the floor. **"P effect not distinguishable from training noise".**
+- **Reading 3, all rows:** −6.68 s (q95 −1.26); 3 WIN and 4 TIE, so criterion 2 fails.
+- **The decomposition adds exactly:** −3.47 + −3.28 = C = −6.75 s. Each half is consistent (7/7 WIN) but about half the floor.
+- **The EDA's T-dominance does not survive the anchor in the model.** For Days 5–7: about −3.5 s of the congestion gain is available at the off-block proxy (P).
