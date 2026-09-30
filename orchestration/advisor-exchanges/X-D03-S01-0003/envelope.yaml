@@ -1,0 +1,35 @@
+schema: advisor-task-envelope-v1
+exchange_id: X-D03-S01-0003
+session: D03-S01
+sender: claude-researcher
+recipient: advisor-subagent
+purpose: phase_close_review
+proposal_ids: [PHASE_CLOSE_D03]
+proposal_paths:
+  - research/day-03/proposals/PHASE_CLOSE_D03_v1.md
+proposal_sha256:
+  - 20dbd9605d7ae864b8a548cd6b4c064da48578d3c236e47861a58db0de189401
+review_output_dir: research/day-03/advisor/
+context_paths:
+  - research/day-03/DAY_SUMMARY.md
+  - research/EXPERIMENT_JOURNAL.md
+  - research/STATE.md
+  - experiments/E019/
+  - experiments/E020/
+  - experiments/E021/
+  - experiments/E022/
+  - research/comparisons/
+  - research/day-03/proposals/
+  - research/day-03/advisor/
+  - research/day-03/acks/
+  - research/day-02/advisor/PHASE_CLOSE_D02_review_v1.md
+  - docs/incidents/INC-0004-researcher-launch-configuration-D03.md
+  - config/splits.yaml
+  - scripts/holdout_check.py
+  - src/prc/evaluate.py
+constraints:
+  - Review file is PHASE_CLOSE_D03_review_v1.md. Be especially adversarial (advisor policy; phase close).
+  - Standing rules 1-11, batch conditions B1-B4 and rulings H, B, R apply.
+  - Rule on the Day 3 holdout access. Do NOT perform it; the researcher runs holdout_check.py only after an ACCEPT and the ack. Do not read December 2025 DEP targets.
+  - Read-only checks only; comparing existing prediction files and re-deriving committed statistics is fine. No model fitting on real data.
+created_utc: 2026-09-30T06:42:02Z
