@@ -221,3 +221,56 @@ The chain runs sequentially: H009, then H010, then H012, then H011.
   - D3-C8: forecasts misquoted or omitted.
   - D3-C9: the Advisor's own miss.
 - **Standing rule 12 adopted.** The routing answer allows an unrouted Day 4 candidate under conditions.
+
+## Day 4 (D04-S01): historical priors and interactions
+
+*Provenance: INC-0004 (open; launch `--effort medium`, metadata `high`) and INC-0005 (open; owner-instructed delegation to `claude-sonnet-5-5` workers) cover every Day 4 record. Items marked "worker" were implemented by a Sonnet worker to the researcher's specification and reviewed by the researcher.*
+
+### Infrastructure (no experiment)
+
+- **`scripts/range_check.py`** (worker) implements rule 12, with `--by-dsched` and `--bands`. It reproduces D3-C2 (E019 above 5 h 41/93 = 44 %) and D3-C3 (January 2026: 435 and 92) exactly.
+- **Out-of-range bands** on `NM_missing_other` bulk rows, 5 development folds (`range_check_refs.json`):
+  - every LightGBM has 60–83 below 1 h of schedule delay (a generic phenomenon);
+  - the congestion (T) increment is in the > 3 h band: E019 81 against E021 18 and the other no-T fits' 13–41.
+- **Prior EDA** (worker; never-validation months only):
+  - stand × runway carries the prior signal (+0.19 R² over airport × hour in a linear model, stability 0.94, subsumes stand);
+  - FS3's keys give 0.4570 against 0.4505 for [K1, K5];
+  - there is no anchor control, so these are loose upper bounds.
+- **FS3** (worker): FS2 plus 5 fold-local LOMO smoothed-mean priors (`src/prc/priors.py`). FS0–FS2 are byte-identical after the refactor.
+- **`route_train_exclude`** (researcher). **`gbm.catboost` and `routed_catboost`** (worker).
+- **CatBoost CPU calibration:** feature combinations make per-iteration cost grow; `max_ctr_complexity=1` makes it linear (0.29 s per iteration on R3).
+
+### X-D04-S01-0001 (batch H018 v1, H019 v1, H020 v1)
+
+- **H018 v1 REVISE (0.88).**
+  - Clause 1 (total out-of-range count ≤ 93) did not test D3-C2: the increment sits in the > 3 h band, and the < 1 h band is generic.
+  - The rule 8 sentence was false: LIRF NM-present convention tail rows stay in training.
+- **H019 v1 REVISE (0.82).**
+  - W1c is inert (a single training month), so it could not LOSS.
+  - The key-selection rule and the joint figures were missing.
+  - The same rule 8 error.
+- **H020 v1 REJECT (0.80); CLASS-L declined. Kept as a negative result.**
+  - The stated mechanism was false for the installed CatBoost 1.2.10: plain boosting, and RMSE CTRs that are a border share plus a count, not a smoothed mean.
+  - FS1's `__RARE__` collapse and `max_ctr_complexity: 1` removed what the mechanism needed; capacity was confounded.
+  - **No CatBoost experiment in Day 4.** The code and calibration are handed to Day 5.
+- **Correction D4-C1:** the v1 `created_utc` values were written by hand, not measured, and post-dated their commit. They are measured from v2 on.
+
+### X-D04-S01-0002 (H018 v2, H019 v2)
+
+- **H018 v2 ACCEPT (0.86).**
+  - Clause 1: > 3 h band ≤ 50 (E019 81, E021 18).
+  - Clause 2: `NM_missing_other` bulk < 0 on at least 3 of R1, R2, R3 and W1.
+  - Clause 3: route integrity.
+  - Rule 8 `NM_present_LIRF` pre-registration, and S1 attribution recording.
+- **H019 v2 ACCEPT (0.80).**
+  - Clause 1: `NM_present_excl_LIRF` against H018, criterion 1, 3 counted WINs among R1–R3 and S1 (S1 required, frozen twin rule), no LOSS; mean ≤ −3.0 s.
+  - Clause 2: all rows mean < 0.
+  - W1c inert.
+- **Advisor predictions:**
+  - H018: mechanism holds 0.85 / 0.88; S1 WIN 0.20; promotion 0.12.
+  - H019: mean ≤ −3.0 s 0.30; mechanism supported 0.27; promotion 0.10.
+- **Corrections D4-C2 to D4-C6** (acks v2):
+  - D4-C2, D4-C4: Implementation Plan version labels.
+  - D4-C3: `range_check_refs.json` commit order.
+  - D4-C5: H019 rule 8 wording.
+  - D4-C6: the dropped twin-rule phrase, restored by reading 4(a).

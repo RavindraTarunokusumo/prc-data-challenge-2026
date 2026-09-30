@@ -1,9 +1,11 @@
 # Research State
 
-*Updated 2026-09-30T16:50:42Z (measured with `date -u` at writing; D04-S01, Day 4 in progress).*
+*Updated 2026-09-30T17:48:59Z (measured with `date -u` at writing; D04-S01, Day 4 in progress).*
 
 - **Phase:** **Day 4 IN PROGRESS** (historical priors and interactions), session D04-S01 on branch `day-4`. Splits, metric and availability definition are **FROZEN** (`config/frozen.json`).
-- **Last session:** D03-S01 (closed). **Current:** D04-S01, started 2026-09-30T16:06:53Z after a container restart. **Last completed exchange:** X-D03-S01-0003. **Pending:** X-D04-S01-0001 (batch H018, H019, H020).
+- **Last session:** D03-S01 (closed). **Current:** D04-S01, started 2026-09-30T16:06:53Z after a container restart. **Last completed exchange:** X-D04-S01-0002 (H018 v2 ACCEPT 0.86, H019 v2 ACCEPT 0.80). Earlier: X-D04-S01-0001 (H018 v1 and H019 v1 REVISE; **H020 v1 REJECT**, and no CatBoost in Day 4, which is handed to Day 5). **Pending:** none.
+- **Open incidents:** INC-0004 (launch `--effort medium` against metadata `high`) and INC-0005 (delegation), both open and non-blocking.
+- **Corrections so far:** D4-C1 (unmeasured v1 `created_utc`) and D4-C2 to D4-C6 (acks v2).
 - **Delegation (INC-0005, open):** by owner instruction, `claude-sonnet-5-5` worker subagents carry out verification, digests, implementation to specification and experiment launches. Proposals, acks, allocations and interpretation stay with the main session. The Advisor is unchanged.
 - **Day 4 so far (infrastructure, no experiment):**
   - `scripts/range_check.py` implements rule 12 and reproduces D3-C2 and D3-C3 exactly.
@@ -75,8 +77,7 @@
   - Every fold except W1c trains on more than 200,000 rows, the LightGBM bin-sample threshold.
 - **Open incidents:** **INC-0004** (launch arguments against session metadata). From about 05:35Z on 30 September, after the second container restart, the process carries `--model claude-opus-5-5 --effort medium` (D3-C5); the metadata says `high`. Open, non-blocking, owner to decide. INC-0003 closed.
 - **Open blockers:** none.
-- **Next action:** X-D04-S01-0001 review of the chain:
-  1. H018: the D3-C2 treatment, excluding routed rows from the LightGBM training;
-  2. H019: FS3 priors on H018;
-  3. H020: routed CatBoost on H018's base.
-  Then the phase close and `HANDOFF_D04.md`.
+- **Next action:** the chain under X-D04-S01-0002, with the tools frozen from `d1cc43b` until its last comparison.
+  1. `gate.py allocate H018 v2`: run, then the comparisons, checkpoint, and H018's promotion status recorded in the journal.
+  2. `gate.py allocate H019 v2` (FS3).
+  3. Then the Day 4 phase close and `HANDOFF_D04.md`.
