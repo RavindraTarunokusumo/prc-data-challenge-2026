@@ -141,3 +141,44 @@ def test_null_key_is_unseen():
     specs.append(dict(month="2025-04", y=None, role="val", stand=None))
     o = run(specs)
     assert o["pr_stand_rwy_logn"][-1] == 0.0
+
+
+def test_single_training_month_priors_are_inert_for_lightgbm():
+    """priors.py docstring: "If a fold has a single training month, training rows have no
+    history and their priors are null (never filled from their own month)." The airport /
+    K2 parents are also LOMO, so all pr_* of training rows are null, except
+    pr_stand_rwy_logn = log1p(n) with n = 0 -> exactly 0.0 (a constant, not null)."""
+    import numpy as np
+
+    from prc.models import REGISTRY
+    from tests.test_models import synthetic
+
+    rng = np.random.default_rng(1)
+    specs = []
+    for k in range(300):
+        specs.append(dict(month="2025-01", y=int(rng.integers(400, 1500)),
+                          stand=f"S{k % 5}", op=("DLH", "BAW", "AFR")[k % 3],
+                          actype=("A320", "B738")[k % 2], hour=k % 24))
+    for k in range(100):
+        specs.append(dict(month="2025-02", y=None, role="val", stand=f"S{k % 5}",
+                          op=("DLH", "BAW", "AFR")[k % 3], actype=("A320", "B738")[k % 2],
+                          hour=k % 24))
+    p = pr.priors(rows_from(specs))
+    tr, va = p.head(300), p.tail(100)
+    for c in pr.FEATURES:
+        if c == "pr_stand_rwy_logn":
+            assert (tr[c] == 0.0).all() and tr[c].null_count() == 0
+        else:
+            assert tr[c].null_count() == 300, c
+        assert va[c].null_count() == 0, c  # validation rows get priors from the one month
+    assert (va["pr_stand_rwy_logn"] > 0).all()
+
+    feats = synthetic(400).with_columns((pl.col("MVT_ID_mvt") + 1).alias("MVT_ID_mvt"))
+    assert feats["role"].to_list() == ["train"] * 300 + ["val"] * 100
+    with_p = feats.join(p, on="MVT_ID_mvt", how="left")
+    assert with_p.height == 400
+    params = {"objective": "regression", "num_boost_round": 5, "num_leaves": 7,
+              "num_threads": 1}
+    a = REGISTRY["lightgbm"](feats, params, 42).sort("MVT_ID_mvt")
+    b = REGISTRY["lightgbm"](with_p, params, 42).sort("MVT_ID_mvt")
+    assert a["pred"].to_numpy().tobytes() == b["pred"].to_numpy().tobytes()

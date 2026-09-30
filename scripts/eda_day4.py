@@ -26,7 +26,10 @@ B. Target-based (bulk y<3600, NM-present): statistics fit on FITA={01,03,04,05},
    Kx stat after K1 mean; stability of key means fit on {01,03} vs {04,05}.
 C. Unimpeded taxi proxy: K5 (stand x runway) q20, alone and on top of K1.
 D. NM-missing rows: RMSE of the K1 prior on LIRF vs other airports (context only).
-Writes research/day-04/eda/priors.json and priors_summary.md.
+E. Joint keys: cross-fit OLS R2 (same protocol as B) of y on the smoothed-mean priors of a set
+   of keys jointly (e.g. [K1,K5]), same fit/eval months and rows as B. Written to
+   priors_joint.json and appended to priors_summary.md (sections A-D outputs unchanged).
+Writes research/day-04/eda/priors.json, priors_joint.json and priors_summary.md.
 """
 
 from __future__ import annotations
@@ -243,6 +246,26 @@ def section_d(feats: pl.DataFrame) -> dict:
     return out
 
 
+JOINT_SETS = [["K1"], ["K1", "K5"], ["K1", "K4", "K5"], ["K1", "K5", "K3"], ["K1", "K5", "K6"],
+              ["K1", "K5", "K7"], ["K1", "K5", "K9"], ["K1", "K5", "K8"],
+              ["K1", "K5", "K3", "K6", "K7"], ["K1", "K5", "K3", "K6", "K7", "K9"],
+              ["K1", "K5", "K3", "K6", "K7", "K8", "K9"],
+              ["K1", "K4", "K5", "K3", "K6", "K7", "K8", "K9"]]
+
+
+def section_joint(pbk: dict) -> dict:
+    """Cross-fit R2 of OLS y ~ [p_mean of each key in the set] (protocol of section B)."""
+    y = pbk["K1"]["y"].to_numpy()
+    mon = pbk["K1"]["month"].to_numpy()
+    out = {}
+    for ks in JOINT_SETS:
+        X = np.column_stack([pbk[k]["p_mean"].to_numpy() for k in ks])
+        out["+".join(ks)] = {"keys": ks, "crossfit_r2": crossfit_r2(y, X, mon)}
+    return {"eval_rows": len(y), "fit_months": FITA, "eval_months": EVB,
+            "protocol": "OLS on smoothed-mean priors (m=50), fit on one eval month, scored on the "
+                        "other, pooled R2; bulk NM-present rows", "sets": out}
+
+
 def md_table(rows: list[list], head: list[str]) -> str:
     f = lambda v: "-" if v is None else (f"{v:.4f}" if isinstance(v, float) and abs(v) < 10 else
                                          f"{v:.1f}" if isinstance(v, float) else str(v))
@@ -283,7 +306,9 @@ def main() -> None:
                 "(descriptive proxy for PRU/ANSP unimpeded taxi time)."}
     out["D_nm_missing_k1_context"] = section_d(feats)
 
+    joint = section_joint(pbk)
     OUT.mkdir(parents=True, exist_ok=True)
+    (OUT / "priors_joint.json").write_text(json.dumps(joint, indent=1) + "\n")
     (OUT / "priors.json").write_text(json.dumps(out, indent=1) + "\n")
 
     A, B, S = out["A_coverage"], out["B_prior_eval"], out["B_stability"]
@@ -311,6 +336,9 @@ def main() -> None:
     C, D = out["C_unimpeded_k5_q20"], out["D_nm_missing_k1_context"]
     md += ["", "## C. K5 q20 unimpeded proxy", "", "```", json.dumps(C, indent=1), "```", "",
            "## D. K1 prior on NM-missing rows (context only)", "", "```", json.dumps(D, indent=1), "```", ""]
+    md += ["## E. Joint keys (cross-fit R2, OLS on smoothed-mean priors, 06+08)", "",
+           md_table([[" + ".join(v["keys"]), v["crossfit_r2"]] for v in joint["sets"].values()],
+                    ["key set", "R2"]), ""]
     (OUT / "priors_summary.md").write_text("\n".join(md))
     print("\n".join(md))
 

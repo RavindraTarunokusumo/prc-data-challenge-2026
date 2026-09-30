@@ -1,12 +1,17 @@
 """Standing rule 12: out-of-range predictions and forward support (disclosure only).
 
     uv run python scripts/range_check.py EXP [EXP2 ...] [--by-dsched] [--json PATH]
+    uv run python scripts/range_check.py EXP [EXP2 ...] --bands [--json PATH]
     uv run python scripts/range_check.py --forward [--json PATH]
 
 Mode 1 counts, per experiment and fold in FOLDS (R1,R2,R3,S1,W1,S1c,W1c; never H), the
 predictions < 0 s and > 3,600 s on bulk rows (y < 3,600 s), by the four rule-7 subgroups
 (NM status x LIRF, prc.attribution definitions) and in total. Truth comes only through
 prc.evaluate.truth_frame, which refuses holdout/final folds.
+
+--bands adds, per experiment, the sum over the five development folds (R1,R2,R3,S1,W1) of
+out-of-range predictions on bulk rows of NM_missing_other by d_sched band (<1h incl. negative,
+1-3h, >3h), as below0/above3600/total plus bulk-row counts, under the key "bands_dev5".
 
 Mode 2 (--forward) is target-free: per ranking month and per 2025 month except December
 (holdout month), the DEP NM-missing rows with d_sched > 3 h and > 5 h, split LIRF / other.
@@ -98,7 +103,32 @@ def by_dsched(frame: pl.DataFrame) -> dict:
     return out
 
 
-def baseline(eids: list[str], with_dsched: bool) -> dict:
+BAND_BINS = (("<1h", -np.inf, 3600.0), ("1-3h", 3600.0, 3 * 3600.0), (">3h", 3 * 3600.0, np.inf))
+
+
+def band_counts(frame: pl.DataFrame) -> dict:
+    """NM_missing_other bulk rows (y<3600): per d_sched band, bulk rows and predictions
+    <0 / >3600 (total = sum)."""
+    y = frame["y"].to_numpy().astype(np.float64)
+    p = frame["pred"].to_numpy().astype(np.float64)
+    d = frame["d_sched"].to_numpy().astype(np.float64)
+    sel = subgroup_masks(frame["ADEP_mvt"], frame["nm_missing"])["NM_missing_other"] & (
+        y < BULK_MAX_S)
+    out = {}
+    for name, a, b in BAND_BINS:
+        m = sel & (d >= a) & (d < b)
+        lo, hi = int((m & (p < 0)).sum()), int((m & (p > UPPER_S)).sum())
+        out[name] = {"bulk_rows": int(m.sum()), "below_0": lo, "above_3600": hi,
+                     "total": lo + hi}
+    return out
+
+
+def sum_bands(per_fold: list[dict]) -> dict:
+    return {b: {k: sum(f[b][k] for f in per_fold) for k in per_fold[0][b]}
+            for b, _, _ in BAND_BINS}
+
+
+def baseline(eids: list[str], with_dsched: bool, with_bands: bool = False) -> dict:
     cols = ["MVT_ID_mvt", "AOBT_3_flt", "MVT_TIME_UTC_mvt", "SCHED_TIME_UTC_mvt", "PHASE_mvt",
             "month"]
     silver = load_silver(columns=cols).filter(pl.col("PHASE_mvt") == "DEP")
@@ -106,11 +136,13 @@ def baseline(eids: list[str], with_dsched: bool) -> dict:
                         _secs(pl.col("MVT_TIME_UTC_mvt"),
                               pl.col("SCHED_TIME_UTC_mvt")).alias("d_sched"))
     res: dict = {}
+    dev5 = list(promotion_config()["development_folds"])
     for eid in eids:
         rec = ledger.get(eid)
         if rec is None or rec["status"] != "COMPLETE":
             sys.exit(f"refused: {eid} is not COMPLETE in the ledger")
         res[eid] = {}
+        bands = []
         for f in folds():
             j = _join(_predictions(eid, f), truth_frame(f)).join(aux, on="MVT_ID_mvt",
                                                                  how="left")
@@ -119,6 +151,10 @@ def baseline(eids: list[str], with_dsched: bool) -> dict:
             res[eid][f] = count_fold(j)
             if with_dsched:
                 res[eid][f]["NM_missing_other_by_dsched"] = by_dsched(j)
+            if with_bands and f in dev5:
+                bands.append(band_counts(j))
+        if with_bands:
+            res[eid]["bands_dev5"] = sum_bands(bands)
     return res
 
 
@@ -161,11 +197,18 @@ def print_baseline(res: dict) -> None:
         print(f"\n{eid}: predictions <0 / >3600 on bulk rows (y<3600)")
         print(f"{'fold':5}" + "".join(f"{s:>22}" for s in (*SUBGROUPS, "total")))
         for f, c in per.items():
+            if f == "bands_dev5":
+                continue
             cells = [f"{c[s]['below_0']}/{c[s]['above_3600']} of {c[s]['bulk_rows']}"
                      for s in (*SUBGROUPS, "total")]
             print(f"{f:5}" + "".join(f"{x:>22}" for x in cells))
+        if "bands_dev5" in per:
+            print("  5-dev-fold sum, NM_missing_other bulk rows, below0/above3600 (total) | rows:")
+            for b, v in per["bands_dev5"].items():
+                print(f"    {b:5} {v['below_0']}/{v['above_3600']} ({v['total']}) | "
+                      f"{v['bulk_rows']}")
         for f, c in per.items():
-            if "NM_missing_other_by_dsched" in c:
+            if f != "bands_dev5" and "NM_missing_other_by_dsched" in c:
                 print(f"  {f} NM_missing_other by d_sched (share OOR all rows | >3600 only | "
                       "bulk-only):")
                 for b, v in c["NM_missing_other_by_dsched"].items():
@@ -195,6 +238,7 @@ def main() -> None:
     ap.add_argument("experiments", nargs="*")
     ap.add_argument("--forward", action="store_true")
     ap.add_argument("--by-dsched", action="store_true")
+    ap.add_argument("--bands", action="store_true")
     ap.add_argument("--json", type=Path)
     a = ap.parse_args()
     if a.forward == bool(a.experiments):
@@ -203,7 +247,7 @@ def main() -> None:
         res = forward()
         print_forward(res)
     else:
-        res = baseline(a.experiments, a.by_dsched)
+        res = baseline(a.experiments, a.by_dsched, a.bands)
         print_baseline(res)
     if a.json:
         a.json.parent.mkdir(parents=True, exist_ok=True)

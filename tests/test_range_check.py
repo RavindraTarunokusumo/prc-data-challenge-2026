@@ -52,3 +52,20 @@ def test_forward_counts_excludes_december():
         "nm_missing": 2, "gt3h": 2, "gt5h": 1, "lirf_nm_missing": 1, "lirf_gt3h": 1,
         "lirf_gt5h": 1, "other_gt3h": 1, "other_gt5h": 0}
     assert r["ranking"]["2026-01"]["gt5h"] == 1 and r["ranking"]["2026-07"] is None
+
+
+def test_band_counts_and_sum():
+    rows = [("EDDF", True, 900, -5, -100), ("EDDF", True, 900, 4000, 3599),
+            ("EDDF", True, 900, 5000, 3600), ("EDDF", True, 900, 100, 7200),
+            ("EDDF", True, 900, -1, 4 * 3600), ("EDDF", True, 900, 9000, 4 * 3600),
+            ("EDDF", True, 9000, 9000, 4 * 3600),  # tail row excluded
+            ("LIRF", True, 900, 9000, 4 * 3600),  # LIRF excluded
+            ("EDDF", False, 900, 9000, 4 * 3600)]  # NM-present excluded
+    f = pl.DataFrame(rows, schema=["ADEP_mvt", "nm_missing", "y", "pred", "d_sched"],
+                     orient="row")
+    b = rc.band_counts(f)
+    assert b["<1h"] == {"bulk_rows": 2, "below_0": 1, "above_3600": 1, "total": 2}
+    assert b["1-3h"] == {"bulk_rows": 2, "below_0": 0, "above_3600": 1, "total": 1}
+    assert b[">3h"] == {"bulk_rows": 2, "below_0": 1, "above_3600": 1, "total": 2}
+    s = rc.sum_bands([b, b])
+    assert s[">3h"] == {"bulk_rows": 4, "below_0": 2, "above_3600": 2, "total": 4}
