@@ -332,3 +332,8 @@ The chain runs sequentially: H009, then H010, then H012, then H011.
 - All development folds within 0.008 s of E019 (tolerance 1.0 s); 668.7 s, 5.22 GB.
 - **Not byte-identical:** all 8 prediction files differ from E019's hashes. Deterministic LightGBM is bit-stable across Intel CPU strings (Day 3), but not from Intel Xeon to AMD Ryzen (observation).
 - **E019's, E005's and E023's prediction files are absent on the laptop,** so row-level comparisons against them cannot run. Ruling needed (first Day 5 exchange).
+
+### E027 · H015 v2 reproduction with learning curves · PASS
+
+- **Byte-identical to E026 (all 8 files):** learning-curve recording does not change the model. 892 s (+33 % for recording), 5.19 GB.
+- **Curves (observation):** development-fold validation RMSE is flat from about 500 iterations, and the 1,000 rounds sit within 0.03–0.78 s of each fold's minimum. W1c (one training month) overfits from 180 (+4.9 s by 1,000). Train RMSE about 200 s against validation 270–630 s. No round count is selected from this (selection hazard, INC-0009 addendum).
