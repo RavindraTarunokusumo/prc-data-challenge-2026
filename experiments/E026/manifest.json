@@ -1,0 +1,66 @@
+{
+ "schema": "artifact-manifest-v1",
+ "producing_experiment": "E026",
+ "artifacts": [
+  {
+   "path": "predictions/validation/E026/R1.parquet",
+   "fold": "R1",
+   "rows": 183950,
+   "size": 1564089,
+   "sha256": "341715523a27c62ca5a1f08436c3691b7ac08dd0704afc06d4e0c2ae265b08e3"
+  },
+  {
+   "path": "predictions/validation/E026/R2.parquet",
+   "fold": "R2",
+   "rows": 185674,
+   "size": 1578256,
+   "sha256": "92b477c0a4aed7ef345038c48e76364b45b01b61970810658db542abf698a86e"
+  },
+  {
+   "path": "predictions/validation/E026/R3.parquet",
+   "fold": "R3",
+   "rows": 162332,
+   "size": 1380819,
+   "sha256": "0fa0a14f6fc880c836d5e1659814dc8afe6c84a5f1b90304c10426f8bbdc8fcf"
+  },
+  {
+   "path": "predictions/validation/E026/S1.parquet",
+   "fold": "S1",
+   "rows": 190713,
+   "size": 1622662,
+   "sha256": "ab72b66e3137c6b1f914bea5784077b8d81246fbf2801ad17fc015def9208ce2"
+  },
+  {
+   "path": "predictions/validation/E026/W1.parquet",
+   "fold": "W1",
+   "rows": 143732,
+   "size": 1222779,
+   "sha256": "47e5879583c614c83efb9e8228939a8f1287704b53d9a668e3fcf0df8a0cd294"
+  },
+  {
+   "path": "predictions/validation/E026/S1c.parquet",
+   "fold": "S1c",
+   "rows": 190713,
+   "size": 1622531,
+   "sha256": "57e410685442b59cc54d12ecadb352cd2940a38752b687dd6e183d09eb5541f6"
+  },
+  {
+   "path": "predictions/validation/E026/W1c.parquet",
+   "fold": "W1c",
+   "rows": 143732,
+   "size": 1223103,
+   "sha256": "f158a7d7cf87ef691f28e92255b5b09c274d40cbd30331d01f742d996c278c5d"
+  },
+  {
+   "path": "predictions/validation/E026/H.parquet",
+   "fold": "H",
+   "rows": 165677,
+   "size": 1409441,
+   "sha256": "0324fbd06539e1cef1cdc77bae57d5486439ad96fb311e7b0bb872601c9e9aab"
+  }
+ ],
+ "format": "parquet [MVT_ID_mvt, pred]",
+ "code_commit": "3b38a9073525381eb76be77b24b46132971ecd5e",
+ "silver_sha256": "efde426225040cd657e2a8c1be7576c6dd03cb2729fea5b303b6c4b9e9ec9c60",
+ "reproduce": "uv run python scripts/run_experiment.py E026  (a reproduction needs a fresh E### from scripts/gate.py)"
+}

@@ -320,3 +320,15 @@ The chain runs sequentially: H009, then H010, then H012, then H011.
   - the ledger decisions are filled;
   - the delegated-work list and process notes are completed.
 - **INC-0005 closed; INC-0004 open.** Days 1–4 (the cloud scope) are complete. Day 5 starts on the laptop from `docs/reproducibility/HANDOFF_D04.md`.
+
+## Day 5 (owner laptop)
+
+### E025 · H015 v2 reproduction · RESOURCE_FAILURE
+
+- Killed by a global OOM in the WSL VM after R1 (446.40, equal to E019), caused by a concurrent researcher `pytest` (INC-0008). Not retried; records reconstructed from the kernel log. An experiment lock now stops memory-heavy side work during runs.
+
+### E026 · H015 v2 reproduction · PASS (laptop compute check)
+
+- All development folds within 0.008 s of E019 (tolerance 1.0 s); 668.7 s, 5.22 GB.
+- **Not byte-identical:** all 8 prediction files differ from E019's hashes. Deterministic LightGBM is bit-stable across Intel CPU strings (Day 3), but not from Intel Xeon to AMD Ryzen (observation).
+- **E019's, E005's and E023's prediction files are absent on the laptop,** so row-level comparisons against them cannot run. Ruling needed (first Day 5 exchange).
