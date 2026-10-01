@@ -1,9 +1,9 @@
 # Research State
 
-*Updated 2026-10-01T01:09:20Z (measured with `date -u` at writing; D04-S02, Day 4 in progress).*
+*Updated 2026-10-01T01:30:08Z (measured with `date -u` at writing; D04-S02, Day 4 in progress).*
 
-- **Phase:** **Day 4 IN PROGRESS** (historical priors and interactions), session D04-S01 on branch `day-4`. Splits, metric and availability definition are **FROZEN** (`config/frozen.json`).
-- **Last session:** D03-S01 (closed). **Current:** D04-S02, started 2026-10-01T00:50:29Z after a container restart. D04-S01 (16:06:53Z) ended at that reset. **Last completed exchange:** X-D04-S01-0002 (H018 v2 ACCEPT 0.86, H019 v2 ACCEPT 0.80). Earlier: X-D04-S01-0001 (H018 v1 and H019 v1 REVISE; **H020 v1 REJECT**, and no CatBoost in Day 4, which is handed to Day 5). **Pending:** none. **E023 (H018 v2): D3-C2 treated, not promoted.** Clauses 1–3 are not met (> 3 h band 5 against a limit of 50; treated-subgroup bulk −105 to −230 s). Criterion 2 fails against E019 (S1 TIE, carried by LIRF NM-present row 192622644). E019 remains champion and is the comparator for H019 v2. Next: `gate.py allocate H019 v2` (FS3 on H018's configuration).
+- **Phase:** **Day 4 IN PROGRESS** (historical priors and interactions), session D04-S02 on branch `day-4`. Splits, metric and availability definition are **FROZEN** (`config/frozen.json`).
+- **Last session:** D03-S01 (closed). **Current:** D04-S02, started 2026-10-01T00:50:29Z after a container restart. D04-S01 (16:06:53Z) ended at that reset. **Last completed exchange:** X-D04-S01-0002 (H018 v2 ACCEPT 0.86, H019 v2 ACCEPT 0.80). Earlier: X-D04-S01-0001 (H018 v1 and H019 v1 REVISE; **H020 v1 REJECT**, and no CatBoost in Day 4, which is handed to Day 5). **Pending:** none. **E023 (H018 v2): D3-C2 treated, not promoted.** Clauses 1–3 are not met (> 3 h band 5 against a limit of 50; treated-subgroup bulk −105 to −230 s). Criterion 2 fails against E019 (S1 TIE, carried by LIRF NM-present row 192622644). **E024 (H019 v2): mechanism FALSIFIED, not promoted.** The prior block adds −0.29 s on `NM_present_excl_LIRF` against E023 (S1 TIE, W1 LOSS; floor −3.0 s), and −0.40 s on all rows. Against E019, S1 is TIE (+0.72). E019 remains champion. Next: the Day 4 phase close (no promotion proposed; holdout to close unused), then `HANDOFF_D04.md`.
 - **Open incidents:** INC-0004 (launch `--effort medium` against metadata `high`) and INC-0005 (delegation), both open and non-blocking.
 - **Corrections so far:** D4-C1 (unmeasured v1 `created_utc`) and D4-C2 to D4-C6 (acks v2).
 - **Delegation (INC-0005, open):** by owner instruction, `claude-sonnet-5-5` worker subagents carry out verification, digests, implementation to specification and experiment launches. Proposals, acks, allocations and interpretation stay with the main session. The Advisor is unchanged.
@@ -77,7 +77,7 @@
   - Every fold except W1c trains on more than 200,000 rows, the LightGBM bin-sample threshold.
 - **Open incidents:** **INC-0004** (launch arguments against session metadata). From about 05:35Z on 30 September, after the second container restart, the process carries `--model claude-opus-5-5 --effort medium` (D3-C5); the metadata says `high`. Open, non-blocking, owner to decide. INC-0003 closed.
 - **Open blockers:** none.
-- **Next action:** the chain under X-D04-S01-0002, with the tools frozen from `d1cc43b` until its last comparison.
+- **Next action:** the Day 4 phase close (DAY_SUMMARY, phase-close envelope, Advisor review), then `docs/reproducibility/HANDOFF_D04.md`. The X-D04-S01-0002 chain is complete; the tools freeze from `d1cc43b` ends.
   1. `gate.py allocate H018 v2`: run, then the comparisons, checkpoint, and H018's promotion status recorded in the journal.
   2. `gate.py allocate H019 v2` (FS3).
   3. Then the Day 4 phase close and `HANDOFF_D04.md`.

@@ -285,3 +285,17 @@ The chain runs sequentially: H009, then H010, then H012, then H011.
 - **Promotion against E019: criterion 2 FAILS** (S1 TIE, +0.20 s). The mean is −2.04 s (q95 −1.31), with 5 WIN and 2 TIE. S1's change is carried by `NM_present_LIRF` (share +3.84; row 192622644).
 - **H018 promotion status (H018 review item 7): NOT PROMOTED.** Recorded as "D3-C2 treated, not promoted", with the clause 1–2 outcomes above. No reproduction is due. **E019 remains the champion in force for H019 v2.**
 - Reported: against E005, −40.27 s, 7/7 WIN.
+
+### E024 · H019 v2 routed LightGBM on FS3 (FS2 + 5 fold-local LOMO priors), matched reference E023 · COMPLETE
+
+- **Development mean 442.06** (E023 442.46; E019 444.49). 1,026.9 s, 5.73 GB. No container restart since E023. Launched by the main session (INC-0005).
+- **W1c byte-identical to E023** (SHA-256 `37857400ac9d…`): the block is inert on a single training month, as pre-registered.
+- **Clause 1 MET** (`NM_present_excl_LIRF` against E023): mean **−0.29 s** (q95 +0.12); R1, R2, R3 WIN, **S1 TIE, W1 LOSS** (+1.63). 1(a) is met (criterion 1 fails, S1 not a counted WIN, W1 LOSS), and 1(b) is met (−0.29 > −3.0). 4-fold mean (R1–R3, S1) −0.77 s.
+- **Clause 2 not met:** all rows against E023, −0.40 s (q95 −0.03). LFPG +0.35 s (named in advance); no airport degraded.
+- **H019 v2 mechanism: FALSIFIED.** The EDA's stand × runway R² (+0.189) does not carry beyond FS2 in this learner.
+- **Promotion against E019: criterion 2 FAILS** (S1 TIE, +0.72 s; mean −2.43 s, q95 −1.59). Criterion 4 also blocks it (B2). S1's `NM_present_LIRF` share is 1.95, with row 192622644 moved further from its target (8,136 → 5,780 s against y 87,002 s). **NOT PROMOTED; no reproduction is due.**
+- **Attribution pair** (development mean, all rows): H018 − E019 −2.04 s; H019 − H018 −0.40 s.
+- `NM_present_LIRF` against E023: full −2.80 to +6.12 (within ±8), bulk −1.27 to −3.41 (within −1 to −6) on every development fold.
+- Route integrity holds (not INVALID). Rule 12: > 3 h band 6 (E023 5).
+- Reported: against E005, −40.67 s (q95 −37.32), 7/7 WIN.
+- **E019 remains champion. Neither Day 4 candidate is promotable.**
