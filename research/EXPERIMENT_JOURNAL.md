@@ -361,3 +361,13 @@ The chain runs sequentially: H009, then H010, then H012, then H011.
   - E029's manifest names the wrong commit;
   - the H021 calibration table misattributed a row.
 - **Verified by the Advisor:** E027 and E029 reproduce the cloud E023-vs-E019 comparison to 1e-4 s, and `FloatTargetMeanValue` averages the raw target.
+
+### X-D05-S04-0002 / -0003 · LAPTOP_REFS v2 ACCEPT; H021–H023 v3 ACCEPT
+
+- Rule L v2 adopted (E026/E029/E028 instances, E029's routed rows the integrity reference, environment bound). Cause of the laptop differences: polars' thread pool (16 against the cloud's 4) changes the ridge's statistics in the last bits.
+- Chain authorized: H022, then H021 (CLASS-L), then H021r, then H023, then H023r if due. Freeze anchor `803ceeb`.
+
+### E030 · H022 v3 (CatBoost GPU, codes control) · COMPLETE
+
+- Development mean 446.50 s; against E029 +4.05 s (S1 TIE). Route integrity holds (bit-identical routed rows). 225 s, 6.40 GB, no swap, GPU about 2.9 GB.
+- Out-of-range on `NM_missing_other` falls from 99 (E029) to 34; the < 1 h band falls from 82 to 25.
