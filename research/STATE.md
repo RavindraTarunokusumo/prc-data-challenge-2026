@@ -1,9 +1,9 @@
 # Research State
 
-*Updated 2026-09-30T17:48:59Z (measured with `date -u` at writing; D04-S01, Day 4 in progress).*
+*Updated 2026-10-01T00:50:29Z (measured with `date -u` at writing; D04-S02, Day 4 in progress).*
 
 - **Phase:** **Day 4 IN PROGRESS** (historical priors and interactions), session D04-S01 on branch `day-4`. Splits, metric and availability definition are **FROZEN** (`config/frozen.json`).
-- **Last session:** D03-S01 (closed). **Current:** D04-S01, started 2026-09-30T16:06:53Z after a container restart. **Last completed exchange:** X-D04-S01-0002 (H018 v2 ACCEPT 0.86, H019 v2 ACCEPT 0.80). Earlier: X-D04-S01-0001 (H018 v1 and H019 v1 REVISE; **H020 v1 REJECT**, and no CatBoost in Day 4, which is handed to Day 5). **Pending:** none.
+- **Last session:** D03-S01 (closed). **Current:** D04-S02, started 2026-10-01T00:50:29Z after a container restart. D04-S01 (16:06:53Z) ended at that reset. **Last completed exchange:** X-D04-S01-0002 (H018 v2 ACCEPT 0.86, H019 v2 ACCEPT 0.80). Earlier: X-D04-S01-0001 (H018 v1 and H019 v1 REVISE; **H020 v1 REJECT**, and no CatBoost in Day 4, which is handed to Day 5). **Pending:** E023 (H018 v2 primary), allocated 17:49:07Z in D04-S01 and run in D04-S02.
 - **Open incidents:** INC-0004 (launch `--effort medium` against metadata `high`) and INC-0005 (delegation), both open and non-blocking.
 - **Corrections so far:** D4-C1 (unmeasured v1 `created_utc`) and D4-C2 to D4-C6 (acks v2).
 - **Delegation (INC-0005, open):** by owner instruction, `claude-sonnet-5-5` worker subagents carry out verification, digests, implementation to specification and experiment launches. Proposals, acks, allocations and interpretation stay with the main session. The Advisor is unchanged.
