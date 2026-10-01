@@ -1,6 +1,6 @@
 # Research State
 
-## Day 5 in progress (owner laptop; updated 2026-10-01T18:56Z, D05-S04)
+## Day 5 in progress (owner laptop; updated 2026-10-01T20:41Z, D05-S04)
 
 - **Sessions:** D05-S01 to D05-S04, on branch `day-5`. Laptop: WSL2 11 GB, swap 0, RTX 5060 8 GB. INC-0007 is closed. Delegation is allowed under INC-0006 (open).
 - **E025** (H015 v2 reproduction): RESOURCE_FAILURE, a global OOM from a concurrent researcher pytest (INC-0008, closed; experiment lock added).
@@ -12,7 +12,20 @@
   - W&B mirror (INC-0009) with learning curves (E027 on). The owner's early-stopping suggestion was logged, not adopted (D05-S04 session record).
   - Laptop instances: **E027** (E019, curves), **E028** (E005), **E029** (E023). All pass `reproduce_check`; none is byte-identical.
 - **X-D05-S04-0001: REVISE ×4** (LAPTOP_REFS, H021, H022, H023). Corrections D5-C1 to D5-C7 are in `research/day-05/acks/`. **The "swap 0" statements above are wrong** (D5-C1: 4 GiB swap since 16:33Z, unused). **The interpreter is CPython 3.13.15, not 3.11** (D5-C2). Owner decisions: keep both (INC-0010, open).
-- **Next:** target-free checks (the laptop ridge-path difference; the exact H021/H022 calibration) and tooling (resolved CatBoost parameters, GPU-failure recording, the worker's start commit), then v2 of the batch. Next experiment id: E030.
+- **X-D05-S04-0002:** LAPTOP_REFS v2 **ACCEPT** (0.88); H021–H023 v2 REVISE.
+  - **Rule L v2 adopted:**
+    - E026 is E019's instance and E029 is E023's;
+    - E028 is E005's instance in a reduced role;
+    - E027 is cited for curves only;
+    - E029's routed rows are the route-integrity reference.
+  - **Ratified:** E027, E028, E029.
+  - **Cause of the laptop differences:** polars' thread pool (16 here, 4 on the cloud) changes the ridge's fitted statistics in the last bits. `sparse_cg` amplifies that on routed rows.
+  - The environment is bound to CPython 3.13.15, lock `efa4fd78…` and the default polars threads.
+- **X-D05-S04-0003: H021 v3, H022 v3, H023 v3 ACCEPT** (0.88, 0.90, 0.88).
+  - Tools-freeze anchor `803ceeb`.
+  - Chain: H022 (CLASS-M), then H021 (CLASS-L, GPU), then H021r (unconditional), then H023 (blend, gated on status only), then H023r if due.
+  - Advisor forecast: H023 promotion P 0.04.
+- **Next experiment id: E030** (H022 v3).
 
 *The Day 4 close state below is unchanged.*
 
