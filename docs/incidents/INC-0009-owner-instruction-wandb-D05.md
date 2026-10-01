@@ -36,3 +36,19 @@ status: open
 ## Resolution
 
 Stays open while the mirror is in use, and is reviewed at the Day 5 phase close.
+
+## Addendum (2026-10-01T17:58Z): learning curves (owner request)
+
+> I want the remaining model training, particularly the final champions, to show a clear learning curve of RMSE against steps of the training and eval phase.
+
+- `src/prc/curves.py` and the worker now record, for LightGBM, XGBoost and CatBoost:
+  - **training RMSE per iteration:** the learner's own training loss on its training rows;
+  - **validation RMSE every 10 iterations:** staged predictions of the *finished* model, scored after training through `prc.evaluate.truth_frame`.
+
+  The results go to `experiments/E###/curves.json` and the W&B history (x-axis `iteration`).
+- **Integrity:**
+  - nothing feeds back into training (no validation set inside the learner, no early stopping, no parameter change);
+  - predictions are bit-identical with recording on or off (`tests/test_models.py`), and the last stage must equal the evaluator's RMSE;
+  - **the holdout gets no validation curve** (`truth_frame` refuses H as well).
+- **Selection hazard, stated:** a validation curve invites picking `num_boost_round` at its minimum. That would be validation-guided tuning, and any proposal using it must say so and pre-register it.
+- Experiments before E027 have no curves: their per-iteration values were never recorded.

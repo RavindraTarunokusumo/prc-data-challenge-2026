@@ -2,7 +2,8 @@
 
 The repository stays the source of truth. A W&B run is a read-only mirror of one
 experiment's committed records: gate metadata, config, fold metrics (development and
-diagnostic folds as in metrics.json; never holdout comparisons) and resource usage. No
+diagnostic folds as in metrics.json; never holdout comparisons), resource usage, and the
+learning curves in curves.json when the experiment recorded them (Day 5 on). No
 predictions, targets or data rows leave the machine.
 
 One run per experiment, with run id == experiment id, so a re-sync updates the same run.
@@ -89,7 +90,36 @@ def payload(eid: str) -> dict:
     return {"id": eid, "name": eid, "group": f"{hyp} v{ver}" if hyp else None,
             "job_type": rec.get("purpose"), "tags": tags, "config": config,
             "summary": {k: v for k, v in summary.items() if v is not None},
-            "segments": rows, "notes": rec.get("notes")}
+            "segments": rows, "notes": rec.get("notes"),
+            "history": curve_history(_read(eid, "curves.json"))}
+
+
+DEV_FOLDS = ("R1", "R2", "R3", "S1", "W1")
+
+
+def curve_history(curves: dict | None) -> list[dict]:
+    """Rows for W&B history, one per staged iteration (curves.json). Keys per fold:
+    `train_rmse/<fold>` and `eval_rmse/<fold>`, plus `eval_rmse/dev_mean` over the five
+    development folds. The x-axis is `iteration`."""
+    if not curves:
+        return []
+    folds = curves["folds"]
+    grids = {tuple(c["iterations"]) for c in folds.values()}
+    iters = sorted({i for g in grids for i in g})
+    rows = []
+    for it in iters:
+        row = {"iteration": it}
+        for fold, c in folds.items():
+            if it in c["iterations"]:
+                k = c["iterations"].index(it)
+                row[f"train_rmse/{fold}"] = c["train_rmse"][it - 1]
+                if "eval_rmse" in c:
+                    row[f"eval_rmse/{fold}"] = c["eval_rmse"][k]
+        dev = [row.get(f"eval_rmse/{f}") for f in DEV_FOLDS]
+        if all(v is not None for v in dev):
+            row["eval_rmse/dev_mean"] = sum(dev) / len(dev)
+        rows.append(row)
+    return rows
 
 
 def sync(eid: str) -> str | None:
@@ -106,6 +136,12 @@ def sync(eid: str) -> str | None:
                      job_type=p["job_type"], tags=p["tags"], config=p["config"],
                      notes=p["notes"], resume="allow", dir=str(RUNTIME), settings=settings)
     try:
+        if p["history"]:
+            run.define_metric("iteration")
+            run.define_metric("train_rmse/*", step_metric="iteration", summary="min")
+            run.define_metric("eval_rmse/*", step_metric="iteration", summary="min")
+            for i, row in enumerate(p["history"]):
+                run.log(row, step=i)  # a re-sync's lower steps are ignored by W&B
         run.summary.update(p["summary"])
         if p["segments"]:
             run.log({"segments": wandb.Table(

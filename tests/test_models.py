@@ -234,3 +234,32 @@ def test_routed_catboost_train_exclude():
     va = feats.filter(pl.col("role") == "val").sort("MVT_ID_mvt")
     route = ((va["ADEP_mvt"] == "LIRF") & (va["flt_missing"] == 1)).to_numpy()
     assert np.array_equal(out["pred"].to_numpy()[~route], cb["pred"].to_numpy()[~route])
+
+
+@pytest.mark.parametrize("name", ["lightgbm", "xgboost", "catboost", "routed_lightgbm",
+                                  "routed_catboost"])
+def test_learning_curve_recording_leaves_predictions_unchanged(name):
+    """Day 5: recording a learning curve must not change the model. The last staged
+    prediction equals the returned prediction, and routed rows hold their ridge value."""
+    from prc import curves
+
+    feats = synthetic(n=2000, seed=5)
+    p = dict(PARAMS[name])
+    rounds_key = "iterations" if "catboost" in name else "num_boost_round"
+    p[rounds_key] = 25
+    off = REGISTRY[name](feats, p, 42)["pred"].to_numpy()
+    curves.start()
+    on = REGISTRY[name](feats, p, 42)
+    c = curves.take()
+    assert np.array_equal(off, on["pred"].to_numpy())
+    assert c["iterations"] == [1, 10, 20, 25] and len(c["train_rmse"]) == 25
+    assert c["train_rmse"][-1] < c["train_rmse"][0]
+    pos = {int(m): i for i, m in enumerate(c["ids"])}
+    last = c["staged"][[pos[int(m)] for m in on["MVT_ID_mvt"]], -1]
+    np.testing.assert_allclose(last, on["pred"].to_numpy(), rtol=1e-9, atol=1e-6)
+    if name.startswith("routed"):
+        va = feats.filter(pl.col("role") == "val")
+        route = ((va["ADEP_mvt"] == "LIRF") & (va["flt_missing"] == 1)).to_numpy()
+        rows = [pos[int(m)] for m in va["MVT_ID_mvt"].to_numpy()[route]]
+        assert np.all(c["staged"][rows, 0] == c["staged"][rows, -1])
+    assert curves.take() is None and not curves.active()

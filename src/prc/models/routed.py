@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import polars as pl
 
+from prc import curves
 from prc.features import FS0
 from prc.models import gbm, linear
 
@@ -38,6 +39,9 @@ def _routed(tier1_fn, feats: pl.DataFrame, params: dict, seed: int) -> pl.DataFr
     fs0_frame = feats.select("MVT_ID_mvt", "role", "month", "y", *FS0)
     champ = linear.ridge(fs0_frame, ridge_params, seed).rename({"pred": "pred_route"})
     va = feats.filter(pl.col("role") == "val").select("MVT_ID_mvt", route_mask().alias("route"))
+    if curves.active():  # routed rows take the ridge prediction at every stage
+        routed = va.filter(pl.col("route")).join(champ, on="MVT_ID_mvt", how="left")
+        curves.override(routed["MVT_ID_mvt"].to_numpy(), routed["pred_route"].to_numpy())
     return (va.join(tier1, on="MVT_ID_mvt", how="left", validate="1:1")
             .join(champ, on="MVT_ID_mvt", how="left", validate="1:1")
             .select("MVT_ID_mvt", pl.when(pl.col("route")).then(pl.col("pred_route"))

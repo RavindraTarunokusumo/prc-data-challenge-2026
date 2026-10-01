@@ -93,3 +93,16 @@ def test_tracking_payload_from_records_only(monkeypatch):
     assert p["summary"]["mean_rmse_dev"] > 0 and "rmse/R1" in p["summary"]
     assert not any(k.startswith("rmse/H") for k in p["summary"])  # no holdout figures
     assert tracking.sync("E019") is None  # disabled: no network
+
+
+def test_curve_history_rows():
+    from prc.tracking import curve_history
+
+    c = {"folds": {f: {"iterations": [1, 10], "train_rmse": [9.0] * 10,
+                       "eval_rmse": [5.0, 4.0]} for f in ("R1", "R2", "R3", "S1", "W1")}}
+    c["folds"]["H"] = {"iterations": [1, 10], "train_rmse": [8.0] * 10}  # no eval for H
+    rows = curve_history(c)
+    assert [r["iteration"] for r in rows] == [1, 10]
+    assert rows[1]["eval_rmse/dev_mean"] == 4.0 and rows[1]["train_rmse/H"] == 8.0
+    assert "eval_rmse/H" not in rows[1]
+    assert curve_history(None) == []
