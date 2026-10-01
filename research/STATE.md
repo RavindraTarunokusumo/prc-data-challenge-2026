@@ -1,6 +1,6 @@
 # Research State
 
-## Day 5 in progress (owner laptop; updated 2026-10-01T21:45Z, D05-S04)
+## Day 5 in progress (owner laptop; updated 2026-10-01T21:12Z, D05-S04)
 
 - **Sessions:** D05-S01 to D05-S04, on branch `day-5`. Laptop: WSL2 11 GB, swap 0, RTX 5060 8 GB. INC-0007 is closed. Delegation is allowed under INC-0006 (open).
 - **E025** (H015 v2 reproduction): RESOURCE_FAILURE, a global OOM from a concurrent researcher pytest (INC-0008, closed; experiment lock added).
