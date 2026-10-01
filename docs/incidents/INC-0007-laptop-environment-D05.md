@@ -38,3 +38,8 @@ status: open
 ## Resolution required
 
 Closes when D05-S02 confirms WSL memory ≥ 11 GB with swap 0, the raw data matches `raw_manifest.json`, and the silver hash matches `config/splits.yaml`.
+
+## Update (D05-S02, 2026-10-01T16:15Z, appended)
+
+- The restart after D05-S01 came up unchanged (7.4 GiB, 2 GiB swap): `C:\Users\rvind\.wslconfig` had not been created. With the owner's permission the researcher wrote it (`[wsl2]`, `memory=11GB`, `swap=0`) at 16:12Z. It takes effect at the next `wsl --shutdown`.
+- Credentials: `.env` provided by the owner. Data: re-downloaded and verified, and the silver rebuild is byte-identical (`research/day-05/sessions/D05-S02/DATA_VERIFICATION.md`). Two of the three closing conditions are met. **Memory ≥ 11 GB with swap 0 is still open.**
