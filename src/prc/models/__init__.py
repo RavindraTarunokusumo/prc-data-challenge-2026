@@ -5,7 +5,7 @@ returning [MVT_ID_mvt, pred] for the validation rows (role == 'val') of `feats`.
 view: training rows carry the target in `y`, validation rows have `y` null.
 """
 
-from prc.models import baselines, blend, gbm, linear, routed
+from prc.models import baselines, gbm, linear, routed
 
 REGISTRY = {
     "global_mean": baselines.global_mean,
@@ -18,5 +18,4 @@ REGISTRY = {
     "routed_lightgbm": routed.routed_lightgbm,
     "catboost": gbm.catboost,
     "routed_catboost": routed.routed_catboost,
-    "blend": blend.blend,
 }

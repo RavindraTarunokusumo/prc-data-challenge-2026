@@ -111,6 +111,8 @@ def catboost(feats: pl.DataFrame, params: dict, seed: int) -> pl.DataFrame:
     model.fit(Pool(prep(x_tr), label=tr["y"].to_numpy(), cat_features=cat_features))
     pool_va = Pool(prep(x_va), cat_features=cat_features)
     pred = model.predict(pool_va)
+    curves.note_params({"cat_mode": mode, "n_cat_features": len(cat_features),
+                        **model.get_all_params()})
     if curves.active():  # CatBoost records the learn RMSE per iteration by default
         n = model.tree_count_
         iters = curves.grid(n)  # 1, then staged_predict's STEP multiples and the last tree

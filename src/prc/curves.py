@@ -41,6 +41,13 @@ def record(learner: str, train_rmse, ids, iterations: list[int], staged: np.ndar
                       ids=np.asarray(ids), iterations=list(iterations), staged=staged)
 
 
+def note_params(params: dict) -> None:
+    """Record the learner's resolved parameters for this fold (written by the worker to
+    resolved_params.json)."""
+    if active():
+        _state["resolved_params"] = params
+
+
 def override(ids, values) -> None:
     """Hold rows (e.g. routed rows) at a fixed prediction across every stage."""
     if active() and "staged" in _state:

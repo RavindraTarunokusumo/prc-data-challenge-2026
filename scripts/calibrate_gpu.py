@@ -42,6 +42,14 @@ XGB = {"objective": "reg:squarederror", "eta": 0.05, "grow_policy": "lossguide",
        "device": "cuda", "nthread": 4}
 CB = {"loss_function": "RMSE", "learning_rate": 0.05, "depth": 8, "border_count": 254,
       "task_type": "GPU", "devices": "0", "thread_count": 4}
+H021 = {"loss_function": "RMSE", "task_type": "GPU", "devices": "0", "depth": 8,
+        "learning_rate": 0.08, "border_count": 254, "l2_leaf_reg": 3,
+        "boosting_type": "Plain",
+        "simple_ctr": ["Borders", "FeatureFreq", "FloatTargetMeanValue"],
+        "combinations_ctr": ["Borders", "FeatureFreq", "FloatTargetMeanValue"],
+        "max_ctr_complexity": 4, "gpu_ram_part": 0.4, "thread_count": 4,
+        "route_ridge_params": {"alpha": 1.0, "winsor": [0.005, 0.995]},
+        "route_train_exclude": True}
 # name: (model, feature set, extra params, iterations)
 CONFIGS = {
     "lgb_cpu_fs2": ("lightgbm", "FS2", {}, 200),
@@ -57,6 +65,11 @@ CONFIGS = {
         "simple_ctr": ["Borders", "FeatureFreq", "FloatTargetMeanValue"],
         "combinations_ctr": ["Borders", "FeatureFreq", "FloatTargetMeanValue"]}, 500),
     "cb_gpu_raw_cap": ("catboost", "FS2_RAW", {"gpu_ram_part": 0.4}, 500),
+    # Day 5 v2: H021's and H022's exact configurations through the worker's code path
+    # (routed_catboost on the unfiltered frame, route_train_exclude), so RSS includes the
+    # filtered copy, the string conversion and the ridge
+    "h021_exact": ("routed_catboost", "FS2_RAW", {**H021, "cat_mode": "ctr"}, 1000),
+    "h022_exact": ("routed_catboost", "FS2_RAW", {**H021, "cat_mode": "codes"}, 1000),
 }
 CB_KEYS = ["boosting_type", "grow_policy", "simple_ctr", "combinations_ctr",
            "max_ctr_complexity", "one_hot_max_size", "bootstrap_type", "subsample",
@@ -64,7 +77,7 @@ CB_KEYS = ["boosting_type", "grow_policy", "simple_ctr", "combinations_ctr",
            "gpu_ram_part"]
 
 
-def build_frame(fs: str):
+def build_frame(fs: str, drop_routed: bool = True):
     import numpy as np
     import polars as pl
 
@@ -78,6 +91,8 @@ def build_frame(fs: str):
     y = feats["y"].to_numpy().astype("float64")
     y[tr_mask] = np.random.default_rng(0).permutation(y[tr_mask])
     feats = feats.with_columns(pl.Series("y", y, dtype=pl.Float64).fill_nan(None))
+    if not drop_routed:  # the routed model drops them itself (route_train_exclude)
+        return feats
     return feats.filter(~((pl.col("role") == "train") & route_mask()))
 
 
@@ -106,6 +121,11 @@ def fit_predict(model: str, feats, params: dict, iters: int):
 
     from prc.models import gbm
 
+    if model == "routed_catboost":
+        from prc.models import routed
+
+        p = {**params, "iterations": iters}
+        return routed.routed_catboost(feats, p, 42)["pred"], None
     if model == "lightgbm":
         return gbm.lightgbm(feats, {**LGB, **params, "num_boost_round": iters}, 42)["pred"], None
     if model == "xgboost":
@@ -141,7 +161,7 @@ def child(name: str) -> dict:
     from prc.features import columns
 
     model, fs, params, iters = CONFIGS[name]
-    feats = build_frame(fs)
+    feats = build_frame(fs, drop_routed=model != "routed_catboost")
     tr = feats.filter(pl.col("role") == "train")
     cats, nums = columns(feats)
     out = {"name": name, "model": model, "feature_set": fs, "params": params,

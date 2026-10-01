@@ -1,0 +1,61 @@
+schema: advisor-task-envelope-v1
+exchange_id: X-D05-S04-0002
+session: D05-S04
+sender: claude-researcher
+recipient: advisor-subagent
+purpose: proposal_review
+proposal_ids: [LAPTOP_REFS, H021, H022, H023]
+proposal_paths:
+  - research/day-05/proposals/LAPTOP_REFS_v2.md
+  - research/day-05/proposals/H021_v2.md
+  - research/day-05/proposals/H022_v2.md
+  - research/day-05/proposals/H023_v2.md
+proposal_sha256:
+  - 4a4a03d75eeb6a5318003a9bb5d80ebbf5b34dda0df30b87af6bed61d95312da
+  - c97b36b34eeda65400d861381722f0a339d8edd5e1114f88cfddbeeb57d7acde
+  - 363b736693175f9224ea5cd2d5fcd6d4806a40522c2a8a7b05eabd1bbeafb920
+  - 05b13cfb32db777fa20fbf4706b3367a158b8604b207005a5f4d978730226a7c
+review_output_dir: research/day-05/advisor/
+context_paths:
+  - research/day-05/advisor/LAPTOP_REFS_review_v1.md
+  - research/day-05/advisor/H021_review_v1.md
+  - research/day-05/advisor/H022_review_v1.md
+  - research/day-05/advisor/H023_review_v1.md
+  - research/day-05/acks/
+  - research/day-05/proposals/LAPTOP_REFS_v1.md
+  - research/day-05/proposals/H021_v1.md
+  - research/day-05/proposals/H022_v1.md
+  - research/day-05/proposals/H023_v1.md
+  - orchestration/advisor-exchanges/X-D05-S04-0001/response.md
+  - docs/incidents/INC-0010-swap-and-interpreter-D05.md
+  - research/day-05/eda/ridge_paths.json
+  - research/day-05/eda/ridge_paths_polars4.json
+  - scripts/diag_ridge_paths.py
+  - research/day-05/eda/gpu_calibration.json
+  - scripts/calibrate_gpu.py
+  - src/prc/blending.py
+  - src/prc/worker.py
+  - src/prc/curves.py
+  - src/prc/models/gbm.py
+  - src/prc/models/routed.py
+  - src/prc/models/linear.py
+  - scripts/run_experiment.py
+  - scripts/route_check.py
+  - tests/test_isolation.py
+  - tests/test_worker.py
+  - tests/test_models.py
+  - experiments/E026/analysis.md
+  - experiments/E028/analysis.md
+  - experiments/E029/analysis.md
+  - research/STATE.md
+  - research/day-05/sessions/D05-S04/SESSION_START.md
+  - config/splits.yaml
+constraints:
+  - Batched review of the v2 revisions. Review files are LAPTOP_REFS_review_v2.md, H021_review_v2.md, H022_review_v2.md and H023_review_v2.md, each with its own decision section.
+  - Check each required revision of the v1 reviews against v2; the v1 'acceptable as is' items are unchanged.
+  - Owner decisions in INC-0010 (keep 4 GB swap, keep CPython 3.13) are given; the environment is bound by LAPTOP_REFS v2 item 6.
+  - H021 v2 requests CLASS-L on runtime grounds (measured 29-34 min); please rule on the justification.
+  - Chain order if accepted is H022, then H021, then H021's seed-43 reproduction (unconditional), then H023 (gated on status only), then H023's reproduction if due.
+  - Standing rules 1-12, batch conditions B1-B4, rulings H, B, R, H3, H4 and the hand-off base ruling X-D04-S02-0001 (e) apply. Missing Controls 1 and 3 of X-D04-S02-0001 apply.
+  - Read-only checks only. Do not read December 2025 DEP targets; do not run holdout_check.py. Do not fit or score any model on real folds. Comparing existing prediction files (E026-E029), target-free checks, permuted-target fits computing no metric and synthetic tests are fine. Check the experiment lock first, and keep memory use light (11 GB VM shared with the owner's desktop; INC-0008).
+created_utc: 2026-10-01T19:55:37Z

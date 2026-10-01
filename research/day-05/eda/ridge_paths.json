@@ -1,0 +1,115 @@
+{
+ "note": "permuted-target ridge fits on each code path; no metric computed",
+ "folds": {
+  "R3": {
+   "fs0": {
+    "x": {
+     "data": "d37c1bc261bf669e",
+     "indices": "959892c9638cac39",
+     "indptr": "68a8e16a52eb1e57",
+     "shape": [
+      1757038,
+      111
+     ],
+     "dtype": "float64"
+    },
+    "y": "72beda02239fd63a",
+    "frame_equals_fs0": true,
+    "max_abs_vs_fs0_all": 0.0,
+    "max_abs_vs_fs0_routed": 0.0,
+    "routed_rows": 52,
+    "bit_equal_fs0": true
+   },
+   "fs2": {
+    "x": {
+     "data": "61e5db11b889b80a",
+     "indices": "959892c9638cac39",
+     "indptr": "68a8e16a52eb1e57",
+     "shape": [
+      1757038,
+      111
+     ],
+     "dtype": "float64"
+    },
+    "y": "72beda02239fd63a",
+    "frame_equals_fs0": true,
+    "max_abs_vs_fs0_all": 0.021654309487757928,
+    "max_abs_vs_fs0_routed": 0.0005669380818744685,
+    "routed_rows": 52,
+    "bit_equal_fs0": false
+   },
+   "fs2_raw": {
+    "x": {
+     "data": "61e5db11b889b80a",
+     "indices": "959892c9638cac39",
+     "indptr": "68a8e16a52eb1e57",
+     "shape": [
+      1757038,
+      111
+     ],
+     "dtype": "float64"
+    },
+    "y": "72beda02239fd63a",
+    "frame_equals_fs0": true,
+    "max_abs_vs_fs0_all": 0.021654309487757928,
+    "max_abs_vs_fs0_routed": 0.0005669380818744685,
+    "routed_rows": 52,
+    "bit_equal_fs0": false
+   },
+   "fs0_again": {
+    "x": {
+     "data": "d37c1bc261bf669e",
+     "indices": "959892c9638cac39",
+     "indptr": "68a8e16a52eb1e57",
+     "shape": [
+      1757038,
+      111
+     ],
+     "dtype": "float64"
+    },
+    "y": "72beda02239fd63a",
+    "frame_equals_fs0": true,
+    "max_abs_vs_fs0_all": 0.0,
+    "max_abs_vs_fs0_routed": 0.0,
+    "routed_rows": 52,
+    "bit_equal_fs0": true
+   },
+   "fs2_after_lgb": {
+    "x": {
+     "data": "61e5db11b889b80a",
+     "indices": "959892c9638cac39",
+     "indptr": "68a8e16a52eb1e57",
+     "shape": [
+      1757038,
+      111
+     ],
+     "dtype": "float64"
+    },
+    "y": "72beda02239fd63a",
+    "frame_equals_fs0": true,
+    "max_abs_vs_fs0_all": 0.021654309487757928,
+    "max_abs_vs_fs0_routed": 0.0005669380818744685,
+    "routed_rows": 52,
+    "bit_equal_fs0": false
+   },
+   "fs0_after_lgb": {
+    "x": {
+     "data": "d37c1bc261bf669e",
+     "indices": "959892c9638cac39",
+     "indptr": "68a8e16a52eb1e57",
+     "shape": [
+      1757038,
+      111
+     ],
+     "dtype": "float64"
+    },
+    "y": "72beda02239fd63a",
+    "frame_equals_fs0": true,
+    "max_abs_vs_fs0_all": 0.0,
+    "max_abs_vs_fs0_routed": 0.0,
+    "routed_rows": 52,
+    "bit_equal_fs0": true
+   }
+  }
+ }
+}

@@ -15,6 +15,7 @@ import datetime as dt
 import importlib.util
 import json
 import os
+import re
 import subprocess
 import sys
 import time
@@ -75,6 +76,26 @@ def check_config(eid: str, cfg: dict, purpose: str) -> None:
         sys.exit(f"refused: {eid} must cover all scored folds plus H; missing {missing}")
 
 
+GPU_FAILURE = re.compile(r"cuda ?error|out of memory|cudaErrorMemoryAllocation|"
+                         r"CUDA_ERROR|device-side assert|no CUDA-capable device",
+                         re.IGNORECASE)
+
+
+def gpu_failure(log: str) -> bool:
+    """A worker log ending in a GPU memory or device error (CatBoost/XGBoost on CUDA)."""
+    return bool(GPU_FAILURE.search(log[-20000:]))
+
+
+def swap_out_pages() -> int | None:
+    try:
+        for line in Path("/proc/vmstat").read_text().splitlines():
+            if line.startswith("pswpout "):
+                return int(line.split()[1])
+    except OSError:
+        pass
+    return None
+
+
 def gpu_used_mib() -> int | None:
     try:
         out = subprocess.run(["nvidia-smi", "--query-gpu=memory.used",
@@ -123,6 +144,7 @@ def run(eid: str, lock) -> None:
                                  pass_fds=(lock.fileno(),))
         proc = psutil.Process(child.pid)
         gpu0 = gpu_used_mib()
+        swap0 = swap_out_pages()
         gpu_peak, polls = gpu0, 0
         while child.poll() is None:
             peak = max(peak, tree_rss(proc))
@@ -142,6 +164,8 @@ def run(eid: str, lock) -> None:
         status = "COMPLETE" if child.returncode == 0 else "INVALID"
         if child.returncode in (-9, 137):
             status = "RESOURCE_FAILURE"  # killed by the kernel (OOM)
+        elif child.returncode != 0 and gpu_failure((exp / "worker.log").read_text()):
+            status = "RESOURCE_FAILURE"  # GPU memory or device error (Day 5)
 
     usage = {
         "experiment_id": eid,
@@ -157,6 +181,10 @@ def run(eid: str, lock) -> None:
         "cpu_count": psutil.cpu_count(),
         # device-wide GPU memory (nvidia-smi), including other processes; null without a GPU
         "gpu_mib_at_start": gpu0,
+        # pages swapped out machine-wide during the run (INC-0010: swap is on; RSS does
+        # not count swapped pages, so any swap-out is disclosed beside peak_rss_gb)
+        "swap_out_pages_during_run": (swap_out_pages() - swap0) if swap0 is not None
+        else None,
         "gpu_mib_peak": gpu_peak if gpu0 is not None else None,
         "run_commit": commit,
         "git_dirty_at_run": dirty,

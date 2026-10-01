@@ -106,3 +106,63 @@ def test_curve_history_rows():
     assert rows[1]["eval_rmse/dev_mean"] == 4.0 and rows[1]["train_rmse/H"] == 8.0
     assert "eval_rmse/H" not in rows[1]
     assert curve_history(None) == []
+
+
+def test_gpu_failure_is_a_resource_failure():
+    import importlib.util
+    from pathlib import Path
+
+    spec = importlib.util.spec_from_file_location(
+        "run_experiment", Path(__file__).resolve().parents[1] / "scripts" / "run_experiment.py")
+    m = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(m)
+    assert m.gpu_failure("...\n_catboost.CatBoostError: CUDA error 2: out of memory\n")
+    assert m.gpu_failure("xgboost.core.XGBoostError: cudaErrorMemoryAllocation")
+    assert not m.gpu_failure("Traceback ...\nValueError: blend: weights must sum 1\n")
+
+
+def test_blend_fixed_weights_of_stored_components(monkeypatch):
+    """Day 5: the blend is the fixed-weight mean of the components' stored predictions,
+    joined by id; incomplete components and bad weights are refused."""
+    import numpy as np
+    import polars as pl
+    import pytest
+
+    from prc import blending
+
+    ids = np.arange(100, 200, dtype=np.int64)
+    stored = {"E900": pl.DataFrame({"MVT_ID_mvt": ids[::-1], "pred": ids[::-1] * 1.0}),
+              "E901": pl.DataFrame({"MVT_ID_mvt": ids, "pred": np.full(ids.size, 10.0)})}
+    status = {"E900": "COMPLETE", "E901": "COMPLETE", "E902": "RESOURCE_FAILURE"}
+    monkeypatch.setattr(blending.ledger, "get", lambda eid: {"status": status[eid]})
+    load = lambda eid, fold: stored[eid]
+    out = blending.blend(pl.Series(ids), {"components": ["E900", "E901"],
+                                          "weights": [0.5, 0.5]}, "R1", loader=load)
+    assert np.allclose(out.sort("MVT_ID_mvt")["pred"].to_numpy(), ids * 0.5 + 5.0)
+    with pytest.raises(ValueError, match="not COMPLETE"):
+        blending.blend(pl.Series(ids), {"components": ["E900", "E902"],
+                                        "weights": [0.5, 0.5]}, "R1", loader=load)
+    with pytest.raises(ValueError, match="weights"):
+        blending.blend(pl.Series(ids), {"components": ["E900", "E901"],
+                                        "weights": [0.6, 0.5]}, "R1", loader=load)
+
+
+def test_blend_refuses_a_file_that_does_not_match_its_manifest(tmp_path, monkeypatch):
+    import json
+
+    import polars as pl
+    import pytest
+
+    from prc import blending
+
+    exp, pred = tmp_path / "experiments", tmp_path / "predictions" / "validation"
+    (exp / "E900").mkdir(parents=True)
+    (pred / "E900").mkdir(parents=True)
+    pl.DataFrame({"MVT_ID_mvt": [1], "pred": [1.0]}).write_parquet(pred / "E900" / "R1.parquet")
+    (exp / "E900" / "manifest.json").write_text(json.dumps({"artifacts": [
+        {"path": "predictions/validation/E900/R1.parquet", "sha256": "0" * 64}]}))
+    monkeypatch.setattr(blending, "EXPERIMENTS", exp)
+    monkeypatch.setattr(blending, "PREDICTIONS_VAL", pred)
+    monkeypatch.setattr(blending, "ROOT", tmp_path)
+    with pytest.raises(RuntimeError, match="does not match"):
+        blending.stored_predictions("E900", "R1")

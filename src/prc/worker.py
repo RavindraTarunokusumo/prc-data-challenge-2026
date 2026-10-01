@@ -16,7 +16,7 @@ import numpy as np
 import polars as pl
 import yaml
 
-from prc import curves
+from prc import blending, curves
 from prc.data import load_silver
 from prc.evaluate import evaluate, truth_frame
 from prc.features import FEATURE_SETS
@@ -46,21 +46,26 @@ def learning_curve(curve: dict, fold, score: dict | None) -> dict:
 
 def main(eid: str) -> None:
     exp = EXPERIMENTS / eid
+    commit = git_commit()  # at start: the code the run used (D5-C6)
     cfg = yaml.safe_load((exp / "config.yaml").read_text())
     folds = [get_fold(f) for f in cfg["folds"]]
     final = any(f.kind == "final" for f in folds)
     silver = load_silver(unmask_holdout_for=eid if final else None)
     out_dir = PREDICTIONS_VAL / eid
     out_dir.mkdir(parents=True, exist_ok=True)
-    scores, timing, files, curve_out = {}, {}, [], {}
+    scores, timing, files, curve_out, resolved = {}, {}, [], {}, {}
     for fold in folds:
         t0 = time.time()
         feats = FEATURE_SETS[cfg["feature_set"]](masked_view(silver, fold))
         curves.start()
-        model = REGISTRY[cfg["model"]]
-        extra = {"fold": fold.fold_id} if getattr(model, "needs_fold", False) else {}
-        pred = model(feats, cfg.get("params", {}), cfg.get("seed", 42), **extra)
+        if cfg["model"] == "blend":  # stored component predictions (prc.blending)
+            val_ids = feats.filter(pl.col("role") == "val")["MVT_ID_mvt"]
+            pred = blending.blend(val_ids, cfg["params"], fold.fold_id)
+        else:
+            pred = REGISTRY[cfg["model"]](feats, cfg.get("params", {}), cfg.get("seed", 42))
         curve = curves.take()
+        if curve and curve.get("resolved_params"):
+            resolved[fold.fold_id] = curve["resolved_params"]
         path = out_dir / f"{fold.fold_id}.parquet"
         pred.select("MVT_ID_mvt", "pred").sort("MVT_ID_mvt").write_parquet(path)
         files.append({"path": str(path.relative_to(ROOT)), "fold": fold.fold_id,
@@ -93,12 +98,19 @@ def main(eid: str) -> None:
                     "staged predictions of the finished model scored after training "
                     "(development and diagnostic folds only; never the holdout)",
             "folds": curve_out}) + "\n")
+    if resolved:  # the learner's own resolved parameters (e.g. CatBoost get_all_params)
+        (exp / "resolved_params.json").write_text(json.dumps(resolved, indent=1,
+                                                             default=str) + "\n")
     (exp / "manifest.json").write_text(json.dumps({
         "schema": "artifact-manifest-v1",
         "producing_experiment": eid,
         "artifacts": files,
         "format": "parquet [MVT_ID_mvt, pred]",
-        "code_commit": git_commit(),
+        "code_commit": commit,
+        # polars' thread pool sets the summation order of the fitted ridge statistics, and
+        # so the routed rows' bits (research/day-05/eda/ridge_paths*.json)
+        "polars_threads": pl.thread_pool_size(),
+        "python": sys.version.split()[0],
         "silver_sha256": json.loads((ROOT / "data/manifests/silver_manifest.json")
                                     .read_text())["sha256"],
         "reproduce": f"uv run python scripts/run_experiment.py {eid}  (a reproduction needs a "
