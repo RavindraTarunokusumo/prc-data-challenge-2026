@@ -350,3 +350,14 @@ The chain runs sequentially: H009, then H010, then H012, then H011.
 ### X-D05-S04-0001 · submitted: LAPTOP_REFS v1, H021 v1, H022 v1, H023 v1
 
 - Rule L (laptop instances E027/E028/E029 for E019/E005/E023); the CatBoost GPU mechanism (H021) and its codes control (H022); the equal-weight blend candidate (H023, promotion P 0.20).
+
+### X-D05-S04-0001 · REVISE ×4 (LAPTOP_REFS 0.90, H021 0.90, H022 0.90, H023 0.93)
+
+- **The science of H021–H023 is sound.** The chain was blocked mainly by an unattainable route-integrity reference: the laptop's routed-path ridge differs from E028 on every routed row (D5-C4).
+- **Corrections D5-C1 to D5-C7:**
+  - swap was on (unused), and the interpreter is 3.13, not 3.11 (owner decisions in INC-0010);
+  - the instance differences sit in LIRF's routed rows, not in the LightGBM;
+  - E027–E029 were outside their reviews' scope (E029 contrary to H018 v2 item 9);
+  - E029's manifest names the wrong commit;
+  - the H021 calibration table misattributed a row.
+- **Verified by the Advisor:** E027 and E029 reproduce the cloud E023-vs-E019 comparison to 1e-4 s, and `FloatTargetMeanValue` averages the raw target.

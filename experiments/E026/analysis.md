@@ -17,3 +17,8 @@
 - **Byte identity:** E022 was byte-identical to E019 on the cloud, across two Intel CPU model strings. On this AMD laptop, **all 8 prediction files differ** from E019's manifest hashes (including H, which is not scored here). The largest development-fold difference is 0.007 s. The likely cause is CPU-architecture-dependent floating-point paths in the same LightGBM build (unverified; E019's files are not on the laptop, so no row-level comparison is possible).
 - **Consequence for Day 5 comparisons.** `prc.evaluate` loads stored predictions and checks them against the experiment's manifest. **E019's, E005's and E023's prediction files are not on the laptop** (git-ignored, cloud only), so `compare.py`, `mechanism_check.py` and `holdout_check.py` cannot run against them. E026's files cannot stand in under E019's name. A Day 5 comparison against the champion therefore needs an Advisor ruling, either on E026 as the laptop instance of E019, or on another route. The request goes into the first Day 5 exchange. `reproduce_check.py --champion E005` was not run for the same reason (E005's files are absent).
 - **Laptop timing:** about 80–90 s per full fold on 4 threads, 30 % faster than the cloud.
+
+## Corrections (appended 2026-10-01T19:35Z; X-D05-S04-0001, D5-C1 to D5-C3)
+
+- **Host:** "swap 0" is wrong. 4 GiB of swap was available (unused). The interpreter was CPython 3.13.15 (numpy 2.5.3, scipy 1.18.1), not the cloud's 3.11.15. See INC-0010.
+- **Byte identity:** the attribution to "CPU-architecture-dependent floating-point paths in the same LightGBM build" is withdrawn. E026 equals E019 exactly at the nine non-LIRF airports. The differences sit in LIRF's routed rows (the ridge), and their cause is open.

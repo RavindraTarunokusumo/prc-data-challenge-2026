@@ -5,3 +5,9 @@
 - **Not byte-identical** to E023 (0 of 8 files), as for E026, E027 and E028. The per-fold differences are almost exactly E026's against E019, which fits a common CPU-architecture effect on the shared LightGBM path.
 - **Single rows on the laptop** (instances): row 192622644 (S1, y 87,002 s): E027 8,136 s, E029 7,041 s (cloud: 8,136 and 7,041). Row 183910286 (W1, LIRF, y 13,865 s): E027 1,979 s, E029 7,938 s.
 - **Purpose:** E023's prediction files are not on the laptop. E029 is proposed as E023's laptop instance and as H023's LightGBM component (`research/day-05/proposals/LAPTOP_REFS_v1.md`).
+
+## Corrections (appended 2026-10-01T19:35Z; D5-C3, D5-C5, D5-C6)
+
+- The "common CPU-architecture effect on the shared LightGBM path" is withdrawn. E029 equals E023 exactly at the nine non-LIRF airports, and differs only in LIRF's routed rows (the ridge).
+- **E029 was allocated contrary to H018 v2 review item 9** (D5-C5).
+- `manifest.json` `code_commit` `ed5151f` is wrong. The predictions are from the run commit `f89dc60` (D5-C6).

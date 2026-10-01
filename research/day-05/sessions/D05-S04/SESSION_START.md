@@ -23,3 +23,7 @@
 - **Early stopping on the validation folds is validation-guided tuning.** The stopping point would be picked with the targets that then score the model ("no early stopping on validation data", `gbm.py`).
 - **Fold-local early stopping** on an inner temporal split of the training months is admissible. But E027's curves bound its gain: the development folds sit within 0.03–0.78 s of an *oracle* minimum, below criterion 1's 1.0 s, before the cost of holding a training month out. Only W1c (one training month; diagnostic) loses 4.9 s, and no submission fold trains on one month.
 - **For CatBoost (H021) the risk is the opposite** (under-convergence), and it is recorded from H021's own curve.
+
+## Correction (appended 2026-10-01T19:35Z; D5-C1, D5-C2)
+
+"Environment: WSL2 10,951 MiB, swap 0" above is wrong on swap. The check printed only the memory line. This boot has had 4 GiB of swap since 16:33:25Z (unused). The interpreter is CPython 3.13.15, which was not recorded. See INC-0010.

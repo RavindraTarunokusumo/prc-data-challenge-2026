@@ -11,7 +11,8 @@
   - GPU calibration (`research/day-05/eda/gpu_calibration.json`). CatBoost on GPU is 0.16–0.20 s per iteration with full CTR combinations, and not deterministic. XGBoost on GPU is slower than CPU LightGBM.
   - W&B mirror (INC-0009) with learning curves (E027 on). The owner's early-stopping suggestion was logged, not adopted (D05-S04 session record).
   - Laptop instances: **E027** (E019, curves), **E028** (E005), **E029** (E023). All pass `reproduce_check`; none is byte-identical.
-- **Pending:** X-D05-S04-0001 (LAPTOP_REFS v1, H021 v1, H022 v1, H023 v1). Next experiment id: E030.
+- **X-D05-S04-0001: REVISE ×4** (LAPTOP_REFS, H021, H022, H023). Corrections D5-C1 to D5-C7 are in `research/day-05/acks/`. **The "swap 0" statements above are wrong** (D5-C1: 4 GiB swap since 16:33Z, unused). **The interpreter is CPython 3.13.15, not 3.11** (D5-C2). Owner decisions: keep both (INC-0010, open).
+- **Next:** target-free checks (the laptop ridge-path difference; the exact H021/H022 calibration) and tooling (resolved CatBoost parameters, GPU-failure recording, the worker's start commit), then v2 of the batch. Next experiment id: E030.
 
 *The Day 4 close state below is unchanged.*
 
