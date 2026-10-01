@@ -47,7 +47,7 @@ def synthetic(n=400, seed=0):
     }).with_columns(pl.col("y").fill_nan(None), pl.col("d_aobt3").fill_nan(None))
 
 
-@pytest.mark.parametrize("name", sorted(REGISTRY))
+@pytest.mark.parametrize("name", sorted(n for n in REGISTRY if n != "blend"))
 def test_model_contract(name):
     feats = synthetic()
     pred = REGISTRY[name](feats, PARAMS.get(name, {}), 42)
@@ -263,3 +263,53 @@ def test_learning_curve_recording_leaves_predictions_unchanged(name):
         rows = [pos[int(m)] for m in va["MVT_ID_mvt"].to_numpy()[route]]
         assert np.all(c["staged"][rows, 0] == c["staged"][rows, -1])
     assert curves.take() is None and not curves.active()
+
+
+def test_blend_fixed_weights_of_stored_components(monkeypatch):
+    """Day 5: the blend is the fixed-weight mean of the components' stored predictions,
+    joined by id; incomplete components and bad weights are refused."""
+    from prc.models import blend as bl
+
+    feats = synthetic()
+    ids = feats.filter(pl.col("role") == "val")["MVT_ID_mvt"].to_numpy()
+    stored = {"E900": pl.DataFrame({"MVT_ID_mvt": ids[::-1], "pred": ids[::-1] * 1.0}),
+              "E901": pl.DataFrame({"MVT_ID_mvt": ids, "pred": np.full(ids.size, 10.0)})}
+    status = {"E900": "COMPLETE", "E901": "COMPLETE", "E902": "RESOURCE_FAILURE"}
+    monkeypatch.setattr(bl, "_predictions", lambda eid, fold: stored[eid])
+    monkeypatch.setattr(bl.ledger, "get", lambda eid: {"status": status[eid]})
+    out = bl.blend(feats, {"components": ["E900", "E901"], "weights": [0.5, 0.5]}, 42, "R1")
+    assert np.allclose(out.sort("MVT_ID_mvt")["pred"].to_numpy(), np.sort(ids) * 0.5 + 5.0)
+    with pytest.raises(ValueError, match="not COMPLETE"):
+        bl.blend(feats, {"components": ["E900", "E902"], "weights": [0.5, 0.5]}, 42, "R1")
+    with pytest.raises(ValueError, match="weights"):
+        bl.blend(feats, {"components": ["E900", "E901"], "weights": [0.6, 0.5]}, 42, "R1")
+    assert REGISTRY["blend"].needs_fold
+
+
+def test_catboost_codes_mode_uses_no_categorical_features():
+    """cat_mode 'codes': categoricals become numeric codes of the training vocabulary (no
+    CTR); 'ctr' is the default and unchanged; anything else is refused."""
+    from catboost import CatBoostRegressor
+
+    feats = synthetic(n=1000, seed=3)
+    p = {**PARAMS["catboost"], "iterations": 10}
+    default = REGISTRY["catboost"](feats, p, 42)["pred"].to_numpy()
+    ctr = REGISTRY["catboost"](feats, {**p, "cat_mode": "ctr"}, 42)["pred"].to_numpy()
+    assert np.array_equal(default, ctr)
+    seen = {}
+    real_fit = CatBoostRegressor.fit
+
+    def spy(self, pool, *a, **k):
+        seen["cat"] = pool.get_cat_feature_indices()
+        return real_fit(self, pool, *a, **k)
+
+    import catboost
+    orig = catboost.CatBoostRegressor.fit
+    catboost.CatBoostRegressor.fit = spy
+    try:
+        codes = REGISTRY["catboost"](feats, {**p, "cat_mode": "codes"}, 42)["pred"].to_numpy()
+    finally:
+        catboost.CatBoostRegressor.fit = orig
+    assert seen["cat"] == [] and np.isfinite(codes).all()
+    with pytest.raises(ValueError, match="cat_mode"):
+        REGISTRY["catboost"](feats, {**p, "cat_mode": "onehot"}, 42)

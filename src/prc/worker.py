@@ -57,7 +57,9 @@ def main(eid: str) -> None:
         t0 = time.time()
         feats = FEATURE_SETS[cfg["feature_set"]](masked_view(silver, fold))
         curves.start()
-        pred = REGISTRY[cfg["model"]](feats, cfg.get("params", {}), cfg.get("seed", 42))
+        model = REGISTRY[cfg["model"]]
+        extra = {"fold": fold.fold_id} if getattr(model, "needs_fold", False) else {}
+        pred = model(feats, cfg.get("params", {}), cfg.get("seed", 42), **extra)
         curve = curves.take()
         path = out_dir / f"{fold.fold_id}.parquet"
         pred.select("MVT_ID_mvt", "pred").sort("MVT_ID_mvt").write_parquet(path)

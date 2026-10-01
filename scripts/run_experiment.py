@@ -75,6 +75,16 @@ def check_config(eid: str, cfg: dict, purpose: str) -> None:
         sys.exit(f"refused: {eid} must cover all scored folds plus H; missing {missing}")
 
 
+def gpu_used_mib() -> int | None:
+    try:
+        out = subprocess.run(["nvidia-smi", "--query-gpu=memory.used",
+                              "--format=csv,noheader,nounits"], capture_output=True,
+                             text=True, timeout=5, check=False)
+        return int(out.stdout.split()[0])
+    except (OSError, ValueError, IndexError, subprocess.SubprocessError):
+        return None
+
+
 def now() -> str:
     return dt.datetime.now(dt.UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
 
@@ -112,8 +122,13 @@ def run(eid: str, lock) -> None:
                                  stdout=log, stderr=subprocess.STDOUT,
                                  pass_fds=(lock.fileno(),))
         proc = psutil.Process(child.pid)
+        gpu0 = gpu_used_mib()
+        gpu_peak, polls = gpu0, 0
         while child.poll() is None:
             peak = max(peak, tree_rss(proc))
+            polls += 1
+            if gpu0 is not None and polls % 4 == 0:  # about once a second
+                gpu_peak = max(gpu_peak, gpu_used_mib() or 0)
             if peak > hard_gb * GB:
                 status = "RESOURCE_FAILURE"
                 kill_tree(proc)
@@ -140,6 +155,9 @@ def run(eid: str, lock) -> None:
         "timeout_s": timeout_s,
         "within_class": runtime <= klass["runtime_min"] * 60 and peak / GB <= klass["ram_gb"],
         "cpu_count": psutil.cpu_count(),
+        # device-wide GPU memory (nvidia-smi), including other processes; null without a GPU
+        "gpu_mib_at_start": gpu0,
+        "gpu_mib_peak": gpu_peak if gpu0 is not None else None,
         "run_commit": commit,
         "git_dirty_at_run": dirty,
         "finished_utc": now(),
