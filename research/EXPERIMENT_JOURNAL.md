@@ -274,3 +274,14 @@ The chain runs sequentially: H009, then H010, then H012, then H011.
   - D4-C3: `range_check_refs.json` commit order.
   - D4-C5: H019 rule 8 wording.
   - D4-C6: the dropped twin-rule phrase, restored by reading 4(a).
+
+### E023 · H018 v2 routed LightGBM on FS2, LIRF NM-missing rows excluded from training · COMPLETE
+
+- **Development mean 442.46** (E019: 444.49). 925 s, 5.29 GB. Allocated in D04-S01, run in D04-S02 after a container restart.
+- **Clause 3 not met:** the routed rows equal E005.
+- **Clause 1 not met:** `NM_missing_other` out-of-range count in the > 3 h band is **5** (limit 50; E019 81, E021 18, E017 14). Fraction of the increment removed: 1.21. Pooled > 5 h share: 1/93 (E019: 41/93).
+- **Clause 2 not met:** `NM_missing_other` bulk against E019 is −197.85, −230.47, −105.67 and −104.99 s on R1, R2, R3 and W1.
+- **D3-C2's attribution to the LIRF NM-missing training rows is supported.**
+- **Promotion against E019: criterion 2 FAILS** (S1 TIE, +0.20 s). The mean is −2.04 s (q95 −1.31), with 5 WIN and 2 TIE. S1's change is carried by `NM_present_LIRF` (share +3.84; row 192622644).
+- **H018 promotion status (H018 review item 7): NOT PROMOTED.** Recorded as "D3-C2 treated, not promoted", with the clause 1–2 outcomes above. No reproduction is due. **E019 remains the champion in force for H019 v2.**
+- Reported: against E005, −40.27 s, 7/7 WIN.

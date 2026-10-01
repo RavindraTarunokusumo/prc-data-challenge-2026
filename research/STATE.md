@@ -1,9 +1,9 @@
 # Research State
 
-*Updated 2026-10-01T00:50:29Z (measured with `date -u` at writing; D04-S02, Day 4 in progress).*
+*Updated 2026-10-01T01:09:20Z (measured with `date -u` at writing; D04-S02, Day 4 in progress).*
 
 - **Phase:** **Day 4 IN PROGRESS** (historical priors and interactions), session D04-S01 on branch `day-4`. Splits, metric and availability definition are **FROZEN** (`config/frozen.json`).
-- **Last session:** D03-S01 (closed). **Current:** D04-S02, started 2026-10-01T00:50:29Z after a container restart. D04-S01 (16:06:53Z) ended at that reset. **Last completed exchange:** X-D04-S01-0002 (H018 v2 ACCEPT 0.86, H019 v2 ACCEPT 0.80). Earlier: X-D04-S01-0001 (H018 v1 and H019 v1 REVISE; **H020 v1 REJECT**, and no CatBoost in Day 4, which is handed to Day 5). **Pending:** E023 (H018 v2 primary), allocated 17:49:07Z in D04-S01 and run in D04-S02.
+- **Last session:** D03-S01 (closed). **Current:** D04-S02, started 2026-10-01T00:50:29Z after a container restart. D04-S01 (16:06:53Z) ended at that reset. **Last completed exchange:** X-D04-S01-0002 (H018 v2 ACCEPT 0.86, H019 v2 ACCEPT 0.80). Earlier: X-D04-S01-0001 (H018 v1 and H019 v1 REVISE; **H020 v1 REJECT**, and no CatBoost in Day 4, which is handed to Day 5). **Pending:** none. **E023 (H018 v2): D3-C2 treated, not promoted.** Clauses 1–3 are not met (> 3 h band 5 against a limit of 50; treated-subgroup bulk −105 to −230 s). Criterion 2 fails against E019 (S1 TIE, carried by LIRF NM-present row 192622644). E019 remains champion and is the comparator for H019 v2. Next: `gate.py allocate H019 v2` (FS3 on H018's configuration).
 - **Open incidents:** INC-0004 (launch `--effort medium` against metadata `high`) and INC-0005 (delegation), both open and non-blocking.
 - **Corrections so far:** D4-C1 (unmeasured v1 `created_utc`) and D4-C2 to D4-C6 (acks v2).
 - **Delegation (INC-0005, open):** by owner instruction, `claude-sonnet-5-5` worker subagents carry out verification, digests, implementation to specification and experiment launches. Proposals, acks, allocations and interpretation stay with the main session. The Advisor is unchanged.
