@@ -153,3 +153,17 @@ def test_p_counts_exclude_self_when_takeoff_precedes_proxy():
     r = row(cg.congestion(v), 1)
     assert r["cg_dep_taxiing"] == 1 and r["cg_dep_taxiing_rwy"] == 1
     assert r["cg_dep_to_p15"] == 1 and r["cg_dep_to_p30"] == 1 and r["cg_dep_to_rwy_p15"] == 1
+
+
+def test_fs2_raw_is_fs2_without_the_rare_collapse(scene):
+    from prc.features import FS1_EXTRA_CATEGORICAL, RARE, fs2_raw
+
+    a, b = fs2(scene), fs2_raw(scene)
+    assert b.columns == a.columns
+    rest = [c for c in a.columns if c not in FS1_EXTRA_CATEGORICAL]
+    assert b.select(rest).equals(a.select(rest))
+    # every level has < RARE_MIN training rows in the scene: FS2 collapses, FS2_RAW keeps
+    assert a.filter(pl.col("MVT_ID_mvt") == 1)["stand"].item() == RARE
+    assert b.filter(pl.col("MVT_ID_mvt") == 1)["stand"].item() == "A1"
+    assert b.filter(pl.col("MVT_ID_mvt") == 1)["op_prefix"].item() == "DLH"
+    assert "FS2_RAW" in FEATURE_SETS

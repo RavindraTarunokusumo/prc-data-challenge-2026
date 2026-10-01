@@ -120,7 +120,7 @@ def raw_static_exprs() -> dict[str, pl.Expr]:
     }
 
 
-def fs1(view: pl.LazyFrame) -> pl.DataFrame:
+def fs1(view: pl.LazyFrame, collapse: bool = True) -> pl.DataFrame:
     dep = view.filter(pl.col("PHASE_mvt") == "DEP")
     raw = raw_static_exprs()
     fill = {"stand": "NA", "actype": "UNK", "op_prefix": "UNK", "ades": "UNK"}
@@ -129,7 +129,9 @@ def fs1(view: pl.LazyFrame) -> pl.DataFrame:
         *[(e.fill_null(fill[k]) if k in fill else e).alias(k) for k, e in raw.items()],
     ).collect()
     feats = fs0(view).join(static, on="MVT_ID_mvt", how="left", validate="1:1")
-    return collapse_rare(feats, FS1_EXTRA_CATEGORICAL).sort("MVT_ID_mvt")
+    if collapse:
+        feats = collapse_rare(feats, FS1_EXTRA_CATEGORICAL)
+    return feats.sort("MVT_ID_mvt")
 
 
 def fs1_no_deltas(view: pl.LazyFrame) -> pl.DataFrame:
@@ -167,6 +169,16 @@ def fs2(view: pl.LazyFrame) -> pl.DataFrame:
                           validate="1:1").sort("MVT_ID_mvt")
 
 
+def fs2_raw(view: pl.LazyFrame) -> pl.DataFrame:
+    """FS2 without the RARE_MIN collapse of the FS1 static keys (Day 5): stand, actype,
+    op_prefix and ades keep every raw level seen in training. Levels absent from the
+    training rows still become null in the model frame (prc.models.gbm._frames)."""
+    from prc.congestion import congestion
+
+    return fs1(view, collapse=False).join(congestion(view), on="MVT_ID_mvt", how="left",
+                                          validate="1:1").sort("MVT_ID_mvt")
+
+
 def fs2_p(view: pl.LazyFrame) -> pl.DataFrame:
     """FS1 plus the P-labelled congestion features only (state at the off-block proxy)."""
     from prc.congestion import T_FEATURES
@@ -185,7 +197,7 @@ def fs3(view: pl.LazyFrame) -> pl.DataFrame:
 FEATURE_SETS = {"FS0": fs0, "FS0_NO_DELTAS": fs0_no_deltas, "FS1": fs1,
                 "FS1_NO_DELTAS": fs1_no_deltas, "FS1_NO_DSCHED": fs1_no_dsched,
                 "FS1_NO_ANCHOR": fs1_no_anchor, "FS1_STATIC_NO_DELTAS": fs1_static_no_deltas,
-                "FS2": fs2, "FS2_P": fs2_p, "FS3": fs3}
+                "FS2": fs2, "FS2_RAW": fs2_raw, "FS2_P": fs2_p, "FS3": fs3}
 
 
 def columns(feats: pl.DataFrame) -> tuple[list[str], list[str]]:

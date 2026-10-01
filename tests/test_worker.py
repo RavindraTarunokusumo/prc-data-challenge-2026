@@ -65,3 +65,18 @@ def test_runner_config_checks():
     with pytest.raises(SystemExit, match="missing"):
         r.check_config("E1", {**ok, "folds": ["R1"]}, "primary")
     r.check_config("E1", {"seed": 43, "folds": ok["folds"]}, "reproduction")
+
+
+def test_experiment_lock_is_exclusive_and_visible(tmp_path, monkeypatch):
+    import pytest
+
+    from prc import paths
+
+    monkeypatch.setattr(paths, "RUNTIME", tmp_path)
+    monkeypatch.setattr(paths, "EXPERIMENT_LOCK", tmp_path / "experiment.lock")
+    assert paths.running_experiment() is None
+    with paths.experiment_lock("E999"):
+        assert paths.running_experiment() == "E999"
+        with pytest.raises(SystemExit, match="E999 is running"), paths.experiment_lock("E998"):
+            pass
+    assert paths.running_experiment() is None

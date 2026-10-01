@@ -1,0 +1,22 @@
+{
+ "experiment_id": "E025",
+ "status": "RESOURCE_FAILURE",
+ "exit_code": null,
+ "runtime_s": 145.4,
+ "peak_rss_gb": 4.137,
+ "job_class": "CLASS-M",
+ "class_limits": {
+  "runtime_min": 30,
+  "ram_gb": 8
+ },
+ "hard_ram_gb": 11,
+ "timeout_s": 2700.0,
+ "within_class": null,
+ "cpu_count": 16,
+ "run_commit": "590ebd82a75dfda368e36982f49c9abaeaa01a4f",
+ "git_dirty_at_run": false,
+ "finished_utc": "2026-10-01T16:19:23Z",
+ "recorded_by": "researcher, reconstructed (D05-S04); the runner died with its worker and wrote no record",
+ "evidence": "kernel log of boot 71605e21: global OOM at 2026-10-01T16:19:23Z killed pid 1430 (the E025 worker, anon-rss 4,338,204 kB); worker.log started 16:16:57Z, last line 16:19:07Z (R1 done); runtime_s = start of worker.log to the kill; peak_rss_gb = anon-rss at the kill, not a sampled peak",
+ "cause": "VM-wide memory exhaustion from a concurrent researcher pytest (3.46 GB) plus other laptop processes; E025 itself was far below its 11 GB guard (INC-0008)"
+}

@@ -26,7 +26,7 @@ import yaml
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from prc import ledger
-from prc.paths import EXPERIMENTS, RESOURCES, ROOT, git_commit, git_dirty
+from prc.paths import EXPERIMENTS, RESOURCES, ROOT, experiment_lock, git_commit, git_dirty
 
 GB = 1024**3
 
@@ -80,6 +80,12 @@ def now() -> str:
 
 
 def main(eid: str) -> None:
+    # One experiment at a time; side work checks the lock (INC-0008)
+    with experiment_lock(eid) as lock:
+        run(eid, lock)
+
+
+def run(eid: str, lock) -> None:
     exp = EXPERIMENTS / eid
     if not (exp / "gate.json").exists():
         sys.exit(f"refused: {eid} was not allocated by scripts/gate.py")
@@ -103,7 +109,8 @@ def main(eid: str) -> None:
     peak, status = 0, None
     with open(exp / "worker.log", "w") as log:
         child = subprocess.Popen([sys.executable, "-m", "prc.worker", eid], cwd=ROOT, env=env,
-                                 stdout=log, stderr=subprocess.STDOUT)
+                                 stdout=log, stderr=subprocess.STDOUT,
+                                 pass_fds=(lock.fileno(),))
         proc = psutil.Process(child.pid)
         while child.poll() is None:
             peak = max(peak, tree_rss(proc))
