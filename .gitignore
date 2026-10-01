@@ -51,3 +51,6 @@ mlruns/
 
 # CatBoost training logs (written to the working directory by default)
 catboost_info/
+
+# Weights & Biases local run files (INC-0009)
+wandb/

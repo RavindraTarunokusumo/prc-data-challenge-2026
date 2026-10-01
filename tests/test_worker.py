@@ -80,3 +80,16 @@ def test_experiment_lock_is_exclusive_and_visible(tmp_path, monkeypatch):
         with pytest.raises(SystemExit, match="E999 is running"), paths.experiment_lock("E998"):
             pass
     assert paths.running_experiment() is None
+
+
+def test_tracking_payload_from_records_only(monkeypatch):
+    from prc import tracking
+
+    monkeypatch.setenv("PRC_WANDB", "0")
+    assert tracking.enabled() is False
+    p = tracking.payload("E019")
+    assert p["id"] == "E019" and p["group"] == "H015 v2"
+    assert "champion-lineage" in p["tags"] and "decision:PROMOTE" in p["tags"]
+    assert p["summary"]["mean_rmse_dev"] > 0 and "rmse/R1" in p["summary"]
+    assert not any(k.startswith("rmse/H") for k in p["summary"])  # no holdout figures
+    assert tracking.sync("E019") is None  # disabled: no network

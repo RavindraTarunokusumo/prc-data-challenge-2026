@@ -25,7 +25,7 @@ import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from prc import ledger
+from prc import ledger, tracking
 from prc.paths import EXPERIMENTS, RESOURCES, ROOT, experiment_lock, git_commit, git_dirty
 
 GB = 1024**3
@@ -157,6 +157,7 @@ def run(eid: str, lock) -> None:
     ledger.update(eid, **fields)
     print(json.dumps({k: usage[k] for k in ("status", "runtime_s", "peak_rss_gb",
                                              "within_class")}))
+    tracking.sync_safely(eid)  # W&B mirror (INC-0009); best-effort, records already written
     if status != "COMPLETE":
         sys.exit(1)
 
