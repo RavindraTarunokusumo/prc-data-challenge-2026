@@ -25,6 +25,25 @@ from prc.paths import EXPERIMENTS, PREDICTIONS_VAL, ROOT, git_commit, sha256_fil
 from prc.splits import development_folds, get_fold, masked_view
 
 
+def environment() -> dict:
+    """The run's environment record (LAPTOP_REFS v2, condition (a)): lock hash, library
+    versions and the launching shell's thread variables."""
+    import importlib
+    import os
+
+    libs = {}
+    for mod in ("numpy", "scipy", "sklearn", "polars", "lightgbm", "catboost", "xgboost",
+                "pandas"):
+        try:
+            libs[mod] = importlib.import_module(mod).__version__
+        except ImportError:
+            libs[mod] = None
+    lock = ROOT / "uv.lock"
+    return {"uv_lock_sha256": sha256_file(lock) if lock.exists() else None, "libraries": libs,
+            "thread_variables": {k: v for k, v in os.environ.items()
+                                 if k.endswith("_THREADS")}}
+
+
 def learning_curve(curve: dict, fold, score: dict | None) -> dict:
     """Train RMSE per iteration, and for scored folds the RMSE of each staged prediction
     against truth. The last stage must equal the evaluator's RMSE (consistency check)."""
@@ -111,6 +130,7 @@ def main(eid: str) -> None:
         # so the routed rows' bits (research/day-05/eda/ridge_paths*.json)
         "polars_threads": pl.thread_pool_size(),
         "python": sys.version.split()[0],
+        "environment": environment(),  # rule L v2 condition (a)
         "silver_sha256": json.loads((ROOT / "data/manifests/silver_manifest.json")
                                     .read_text())["sha256"],
         "reproduce": f"uv run python scripts/run_experiment.py {eid}  (a reproduction needs a "
