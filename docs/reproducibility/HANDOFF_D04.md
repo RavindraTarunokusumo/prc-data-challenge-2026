@@ -1,20 +1,30 @@
 # Hand-off at the end of Day 4 (for Days 5-7, owner laptop)
 
-**Status: DRAFT — champion section to be finalised at the Day 4 phase close.**
-Written 2026-09-30 from branch `day-4`; repository values below were read from files or from `gate.py status`, `pytest` and `ruff` runs on that date.
+**Status: FINAL** (Day 4 phase close X-D04-S02-0001 ACCEPT; finalised per correction D4-C14 at 2026-10-01T01:59:14Z).
+Written from branch `day-4`. The repository values below were read from files, or from `gate.py status`, `pytest` and `ruff` runs, at finalisation.
 
 ## 1. Purpose
 
 Lets the owner continue on the laptop (WSL2, RTX 5060) from files alone: set up, re-download data, reproduce the champion's validation predictions, and know what governance carries over.
 
 <!-- CHAMPION-FINAL -->
-**Champion (provisional): E019** (H015 v2, routed LightGBM on FS2; `models/champion/CURRENT.json`). Development mean 444.49 s. Holdout H recorded once (WIN, 375.93 vs E005 411.29). Replace this block at the Day 4 phase close if the champion changes.
+**Champion: E019** (H015 v2, routed LightGBM on FS2; `models/champion/CURRENT.json`).
+- **Status.** Champion since the Day 3 phase close, and **held through Day 4 by rule** (X-D04-S02-0001). It is Day 5's phase-opening champion.
+- **Figures.** Development mean 444.49 s. Holdout H was recorded once (Day 3: WIN, 375.93 against E005's 411.29).
+- **Standing disclosures (read before building on it):**
+  - **D3-C1.** 95 % of its margin over E005 is routed FS1 structure. Congestion as served is −1.90 s on all rows.
+  - **D3-C2.** It makes out-of-range predictions on NM-missing rows at the nine non-LIRF airports: below 0 s, or above 3,600 s on normal taxis. That is 81 in the > 3 h `d_sched` band, and 44 % of rows over 5 h. **The cause is confirmed by E023's exact ablation** (Day 4): the LightGBM trains on the routed LIRF NM-missing convention rows.
+  - **D3-C3.** January 2026 has 435 NM-missing rows with `d_sched` > 3 h and 92 > 5 h. That is 2.0–2.6 times the 2025 maximum. H does not test it.
+  - **D4-C9.** S1 against E019 is decided by one row.
+    - Row 192622644 (LIRF, NM-present, y 87,002 s) carries 8.2 % of E019's S1 SSE; E019 predicts 8,136 s there.
+    - E023's W1 WIN is likewise carried by row 183910286.
+  - **Consequence.** The submitted model carries D3-C2 and D3-C3 unless a later candidate is promoted.
 <!-- /CHAMPION-FINAL -->
 
 ## 2. Repository state
 
 - One branch per research phase, `day-N` (`day-1` ... `day-4`), branched from `main`. PRs go from `day-N` into `main`. Day 5 starts as `day-5` from `main` after the Day 4 PR merges.
-- Read first: `docs/PROJECT_BRIEF.md` (v3.0), `AGENTS.md`, `docs/governance/COMMUNICATION_CONTRACT.md`, `research/STATE.md`, latest `research/day-NN/DAY_SUMMARY.md` (Day 3 exists; `day-04/DAY_SUMMARY.md` is written at the phase close (not yet present)).
+- Read first: `docs/PROJECT_BRIEF.md` (v3.0), `AGENTS.md`, `docs/governance/COMMUNICATION_CONTRACT.md`, `research/STATE.md`, `research/day-04/DAY_SUMMARY.md` (FINAL) and `research/day-04/acks/PHASE_CLOSE_D04_ack_v1.md` (rulings and corrections D4-C7 to D4-C16).
 
 ## 3. Environment setup
 
@@ -25,7 +35,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh   # if uv is missing
 uv sync
 sha256sum uv.lock
 # 39df945cddc466202080bfed4af714c86cbae429fa0d86592bd4895a33f4b73b
-uv run pytest -q          # cloud: 141 passed
+uv run pytest -q          # cloud: 143 passed
 uv run ruff check .       # cloud: All checks passed!
 uv run python scripts/gate.py status
 ```
@@ -35,7 +45,7 @@ Expected `gate.py status` output (a mismatch blocks allocation and runs):
 ```text
 advisor definition: 30fff5dd3c54 OK
 frozen files: 32c41c0f9331 OK
-experiments allocated: 22
+experiments allocated: 24
 ```
 
 The `uv.lock` hash and counts will change if later commits alter them; compare with the committed `HEAD`. CPU-only `uv sync` is what was tested; GPU-enabled wheels on the laptop are (unverified).
@@ -60,10 +70,12 @@ Network hosts must be on `config/network.yaml`. `fetch_data.py` refuses the subm
 
 ## 5. Champion reproduction (E019 predictions)
 
-A reproduction is a new experiment id with `purpose=reproduction`, the same H/version, and seed 43. `gate.py allocate` requires the existing proposal, review and ack files (present for H015 v2: `research/day-03/proposals/H015_v2.md`, `.../advisor/H015_review_v2.md`, `research/day-03/acks/H015_ack_v2.md`; the proposal/review/ack paths are taken from the `day` folder, verify it finds them) and the hashes above.
+A reproduction is a new experiment id with `purpose=reproduction`, the same H/version, and seed 43. `gate.py allocate` requires the existing proposal, review and ack files (present for H015 v2: `research/day-03/proposals/H015_v2.md`, `.../advisor/H015_review_v2.md`, `research/day-03/acks/H015_ack_v2.md`) and the hashes above.
+
+**Gate semantics (D4-C14 (v), D4-C15):** `gate.py` copies `day` and `session` from the proposal's folder and front matter, not from the current phase. So a Day 5 reproduction of H015 v2 is recorded as `day-03` / D03-S01, and E024 shows D04-S01 although it was allocated in D04-S02. This is the tool's semantics; do not edit gate records. A **Day 5 holdout access needs a Day 5 allocation as NEW** (§7).
 
 ```bash
-uv run python scripts/gate.py allocate H015 v2 --purpose reproduction   # prints the new id, call it E0XX (next is E023)
+uv run python scripts/gate.py allocate H015 v2 --purpose reproduction   # prints the new id, call it E0XX (next is E025)
 cp experiments/E022/config.yaml experiments/E0XX/config.yaml            # E022 was the Day 3 reproduction: purpose reproduction, seed 43
 uv run python scripts/run_experiment.py E0XX
 uv run python scripts/reproduce_check.py E0XX E019 --champion E005
@@ -94,7 +106,7 @@ E019 prediction SHA-256 (`experiments/E019/manifest.json`; files `predictions/va
 
 LightGBM is deterministic here: E022 was byte-identical to E019, and Day 3 found identical output across two CPU model strings. On the same lockfile expect byte-identical files. A different OS, CPU architecture or LightGBM build may differ; then the 1.0 s rule decides, not the hash. Also note the silver hash must match first.
 
-Resources: CLASS-M. E019 took 954 s (E022: 1,339 s on a slower CPU); expect about 16-22 min on 4 vCPU, peak RSS 4.76 GB (about 5 GB). Timeout 45 min, hard RAM 11 GB. Laptop runtime is (unverified).
+Resources: CLASS-M. E019 took 954 s (E022: 1,339 s on another CPU string); expect about 16-22 min on 4 vCPU, peak RSS 4.76 GB (about 5 GB). Timeout 45 min, hard RAM 11 GB. Laptop runtime is (unverified).
 
 ## 6. Git-ignored artifacts and their manifests
 
@@ -113,16 +125,22 @@ Ledger rebuild: there is no separate function, but `prc.ledger.connect()` does i
 uv run python -c "from prc import ledger; print(len(ledger.all_rows()))"
 ```
 
-(Run from the repo root with `uv run`; expected 22 rows. Not executed here.)
+(Run from the repo root with `uv run`; expected 24 rows. Not executed here.)
 
 ## 7. Governance carried to Days 5-7
 
 - Frozen (hash-checked by `gate.py`): `config/splits.yaml`, `src/prc/{__init__,metrics,splits,evaluate}.py`, `docs/methodology/DATASET_AUDIT.md`. Editing any blocks allocation and runs. Do not edit.
-- Holdout H (Dec 2025): at most one access per phase, only via `evaluate.holdout_compare` / `scripts/holdout_check.py`, at the phase-close review. Day 3's access is used; Day 4's is (unverified, see `research/STATE.md`).
+- Holdout H (Dec 2025): at most one access per phase, only via `evaluate.holdout_compare` / `scripts/holdout_check.py`, at the phase-close review. Record so far:
+  - Day 1: used (WIN). Day 2: closed unused (ruling H). Day 3: used (WIN, E019 vs E005).
+  - **Day 4: 0 of 1, closed unused (ruling H4; not a TIE).** There is no carry-over: **Day 5 has exactly one access.**
+  - `holdout_compare` takes the phase from NEW's gate record, so a Day 5 access needs a Day 5 allocation as NEW.
+  - **E012–E018 and E020–E024 may never be NEW** (rule 9). In particular, no `holdout_check.py` with E023 or E024 as NEW, in any phase, even though `day-04` still shows an unused access and the code would accept them.
 - Leaderboard and submission bucket: zero reads and zero submissions until project state is `FROZEN` (`docs/governance/LEADERBOARD_POLICY.md`). No searching for other teams' solutions.
 - Flow unchanged: proposal -> Advisor review (envelope first, `advisor` subagent gets the envelope path) -> ack -> `gate.py allocate`.
-- Open incidents (`status:` lines): INC-0004 open (launch configuration D03); INC-0005 open (owner's delegation instruction, Day 4). INC-0001 accepted; INC-0002 and INC-0003 closed.
-- Standing rules and disclosures (D3-C1, D3-C2, D3-C3) live in `research/STATE.md`.
+- Open incidents (`status:` lines): INC-0004 open (launch configuration D03; owner decision). INC-0005 closed at the Day 4 phase close; **any delegation to worker models on Days 5–7 needs a new incident.** INC-0001 accepted; INC-0002 and INC-0003 closed.
+- Standing rules 1–12, batch conditions B1–B4, rulings H, B, R, H3 and H4, and the champion disclosures (D3-C1 to D3-C3, D4-C9) live in `research/STATE.md`.
+- **Rule 10 (no re-adjudication)** covers the configurations of E020, E021, E023 and E024. A variant that differs only by compute backend or library build (e.g. GPU LightGBM) is a re-draw of the same configuration. It is admissible as a candidate only if its proposal pre-registers a mechanism for that difference (X-D04-S02-0001 (e)).
+- **Ledger decisions** (D4-C11): E019 and E022 PROMOTE; E023 and E024 REJECT; E020 and E021 none by design.
 
 ## 8. Day 5 pointers
 
@@ -130,3 +148,35 @@ uv run python -c "from prc import ledger; print(len(ledger.all_rows()))"
 - `gbm.catboost` and `routed_catboost` are registered (`src/prc/models/__init__.py`, `gbm.py`, `routed.py`). They share LightGBM's category vocabulary.
 - CPU calibration (`research/day-04/eda/catboost_calibration.json`, `catboost_calibration_ctr1.json`): default `max_ctr_complexity` cost 0.88-1.13 s/iteration on R3; `max_ctr_complexity=1` cost about 0.29-0.30 s/iteration, extrapolated 35-45 min for 8 folds x 1000 iterations (CLASS-L). A GPU may lift that restriction; unmeasured (unverified).
 - `resource-usage` classes, the 11 GB RAM guard and the seed rule (42 primary, 43 reproduction) are CPU-era; changes to `config/resources.yaml` may only tighten them.
+- **H020 v1 (CatBoost) was REJECTED in Day 4** (`research/day-04/advisor/H020_review_v1.md`, `acks/H020_ack_v1.md`), and CatBoost was deferred to Day 5. The review's objections, which any CatBoost proposal must answer (Missing Control 3 of X-D04-S02-0001):
+  - **Boosting type.** The installed CatBoost 1.2.10 ran *plain*, not ordered, boosting. State and check the scheme via `get_all_params()`.
+  - **CTR type.** Its RMSE categorical statistics are a border share and a frequency count, not a smoothed target mean. Do not claim a target-mean mechanism without checking.
+  - **Pre-collapse levels.** FS1's `__RARE__` collapse removes the sparse levels that a sparse-level mechanism needs. Keep them if that mechanism is claimed.
+  - **CTR complexity.** `max_ctr_complexity: 1` removes the stand × runway combination.
+  - **Capacity control.** Include a contrast whose only difference is the categorical handling, at fixed capacity.
+  - **Rationale.** A CLASS-L or GPU rationale must be tied to a decision.
+  - **Calibration.** Commit the calibration script and its exact invocation: `scripts/calibrate_catboost.py` is committed, but the `max_ctr_complexity=1` addendum (`af21355`) committed only its JSON.
+
+## 9. Open work from Day 4 (not results)
+
+- **E023 (H018 v2): mechanism supported, "D3-C2 treated, not promoted"** (ledger REJECT).
+  - Excluding the routed LIRF NM-missing rows from LightGBM training (`route_train_exclude: true`) cuts the > 3 h out-of-range band from 81 to 5. All rows −2.04 s against E019; development mean 442.46.
+  - It failed criterion 2: S1 TIE, carried by the single row 192622644 (D4-C9).
+- **E024 (H019 v2, FS3 priors): mechanism falsified** (ledger REJECT).
+  - −0.29 s on `NM_present_excl_LIRF` against E023 (floor −3.0 s); −0.40 s on all rows. Development mean 442.06.
+  - "LightGBM already holds the keys" is untested. Its controls are a within-key permuted prior and a K5-only block.
+- **Hand-off base ruling (X-D04-S02-0001 (e), as written):**
+  - Under ruling R, E023 is the matched reference for any candidate that keeps `route_train_exclude: true` on FS2, and E024 for FS3.
+  - **E023 is not a default or recommended base, and not a de facto champion.** Choosing the base is a Day 5 proposal's decision.
+  - Such a candidate is judged against **E019**. Its criterion 4 includes H018 v2's clauses 1–2 (both recorded as not met). Its rule 8 pre-registration states the single-row S1 exposure.
+- **Single-row exposure (Missing Control 1).** A Day 5–7 candidate compared with E019, whose promotion needs S1 (or W1), states under rule 8:
+  - its expected direction on rows 192622644 (S1) and 183910286 (W1);
+  - the `NM_present_LIRF` cell expectation, read as a single-row statistic.
+
+  This is a disclosure, not a new reading of criterion 2.
+
+## 10. Producing submission predictions (note; not required by brief §3)
+
+- `config/splits.yaml` defines the final folds `SUBMIT_JAN` (train 2025-01..12, predict 2026-01) and `SUBMIT_JUL` (predict 2026-07). There is one fold per ranking month, and no cross-month information.
+- `run_experiment.py` accepts final folds, and `prc.data.load_silver` unmasks December 2025 targets only for a final (SUBMIT) run, logging the event.
+- The exact Day 7 procedure (allocation, config and file format) is **not yet written or tested**. The submission bucket stays untouched until the project state is FROZEN (`docs/governance/LEADERBOARD_POLICY.md`).

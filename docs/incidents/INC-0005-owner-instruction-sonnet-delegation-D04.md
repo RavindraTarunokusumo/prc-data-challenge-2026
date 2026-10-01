@@ -3,7 +3,7 @@ schema: incident-v1
 incident_id: INC-0005
 type: protocol_deviation
 created_utc: 2026-09-30T16:06:53Z
-status: open
+status: closed
 ---
 
 # Day 4: owner instruction to delegate work to `claude-sonnet-5-5` subagents
@@ -48,3 +48,12 @@ Provenance only. No frozen artifact, split, metric or gate check changes. INC-00
 ## Resolution required (owner)
 
 None beyond the instruction itself. The incident closes at the Day 4 phase close, with the list of delegated work in `research/day-04/DAY_SUMMARY.md`.
+
+## Closure (2026-10-01T01:59:30Z)
+
+**Closed at the Day 4 phase close** (X-D04-S02-0001 ACCEPT; `research/day-04/acks/PHASE_CLOSE_D04_ack_v1.md`).
+- **The delegated-work list** is in `research/day-04/DAY_SUMMARY.md` §8, corrected per D4-C12:
+  - `e4c57f8` is added;
+  - the D04-S01 pipeline digest was never committed.
+- **The Advisor audited the boundary.** No delegated commit touched a proposal, review, ack, envelope, gate or allocation record, ledger, journal, STATE or summary. The main session launched both Day 4 runs.
+- **Delegation on Days 5–7 needs a new incident.**

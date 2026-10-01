@@ -299,3 +299,24 @@ The chain runs sequentially: H009, then H010, then H012, then H011.
 - Route integrity holds (not INVALID). Rule 12: > 3 h band 6 (E023 5).
 - Reported: against E005, −40.67 s (q95 −37.32), 7/7 WIN.
 - **E019 remains champion. Neither Day 4 candidate is promotable.**
+
+### X-D04-S02-0001 · Day 4 phase close · ACCEPT (0.85)
+
+- **Decisions stand:**
+  - **E019 remains champion, by rule.** Its disclosures are D3-C1 to D3-C3 and **D4-C9**: S1 against E019 is decided by row 192622644, which carries 8.2 % of E019's S1 SSE. Without that row (audit only), E023 meets criteria 1–3.
+  - E023: REJECT ("D3-C2 treated, not promoted").
+  - E024: REJECT (mechanism falsified).
+  - H020 v1: closed.
+- **Ruling H4: Day 4 holdout 0 of 1, closed unused** (not a TIE). There is no carry-over. E023 and E024 are never NEW, in any phase.
+- **Hand-off base ruling:**
+  - Under ruling R, E023 is the matched reference for `route_train_exclude` candidates on FS2, and E024 for FS3. Neither is a default base nor a de facto champion.
+  - Candidates are judged against E019.
+  - Rule 10 covers backend-only re-draws of E020, E021, E023 and E024.
+- **Corrections D4-C7 to D4-C16** (`research/day-04/acks/PHASE_CLOSE_D04_ack_v1.md`). The main ones:
+  - the prior block is a real −0.40 s on all rows, not "nothing";
+  - E023's "no cost" is scoped to `NM_present_excl_LIRF`;
+  - the single-row S1 and W1 quantification;
+  - the Advisor's forecast misses;
+  - the ledger decisions are filled;
+  - the delegated-work list and process notes are completed.
+- **INC-0005 closed; INC-0004 open.** Days 1–4 (the cloud scope) are complete. Day 5 starts on the laptop from `docs/reproducibility/HANDOFF_D04.md`.
