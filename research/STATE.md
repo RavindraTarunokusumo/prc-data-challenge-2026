@@ -1,5 +1,16 @@
 # Research State
 
+## Day 5 in progress (owner laptop; updated 2026-10-01T17:16Z, D05-S04)
+
+- **Sessions:** D05-S01 to D05-S04, on branch `day-5`. Laptop: WSL2 11 GB, swap 0, RTX 5060 8 GB. INC-0007 is closed. Delegation is allowed under INC-0006 (open).
+- **E025** (H015 v2 reproduction): RESOURCE_FAILURE, a global OOM from a concurrent researcher pytest (INC-0008, closed; experiment lock added).
+- **E026** (H015 v2 reproduction): **PASS**. All development folds are within 0.008 s of E019, in 669 s at 5.22 GB. **The prediction files are not byte-identical to E019's** (AMD against Intel).
+- **Blocker for Day 5 comparisons:** E019's, E005's and E023's prediction files are not on the laptop, so row-level comparisons against them cannot run. This needs an Advisor ruling in the first Day 5 exchange.
+- **Champion: E019, unchanged.** Day 5 holdout: 1 of 1 available. Next experiment id: E027. Last exchange: X-D04-S02-0001.
+- **Next:** GPU calibration (`scripts/calibrate_gpu.py`; permuted target, no metric), then the Day 5 proposals.
+
+*The Day 4 close state below is unchanged.*
+
 *Updated 2026-10-01T01:58:22Z (measured with `date -u` at writing; D04-S02, at the Day 4 phase close).*
 
 - **Phase:** **Day 4 CLOSED** (historical priors and interactions). Phase close X-D04-S02-0001: **ACCEPT** (0.85), with no promotion and no holdout access. Splits, metric and availability definition are **FROZEN** (`config/frozen.json`). **Days 1–4 (cloud scope) are complete.**

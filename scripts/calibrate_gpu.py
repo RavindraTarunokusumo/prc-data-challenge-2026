@@ -51,6 +51,12 @@ CONFIGS = {
     "cb_gpu_raw": ("catboost", "FS2_RAW", {}, 500),
     "cb_gpu_raw_ordered": ("catboost", "FS2_RAW", {"boosting_type": "Ordered"}, 500),
     "cb_gpu_nocat": ("catboost_nocat", "FS2", {}, 500),
+    # target-mean CTRs (GPU-only type) beside the default border share and frequency, and
+    # a VRAM cap so the device peak reflects need rather than CatBoost's 95 % pre-allocation
+    "cb_gpu_raw_mean": ("catboost", "FS2_RAW", {
+        "simple_ctr": ["Borders", "FeatureFreq", "FloatTargetMeanValue"],
+        "combinations_ctr": ["Borders", "FeatureFreq", "FloatTargetMeanValue"]}, 500),
+    "cb_gpu_raw_cap": ("catboost", "FS2_RAW", {"gpu_ram_part": 0.4}, 500),
 }
 CB_KEYS = ["boosting_type", "grow_policy", "simple_ctr", "combinations_ctr",
            "max_ctr_complexity", "one_hot_max_size", "bootstrap_type", "subsample",

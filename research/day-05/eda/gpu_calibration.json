@@ -1,0 +1,515 @@
+{
+ "note": "permuted-target timing only; no metric computed (scripts/calibrate_gpu.py)",
+ "fold": "R3",
+ "host": "owner laptop: Ryzen 7 260, RTX 5060 Laptop 8 GB, WSL2 11 GB",
+ "runs": [
+  {
+   "name": "lgb_cpu_fs2",
+   "model": "lightgbm",
+   "feature_set": "FS2",
+   "params": {},
+   "iterations": 200,
+   "train_rows": 1755690,
+   "val_rows": 162332,
+   "cat_cardinality": {
+    "ADEP_mvt": 10,
+    "airport_runway": 69,
+    "WK_TBL_CAT_flt": 5,
+    "MARKET_SEGMENT_flt": 9,
+    "FLIGHT_TYPE_flt": 6,
+    "stand": 1343,
+    "actype": 120,
+    "op_prefix": 523,
+    "ades": 606
+   },
+   "n_num": 23,
+   "rss_gb_after_frame": 4.528,
+   "gpu_mib_before": 481,
+   "loadavg_before": [
+    "3.01",
+    "4.24",
+    "2.68"
+   ],
+   "total_s": [
+    22.2,
+    21.0
+   ],
+   "s_per_iter": 0.111,
+   "deterministic": true,
+   "pred_sha256": [
+    "8f1acf0775cd",
+    "8f1acf0775cd"
+   ],
+   "peak_rss_gb": 4.713,
+   "gpu_mib_peak": 481,
+   "resolved": null
+  },
+  {
+   "name": "lgb_cpu8_fs2",
+   "model": "lightgbm",
+   "feature_set": "FS2",
+   "params": {
+    "num_threads": 8
+   },
+   "iterations": 200,
+   "train_rows": 1755690,
+   "val_rows": 162332,
+   "cat_cardinality": {
+    "ADEP_mvt": 10,
+    "airport_runway": 69,
+    "WK_TBL_CAT_flt": 5,
+    "MARKET_SEGMENT_flt": 9,
+    "FLIGHT_TYPE_flt": 6,
+    "stand": 1343,
+    "actype": 120,
+    "op_prefix": 523,
+    "ades": 606
+   },
+   "n_num": 23,
+   "rss_gb_after_frame": 4.46,
+   "gpu_mib_before": 481,
+   "loadavg_before": [
+    "4.10",
+    "4.28",
+    "2.78"
+   ],
+   "total_s": [
+    20.0,
+    20.1
+   ],
+   "s_per_iter": 0.1,
+   "deterministic": true,
+   "pred_sha256": [
+    "8349d7b8b662",
+    "8349d7b8b662"
+   ],
+   "peak_rss_gb": 4.464,
+   "gpu_mib_peak": 481,
+   "resolved": null
+  },
+  {
+   "name": "xgb_gpu_fs2",
+   "model": "xgboost",
+   "feature_set": "FS2",
+   "params": {},
+   "iterations": 500,
+   "train_rows": 1755690,
+   "val_rows": 162332,
+   "cat_cardinality": {
+    "ADEP_mvt": 10,
+    "airport_runway": 69,
+    "WK_TBL_CAT_flt": 5,
+    "MARKET_SEGMENT_flt": 9,
+    "FLIGHT_TYPE_flt": 6,
+    "stand": 1343,
+    "actype": 120,
+    "op_prefix": 523,
+    "ades": 606
+   },
+   "n_num": 23,
+   "rss_gb_after_frame": 4.507,
+   "gpu_mib_before": 466,
+   "loadavg_before": [
+    "6.70",
+    "4.93",
+    "3.07"
+   ],
+   "total_s": [
+    100.1,
+    98.5
+   ],
+   "s_per_iter": 0.2002,
+   "deterministic": true,
+   "pred_sha256": [
+    "dc465d60f8a6",
+    "dc465d60f8a6"
+   ],
+   "peak_rss_gb": 4.917,
+   "gpu_mib_peak": 1141,
+   "resolved": null
+  },
+  {
+   "name": "cb_gpu_fs2",
+   "model": "catboost",
+   "feature_set": "FS2",
+   "params": {},
+   "iterations": 500,
+   "train_rows": 1755690,
+   "val_rows": 162332,
+   "cat_cardinality": {
+    "ADEP_mvt": 10,
+    "airport_runway": 69,
+    "WK_TBL_CAT_flt": 5,
+    "MARKET_SEGMENT_flt": 9,
+    "FLIGHT_TYPE_flt": 6,
+    "stand": 1343,
+    "actype": 120,
+    "op_prefix": 523,
+    "ades": 606
+   },
+   "n_num": 23,
+   "rss_gb_after_frame": 4.505,
+   "gpu_mib_before": 489,
+   "loadavg_before": [
+    "2.50",
+    "3.40",
+    "2.81"
+   ],
+   "total_s": [
+    85.1,
+    71.8
+   ],
+   "s_per_iter": 0.1702,
+   "deterministic": false,
+   "pred_sha256": [
+    "c7ffad9f6d02",
+    "b077623a5df6"
+   ],
+   "peak_rss_gb": 5.315,
+   "gpu_mib_peak": 7272,
+   "resolved": {
+    "boosting_type": "Plain",
+    "grow_policy": "SymmetricTree",
+    "simple_ctr": [
+     "Borders:CtrBorderCount=15:CtrBorderType=Uniform:TargetBorderCount=1:TargetBorderType=MinEntropy:Prior=0/1:Prior=0.5/1:Prior=1/1",
+     "FeatureFreq:CtrBorderCount=15:CtrBorderType=MinEntropy:Prior=0/1"
+    ],
+    "combinations_ctr": [
+     "Borders:CtrBorderCount=15:CtrBorderType=Uniform:TargetBorderCount=1:TargetBorderType=MinEntropy:Prior=0/1:Prior=0.5/1:Prior=1/1",
+     "FeatureFreq:CtrBorderCount=15:CtrBorderType=Median:Prior=0/1"
+    ],
+    "max_ctr_complexity": 4,
+    "one_hot_max_size": 2,
+    "bootstrap_type": "Bayesian",
+    "subsample": null,
+    "random_strength": 1,
+    "l2_leaf_reg": 3,
+    "border_count": 254,
+    "depth": 8,
+    "task_type": "GPU",
+    "gpu_ram_part": 0.95
+   }
+  },
+  {
+   "name": "cb_gpu_raw",
+   "model": "catboost",
+   "feature_set": "FS2_RAW",
+   "params": {},
+   "iterations": 500,
+   "train_rows": 1755690,
+   "val_rows": 162332,
+   "cat_cardinality": {
+    "ADEP_mvt": 10,
+    "airport_runway": 69,
+    "WK_TBL_CAT_flt": 5,
+    "MARKET_SEGMENT_flt": 9,
+    "FLIGHT_TYPE_flt": 6,
+    "stand": 1877,
+    "actype": 264,
+    "op_prefix": 2288,
+    "ades": 1507
+   },
+   "n_num": 23,
+   "rss_gb_after_frame": 4.511,
+   "gpu_mib_before": 469,
+   "loadavg_before": [
+    "2.28",
+    "2.77",
+    "2.65"
+   ],
+   "total_s": [
+    101.0,
+    94.4
+   ],
+   "s_per_iter": 0.202,
+   "deterministic": true,
+   "pred_sha256": [
+    "8cce8f36bdbb",
+    "8cce8f36bdbb"
+   ],
+   "peak_rss_gb": 5.179,
+   "gpu_mib_peak": 7291,
+   "resolved": {
+    "boosting_type": "Plain",
+    "grow_policy": "SymmetricTree",
+    "simple_ctr": [
+     "Borders:CtrBorderCount=15:CtrBorderType=Uniform:TargetBorderCount=1:TargetBorderType=MinEntropy:Prior=0/1:Prior=0.5/1:Prior=1/1",
+     "FeatureFreq:CtrBorderCount=15:CtrBorderType=MinEntropy:Prior=0/1"
+    ],
+    "combinations_ctr": [
+     "Borders:CtrBorderCount=15:CtrBorderType=Uniform:TargetBorderCount=1:TargetBorderType=MinEntropy:Prior=0/1:Prior=0.5/1:Prior=1/1",
+     "FeatureFreq:CtrBorderCount=15:CtrBorderType=Median:Prior=0/1"
+    ],
+    "max_ctr_complexity": 4,
+    "one_hot_max_size": 2,
+    "bootstrap_type": "Bayesian",
+    "subsample": null,
+    "random_strength": 1,
+    "l2_leaf_reg": 3,
+    "border_count": 254,
+    "depth": 8,
+    "task_type": "GPU",
+    "gpu_ram_part": 0.95
+   }
+  },
+  {
+   "name": "cb_gpu_raw_ordered",
+   "model": "catboost",
+   "feature_set": "FS2_RAW",
+   "params": {
+    "boosting_type": "Ordered"
+   },
+   "iterations": 500,
+   "train_rows": 1755690,
+   "val_rows": 162332,
+   "cat_cardinality": {
+    "ADEP_mvt": 10,
+    "airport_runway": 69,
+    "WK_TBL_CAT_flt": 5,
+    "MARKET_SEGMENT_flt": 9,
+    "FLIGHT_TYPE_flt": 6,
+    "stand": 1877,
+    "actype": 264,
+    "op_prefix": 2288,
+    "ades": 1507
+   },
+   "n_num": 23,
+   "rss_gb_after_frame": 4.523,
+   "gpu_mib_before": 494,
+   "loadavg_before": [
+    "2.78",
+    "2.45",
+    "2.53"
+   ],
+   "total_s": [
+    123.9,
+    122.3
+   ],
+   "s_per_iter": 0.2478,
+   "deterministic": false,
+   "pred_sha256": [
+    "a9337ead06ed",
+    "91b9ae30f722"
+   ],
+   "peak_rss_gb": 5.228,
+   "gpu_mib_peak": 7446,
+   "resolved": {
+    "boosting_type": "Ordered",
+    "grow_policy": "SymmetricTree",
+    "simple_ctr": [
+     "Borders:CtrBorderCount=15:CtrBorderType=Uniform:TargetBorderCount=1:TargetBorderType=MinEntropy:Prior=0/1:Prior=0.5/1:Prior=1/1",
+     "FeatureFreq:CtrBorderCount=15:CtrBorderType=MinEntropy:Prior=0/1"
+    ],
+    "combinations_ctr": [
+     "Borders:CtrBorderCount=15:CtrBorderType=Uniform:TargetBorderCount=1:TargetBorderType=MinEntropy:Prior=0/1:Prior=0.5/1:Prior=1/1",
+     "FeatureFreq:CtrBorderCount=15:CtrBorderType=Median:Prior=0/1"
+    ],
+    "max_ctr_complexity": 4,
+    "one_hot_max_size": 2,
+    "bootstrap_type": "Bayesian",
+    "subsample": null,
+    "random_strength": 1,
+    "l2_leaf_reg": 3,
+    "border_count": 254,
+    "depth": 8,
+    "task_type": "GPU",
+    "gpu_ram_part": 0.95
+   }
+  },
+  {
+   "name": "cb_gpu_nocat",
+   "model": "catboost_nocat",
+   "feature_set": "FS2",
+   "params": {},
+   "iterations": 500,
+   "train_rows": 1755690,
+   "val_rows": 162332,
+   "cat_cardinality": {
+    "ADEP_mvt": 10,
+    "airport_runway": 69,
+    "WK_TBL_CAT_flt": 5,
+    "MARKET_SEGMENT_flt": 9,
+    "FLIGHT_TYPE_flt": 6,
+    "stand": 1343,
+    "actype": 120,
+    "op_prefix": 523,
+    "ades": 606
+   },
+   "n_num": 23,
+   "rss_gb_after_frame": 4.331,
+   "gpu_mib_before": 335,
+   "loadavg_before": [
+    "3.51",
+    "2.44",
+    "2.47"
+   ],
+   "total_s": [
+    14.6,
+    12.9
+   ],
+   "s_per_iter": 0.0292,
+   "deterministic": false,
+   "pred_sha256": [
+    "0991bcc70073",
+    "0b59203123b3"
+   ],
+   "peak_rss_gb": 4.596,
+   "gpu_mib_peak": 7122,
+   "resolved": {
+    "boosting_type": "Plain",
+    "grow_policy": "SymmetricTree",
+    "simple_ctr": null,
+    "combinations_ctr": null,
+    "max_ctr_complexity": null,
+    "one_hot_max_size": null,
+    "bootstrap_type": "Bayesian",
+    "subsample": null,
+    "random_strength": 1,
+    "l2_leaf_reg": 3,
+    "border_count": 254,
+    "depth": 8,
+    "task_type": "GPU",
+    "gpu_ram_part": 0.95
+   }
+  },
+  {
+   "name": "cb_gpu_raw_mean",
+   "model": "catboost",
+   "feature_set": "FS2_RAW",
+   "params": {
+    "simple_ctr": [
+     "Borders",
+     "FeatureFreq",
+     "FloatTargetMeanValue"
+    ],
+    "combinations_ctr": [
+     "Borders",
+     "FeatureFreq",
+     "FloatTargetMeanValue"
+    ]
+   },
+   "iterations": 500,
+   "train_rows": 1755690,
+   "val_rows": 162332,
+   "cat_cardinality": {
+    "ADEP_mvt": 10,
+    "airport_runway": 69,
+    "WK_TBL_CAT_flt": 5,
+    "MARKET_SEGMENT_flt": 9,
+    "FLIGHT_TYPE_flt": 6,
+    "stand": 1877,
+    "actype": 264,
+    "op_prefix": 2288,
+    "ades": 1507
+   },
+   "n_num": 23,
+   "rss_gb_after_frame": 4.485,
+   "gpu_mib_before": 335,
+   "loadavg_before": [
+    "3.96",
+    "2.63",
+    "2.52"
+   ],
+   "total_s": [
+    86.6,
+    85.5
+   ],
+   "s_per_iter": 0.1732,
+   "deterministic": false,
+   "pred_sha256": [
+    "6cb13b0d0fb9",
+    "b9f708fcf5e6"
+   ],
+   "peak_rss_gb": 5.18,
+   "gpu_mib_peak": 7112,
+   "resolved": {
+    "boosting_type": "Plain",
+    "grow_policy": "SymmetricTree",
+    "simple_ctr": [
+     "Borders:CtrBorderCount=15:CtrBorderType=Uniform:TargetBorderCount=1:TargetBorderType=MinEntropy:Prior=0/1:Prior=0.5/1:Prior=1/1",
+     "FeatureFreq:CtrBorderCount=15:CtrBorderType=MinEntropy:Prior=0/1",
+     "FloatTargetMeanValue:CtrBorderCount=15:CtrBorderType=Uniform:TargetBorderCount=1:TargetBorderType=MinEntropy:Prior=0/1"
+    ],
+    "combinations_ctr": [
+     "Borders:CtrBorderCount=15:CtrBorderType=Uniform:TargetBorderCount=1:TargetBorderType=MinEntropy:Prior=0/1:Prior=0.5/1:Prior=1/1",
+     "FeatureFreq:CtrBorderCount=15:CtrBorderType=Median:Prior=0/1",
+     "FloatTargetMeanValue:CtrBorderCount=15:CtrBorderType=Uniform:TargetBorderCount=1:TargetBorderType=MinEntropy:Prior=0/1"
+    ],
+    "max_ctr_complexity": 4,
+    "one_hot_max_size": 2,
+    "bootstrap_type": "Bayesian",
+    "subsample": null,
+    "random_strength": 1,
+    "l2_leaf_reg": 3,
+    "border_count": 254,
+    "depth": 8,
+    "task_type": "GPU",
+    "gpu_ram_part": 0.95
+   }
+  },
+  {
+   "name": "cb_gpu_raw_cap",
+   "model": "catboost",
+   "feature_set": "FS2_RAW",
+   "params": {
+    "gpu_ram_part": 0.4
+   },
+   "iterations": 500,
+   "train_rows": 1755690,
+   "val_rows": 162332,
+   "cat_cardinality": {
+    "ADEP_mvt": 10,
+    "airport_runway": 69,
+    "WK_TBL_CAT_flt": 5,
+    "MARKET_SEGMENT_flt": 9,
+    "FLIGHT_TYPE_flt": 6,
+    "stand": 1877,
+    "actype": 264,
+    "op_prefix": 2288,
+    "ades": 1507
+   },
+   "n_num": 23,
+   "rss_gb_after_frame": 4.534,
+   "gpu_mib_before": 325,
+   "loadavg_before": [
+    "2.19",
+    "2.35",
+    "2.43"
+   ],
+   "total_s": [
+    81.0,
+    77.7
+   ],
+   "s_per_iter": 0.162,
+   "deterministic": false,
+   "pred_sha256": [
+    "0f1c3f9cf233",
+    "8cce8f36bdbb"
+   ],
+   "peak_rss_gb": 5.08,
+   "gpu_mib_peak": 3251,
+   "resolved": {
+    "boosting_type": "Plain",
+    "grow_policy": "SymmetricTree",
+    "simple_ctr": [
+     "Borders:CtrBorderCount=15:CtrBorderType=Uniform:TargetBorderCount=1:TargetBorderType=MinEntropy:Prior=0/1:Prior=0.5/1:Prior=1/1",
+     "FeatureFreq:CtrBorderCount=15:CtrBorderType=MinEntropy:Prior=0/1"
+    ],
+    "combinations_ctr": [
+     "Borders:CtrBorderCount=15:CtrBorderType=Uniform:TargetBorderCount=1:TargetBorderType=MinEntropy:Prior=0/1:Prior=0.5/1:Prior=1/1",
+     "FeatureFreq:CtrBorderCount=15:CtrBorderType=Median:Prior=0/1"
+    ],
+    "max_ctr_complexity": 4,
+    "one_hot_max_size": 2,
+    "bootstrap_type": "Bayesian",
+    "subsample": null,
+    "random_strength": 1,
+    "l2_leaf_reg": 3,
+    "border_count": 254,
+    "depth": 8,
+    "task_type": "GPU",
+    "gpu_ram_part": 0.4
+   }
+  }
+ ]
+}
