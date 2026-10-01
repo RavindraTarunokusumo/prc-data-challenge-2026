@@ -15,6 +15,10 @@ PARAMS = {
     "routed_lightgbm": {"objective": "regression", "num_boost_round": 5, "num_leaves": 7,
                         "num_threads": 1,
                         "route_ridge_params": {"alpha": 1.0, "winsor": [0.005, 0.995]}},
+    "catboost": {"loss_function": "RMSE", "iterations": 5, "depth": 3, "thread_count": 1},
+    "routed_catboost": {"loss_function": "RMSE", "iterations": 5, "depth": 3,
+                        "thread_count": 1,
+                        "route_ridge_params": {"alpha": 1.0, "winsor": [0.005, 0.995]}},
 }
 
 
@@ -53,7 +57,7 @@ def test_model_contract(name):
     assert np.isfinite(pred["pred"].to_numpy()).all()
 
 
-@pytest.mark.parametrize("name", ["lightgbm", "xgboost", "ridge"])
+@pytest.mark.parametrize("name", ["lightgbm", "xgboost", "ridge", "catboost"])
 def test_model_deterministic(name):
     feats = synthetic(seed=1)
     a = REGISTRY[name](feats, PARAMS.get(name, {}), 42)
@@ -165,3 +169,68 @@ def test_routed_ridge_sees_fs0_columns_only():
     va = feats.filter(pl.col("role") == "val").sort("MVT_ID_mvt")
     route = ((va["ADEP_mvt"] == "LIRF") & (va["flt_missing"] == 1)).to_numpy()
     assert np.array_equal(a["pred"].to_numpy()[route], b["pred"].to_numpy()[route])
+
+
+def test_routed_train_exclude_drops_only_routed_training_rows():
+    """H018: with `route_train_exclude`, non-routed rows equal a LightGBM fitted without the
+    routed subgroup's training rows, routed rows still take the ridge fitted on every
+    training row, and absent/false reproduces the Day 3 procedure."""
+    feats = synthetic(n=2000, seed=7)
+    p = PARAMS["routed_lightgbm"]
+    gb_p = {k: v for k, v in p.items() if k != "route_ridge_params"}
+    base = REGISTRY["routed_lightgbm"](feats, p, 42).sort("MVT_ID_mvt")
+    off = REGISTRY["routed_lightgbm"](feats, {**p, "route_train_exclude": False}, 42)
+    assert np.array_equal(base["pred"].to_numpy(), off.sort("MVT_ID_mvt")["pred"].to_numpy())
+    out = REGISTRY["routed_lightgbm"](feats, {**p, "route_train_exclude": True}, 42)
+    out = out.sort("MVT_ID_mvt")
+    routed_train = (pl.col("role") == "train") & (pl.col("ADEP_mvt") == "LIRF") & (
+        pl.col("flt_missing") == 1)
+    assert feats.filter(routed_train).height > 0
+    gb = REGISTRY["lightgbm"](feats.filter(~routed_train), gb_p, 42).sort("MVT_ID_mvt")
+    rd = REGISTRY["ridge"](feats, p["route_ridge_params"], 42).sort("MVT_ID_mvt")
+    va = feats.filter(pl.col("role") == "val").sort("MVT_ID_mvt")
+    route = ((va["ADEP_mvt"] == "LIRF") & (va["flt_missing"] == 1)).to_numpy()
+    got = out["pred"].to_numpy()
+    assert np.array_equal(got[route], rd["pred"].to_numpy()[route])
+    assert np.array_equal(got[~route], gb["pred"].to_numpy()[~route])
+
+
+def test_catboost_deterministic_multithread_and_unseen_levels():
+    """Same input + seed + thread_count gives identical predictions; a validation level
+    unseen in training (null after the vocabulary step) does not break the fit."""
+    feats = synthetic(n=2000, seed=8).with_columns(
+        pl.when(pl.col("role") == "val").then(pl.lit("NEWRWY")).otherwise(pl.col("airport_runway"))
+        .alias("airport_runway"))
+    p = {**PARAMS["catboost"], "iterations": 20, "thread_count": 4}
+    a = REGISTRY["catboost"](feats, p, 42)["pred"].to_numpy()
+    b = REGISTRY["catboost"](feats, p, 42)["pred"].to_numpy()
+    assert np.isfinite(a).all() and np.array_equal(a, b)
+
+
+def test_routed_catboost_routes_only_lirf_nm_missing():
+    feats = synthetic(n=2000, seed=5)
+    p = PARAMS["routed_catboost"]
+    out = REGISTRY["routed_catboost"](feats, p, 42).sort("MVT_ID_mvt")
+    cb = REGISTRY["catboost"](feats, {k: v for k, v in p.items() if k != "route_ridge_params"},
+                              42).sort("MVT_ID_mvt")
+    rd = REGISTRY["ridge"](feats, p["route_ridge_params"], 42).sort("MVT_ID_mvt")
+    va = feats.filter(pl.col("role") == "val").sort("MVT_ID_mvt")
+    route = ((va["ADEP_mvt"] == "LIRF") & (va["flt_missing"] == 1)).to_numpy()
+    assert 0 < route.sum() < route.size
+    got = out["pred"].to_numpy()
+    assert np.array_equal(got[route], rd["pred"].to_numpy()[route])
+    assert np.array_equal(got[~route], cb["pred"].to_numpy()[~route])
+
+
+def test_routed_catboost_train_exclude():
+    feats = synthetic(n=2000, seed=7)
+    p = PARAMS["routed_catboost"]
+    cb_p = {k: v for k, v in p.items() if k != "route_ridge_params"}
+    out = REGISTRY["routed_catboost"](feats, {**p, "route_train_exclude": True}, 42)
+    out = out.sort("MVT_ID_mvt")
+    routed_train = (pl.col("role") == "train") & (pl.col("ADEP_mvt") == "LIRF") & (
+        pl.col("flt_missing") == 1)
+    cb = REGISTRY["catboost"](feats.filter(~routed_train), cb_p, 42).sort("MVT_ID_mvt")
+    va = feats.filter(pl.col("role") == "val").sort("MVT_ID_mvt")
+    route = ((va["ADEP_mvt"] == "LIRF") & (va["flt_missing"] == 1)).to_numpy()
+    assert np.array_equal(out["pred"].to_numpy()[~route], cb["pred"].to_numpy()[~route])

@@ -1,0 +1,10 @@
+{
+ "note": "Addendum to catboost_calibration.json (researcher, D04-S01). Same permuted-target R3 FS2 frame (scripts/calibrate_catboost.py build_frame; LIRF NM-missing training rows dropped), gbm.catboost end to end (encode + fit + predict), CB base params {loss_function: RMSE, learning_rate: 0.08, border_count: 254, thread_count: 4} plus depth 6 and max_ctr_complexity 1. No metric computed. Script: scratch cb_ctr1.py (loop over iterations calling gbm.catboost on cc.build_frame()).",
+ "runs": [
+  {"depth": 6, "iterations": 100, "max_ctr_complexity": 1, "total_s": 38.8, "peak_rss_gb": 3.97, "loadavg": [2.21, 2.98, 3.03]},
+  {"depth": 6, "iterations": 300, "max_ctr_complexity": 1, "total_s": 94.8, "peak_rss_gb": 3.97, "loadavg": [3.58, 3.23, 3.12]},
+  {"depth": 6, "iterations": 600, "max_ctr_complexity": 1, "total_s": 183.9, "peak_rss_gb": 3.97, "loadavg": [3.66, 3.48, 3.24]}
+ ],
+ "reading": "Linear in iterations at about 0.29-0.30 s/iteration on R3 (1.76 M training rows), versus 0.88-1.13 s/iteration with the default max_ctr_complexity (catboost_calibration.json). RAM flat.",
+ "extrapolation_8_folds_1000_iterations": "About 305 s for R3; 8 folds are about 6.2 R3-equivalents of training rows, so about 31-32 min of fitting plus about 3 min of feature builds and ridge fits: 35-45 min. Above the CLASS-M target (30 min; runner kill at 45 min), inside CLASS-L (90 min; kill at 135 min). Peak RAM about 5-6 GB including the frame."
+}

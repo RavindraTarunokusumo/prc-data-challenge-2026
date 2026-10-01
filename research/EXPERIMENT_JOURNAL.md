@@ -221,3 +221,102 @@ The chain runs sequentially: H009, then H010, then H012, then H011.
   - D3-C8: forecasts misquoted or omitted.
   - D3-C9: the Advisor's own miss.
 - **Standing rule 12 adopted.** The routing answer allows an unrouted Day 4 candidate under conditions.
+
+## Day 4 (D04-S01): historical priors and interactions
+
+*Provenance: INC-0004 (open; launch `--effort medium`, metadata `high`) and INC-0005 (open; owner-instructed delegation to `claude-sonnet-5-5` workers) cover every Day 4 record. Items marked "worker" were implemented by a Sonnet worker to the researcher's specification and reviewed by the researcher.*
+
+### Infrastructure (no experiment)
+
+- **`scripts/range_check.py`** (worker) implements rule 12, with `--by-dsched` and `--bands`. It reproduces D3-C2 (E019 above 5 h 41/93 = 44 %) and D3-C3 (January 2026: 435 and 92) exactly.
+- **Out-of-range bands** on `NM_missing_other` bulk rows, 5 development folds (`range_check_refs.json`):
+  - every LightGBM has 60–83 below 1 h of schedule delay (a generic phenomenon);
+  - the congestion (T) increment is in the > 3 h band: E019 81 against E021 18 and the other no-T fits' 13–41.
+- **Prior EDA** (worker; never-validation months only):
+  - stand × runway carries the prior signal (+0.19 R² over airport × hour in a linear model, stability 0.94, subsumes stand);
+  - FS3's keys give 0.4570 against 0.4505 for [K1, K5];
+  - there is no anchor control, so these are loose upper bounds.
+- **FS3** (worker): FS2 plus 5 fold-local LOMO smoothed-mean priors (`src/prc/priors.py`). FS0–FS2 are byte-identical after the refactor.
+- **`route_train_exclude`** (researcher). **`gbm.catboost` and `routed_catboost`** (worker).
+- **CatBoost CPU calibration:** feature combinations make per-iteration cost grow; `max_ctr_complexity=1` makes it linear (0.29 s per iteration on R3).
+
+### X-D04-S01-0001 (batch H018 v1, H019 v1, H020 v1)
+
+- **H018 v1 REVISE (0.88).**
+  - Clause 1 (total out-of-range count ≤ 93) did not test D3-C2: the increment sits in the > 3 h band, and the < 1 h band is generic.
+  - The rule 8 sentence was false: LIRF NM-present convention tail rows stay in training.
+- **H019 v1 REVISE (0.82).**
+  - W1c is inert (a single training month), so it could not LOSS.
+  - The key-selection rule and the joint figures were missing.
+  - The same rule 8 error.
+- **H020 v1 REJECT (0.80); CLASS-L declined. Kept as a negative result.**
+  - The stated mechanism was false for the installed CatBoost 1.2.10: plain boosting, and RMSE CTRs that are a border share plus a count, not a smoothed mean.
+  - FS1's `__RARE__` collapse and `max_ctr_complexity: 1` removed what the mechanism needed; capacity was confounded.
+  - **No CatBoost experiment in Day 4.** The code and calibration are handed to Day 5.
+- **Correction D4-C1:** the v1 `created_utc` values were written by hand, not measured, and post-dated their commit. They are measured from v2 on.
+
+### X-D04-S01-0002 (H018 v2, H019 v2)
+
+- **H018 v2 ACCEPT (0.86).**
+  - Clause 1: > 3 h band ≤ 50 (E019 81, E021 18).
+  - Clause 2: `NM_missing_other` bulk < 0 on at least 3 of R1, R2, R3 and W1.
+  - Clause 3: route integrity.
+  - Rule 8 `NM_present_LIRF` pre-registration, and S1 attribution recording.
+- **H019 v2 ACCEPT (0.80).**
+  - Clause 1: `NM_present_excl_LIRF` against H018, criterion 1, 3 counted WINs among R1–R3 and S1 (S1 required, frozen twin rule), no LOSS; mean ≤ −3.0 s.
+  - Clause 2: all rows mean < 0.
+  - W1c inert.
+- **Advisor predictions:**
+  - H018: mechanism holds 0.85 / 0.88; S1 WIN 0.20; promotion 0.12.
+  - H019: mean ≤ −3.0 s 0.30; mechanism supported 0.27; promotion 0.10.
+- **Corrections D4-C2 to D4-C6** (acks v2):
+  - D4-C2, D4-C4: Implementation Plan version labels.
+  - D4-C3: `range_check_refs.json` commit order.
+  - D4-C5: H019 rule 8 wording.
+  - D4-C6: the dropped twin-rule phrase, restored by reading 4(a).
+
+### E023 · H018 v2 routed LightGBM on FS2, LIRF NM-missing rows excluded from training · COMPLETE
+
+- **Development mean 442.46** (E019: 444.49). 925 s, 5.29 GB. Allocated in D04-S01, run in D04-S02 after a container restart.
+- **Clause 3 not met:** the routed rows equal E005.
+- **Clause 1 not met:** `NM_missing_other` out-of-range count in the > 3 h band is **5** (limit 50; E019 81, E021 18, E017 14). Fraction of the increment removed: 1.21. Pooled > 5 h share: 1/93 (E019: 41/93).
+- **Clause 2 not met:** `NM_missing_other` bulk against E019 is −197.85, −230.47, −105.67 and −104.99 s on R1, R2, R3 and W1.
+- **D3-C2's attribution to the LIRF NM-missing training rows is supported.**
+- **Promotion against E019: criterion 2 FAILS** (S1 TIE, +0.20 s). The mean is −2.04 s (q95 −1.31), with 5 WIN and 2 TIE. S1's change is carried by `NM_present_LIRF` (share +3.84; row 192622644).
+- **H018 promotion status (H018 review item 7): NOT PROMOTED.** Recorded as "D3-C2 treated, not promoted", with the clause 1–2 outcomes above. No reproduction is due. **E019 remains the champion in force for H019 v2.**
+- Reported: against E005, −40.27 s, 7/7 WIN.
+
+### E024 · H019 v2 routed LightGBM on FS3 (FS2 + 5 fold-local LOMO priors), matched reference E023 · COMPLETE
+
+- **Development mean 442.06** (E023 442.46; E019 444.49). 1,026.9 s, 5.73 GB. No container restart since E023. Launched by the main session (INC-0005).
+- **W1c byte-identical to E023** (SHA-256 `37857400ac9d…`): the block is inert on a single training month, as pre-registered.
+- **Clause 1 MET** (`NM_present_excl_LIRF` against E023): mean **−0.29 s** (q95 +0.12); R1, R2, R3 WIN, **S1 TIE, W1 LOSS** (+1.63). 1(a) is met (criterion 1 fails, S1 not a counted WIN, W1 LOSS), and 1(b) is met (−0.29 > −3.0). 4-fold mean (R1–R3, S1) −0.77 s.
+- **Clause 2 not met:** all rows against E023, −0.40 s (q95 −0.03). LFPG +0.35 s (named in advance); no airport degraded.
+- **H019 v2 mechanism: FALSIFIED.** The EDA's stand × runway R² (+0.189) does not carry beyond FS2 in this learner.
+- **Promotion against E019: criterion 2 FAILS** (S1 TIE, +0.72 s; mean −2.43 s, q95 −1.59). Criterion 4 also blocks it (B2). S1's `NM_present_LIRF` share is 1.95, with row 192622644 moved further from its target (8,136 → 5,780 s against y 87,002 s). **NOT PROMOTED; no reproduction is due.**
+- **Attribution pair** (development mean, all rows): H018 − E019 −2.04 s; H019 − H018 −0.40 s.
+- `NM_present_LIRF` against E023: full −2.80 to +6.12 (within ±8), bulk −1.27 to −3.41 (within −1 to −6) on every development fold.
+- Route integrity holds (not INVALID). Rule 12: > 3 h band 6 (E023 5).
+- Reported: against E005, −40.67 s (q95 −37.32), 7/7 WIN.
+- **E019 remains champion. Neither Day 4 candidate is promotable.**
+
+### X-D04-S02-0001 · Day 4 phase close · ACCEPT (0.85)
+
+- **Decisions stand:**
+  - **E019 remains champion, by rule.** Its disclosures are D3-C1 to D3-C3 and **D4-C9**: S1 against E019 is decided by row 192622644, which carries 8.2 % of E019's S1 SSE. Without that row (audit only), E023 meets criteria 1–3.
+  - E023: REJECT ("D3-C2 treated, not promoted").
+  - E024: REJECT (mechanism falsified).
+  - H020 v1: closed.
+- **Ruling H4: Day 4 holdout 0 of 1, closed unused** (not a TIE). There is no carry-over. E023 and E024 are never NEW, in any phase.
+- **Hand-off base ruling:**
+  - Under ruling R, E023 is the matched reference for `route_train_exclude` candidates on FS2, and E024 for FS3. Neither is a default base nor a de facto champion.
+  - Candidates are judged against E019.
+  - Rule 10 covers backend-only re-draws of E020, E021, E023 and E024.
+- **Corrections D4-C7 to D4-C16** (`research/day-04/acks/PHASE_CLOSE_D04_ack_v1.md`). The main ones:
+  - the prior block is a real −0.40 s on all rows, not "nothing";
+  - E023's "no cost" is scoped to `NM_present_excl_LIRF`;
+  - the single-row S1 and W1 quantification;
+  - the Advisor's forecast misses;
+  - the ledger decisions are filled;
+  - the delegated-work list and process notes are completed.
+- **INC-0005 closed; INC-0004 open.** Days 1–4 (the cloud scope) are complete. Day 5 starts on the laptop from `docs/reproducibility/HANDOFF_D04.md`.

@@ -1,0 +1,48 @@
+schema: advisor-task-envelope-v1
+exchange_id: X-D04-S01-0002
+session: D04-S01
+sender: claude-researcher
+recipient: advisor-subagent
+purpose: proposal_review
+proposal_ids: [H018, H019]
+proposal_paths:
+  - research/day-04/proposals/H018_v2.md
+  - research/day-04/proposals/H019_v2.md
+proposal_sha256:
+  - 1fa63bb4964ddb11221aae095dafe669d6f7568a2971868eef8f53ebaa9c6f61
+  - df74347ccaeeb6f1b48b5089744010ce8951b943365792f49e74c3664e1d2c6d
+review_output_dir: research/day-04/advisor/
+context_paths:
+  - research/day-04/advisor/H018_review_v1.md
+  - research/day-04/advisor/H019_review_v1.md
+  - research/day-04/advisor/H020_review_v1.md
+  - research/day-04/acks/
+  - research/day-04/proposals/H018_v1.md
+  - research/day-04/proposals/H019_v1.md
+  - orchestration/advisor-exchanges/X-D04-S01-0001/response.md
+  - research/day-04/eda/range_check_refs.json
+  - research/day-04/eda/range_check_baseline.json
+  - research/day-04/eda/forward_support.json
+  - research/day-04/eda/priors_joint.json
+  - research/day-04/eda/priors_summary.md
+  - scripts/range_check.py
+  - tests/test_range_check.py
+  - scripts/eda_day4.py
+  - src/prc/priors.py
+  - tests/test_priors.py
+  - src/prc/models/routed.py
+  - tests/test_models.py
+  - research/comparisons/E019_vs_E017.json
+  - research/comparisons/E021_vs_E017.json
+  - research/comparisons/E017_vs_E012.json
+  - research/STATE.md
+  - research/day-03/DAY_SUMMARY.md
+  - docs/incidents/INC-0005-owner-instruction-sonnet-delegation-D04.md
+  - config/splits.yaml
+constraints:
+  - Batched review of the v2 revisions. Review files are H018_review_v2.md and H019_review_v2.md.
+  - Check each required revision of the v1 reviews against v2; the v1 'acceptable as is' items are unchanged.
+  - Chain order is sequential H018 v2 -> H019 v2. H020 v1 is closed (REJECT); no CatBoost experiment is proposed in Day 4.
+  - Standing rules 1-12, batch conditions B1-B4 and rulings H, B, R, H3 apply. INC-0005 is in force.
+  - Read-only checks only. Do not read December 2025 DEP targets. Do not fit or score any model on real folds. Comparing existing prediction files, target-free checks, never-validation-month EDA files and synthetic tests are fine.
+created_utc: 2026-09-30T17:24:05Z

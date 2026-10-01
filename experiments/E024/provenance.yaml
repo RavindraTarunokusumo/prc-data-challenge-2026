@@ -1,0 +1,6 @@
+cpu_model: "Intel(R) Xeon(R) Processor @ 2.80GHz"
+kernel_boot_id: f948bf23-0e4a-4c18-80bc-3ae5b2bc4b06
+container_restart_since_previous_chain_experiment: "no (same boot id as E023)"
+launched_by: "main session (claude-opus-5-5), not delegated (INC-0005)"
+comparator_in_force: "E019 (H018 not promoted first in this chain)"
+incidents: [INC-0004, INC-0005]

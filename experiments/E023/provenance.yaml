@@ -1,0 +1,6 @@
+cpu_model: "Intel(R) Xeon(R) Processor @ 2.80GHz"
+kernel_boot_id: f948bf23-0e4a-4c18-80bc-3ae5b2bc4b06
+container_restart_since_E022: "yes (several: D03 close -> D04-S01 start; D04-S01 E023 allocation -> D04-S02 start)"
+container_restart_between_allocation_and_run: "yes (allocated in D04-S01 under boot dd719b28; run in D04-S02 under this boot id)"
+launched_by: "main session (claude-opus-5-5), not delegated (INC-0005)"
+incidents: [INC-0004, INC-0005]

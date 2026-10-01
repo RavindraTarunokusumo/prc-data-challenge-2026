@@ -1,0 +1,40 @@
+schema: advisor-task-envelope-v1
+exchange_id: X-D04-S02-0001
+session: D04-S02
+sender: claude-researcher
+recipient: advisor-subagent
+purpose: phase_close_review
+proposal_ids: [PHASE_CLOSE_D04]
+proposal_paths:
+  - research/day-04/proposals/PHASE_CLOSE_D04_v1.md
+proposal_sha256:
+  - 1c7609037e02a42e7c185adff73354194b0dcd94eb5d1141966d0ae5e60a5ee5
+review_output_dir: research/day-04/advisor/
+context_paths:
+  - research/day-04/DAY_SUMMARY.md
+  - research/EXPERIMENT_JOURNAL.md
+  - research/STATE.md
+  - experiments/E023/
+  - experiments/E024/
+  - research/comparisons/
+  - research/day-04/proposals/
+  - research/day-04/advisor/
+  - research/day-04/acks/
+  - research/day-04/eda/
+  - research/day-04/sessions/
+  - research/day-03/DAY_SUMMARY.md
+  - research/day-03/advisor/PHASE_CLOSE_D03_review_v1.md
+  - research/day-02/advisor/PHASE_CLOSE_D02_review_v1.md
+  - docs/reproducibility/HANDOFF_D04.md
+  - docs/incidents/INC-0004-researcher-launch-configuration-D03.md
+  - docs/incidents/INC-0005-owner-instruction-sonnet-delegation-D04.md
+  - orchestration/session-registry.jsonl
+  - config/splits.yaml
+  - scripts/holdout_check.py
+  - src/prc/evaluate.py
+constraints:
+  - Review file is PHASE_CLOSE_D04_review_v1.md. Be especially adversarial (advisor policy; phase close).
+  - Standing rules 1-12, batch conditions B1-B4 and rulings H, B, R, H3 apply. INC-0005 is in force until this phase close.
+  - Rule on the Day 4 holdout access. Do NOT perform any access; the researcher runs holdout_check.py only if an ACCEPT names one, after the ack. Do not read December 2025 DEP targets.
+  - Read-only checks only; comparing existing prediction files and re-deriving committed statistics is fine. No model fitting or scoring on real folds.
+created_utc: 2026-10-01T01:32:58Z

@@ -1,6 +1,8 @@
 """Integrity check of a routed candidate (Day 3, H015 clause 3). Never reads truth.
 
     uv run python scripts/route_check.py ROUTED_EID UNROUTED_EID CHAMPION_EID
+UNROUTED_EID may be `-` (Day 4, H018: a routed candidate without an unrouted twin); then
+only the routed-subgroup check runs.
 
 For every fold the routed experiment predicted (scored folds and H), compares prediction
 files row by row:
@@ -41,11 +43,13 @@ def main(routed: str, unrouted: str, champion: str) -> None:
                              columns=["MVT_ID_mvt", "ADEP_mvt", "AOBT_3_flt"])
     sub = silver.select("MVT_ID_mvt", ((pl.col("ADEP_mvt") == "LIRF")
                                        & pl.col("AOBT_3_flt").is_null()).alias("route"))
-    shas = {e: manifest(e) for e in (routed, unrouted, champion)}
+    twin = unrouted != "-"
+    shas = {e: manifest(e) for e in ((routed, unrouted, champion) if twin else (routed, champion))}
     out, ok = {"routed": routed, "unrouted": unrouted, "champion": champion,
                "tolerance_champion_s": TOL_CHAMPION, "folds": {}}, True
     for fold in shas[routed]:
-        r, u, c = load(routed, fold), load(unrouted, fold), load(champion, fold)
+        r, c = load(routed, fold), load(champion, fold)
+        u = load(unrouted, fold) if twin else r
         if not (r["MVT_ID_mvt"].equals(u["MVT_ID_mvt"]) and r["MVT_ID_mvt"].equals(c["MVT_ID_mvt"])):
             sys.exit(f"{fold}: prediction files cover different rows")
         m = r.join(sub, on="MVT_ID_mvt", how="left")["route"].fill_null(False).to_numpy()
@@ -57,8 +61,8 @@ def main(routed: str, unrouted: str, champion: str) -> None:
         out["folds"][fold] = {
             "rows": int(m.size), "routed_rows": int(m.sum()),
             "max_abs_diff_routed_vs_champion": d_champ,
-            "max_abs_diff_nonrouted_vs_unrouted": d_unr,
-            "routed_rows_differing_from_unrouted": int((pr[m] != pu[m]).sum()),
+            "max_abs_diff_nonrouted_vs_unrouted": d_unr if twin else None,
+            "routed_rows_differing_from_unrouted": int((pr[m] != pu[m]).sum()) if twin else None,
             "sha256": {e: shas[e].get(fold) for e in shas}, "passes": passed}
     out["passes"] = bool(ok)
     path = ROOT / "research" / "comparisons" / f"route_check_{routed}.json"

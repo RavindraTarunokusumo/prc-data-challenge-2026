@@ -36,7 +36,9 @@ CONGESTION_NUMERIC = ["cg_dep_taxiing", "cg_dep_taxiing_rwy", "cg_dep_to_p15", "
                       "cg_arr_taxiing", "cg_sched_dep_n30", "cg_sched_arr_n30",
                       "cg_dep_to_during", "cg_dep_to_rwy_during", "cg_arr_land_during",
                       "cg_rwy_gap_prev", "cg_dep_to_rwy_m15"]
-NUMERIC = FS0_NUMERIC + FS1_EXTRA_NUMERIC + CONGESTION_NUMERIC
+# Day 4 prior columns (same names as prc.priors.FEATURES; a test checks they agree)
+PRIOR_NUMERIC = ["pr_stand_rwy", "pr_stand_rwy_logn", "pr_rwy_hour", "pr_op", "pr_actype"]
+NUMERIC = FS0_NUMERIC + FS1_EXTRA_NUMERIC + CONGESTION_NUMERIC + PRIOR_NUMERIC
 RARE_MIN = 100  # equals LightGBM's default min_data_per_group
 RARE = "__RARE__"
 AIRPORT_TZ = {"EDDF": "Europe/Berlin", "EDDM": "Europe/Berlin", "EGLL": "Europe/London",
@@ -103,17 +105,28 @@ def collapse_rare(feats: pl.DataFrame, cols: list[str], min_rows: int = RARE_MIN
     return feats.with_columns(out)
 
 
+def raw_static_exprs() -> dict[str, pl.Expr]:
+    """Row-own static keys at raw level, nulls kept (fs1 fills them with sentinels; the Day 4
+    priors treat null as an unseen key). Shared so both use the same expressions."""
+    sched_local = local_time("SCHED_TIME_UTC_mvt")
+    return {
+        "stand": pl.col("STAND_mvt").alias("stand"),
+        "actype": pl.col("AIRCRAFT_TYPE_mvt").alias("actype"),
+        "op_prefix": pl.col("FLIGHT_mvt").str.slice(0, 3).alias("op_prefix"),
+        "ades": pl.col("ADES_mvt").alias("ades"),
+        "sched_hour_local": sched_local.dt.hour().cast(pl.Int32).alias("sched_hour_local"),
+        "sched_weekday_local": sched_local.dt.weekday().cast(pl.Int32).alias(
+            "sched_weekday_local"),
+    }
+
+
 def fs1(view: pl.LazyFrame) -> pl.DataFrame:
     dep = view.filter(pl.col("PHASE_mvt") == "DEP")
-    sched_local = local_time("SCHED_TIME_UTC_mvt")
+    raw = raw_static_exprs()
+    fill = {"stand": "NA", "actype": "UNK", "op_prefix": "UNK", "ades": "UNK"}
     static = dep.select(
         "MVT_ID_mvt",
-        pl.col("STAND_mvt").fill_null("NA").alias("stand"),
-        pl.col("AIRCRAFT_TYPE_mvt").fill_null("UNK").alias("actype"),
-        pl.col("FLIGHT_mvt").str.slice(0, 3).fill_null("UNK").alias("op_prefix"),
-        pl.col("ADES_mvt").fill_null("UNK").alias("ades"),
-        sched_local.dt.hour().cast(pl.Int32).alias("sched_hour_local"),
-        sched_local.dt.weekday().cast(pl.Int32).alias("sched_weekday_local"),
+        *[(e.fill_null(fill[k]) if k in fill else e).alias(k) for k, e in raw.items()],
     ).collect()
     feats = fs0(view).join(static, on="MVT_ID_mvt", how="left", validate="1:1")
     return collapse_rare(feats, FS1_EXTRA_CATEGORICAL).sort("MVT_ID_mvt")
@@ -161,10 +174,18 @@ def fs2_p(view: pl.LazyFrame) -> pl.DataFrame:
     return fs2(view).drop(T_FEATURES)
 
 
+def fs3(view: pl.LazyFrame) -> pl.DataFrame:
+    """FS2 plus the Day 4 fold-local target-prior block (prc.priors, label P)."""
+    from prc.priors import priors
+
+    return fs2(view).join(priors(view), on="MVT_ID_mvt", how="left",
+                          validate="1:1").sort("MVT_ID_mvt")
+
+
 FEATURE_SETS = {"FS0": fs0, "FS0_NO_DELTAS": fs0_no_deltas, "FS1": fs1,
                 "FS1_NO_DELTAS": fs1_no_deltas, "FS1_NO_DSCHED": fs1_no_dsched,
                 "FS1_NO_ANCHOR": fs1_no_anchor, "FS1_STATIC_NO_DELTAS": fs1_static_no_deltas,
-                "FS2": fs2, "FS2_P": fs2_p}
+                "FS2": fs2, "FS2_P": fs2_p, "FS3": fs3}
 
 
 def columns(feats: pl.DataFrame) -> tuple[list[str], list[str]]:
