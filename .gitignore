@@ -48,3 +48,6 @@ mlruns/
 .DS_Store
 .vscode/
 .idea/
+
+# CatBoost training logs (written to the working directory by default)
+catboost_info/
