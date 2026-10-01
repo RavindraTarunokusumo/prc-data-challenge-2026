@@ -1,13 +1,17 @@
 # Research State
 
-## Day 5 in progress (owner laptop; updated 2026-10-01T17:16Z, D05-S04)
+## Day 5 in progress (owner laptop; updated 2026-10-01T18:56Z, D05-S04)
 
 - **Sessions:** D05-S01 to D05-S04, on branch `day-5`. Laptop: WSL2 11 GB, swap 0, RTX 5060 8 GB. INC-0007 is closed. Delegation is allowed under INC-0006 (open).
 - **E025** (H015 v2 reproduction): RESOURCE_FAILURE, a global OOM from a concurrent researcher pytest (INC-0008, closed; experiment lock added).
 - **E026** (H015 v2 reproduction): **PASS**. All development folds are within 0.008 s of E019, in 669 s at 5.22 GB. **The prediction files are not byte-identical to E019's** (AMD against Intel).
 - **Blocker for Day 5 comparisons:** E019's, E005's and E023's prediction files are not on the laptop, so row-level comparisons against them cannot run. This needs an Advisor ruling in the first Day 5 exchange.
-- **Champion: E019, unchanged.** Day 5 holdout: 1 of 1 available. Next experiment id: E027. Last exchange: X-D04-S02-0001.
-- **Next:** GPU calibration (`scripts/calibrate_gpu.py`; permuted target, no metric), then the Day 5 proposals.
+- **Champion: E019, unchanged.** Day 5 holdout: 1 of 1 available. Last completed exchange: X-D04-S02-0001.
+- **Done since:**
+  - GPU calibration (`research/day-05/eda/gpu_calibration.json`). CatBoost on GPU is 0.16–0.20 s per iteration with full CTR combinations, and not deterministic. XGBoost on GPU is slower than CPU LightGBM.
+  - W&B mirror (INC-0009) with learning curves (E027 on). The owner's early-stopping suggestion was logged, not adopted (D05-S04 session record).
+  - Laptop instances: **E027** (E019, curves), **E028** (E005), **E029** (E023). All pass `reproduce_check`; none is byte-identical.
+- **Pending:** X-D05-S04-0001 (LAPTOP_REFS v1, H021 v1, H022 v1, H023 v1). Next experiment id: E030.
 
 *The Day 4 close state below is unchanged.*
 

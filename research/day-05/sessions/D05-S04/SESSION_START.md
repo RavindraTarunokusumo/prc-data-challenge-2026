@@ -14,3 +14,12 @@
 - **Guard added:** an experiment lock in `run_experiment.py`. The real-silver tests and the GPU calibration stand down while an experiment runs (INC-0008, closed).
 - **Resolved model ID:** researcher `claude-opus-5-5` (`--effort high`); Advisor `advisor` subagent, definition `30fff5dd3c54`; delegation INC-0006.
 - **Next:** commit; allocate a new H015 v2 reproduction (E026) and run it **with nothing else running**; then the GPU calibration; then the Day 5 proposals.
+
+## Owner methodological suggestion (2026-10-01T18:48:34Z, logged per brief §1)
+
+> I saw the curves for E027. You could use early stopping.
+
+**Not adopted as a suggestion.** It is methodological input, outside the owner's safety, infrastructure and policy role (brief §1). It would become an instruction only through an incident record, as INC-0006 and INC-0009 were. The researcher's own assessment, which stands independently:
+- **Early stopping on the validation folds is validation-guided tuning.** The stopping point would be picked with the targets that then score the model ("no early stopping on validation data", `gbm.py`).
+- **Fold-local early stopping** on an inner temporal split of the training months is admissible. But E027's curves bound its gain: the development folds sit within 0.03–0.78 s of an *oracle* minimum, below criterion 1's 1.0 s, before the cost of holding a training month out. Only W1c (one training month; diagnostic) loses 4.9 s, and no submission fold trains on one month.
+- **For CatBoost (H021) the risk is the opposite** (under-convergence), and it is recorded from H021's own curve.

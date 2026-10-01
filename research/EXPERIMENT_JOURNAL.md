@@ -337,3 +337,16 @@ The chain runs sequentially: H009, then H010, then H012, then H011.
 
 - **Byte-identical to E026 (all 8 files):** learning-curve recording does not change the model. 892 s (+33 % for recording), 5.19 GB.
 - **Curves (observation):** development-fold validation RMSE is flat from about 500 iterations, and the 1,000 rounds sit within 0.03–0.78 s of each fold's minimum. W1c (one training month) overfits from 180 (+4.9 s by 1,000). Train RMSE about 200 s against validation 270–630 s. No round count is selected from this (selection hazard, INC-0009 addendum).
+
+### E028 · H004 v1 reproduction (laptop instance of E005) · PASS
+
+- Within 0.011 s of E005 on every development fold; not byte-identical (ridge/BLAS). 72.7 s.
+
+### E029 · H018 v2 reproduction (laptop instance of E023) · PASS
+
+- Within 0.0072 s of E023; not byte-identical. 893 s, 6.60 GB (E023 5.29 GB; cause not established). Learning curves recorded.
+- Single rows on the laptop: 192622644 (S1): E027 8,136 s, E029 7,041 s. 183910286 (W1, y 13,865 s): E027 1,979 s, E029 7,938 s.
+
+### X-D05-S04-0001 · submitted: LAPTOP_REFS v1, H021 v1, H022 v1, H023 v1
+
+- Rule L (laptop instances E027/E028/E029 for E019/E005/E023); the CatBoost GPU mechanism (H021) and its codes control (H022); the equal-weight blend candidate (H023, promotion P 0.20).
