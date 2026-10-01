@@ -3,7 +3,7 @@ schema: incident-v1
 incident_id: INC-0007
 type: infrastructure
 created_utc: 2026-10-01T16:10:00Z
-status: open
+status: closed
 ---
 
 # Day 5 start on the owner's laptop: memory below the brief's guard, data and credentials absent
@@ -43,3 +43,10 @@ Closes when D05-S02 confirms WSL memory ≥ 11 GB with swap 0, the raw data matc
 
 - The restart after D05-S01 came up unchanged (7.4 GiB, 2 GiB swap): `C:\Users\rvind\.wslconfig` had not been created. With the owner's permission the researcher wrote it (`[wsl2]`, `memory=11GB`, `swap=0`) at 16:12Z. It takes effect at the next `wsl --shutdown`.
 - Credentials: `.env` provided by the owner. Data: re-downloaded and verified, and the silver rebuild is byte-identical (`research/day-05/sessions/D05-S02/DATA_VERIFICATION.md`). Two of the three closing conditions are met. **Memory ≥ 11 GB with swap 0 is still open.**
+
+## Closure (2026-10-01T16:16:18Z)
+
+All three closing conditions are met (D05-S03 start, boot ID `71605e21…`):
+- **Memory:** WSL2 10,951 MiB total (`memory=11GB`), **swap 0** (`swapon --show` empty). The brief's 11 GB per-experiment guard is physically reachable, and the no-swap rule holds.
+- **Raw data** matches `raw_manifest.json`, and the **silver hash** matches `config/splits.yaml` (`efde4262…`; re-checked after the restart). See `research/day-05/sessions/D05-S02/DATA_VERIFICATION.md`.
+- Laptop compute calibration (runtime, GPU) goes into a Day 5 calibration record, starting with the E019 reproduction.
