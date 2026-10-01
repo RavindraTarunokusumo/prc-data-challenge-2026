@@ -1,6 +1,6 @@
 # Research State
 
-## Day 5 in progress (owner laptop; updated 2026-10-01T20:41Z, D05-S04)
+## Day 5 in progress (owner laptop; updated 2026-10-01T21:45Z, D05-S04)
 
 - **Sessions:** D05-S01 to D05-S04, on branch `day-5`. Laptop: WSL2 11 GB, swap 0, RTX 5060 8 GB. INC-0007 is closed. Delegation is allowed under INC-0006 (open).
 - **E025** (H015 v2 reproduction): RESOURCE_FAILURE, a global OOM from a concurrent researcher pytest (INC-0008, closed; experiment lock added).
@@ -25,7 +25,9 @@
   - Tools-freeze anchor `803ceeb`.
   - Chain: H022 (CLASS-M), then H021 (CLASS-L, GPU), then H021r (unconditional), then H023 (blend, gated on status only), then H023r if due.
   - Advisor forecast: H023 promotion P 0.04.
-- **Next experiment id: E030** (H022 v3).
+- **E030 (H022 v3, codes control):** 446.50; integrity holds.
+- **E031 (H021 v3, CTRs): 440.76, the best single run so far** (−1.69 s against E029 on all rows; S1 WIN). Not a candidate by pre-registration. Clause 1 is provisionally not met (−4.91 s); the noise condition needs H021r.
+- **PAUSED after E031 by the owner (INC-0011).** Remaining authorized chain: H021r (unconditional), H023, H023r if due. Next experiment id: E032.
 
 *The Day 4 close state below is unchanged.*
 

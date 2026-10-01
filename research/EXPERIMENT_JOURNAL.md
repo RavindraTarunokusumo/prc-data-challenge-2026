@@ -371,3 +371,10 @@ The chain runs sequentially: H009, then H010, then H012, then H011.
 
 - Development mean 446.50 s; against E029 +4.05 s (S1 TIE). Route integrity holds (bit-identical routed rows). 225 s, 6.40 GB, no swap, GPU about 2.9 GB.
 - Out-of-range on `NM_missing_other` falls from 99 (E029) to 34; the < 1 h band falls from 82 to 25.
+
+### E031 · H021 v3 (CatBoost GPU, CTRs on raw keys) · COMPLETE; clause 1 provisionally not met
+
+- **Development mean 440.76 s, the best single run so far.** Against E029 (LightGBM, E023's instance): −1.69 s on all rows, WIN on R1–R3 and S1, W1 TIE, no airport degraded. **Not a candidate (pre-registered).**
+- Clause 1 (against E030): −4.91 s, 5/5 counted WINs. The categorical statistics matter at fixed capacity. **Provisional: the noise condition needs H021r, paused (INC-0011).**
+- Missed expectations: CatBoost was expected to lose to the LightGBM (+2 to +15 s) and to lower the day-scale rows' predictions; it won, and raised them. 25 min, 7.01 GB, no swap, GPU about 3.1 GB.
+- **Experiments paused after E031 by the owner (INC-0011).**

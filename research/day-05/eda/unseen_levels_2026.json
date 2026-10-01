@@ -1,0 +1,19 @@
+{
+ "note": "share of 2026 ranking DEP rows whose raw level never appears in 2025 DEP rows (target-free; null levels excluded)",
+ "shares": {
+  "2026-01": {
+   "rows": 152719,
+   "stand": 0.0002,
+   "op_prefix": 0.0004,
+   "ades": 0.0002,
+   "actype": 0.0001
+  },
+  "2026-07": {
+   "rows": 192122,
+   "stand": 0.0013,
+   "op_prefix": 0.0043,
+   "ades": 0.0008,
+   "actype": 0.0
+  }
+ }
+}

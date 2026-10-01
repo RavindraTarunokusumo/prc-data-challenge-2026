@@ -1,0 +1,162 @@
+{
+ "R1": {
+  "differ": [
+   "cat_mode",
+   "data_partition",
+   "n_cat_features"
+  ],
+  "only_one_arm": [
+   "combinations_ctr",
+   "counter_calc_method",
+   "ctr_history_unit",
+   "ctr_target_border_count",
+   "fold_permutation_block",
+   "has_time",
+   "max_ctr_complexity",
+   "one_hot_max_size",
+   "permutation_count",
+   "simple_ctr"
+  ],
+  "outside_closed_set": []
+ },
+ "R2": {
+  "differ": [
+   "cat_mode",
+   "data_partition",
+   "n_cat_features"
+  ],
+  "only_one_arm": [
+   "combinations_ctr",
+   "counter_calc_method",
+   "ctr_history_unit",
+   "ctr_target_border_count",
+   "fold_permutation_block",
+   "has_time",
+   "max_ctr_complexity",
+   "one_hot_max_size",
+   "permutation_count",
+   "simple_ctr"
+  ],
+  "outside_closed_set": []
+ },
+ "R3": {
+  "differ": [
+   "cat_mode",
+   "data_partition",
+   "n_cat_features"
+  ],
+  "only_one_arm": [
+   "combinations_ctr",
+   "counter_calc_method",
+   "ctr_history_unit",
+   "ctr_target_border_count",
+   "fold_permutation_block",
+   "has_time",
+   "max_ctr_complexity",
+   "one_hot_max_size",
+   "permutation_count",
+   "simple_ctr"
+  ],
+  "outside_closed_set": []
+ },
+ "S1": {
+  "differ": [
+   "cat_mode",
+   "data_partition",
+   "n_cat_features"
+  ],
+  "only_one_arm": [
+   "combinations_ctr",
+   "counter_calc_method",
+   "ctr_history_unit",
+   "ctr_target_border_count",
+   "fold_permutation_block",
+   "has_time",
+   "max_ctr_complexity",
+   "one_hot_max_size",
+   "permutation_count",
+   "simple_ctr"
+  ],
+  "outside_closed_set": []
+ },
+ "W1": {
+  "differ": [
+   "cat_mode",
+   "data_partition",
+   "n_cat_features"
+  ],
+  "only_one_arm": [
+   "combinations_ctr",
+   "counter_calc_method",
+   "ctr_history_unit",
+   "ctr_target_border_count",
+   "fold_permutation_block",
+   "has_time",
+   "max_ctr_complexity",
+   "one_hot_max_size",
+   "permutation_count",
+   "simple_ctr"
+  ],
+  "outside_closed_set": []
+ },
+ "S1c": {
+  "differ": [
+   "cat_mode",
+   "data_partition",
+   "n_cat_features"
+  ],
+  "only_one_arm": [
+   "combinations_ctr",
+   "counter_calc_method",
+   "ctr_history_unit",
+   "ctr_target_border_count",
+   "fold_permutation_block",
+   "has_time",
+   "max_ctr_complexity",
+   "one_hot_max_size",
+   "permutation_count",
+   "simple_ctr"
+  ],
+  "outside_closed_set": []
+ },
+ "W1c": {
+  "differ": [
+   "cat_mode",
+   "data_partition",
+   "n_cat_features"
+  ],
+  "only_one_arm": [
+   "combinations_ctr",
+   "counter_calc_method",
+   "ctr_history_unit",
+   "ctr_target_border_count",
+   "fold_permutation_block",
+   "has_time",
+   "max_ctr_complexity",
+   "one_hot_max_size",
+   "permutation_count",
+   "simple_ctr"
+  ],
+  "outside_closed_set": []
+ },
+ "H": {
+  "differ": [
+   "cat_mode",
+   "data_partition",
+   "n_cat_features"
+  ],
+  "only_one_arm": [
+   "combinations_ctr",
+   "counter_calc_method",
+   "ctr_history_unit",
+   "ctr_target_border_count",
+   "fold_permutation_block",
+   "has_time",
+   "max_ctr_complexity",
+   "one_hot_max_size",
+   "permutation_count",
+   "simple_ctr"
+  ],
+  "outside_closed_set": []
+ }
+}
