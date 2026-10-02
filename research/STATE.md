@@ -1,6 +1,6 @@
 # Research State
 
-## Day 5 in progress (owner laptop; updated 2026-10-01T21:12Z, D05-S04)
+## Day 5 in progress (owner laptop; updated 2026-10-02T12:46Z, D05-S05)
 
 - **Sessions:** D05-S01 to D05-S04, on branch `day-5`. Laptop: WSL2 11 GB, swap 0, RTX 5060 8 GB. INC-0007 is closed. Delegation is allowed under INC-0006 (open).
 - **E025** (H015 v2 reproduction): RESOURCE_FAILURE, a global OOM from a concurrent researcher pytest (INC-0008, closed; experiment lock added).
@@ -27,7 +27,10 @@
   - Advisor forecast: H023 promotion P 0.04.
 - **E030 (H022 v3, codes control):** 446.50; integrity holds.
 - **E031 (H021 v3, CTRs): 440.76, the best single run so far** (−1.69 s against E029 on all rows; S1 WIN). Not a candidate by pre-registration. Clause 1 is provisionally not met (−4.91 s); the noise condition needs H021r.
-- **PAUSED after E031 by the owner (INC-0011).** Remaining authorized chain: H021r (unconditional), H023, H023r if due. Next experiment id: E032.
+- Paused after E031 by the owner (INC-0011), and resumed on 2026-10-02 (D05-S05; INC-0011 closed).
+- **E032 (H021r):** 440.91. The noise condition holds (m = +0.68 s), so **H021 clause 1 is final: NOT MET** (the categorical statistics carry signal, −4.91 s). Its own 1.0 s reproduction tolerance fails on R1 (+1.056 s); H021 is not a candidate.
+- **E033 (H023 v3, blend 0.5 E029 + 0.5 E031): development mean 438.87.** Against E019 (instance E026): **−5.62 s, WIN on all 7 folds incl. S1, criteria 1–8 MET.** E034 (reproduction) passes criterion 6. **PROMOTE recommended**; the champion change is recorded at the Day 5 phase close, with the Day 5 holdout access (H023 as NEW, a Day 5 allocation; reference E026).
+- **The authorized chain is complete.** Next: the Day 5 phase close. Next experiment id: E035.
 
 *The Day 4 close state below is unchanged.*
 

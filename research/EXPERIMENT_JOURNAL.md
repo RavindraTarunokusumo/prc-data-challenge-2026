@@ -385,3 +385,14 @@ The chain runs sequentially: H009, then H010, then H012, then H011.
 - **CatBoost's categorical statistics carry signal at fixed capacity: −4.91 s (re-draw −4.23 s) against the codes control, 5/5 WINs.**
 - The frozen 1.0 s reproduction tolerance fails on R1 (+1.056 s). This is a genuine GPU and seed re-draw. H021 is not a candidate.
 - Resumed by the owner (INC-0011 closed). 19 min, 7.08 GB, no swap.
+
+### E033 · H023 v3 (equal-weight blend: routed LightGBM E029 + routed CatBoost E031) · criteria 1–8 MET; PROMOTE recommended at the phase close
+
+- **Development mean 438.87 s.** Against E019 (instance E026): **−5.62 s (q95 −4.79), WIN on all 7 folds including S1**; every airport improves. **D3-C2 is treated** (> 3 h band 3 against E019's 81).
+- Clause 1 (complementarity on normal taxis): −3.96 s; clause 2 (all rows): −3.58 s. Neither is met. Residual correlation is 0.84–0.92 on bulk rows.
+- The S1 WIN is not convention-carried (`NM_present_LIRF` share 0.24). The single-row constraint (D4-C9) did not bind: the CatBoost half raised row 192622644's prediction.
+- **Missed pre-registrations:** the single-row directions (Missing Control 1), and the expectation that S1 would most likely TIE.
+
+### E034 · H023 v3 reproduction · PASS (criterion 6)
+
+- Within 0.48 s on every development fold; criteria 1–3 hold against E026 (7/7 WIN). Clause 1 −3.70 s.
