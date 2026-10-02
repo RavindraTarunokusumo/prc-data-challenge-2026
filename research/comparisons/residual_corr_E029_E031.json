@@ -1,0 +1,33 @@
+{
+ "note": "Pearson correlation of residuals, E029 (LightGBM) vs E031 (CatBoost), H023 v3 reported item",
+ "folds": {
+  "R1": {
+   "all": 0.9753,
+   "bulk": 0.9048
+  },
+  "R2": {
+   "all": 0.9446,
+   "bulk": 0.9198
+  },
+  "R3": {
+   "all": 0.9764,
+   "bulk": 0.9186
+  },
+  "S1": {
+   "all": 0.9854,
+   "bulk": 0.9148
+  },
+  "W1": {
+   "all": 0.9785,
+   "bulk": 0.9169
+  },
+  "S1c": {
+   "all": 0.9814,
+   "bulk": 0.892
+  },
+  "W1c": {
+   "all": 0.9605,
+   "bulk": 0.8391
+  }
+ }
+}
