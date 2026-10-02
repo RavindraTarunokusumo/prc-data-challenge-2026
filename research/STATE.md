@@ -1,12 +1,15 @@
 # Research State
 
-*Updated 2026-10-02T13:16:27Z (measured with `date -u` at writing; D05-S05, at the Day 5 phase close).*
+*Updated 2026-10-02T19:35:34Z (measured with `date -u` at writing; D06-S01, after the Day 6 ladder batch).*
 
-- **Phase:** **Day 5 CLOSED** (model architecture, CPU against GPU). Phase close X-D05-S05-0001: **ACCEPT** (0.88), then the holdout WIN.
+- **Phase:** **Day 6 OPEN** (adversarial science day), branch `day-6`, session D06-S01.
   - Splits, metric and availability definition are FROZEN (`config/frozen.json`).
-  - Days 1–5 are complete. Days 6–7 continue on the owner's laptop.
-- **Sessions:** D05-S01 to D05-S05, on branch `day-5`. **Last completed exchange:** X-D05-S05-0001. **Pending:** none.
-- **Next action:** Day 6 (adversarial science day, brief §3). Day 6 opens `day-6` from `main` after the Day 5 PR merges, and **E033 is its phase-opening champion.** Next experiment id: E035.
+  - Days 1–5 are complete.
+- **Last completed exchange:** X-D06-S01-0002 (H024–H028 v2 ACCEPT, conditions C1–C7). **Pending:** none.
+- **Day 6 so far:** the attribution ladder (E035–E039, controls, all COMPLETE inside the owner's window). Readings: rung B (codes CatBoost) and rung C (per-key CatBoost) "carry part"; rung A (LightGBM twin) does not reproduce the gain (averaging floor −1.53 s at seed 42); H024's own reading INCONCLUSIVE (closed set: `data_partition`). See the journal's Day 6 section and `experiments/E035…E039/analysis.md`.
+- **Never NEW, in any phase (added):** E035–E039 (X-D06-S01-0001 ruling); rule 10 covers their configurations; any Day 7 use states the selection.
+- **Owner instructions:** INC-0012 (runs only 21:00–21:30 local), INC-0013 (Sonnet delegation of coding permitted; used once: `research/day-06/eda/d06_diagnostics.py`).
+- **Next action:** further Day 6 work or the Day 6 phase close (one holdout access available, named by the phase close). **E033 remains champion.** Next experiment id: E040.
 
 ## Champion: E033 (H023 v3), since the Day 5 phase close
 
@@ -62,6 +65,7 @@
 
   A change ends the instances and needs a new ruling. Every run records its environment in its manifest.
 - **Open incidents:**
+  - **INC-0012** (owner run window), **INC-0013** (Sonnet delegation, Day 6);
   - **INC-0004** (Day 3 launch configuration; owner decision);
   - **INC-0009** (W&B mirror and learning curves);
   - **INC-0010** (swap kept; CPython 3.13 kept: owner decisions).
@@ -72,7 +76,7 @@
 
 - Day 1: used (WIN). Day 2: closed unused (ruling H). Day 3: used (WIN, E019 against E005). Day 4: closed unused (ruling H4).
 - **Day 5: 1 of 1 used (WIN, E033 against E026).**
-- Day 6 has one access, which needs a Day 6 allocation as NEW.
+- Day 6 has one access, which needs a Day 6 allocation as NEW (not E035–E039).
 - Never NEW, in any phase:
   - E012–E018 and E020–E024 (rule 9; ruling H4);
   - E026–E032 and E034 (rule L v2; the H021 and H022 authorizations; the phase-close review).

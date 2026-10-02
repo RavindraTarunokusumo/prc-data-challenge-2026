@@ -8,3 +8,10 @@
 - **Freeze:** `git diff --stat 4ad18a1 -- src scripts pyproject.toml uv.lock config` is empty.
 - **Environment:** unchanged from SESSION_START (rule L v2 item 6).
 - **Next:** commit and push, confirm a clean tree, arm the launcher in the background (it waits for 21:00 Europe/Amsterdam). No repository file is touched until the queue ends.
+
+## After the window (appended)
+
+- All five runs COMPLETE between 19:00:05Z and 19:29:17Z; each passed its route check and was committed and pushed by the launcher (`2657659`, `563891b`, `1e01158`, `2a7d2b2`, `50fb392`). **No run executed past 21:30: no INC-0012 deviation.** Launcher log: `run_window.log` here.
+- GPU memory of 4.3–5.2 GB was held during the window by a process outside the WSL VM's view (921 MiB at the session start); E036's own share was about 2.2 GB. No GPU failure.
+- The W&B mirror synced each run at completion; a re-sync after the analyses timed out (`api.wandb.ai` deadline) and will be retried.
+- Delegated (INC-0013): `research/day-06/eda/d06_diagnostics.py` and its test, implemented by a `claude-sonnet-5-5` worker to the researcher's specification; reviewed by the researcher. SHA-256 `5fc21113613c675ec772390672132e78556ca6336bc736e10f7d8bc90c4e10b7`.

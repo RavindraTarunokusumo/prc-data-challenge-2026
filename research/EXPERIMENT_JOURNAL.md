@@ -412,3 +412,34 @@ The chain runs sequentially: H009, then H010, then H012, then H011.
   D3-C2 is retired as a defect, and D4-C9 is superseded.
 - **Corrections D5-C8 to D5-C16**, including D5-C11 (CatBoost alone's S1 WIN is 62 % one row) and D5-C12 (attribution scopes).
 - **Standing rule 13** (stochastic components: disclose the re-draw spread). INC-0006 closed (no delegation).
+
+## Day 6 (D06-S01): adversarial attribution ladder (batch X-D06-S01-0002; controls, no candidate)
+
+Exchanges: X-D06-S01-0001 (v1, REVISE ×5: bounded readings, rung A relabelled, H027 seed refused, launcher pinning), X-D06-S01-0002 (v2, ACCEPT ×5, conditions C1–C7). All five runs inside the owner's 21:00–21:30 window (INC-0012); no deviation. Freeze diff empty. Never NEW (ruling). Readings on `NM_present_excl_LIRF` against E033 (D), all rows beside.
+
+### E035 · H026 v2 · rung B (E029 + codes CatBoost E030) · statistics carry part
+
+- D +1.34 s (q95 +1.65), LOSS 5/5 dev folds. G −2.62 s (66 % of E033's −3.96). All rows: −1.77 vs E029, +1.81 vs E033.
+- E030 disagrees with E029 more than E031 does (RMS 93 against 81 s) but is 4.6 s less accurate: the statistics' contribution runs through accuracy.
+
+### E036 · H024 v2 · CatBoost complexity 1 · own reading INCONCLUSIVE (closed set)
+
+- `data_partition` DocParallel against E031's FeatureParallel (CatBoost's GPU choice): violation, pre-registered → INCONCLUSIVE.
+- Values: +4.96 s against E031 (5/5 LOSS), +0.04 s against the codes arm E030. Per-key statistics alone recover none of E031's advantage on normal taxis. Dev mean 444.46; 354 s (E031 1,523 s).
+
+### E037 · H025 v2 · rung C (E029 + E036) · combinations carry part (with the C6 disclosure)
+
+- D +1.65 s (q95 +1.98), LOSS 5/5. G −2.31 s (58 %). All rows: −2.41 vs E029, +1.17 vs E033 (better than rung B on all rows, worse on normal taxis).
+- Missed: expected D +0.1 to +1.4; Advisor P(carries) 0.60.
+
+### E038 · H027 v2 · LightGBM twin (subsampling 0.8/0.8, seed 42)
+
+- Dev mean 442.03 (E029 442.46); −0.42 s all rows. Residual correlation with E029 0.977–0.980 on normal taxis; RMS disagreement 46 s. 909 s (no speed-up).
+
+### E039 · H028 v2 · rung A (E029 + twin) · the twin does not reproduce the gain
+
+- D +2.43 s (q95 +2.99), LOSS 4/5 (W1 TIE). **Averaging floor at seed 42: G −1.53 s** (39 %), larger than expected (−0.2 to −1.2). Not evidence about learner families.
+
+### Batch conclusion (bounded, H024 v2 §Batch; C5)
+
+At equal weight, neither the codes CatBoost, nor the per-key CatBoost, nor a perturbation twin of E029 substitutes for E031 in the blend. Each rung keeps 39–66 % of E033's gain on normal taxis; the remainder needs E031's configuration, and the complexity-4 combinations are where E031's accuracy comes from (E036 values, with the closed-set disclosure). E033's performance claim was not under test. The Day 5 reading "this CatBoost configuration as a whole" survives; no family claim is made or widened.
