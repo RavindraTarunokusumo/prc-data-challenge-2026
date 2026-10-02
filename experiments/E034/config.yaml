@@ -1,0 +1,23 @@
+hypothesis_id: H023
+proposal_version: 3
+purpose: reproduction
+model: blend
+feature_set: FS0
+params:
+  components:
+  - E029
+  - E032
+  weights:
+  - 0.5
+  - 0.5
+folds:
+- R1
+- R2
+- R3
+- S1
+- W1
+- S1c
+- W1c
+- H
+seed: 43
+job_class: CLASS-S
