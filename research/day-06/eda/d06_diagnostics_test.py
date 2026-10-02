@@ -9,10 +9,9 @@ from pathlib import Path
 sys.dont_write_bytecode = True
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+import d06_diagnostics as d
 import numpy as np
 import polars as pl
-
-import d06_diagnostics as d
 
 rng = np.random.default_rng(0)
 N = 4000
