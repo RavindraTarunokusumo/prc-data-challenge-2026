@@ -396,3 +396,19 @@ The chain runs sequentially: H009, then H010, then H012, then H011.
 ### E034 · H023 v3 reproduction · PASS (criterion 6)
 
 - Within 0.48 s on every development fold; criteria 1–3 hold against E026 (7/7 WIN). Clause 1 −3.70 s.
+
+### X-D05-S05-0001 · Day 5 phase close · ACCEPT (0.88); holdout WIN; champion E019 → E033
+
+- **The decisions stand.** H023 v3 (E033) meets criteria 1–8 against E019 (instance E026).
+- **Holdout H: WIN.** E033 369.18 s against E026 375.93 s (−6.75 s; q10/q90 −9.83/−4.88). No revert. Ruling H5: recorded only; a joint test on one draw. Instance check: E026 375.92735 s against E019's recorded 375.92721 s.
+- **E033 is champion; E019 is previous.** E033 and E034 are PROMOTE.
+- **Disclosures:**
+  - D3-C1 (lineage); D3-C3 restated (D5-C16);
+  - D5-C8: margin composition, −2.04 s treatment and −3.58 s CatBoost half;
+  - D5-C9: stochastic champion;
+  - D5-C10: single rows;
+  - the 1,000-iteration budget.
+
+  D3-C2 is retired as a defect, and D4-C9 is superseded.
+- **Corrections D5-C8 to D5-C16**, including D5-C11 (CatBoost alone's S1 WIN is 62 % one row) and D5-C12 (attribution scopes).
+- **Standing rule 13** (stochastic components: disclose the re-draw spread). INC-0006 closed (no delegation).
