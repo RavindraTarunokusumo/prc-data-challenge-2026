@@ -33,3 +33,9 @@ No reason was stated. The laptop clock is CEST (UTC+2), so the window is **19:00
 ## Resolution
 
 Open for Day 6. Closes at the Day 6 phase close, or when the owner changes the window.
+
+## Amendment (2026-10-02, after X-D06-S01-0001)
+
+- "No file under the repository changes during the window" reads: **no file outside the running experiment's own records changes during the window.** The launcher's per-run checkpoint commits only that run's paths (`experiments/<E###>/`, `experiments/ledger.jsonl`, `research/comparisons/route_check_<E###>.json`).
+- The launcher was revised for batch v2 (rung B first; own-path staging; clean-tree re-check at window open; `TZ=Europe/Amsterdam` with the window computed from UTC; non-interactive push under a 60 s timeout; a log line for any run that ends after 21:30). Its SHA-256 is pinned in `research/day-06/proposals/H024_v2.md` §Batch.
+- **Overrun:** the launcher never kills a run; the CLASS-M timeout (2,700 s) bounds it. Any run still executing at 21:30 is reported, with its end time, as a deviation under this incident.

@@ -51,3 +51,5 @@
 {"event": "holdout_access", "phase": "day-05", "utc": "2026-10-02T13:14:08Z", "experiments": ["E033", "E026"], "reason": "Day 5 phase close (X-D05-S05-0001): phase-closing champion E033 (H023 v3) vs phase-opening champion E019, laptop instance E026 (rule L v2 item 5)"}
 {"ts": "2026-10-02T13:14:32Z", "event": "champion_change", "from": "E019", "to": "E033", "phase": "day-05", "basis": "X-D05-S05-0001 ACCEPT; holdout WIN (-6.75 s, E033 369.18 vs E026 375.93)"}
 {"ts": "2026-10-02T17:24:15Z", "event": "advisor_request", "exchange_id": "X-D06-S01-0001", "proposals": ["H024", "H025", "H026", "H027", "H028"]}
+{"ts": "2026-10-02T17:49:27Z", "event": "advisor_result", "exchange_id": "X-D06-S01-0001", "decisions": {"H024": "REVISE", "H025": "REVISE", "H026": "REVISE", "H027": "REVISE", "H028": "REVISE"}}
+{"ts": "2026-10-02T17:53:04Z", "event": "advisor_request", "exchange_id": "X-D06-S01-0002", "proposals": ["H024", "H025", "H026", "H027", "H028"], "version": "v2"}
