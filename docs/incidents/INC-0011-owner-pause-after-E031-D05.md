@@ -3,7 +3,7 @@ schema: incident-v1
 incident_id: INC-0011
 type: owner_intervention
 created_utc: 2026-10-01T21:09:37Z
-status: open
+status: closed
 ---
 
 # Day 5: owner pauses experiments after E031
@@ -35,3 +35,7 @@ No reason was stated.
 ## Resolution
 
 Closes when the owner lifts the pause, or when the chain is formally closed at the Day 5 phase close.
+
+## Closure (2026-10-02T12:22Z)
+
+The owner lifted the pause ("Resume", D05-S05). The environment and the freeze anchor were verified unchanged, so the chain resumes at H021's reproduction under the same authorizations.
