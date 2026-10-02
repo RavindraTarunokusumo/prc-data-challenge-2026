@@ -1,0 +1,55 @@
+schema: advisor-task-envelope-v1
+exchange_id: X-D06-S01-0001
+session: D06-S01
+sender: claude-researcher
+recipient: advisor-subagent
+purpose: proposal_review
+proposal_ids: [H024, H025, H026, H027, H028]
+proposal_paths:
+  - research/day-06/proposals/H024_v1.md
+  - research/day-06/proposals/H025_v1.md
+  - research/day-06/proposals/H026_v1.md
+  - research/day-06/proposals/H027_v1.md
+  - research/day-06/proposals/H028_v1.md
+proposal_sha256:
+  - abdaba7806b306347db048a070cb9cd7baa9a865a133fdc40fb3da88cae05c7d
+  - de55d6af78decf148b089518b3815c33af91cf3ec2121378016931997354395f
+  - dbcef1904ffc6ce28c70fecdf6f57d1ebe7323c806707a9ed507e85eebfdcd71
+  - 361b317e712dde78a59bc32ba62cb1469849f524e5626f3553c4bbc9ebc802bf
+  - 172b45ad51e788879cf90ccd5187dc3e6cd4972cb96bd30312404d6896622675
+review_output_dir: research/day-06/advisor/
+context_paths:
+  - research/STATE.md
+  - research/day-05/DAY_SUMMARY.md
+  - research/day-06/sessions/D06-S01/SESSION_START.md
+  - research/day-06/sessions/D06-S01/run_window.sh
+  - docs/incidents/INC-0012-owner-run-window-D06.md
+  - docs/incidents/INC-0008-concurrent-oom-E025-D05.md
+  - research/day-05/proposals/H021_v3.md
+  - research/day-05/proposals/H022_v3.md
+  - research/day-05/proposals/H023_v3.md
+  - research/day-05/advisor/H023_review_v3.md
+  - research/day-05/advisor/PHASE_CLOSE_D05_review_v1.md
+  - research/day-05/acks/PHASE_CLOSE_D05_ack_v1.md
+  - experiments/E029/config.yaml
+  - experiments/E030/config.yaml
+  - experiments/E031/config.yaml
+  - experiments/E033/config.yaml
+  - research/comparisons/E033_vs_E029.json
+  - research/comparisons/E033_vs_E029_mech_NM_present_excl_LIRF.json
+  - research/comparisons/E030_vs_E029.json
+  - research/comparisons/E031_vs_E029.json
+  - research/comparisons/E032_vs_E031_mech_NM_present_excl_LIRF.json
+  - research/comparisons/residual_corr_E029_E031.json
+  - src/prc/models/gbm.py
+  - src/prc/blending.py
+  - scripts/run_experiment.py
+  - scripts/gate.py
+constraints:
+  - Batched proposal review (Day 6, adversarial science day). Review files are H024_review_v1.md to H028_review_v1.md, one decision each.
+  - H024 §Batch is shared text that H025-H028 adopt by reference; review it once and apply it to each.
+  - None of these is a candidate; no holdout access is requested. Check that the readings, thresholds and gating cannot be used to promote or select, and that the ladder actually tests the Day 5 mechanism claim.
+  - Owner instruction INC-0012 restricts runs to 21:00-21:30 CEST (19:00-19:30Z) on 2026-10-02. Review the launcher's deferral and checkpoint logic as part of criterion 7 and isolation.
+  - The tools-freeze anchor is the commit that submits this envelope.
+  - Read-only checks only. Do not read December 2025 DEP targets; do not run holdout_check.py; no fit or score on a real fold with a real target. Check the experiment lock first and keep memory light (INC-0008).
+created_utc: 2026-10-02T17:24:15Z
