@@ -55,3 +55,7 @@
 
 - **The symmetric-tree "bounded extreme predictions" reasoning was wrong for the day-scale rows.** Both CatBoost arms predict *higher* than the LightGBM on the two LIRF NM-present tail rows. The H020 review's prediction (that CatBoost bounds predictions more tightly) holds for the `NM_missing_other` out-of-range counts, but not for these rows.
 - **Consequence for H023 (recorded, not acted on).** H023's Missing Control 1 pre-registered that the blend would lower the S1 row's prediction. With E031 at 10,976 s, the blend would be about 9,000 s, above E026's 8,136 s, so moving towards y. The pre-registration stands as written, and its miss will be recorded if H023 runs.
+
+## Clause 1 final verdict (appended 2026-10-02, D05-S05)
+
+H021r (E032) gives m = +0.683 s on `NM_present_excl_LIRF`, inside the 1.5 s noise limit. **Clause 1 is NOT MET, a final verdict: the mechanism is supported.** E032's own reproduction tolerance fails on R1 (+1.056 s), which does not bear on H021 (not a candidate). See the E032 analysis.

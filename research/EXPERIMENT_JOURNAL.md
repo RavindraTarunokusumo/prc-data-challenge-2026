@@ -378,3 +378,10 @@ The chain runs sequentially: H009, then H010, then H012, then H011.
 - Clause 1 (against E030): −4.91 s, 5/5 counted WINs. The categorical statistics matter at fixed capacity. **Provisional: the noise condition needs H021r, paused (INC-0011).**
 - Missed expectations: CatBoost was expected to lose to the LightGBM (+2 to +15 s) and to lower the day-scale rows' predictions; it won, and raised them. 25 min, 7.01 GB, no swap, GPU about 3.1 GB.
 - **Experiments paused after E031 by the owner (INC-0011).**
+
+### E032 · H021 v3 reproduction · COMPLETE; clause 1 final: NOT MET (mechanism supported)
+
+- Development mean 440.91 (E031 440.76). Integrity holds. The noise condition holds: m = +0.68 s against the 1.5 s limit.
+- **CatBoost's categorical statistics carry signal at fixed capacity: −4.91 s (re-draw −4.23 s) against the codes control, 5/5 WINs.**
+- The frozen 1.0 s reproduction tolerance fails on R1 (+1.056 s). This is a genuine GPU and seed re-draw. H021 is not a candidate.
+- Resumed by the owner (INC-0011 closed). 19 min, 7.08 GB, no swap.
