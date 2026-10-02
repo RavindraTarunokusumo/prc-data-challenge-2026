@@ -3,7 +3,7 @@ schema: incident-v1
 incident_id: INC-0006
 type: protocol_deviation
 created_utc: 2026-10-01T16:10:00Z
-status: open
+status: closed
 ---
 
 # Day 5: owner permission to delegate work to `claude-sonnet-5-5` subagents
@@ -29,3 +29,7 @@ Every delegated record carries the line *"implemented by a `claude-sonnet-5-5` w
 ## Resolution
 
 Closes at the Day 5 phase close, with the delegated-work list.
+
+## Closure (2026-10-02, Day 5 phase close X-D05-S05-0001 ACCEPT)
+
+**No delegated work.** Delegation to `claude-sonnet-5-5` workers was permitted but never used. No Day 5 record carries the delegation provenance line, and none claims delegation (verified by the phase-close review). The delegated-work list in `research/day-05/DAY_SUMMARY.md` §8 is empty. Delegation on Days 6–7 needs a new incident.

@@ -23,7 +23,7 @@ from prc import ledger
 from prc.paths import EXPERIMENTS, ROOT, RUNTIME
 
 PROJECT = "PRC-Data-Challenge-2026"
-CHAMPIONS = {"E001", "E002", "E005", "E019"}  # champion lineage (STATE.md)
+CHAMPIONS = {"E001", "E002", "E003", "E005", "E019", "E033"}  # champion lineage (STATE.md)
 SEGMENTS = ("by_airport", "by_airport_bulk", "by_traffic", "by_wake", "by_taxi_band")
 
 

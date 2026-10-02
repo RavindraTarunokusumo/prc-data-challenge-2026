@@ -50,3 +50,7 @@ All three closing conditions are met (D05-S03 start, boot ID `71605e21…`):
 - **Memory:** WSL2 10,951 MiB total (`memory=11GB`), **swap 0** (`swapon --show` empty). The brief's 11 GB per-experiment guard is physically reachable, and the no-swap rule holds.
 - **Raw data** matches `raw_manifest.json`, and the **silver hash** matches `config/splits.yaml` (`efde4262…`; re-checked after the restart). See `research/day-05/sessions/D05-S02/DATA_VERIFICATION.md`.
 - Laptop compute calibration (runtime, GPU) goes into a Day 5 calibration record, starting with the E019 reproduction.
+
+## Pointer (appended 2026-10-02; D5-C15 (d))
+
+The swap-0 closure above held only for boot `71605e21` (16:16–16:33Z). From boot `cf2c705b` (16:33:25Z) the VM has 4 GiB of swap (`.wslconfig` changed at 16:30:17Z). The owner decided to keep it: see **INC-0010**.
