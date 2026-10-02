@@ -22,7 +22,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 RAW = ROOT / "data" / "raw"
 MANIFESTS = ROOT / "data" / "manifests"
-SECRET_VARS = ("PRC_S3_ACCESS_KEY", "PRC_S3_SECRET_KEY", "OPENSKY_PASSWORD")
+SECRET_VARS = ("PRC_S3_ACCESS_KEY", "PRC_S3_SECRET_KEY", "OPENSKY_PASSWORD", "WANDB_API_KEY")
 
 
 def load_env() -> None:

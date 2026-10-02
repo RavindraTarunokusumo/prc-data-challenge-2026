@@ -1,17 +1,55 @@
 {
-  "champion": "E019",
-  "hypothesis_id": "H015",
-  "proposal_version": 2,
-  "since_utc": "2026-09-30T07:06:50Z",
-  "since_phase": "day-03",
-  "decided_by": "X-D03-S01-0003 (phase close ACCEPT) + holdout_E019_vs_E005 WIN",
-  "previous": "E005",
-  "reproduction": "E022 (byte-identical)",
-  "standing_disclosures": [
-    "D3-C1",
-    "D3-C2",
-    "D3-C3",
-    "D4-C9"
+  "champion": "E033",
+  "hypothesis_id": "H023",
+  "proposal_version": 3,
+  "model": "blend",
+  "components": [
+    "E029",
+    "E031"
   ],
-  "held_through": "day-04 (X-D04-S02-0001 ACCEPT; held by rule)"
+  "weights": [
+    0.5,
+    0.5
+  ],
+  "component_configs": {
+    "E029": "routed LightGBM, FS2, route_train_exclude (H018 v2 config; E023's laptop instance)",
+    "E031": "routed CatBoost GPU, FS2_RAW, CTRs (H021 v3)"
+  },
+  "since_utc": "2026-10-02T13:14:32Z",
+  "since_phase": "day-05",
+  "decided_by": "X-D05-S05-0001 (phase close ACCEPT 0.88) + holdout_E033_vs_E026 WIN (-6.75 s)",
+  "previous": "E019",
+  "reproduction": "E034 (within 0.48 s; not byte-identical: CatBoost GPU re-draw)",
+  "environment": "rule L v2 item 6 (CPython 3.13.15, lock efa4fd78, polars 16 threads, owner laptop; INC-0010)",
+  "standing_disclosures": [
+    "D3-C1 (lineage)",
+    "D3-C3 (restated by D5-C16)",
+    "D5-C8",
+    "D5-C9",
+    "D5-C10",
+    "1,000-iteration budget"
+  ],
+  "retired": {
+    "D3-C2": "treated (>3 h band 3 vs 81); kept as history",
+    "D4-C9": "superseded for E033 by D5-C10"
+  },
+  "history": [
+    {
+      "champion": "E019",
+      "hypothesis_id": "H015",
+      "proposal_version": 2,
+      "since_utc": "2026-09-30T07:06:50Z",
+      "since_phase": "day-03",
+      "decided_by": "X-D03-S01-0003 (phase close ACCEPT) + holdout_E019_vs_E005 WIN",
+      "previous": "E005",
+      "reproduction": "E022 (byte-identical)",
+      "standing_disclosures": [
+        "D3-C1",
+        "D3-C2",
+        "D3-C3",
+        "D4-C9"
+      ],
+      "held_through": "day-04 (X-D04-S02-0001 ACCEPT; held by rule)"
+    }
+  ]
 }

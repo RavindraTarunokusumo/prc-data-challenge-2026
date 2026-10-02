@@ -1,0 +1,33 @@
+hypothesis_id: H018
+proposal_version: 2
+purpose: reproduction
+model: routed_lightgbm
+feature_set: FS2
+params:
+  objective: regression
+  learning_rate: 0.05
+  num_leaves: 255
+  min_data_in_leaf: 100
+  feature_fraction: 1.0
+  bagging_fraction: 1.0
+  bagging_freq: 0
+  bin_construct_sample_cnt: 5000000
+  num_threads: 4
+  num_boost_round: 1000
+  route_train_exclude: true
+  route_ridge_params:
+    alpha: 1.0
+    winsor:
+    - 0.005
+    - 0.995
+folds:
+- R1
+- R2
+- R3
+- S1
+- W1
+- S1c
+- W1c
+- H
+seed: 43
+job_class: CLASS-M

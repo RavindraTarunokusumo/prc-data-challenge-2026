@@ -53,3 +53,10 @@ def test_frozen_modules_import_only_frozen(module):
     prc_imports = {n for n in imports(path) if n == "prc" or n.startswith("prc.")}
     modules = {n for n in prc_imports if n in FROZEN_ALLOWED or n.count(".") == 1}
     assert modules <= FROZEN_ALLOWED, modules - FROZEN_ALLOWED
+
+
+def test_blending_does_not_import_truth():
+    """prc.blending reads stored prediction files (so it may use prc.paths), but never
+    truth-reading or data-loading code."""
+    forbidden = FORBIDDEN_FOR_MODELS - {"prc.paths"}
+    assert not imports(SRC / "blending.py") & forbidden

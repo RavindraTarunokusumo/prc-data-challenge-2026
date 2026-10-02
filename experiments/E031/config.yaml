@@ -1,0 +1,38 @@
+hypothesis_id: H021
+proposal_version: 3
+purpose: primary
+model: routed_catboost
+feature_set: FS2_RAW
+params:
+  loss_function: RMSE
+  task_type: GPU
+  devices: "0"
+  depth: 8
+  iterations: 1000
+  learning_rate: 0.08
+  border_count: 254
+  l2_leaf_reg: 3
+  boosting_type: Plain
+  simple_ctr: [Borders, FeatureFreq, FloatTargetMeanValue]
+  combinations_ctr: [Borders, FeatureFreq, FloatTargetMeanValue]
+  max_ctr_complexity: 4
+  gpu_ram_part: 0.4
+  thread_count: 4
+  cat_mode: ctr
+  route_ridge_params:
+    alpha: 1.0
+    winsor:
+    - 0.005
+    - 0.995
+  route_train_exclude: true
+folds:
+- R1
+- R2
+- R3
+- S1
+- W1
+- S1c
+- W1c
+- H
+seed: 42
+job_class: CLASS-L

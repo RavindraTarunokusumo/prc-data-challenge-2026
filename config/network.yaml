@@ -22,6 +22,11 @@ allowed_hosts:
       purpose: MIT author-hosted papers
     - host: ansperformance.eu
       purpose: PRC/PRU taxi-out methodology and definitions (general methodology)
+  tracking:   # owner decision INC-0009 (Day 5): experiment-record mirror only, no data rows
+    - host: api.wandb.ai
+      purpose: Weights & Biases API, project PRC-Data-Challenge-2026 (scripts/wandb_sync.py, prc.tracking)
+    - host: storage.googleapis.com
+      purpose: W&B signed-URL uploads of run files (config, summary, segment tables) only
 package_indexes: [pypi.org, files.pythonhosted.org]   # allowed by the platform by default
 rules:
   - Web search is allowed for general methodology. Always exclude github.com and kaggle.com, and never search for other PRC 2026 teams, solutions or leaderboards (LEADERBOARD_POLICY).

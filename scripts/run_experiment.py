@@ -15,6 +15,7 @@ import datetime as dt
 import importlib.util
 import json
 import os
+import re
 import subprocess
 import sys
 import time
@@ -25,8 +26,8 @@ import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from prc import ledger
-from prc.paths import EXPERIMENTS, RESOURCES, ROOT, git_commit, git_dirty
+from prc import ledger, tracking
+from prc.paths import EXPERIMENTS, RESOURCES, ROOT, experiment_lock, git_commit, git_dirty
 
 GB = 1024**3
 
@@ -75,11 +76,47 @@ def check_config(eid: str, cfg: dict, purpose: str) -> None:
         sys.exit(f"refused: {eid} must cover all scored folds plus H; missing {missing}")
 
 
+GPU_FAILURE = re.compile(r"cuda ?error|out of memory|cudaErrorMemoryAllocation|"
+                         r"CUDA_ERROR|device-side assert|no CUDA-capable device",
+                         re.IGNORECASE)
+
+
+def gpu_failure(log: str) -> bool:
+    """A worker log ending in a GPU memory or device error (CatBoost/XGBoost on CUDA)."""
+    return bool(GPU_FAILURE.search(log[-20000:]))
+
+
+def swap_out_pages() -> int | None:
+    try:
+        for line in Path("/proc/vmstat").read_text().splitlines():
+            if line.startswith("pswpout "):
+                return int(line.split()[1])
+    except OSError:
+        pass
+    return None
+
+
+def gpu_used_mib() -> int | None:
+    try:
+        out = subprocess.run(["nvidia-smi", "--query-gpu=memory.used",
+                              "--format=csv,noheader,nounits"], capture_output=True,
+                             text=True, timeout=5, check=False)
+        return int(out.stdout.split()[0])
+    except (OSError, ValueError, IndexError, subprocess.SubprocessError):
+        return None
+
+
 def now() -> str:
     return dt.datetime.now(dt.UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def main(eid: str) -> None:
+    # One experiment at a time; side work checks the lock (INC-0008)
+    with experiment_lock(eid) as lock:
+        run(eid, lock)
+
+
+def run(eid: str, lock) -> None:
     exp = EXPERIMENTS / eid
     if not (exp / "gate.json").exists():
         sys.exit(f"refused: {eid} was not allocated by scripts/gate.py")
@@ -103,10 +140,17 @@ def main(eid: str) -> None:
     peak, status = 0, None
     with open(exp / "worker.log", "w") as log:
         child = subprocess.Popen([sys.executable, "-m", "prc.worker", eid], cwd=ROOT, env=env,
-                                 stdout=log, stderr=subprocess.STDOUT)
+                                 stdout=log, stderr=subprocess.STDOUT,
+                                 pass_fds=(lock.fileno(),))
         proc = psutil.Process(child.pid)
+        gpu0 = gpu_used_mib()
+        swap0 = swap_out_pages()
+        gpu_peak, polls = gpu0, 0
         while child.poll() is None:
             peak = max(peak, tree_rss(proc))
+            polls += 1
+            if gpu0 is not None and polls % 4 == 0:  # about once a second
+                gpu_peak = max(gpu_peak, gpu_used_mib() or 0)
             if peak > hard_gb * GB:
                 status = "RESOURCE_FAILURE"
                 kill_tree(proc)
@@ -120,6 +164,8 @@ def main(eid: str) -> None:
         status = "COMPLETE" if child.returncode == 0 else "INVALID"
         if child.returncode in (-9, 137):
             status = "RESOURCE_FAILURE"  # killed by the kernel (OOM)
+        elif child.returncode != 0 and gpu_failure((exp / "worker.log").read_text()):
+            status = "RESOURCE_FAILURE"  # GPU memory or device error (Day 5)
 
     usage = {
         "experiment_id": eid,
@@ -133,6 +179,13 @@ def main(eid: str) -> None:
         "timeout_s": timeout_s,
         "within_class": runtime <= klass["runtime_min"] * 60 and peak / GB <= klass["ram_gb"],
         "cpu_count": psutil.cpu_count(),
+        # device-wide GPU memory (nvidia-smi), including other processes; null without a GPU
+        "gpu_mib_at_start": gpu0,
+        # pages swapped out machine-wide during the run (INC-0010: swap is on; RSS does
+        # not count swapped pages, so any swap-out is disclosed beside peak_rss_gb)
+        "swap_out_pages_during_run": (swap_out_pages() - swap0) if swap0 is not None
+        else None,
+        "gpu_mib_peak": gpu_peak if gpu0 is not None else None,
         "run_commit": commit,
         "git_dirty_at_run": dirty,
         "finished_utc": now(),
@@ -150,6 +203,7 @@ def main(eid: str) -> None:
     ledger.update(eid, **fields)
     print(json.dumps({k: usage[k] for k in ("status", "runtime_s", "peak_rss_gb",
                                              "within_class")}))
+    tracking.sync_safely(eid)  # W&B mirror (INC-0009); best-effort, records already written
     if status != "COMPLETE":
         sys.exit(1)
 

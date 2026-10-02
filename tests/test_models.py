@@ -234,3 +234,74 @@ def test_routed_catboost_train_exclude():
     va = feats.filter(pl.col("role") == "val").sort("MVT_ID_mvt")
     route = ((va["ADEP_mvt"] == "LIRF") & (va["flt_missing"] == 1)).to_numpy()
     assert np.array_equal(out["pred"].to_numpy()[~route], cb["pred"].to_numpy()[~route])
+
+
+@pytest.mark.parametrize("name", ["lightgbm", "xgboost", "catboost", "routed_lightgbm",
+                                  "routed_catboost"])
+def test_learning_curve_recording_leaves_predictions_unchanged(name):
+    """Day 5: recording a learning curve must not change the model. The last staged
+    prediction equals the returned prediction, and routed rows hold their ridge value."""
+    from prc import curves
+
+    feats = synthetic(n=2000, seed=5)
+    p = dict(PARAMS[name])
+    rounds_key = "iterations" if "catboost" in name else "num_boost_round"
+    p[rounds_key] = 25
+    off = REGISTRY[name](feats, p, 42)["pred"].to_numpy()
+    curves.start()
+    on = REGISTRY[name](feats, p, 42)
+    c = curves.take()
+    assert np.array_equal(off, on["pred"].to_numpy())
+    assert c["iterations"] == [1, 10, 20, 25] and len(c["train_rmse"]) == 25
+    assert c["train_rmse"][-1] < c["train_rmse"][0]
+    pos = {int(m): i for i, m in enumerate(c["ids"])}
+    last = c["staged"][[pos[int(m)] for m in on["MVT_ID_mvt"]], -1]
+    np.testing.assert_allclose(last, on["pred"].to_numpy(), rtol=1e-9, atol=1e-6)
+    if name.startswith("routed"):
+        va = feats.filter(pl.col("role") == "val")
+        route = ((va["ADEP_mvt"] == "LIRF") & (va["flt_missing"] == 1)).to_numpy()
+        rows = [pos[int(m)] for m in va["MVT_ID_mvt"].to_numpy()[route]]
+        assert np.all(c["staged"][rows, 0] == c["staged"][rows, -1])
+    assert curves.take() is None and not curves.active()
+
+
+def test_catboost_codes_mode_uses_no_categorical_features():
+    """cat_mode 'codes': categoricals become numeric codes of the training vocabulary (no
+    CTR); 'ctr' is the default and unchanged; anything else is refused."""
+    from catboost import CatBoostRegressor
+
+    feats = synthetic(n=1000, seed=3)
+    p = {**PARAMS["catboost"], "iterations": 10}
+    default = REGISTRY["catboost"](feats, p, 42)["pred"].to_numpy()
+    ctr = REGISTRY["catboost"](feats, {**p, "cat_mode": "ctr"}, 42)["pred"].to_numpy()
+    assert np.array_equal(default, ctr)
+    seen = {}
+    real_fit = CatBoostRegressor.fit
+
+    def spy(self, pool, *a, **k):
+        seen["cat"] = pool.get_cat_feature_indices()
+        return real_fit(self, pool, *a, **k)
+
+    import catboost
+    orig = catboost.CatBoostRegressor.fit
+    catboost.CatBoostRegressor.fit = spy
+    try:
+        codes = REGISTRY["catboost"](feats, {**p, "cat_mode": "codes"}, 42)["pred"].to_numpy()
+    finally:
+        catboost.CatBoostRegressor.fit = orig
+    assert seen["cat"] == [] and np.isfinite(codes).all()
+    with pytest.raises(ValueError, match="cat_mode"):
+        REGISTRY["catboost"](feats, {**p, "cat_mode": "onehot"}, 42)
+
+
+def test_catboost_resolved_params_are_recorded():
+    """Day 5: the worker writes the learner's get_all_params() (resolved_params.json)."""
+    from prc import curves
+
+    feats = synthetic(n=600, seed=4)
+    curves.start()
+    REGISTRY["catboost"](feats, {**PARAMS["catboost"], "boosting_type": "Plain"}, 42)
+    c = curves.take()
+    rp = c["resolved_params"]
+    assert rp["cat_mode"] == "ctr" and rp["n_cat_features"] == 5  # FS0 categoricals
+    assert rp["boosting_type"] == "Plain" and "simple_ctr" in rp

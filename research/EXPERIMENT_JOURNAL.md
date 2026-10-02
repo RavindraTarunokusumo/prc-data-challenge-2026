@@ -320,3 +320,95 @@ The chain runs sequentially: H009, then H010, then H012, then H011.
   - the ledger decisions are filled;
   - the delegated-work list and process notes are completed.
 - **INC-0005 closed; INC-0004 open.** Days 1–4 (the cloud scope) are complete. Day 5 starts on the laptop from `docs/reproducibility/HANDOFF_D04.md`.
+
+## Day 5 (owner laptop)
+
+### E025 · H015 v2 reproduction · RESOURCE_FAILURE
+
+- Killed by a global OOM in the WSL VM after R1 (446.40, equal to E019), caused by a concurrent researcher `pytest` (INC-0008). Not retried; records reconstructed from the kernel log. An experiment lock now stops memory-heavy side work during runs.
+
+### E026 · H015 v2 reproduction · PASS (laptop compute check)
+
+- All development folds within 0.008 s of E019 (tolerance 1.0 s); 668.7 s, 5.22 GB.
+- **Not byte-identical:** all 8 prediction files differ from E019's hashes. Deterministic LightGBM is bit-stable across Intel CPU strings (Day 3), but not from Intel Xeon to AMD Ryzen (observation).
+- **E019's, E005's and E023's prediction files are absent on the laptop,** so row-level comparisons against them cannot run. Ruling needed (first Day 5 exchange).
+
+### E027 · H015 v2 reproduction with learning curves · PASS
+
+- **Byte-identical to E026 (all 8 files):** learning-curve recording does not change the model. 892 s (+33 % for recording), 5.19 GB.
+- **Curves (observation):** development-fold validation RMSE is flat from about 500 iterations, and the 1,000 rounds sit within 0.03–0.78 s of each fold's minimum. W1c (one training month) overfits from 180 (+4.9 s by 1,000). Train RMSE about 200 s against validation 270–630 s. No round count is selected from this (selection hazard, INC-0009 addendum).
+
+### E028 · H004 v1 reproduction (laptop instance of E005) · PASS
+
+- Within 0.011 s of E005 on every development fold; not byte-identical (ridge/BLAS). 72.7 s.
+
+### E029 · H018 v2 reproduction (laptop instance of E023) · PASS
+
+- Within 0.0072 s of E023; not byte-identical. 893 s, 6.60 GB (E023 5.29 GB; cause not established). Learning curves recorded.
+- Single rows on the laptop: 192622644 (S1): E027 8,136 s, E029 7,041 s. 183910286 (W1, y 13,865 s): E027 1,979 s, E029 7,938 s.
+
+### X-D05-S04-0001 · submitted: LAPTOP_REFS v1, H021 v1, H022 v1, H023 v1
+
+- Rule L (laptop instances E027/E028/E029 for E019/E005/E023); the CatBoost GPU mechanism (H021) and its codes control (H022); the equal-weight blend candidate (H023, promotion P 0.20).
+
+### X-D05-S04-0001 · REVISE ×4 (LAPTOP_REFS 0.90, H021 0.90, H022 0.90, H023 0.93)
+
+- **The science of H021–H023 is sound.** The chain was blocked mainly by an unattainable route-integrity reference: the laptop's routed-path ridge differs from E028 on every routed row (D5-C4).
+- **Corrections D5-C1 to D5-C7:**
+  - swap was on (unused), and the interpreter is 3.13, not 3.11 (owner decisions in INC-0010);
+  - the instance differences sit in LIRF's routed rows, not in the LightGBM;
+  - E027–E029 were outside their reviews' scope (E029 contrary to H018 v2 item 9);
+  - E029's manifest names the wrong commit;
+  - the H021 calibration table misattributed a row.
+- **Verified by the Advisor:** E027 and E029 reproduce the cloud E023-vs-E019 comparison to 1e-4 s, and `FloatTargetMeanValue` averages the raw target.
+
+### X-D05-S04-0002 / -0003 · LAPTOP_REFS v2 ACCEPT; H021–H023 v3 ACCEPT
+
+- Rule L v2 adopted (E026/E029/E028 instances, E029's routed rows the integrity reference, environment bound). Cause of the laptop differences: polars' thread pool (16 against the cloud's 4) changes the ridge's statistics in the last bits.
+- Chain authorized: H022, then H021 (CLASS-L), then H021r, then H023, then H023r if due. Freeze anchor `803ceeb`.
+
+### E030 · H022 v3 (CatBoost GPU, codes control) · COMPLETE
+
+- Development mean 446.50 s; against E029 +4.05 s (S1 TIE). Route integrity holds (bit-identical routed rows). 225 s, 6.40 GB, no swap, GPU about 2.9 GB.
+- Out-of-range on `NM_missing_other` falls from 99 (E029) to 34; the < 1 h band falls from 82 to 25.
+
+### E031 · H021 v3 (CatBoost GPU, CTRs on raw keys) · COMPLETE; clause 1 provisionally not met
+
+- **Development mean 440.76 s, the best single run so far.** Against E029 (LightGBM, E023's instance): −1.69 s on all rows, WIN on R1–R3 and S1, W1 TIE, no airport degraded. **Not a candidate (pre-registered).**
+- Clause 1 (against E030): −4.91 s, 5/5 counted WINs. The categorical statistics matter at fixed capacity. **Provisional: the noise condition needs H021r, paused (INC-0011).**
+- Missed expectations: CatBoost was expected to lose to the LightGBM (+2 to +15 s) and to lower the day-scale rows' predictions; it won, and raised them. 25 min, 7.01 GB, no swap, GPU about 3.1 GB.
+- **Experiments paused after E031 by the owner (INC-0011).**
+
+### E032 · H021 v3 reproduction · COMPLETE; clause 1 final: NOT MET (mechanism supported)
+
+- Development mean 440.91 (E031 440.76). Integrity holds. The noise condition holds: m = +0.68 s against the 1.5 s limit.
+- **CatBoost's categorical statistics carry signal at fixed capacity: −4.91 s (re-draw −4.23 s) against the codes control, 5/5 WINs.**
+- The frozen 1.0 s reproduction tolerance fails on R1 (+1.056 s). This is a genuine GPU and seed re-draw. H021 is not a candidate.
+- Resumed by the owner (INC-0011 closed). 19 min, 7.08 GB, no swap.
+
+### E033 · H023 v3 (equal-weight blend: routed LightGBM E029 + routed CatBoost E031) · criteria 1–8 MET; PROMOTE recommended at the phase close
+
+- **Development mean 438.87 s.** Against E019 (instance E026): **−5.62 s (q95 −4.79), WIN on all 7 folds including S1**; every airport improves. **D3-C2 is treated** (> 3 h band 3 against E019's 81).
+- Clause 1 (complementarity on normal taxis): −3.96 s; clause 2 (all rows): −3.58 s. Neither is met. Residual correlation is 0.84–0.92 on bulk rows.
+- The S1 WIN is not convention-carried (`NM_present_LIRF` share 0.24). The single-row constraint (D4-C9) did not bind: the CatBoost half raised row 192622644's prediction.
+- **Missed pre-registrations:** the single-row directions (Missing Control 1), and the expectation that S1 would most likely TIE.
+
+### E034 · H023 v3 reproduction · PASS (criterion 6)
+
+- Within 0.48 s on every development fold; criteria 1–3 hold against E026 (7/7 WIN). Clause 1 −3.70 s.
+
+### X-D05-S05-0001 · Day 5 phase close · ACCEPT (0.88); holdout WIN; champion E019 → E033
+
+- **The decisions stand.** H023 v3 (E033) meets criteria 1–8 against E019 (instance E026).
+- **Holdout H: WIN.** E033 369.18 s against E026 375.93 s (−6.75 s; q10/q90 −9.83/−4.88). No revert. Ruling H5: recorded only; a joint test on one draw. Instance check: E026 375.92735 s against E019's recorded 375.92721 s.
+- **E033 is champion; E019 is previous.** E033 and E034 are PROMOTE.
+- **Disclosures:**
+  - D3-C1 (lineage); D3-C3 restated (D5-C16);
+  - D5-C8: margin composition, −2.04 s treatment and −3.58 s CatBoost half;
+  - D5-C9: stochastic champion;
+  - D5-C10: single rows;
+  - the 1,000-iteration budget.
+
+  D3-C2 is retired as a defect, and D4-C9 is superseded.
+- **Corrections D5-C8 to D5-C16**, including D5-C11 (CatBoost alone's S1 WIN is 62 % one row) and D5-C12 (attribution scopes).
+- **Standing rule 13** (stochastic components: disclose the re-draw spread). INC-0006 closed (no delegation).

@@ -1,0 +1,37 @@
+schema: advisor-task-envelope-v1
+exchange_id: X-D05-S04-0003
+session: D05-S04
+sender: claude-researcher
+recipient: advisor-subagent
+purpose: proposal_review
+proposal_ids: [H021, H022, H023]
+proposal_paths:
+  - research/day-05/proposals/H021_v3.md
+  - research/day-05/proposals/H022_v3.md
+  - research/day-05/proposals/H023_v3.md
+proposal_sha256:
+  - b8618266bf2cd259415ab3879435d5f016f8dee780a50c798d1b6cba68a19716
+  - 43526f13c690193fe06fcc65b6fd32de6247d83a40178cdf81a0c6c9ccc9d95b
+  - 41712f57b3befe4ad4a342bc129a6e447b1fd31c1e01b2070dab4903da83eec2
+review_output_dir: research/day-05/advisor/
+context_paths:
+  - research/day-05/advisor/H021_review_v2.md
+  - research/day-05/advisor/H022_review_v2.md
+  - research/day-05/advisor/H023_review_v2.md
+  - research/day-05/advisor/LAPTOP_REFS_review_v2.md
+  - research/day-05/acks/
+  - research/day-05/proposals/H021_v2.md
+  - research/day-05/proposals/H022_v2.md
+  - research/day-05/proposals/H023_v2.md
+  - research/day-05/proposals/LAPTOP_REFS_v2.md
+  - orchestration/advisor-exchanges/X-D05-S04-0002/response.md
+  - research/day-05/eda/cb_param_diff.json
+  - scripts/diag_cb_params.py
+  - src/prc/worker.py
+  - docs/incidents/INC-0010-swap-and-interpreter-D05.md
+constraints:
+  - Small batched review of the v3 revisions. Review files are H021_review_v3.md, H022_review_v3.md and H023_review_v3.md.
+  - Check each required revision of the v2 reviews against v3; the v2 'acceptable as is' items (including CLASS-L for H021 and H021r) are unchanged.
+  - LAPTOP_REFS v2 is accepted and acknowledged (rule L v2 adopted). The tools-freeze anchor is the commit that submits this envelope.
+  - Read-only checks only. Do not read December 2025 DEP targets; do not run holdout_check.py; no fit or score on a real fold with a real target. Check the experiment lock first and keep memory light (INC-0008).
+created_utc: 2026-10-01T20:25:33Z

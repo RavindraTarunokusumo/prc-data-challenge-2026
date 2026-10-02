@@ -1,0 +1,82 @@
+{
+ "schema": "artifact-manifest-v1",
+ "producing_experiment": "E030",
+ "artifacts": [
+  {
+   "path": "predictions/validation/E030/R1.parquet",
+   "fold": "R1",
+   "rows": 183950,
+   "size": 1499162,
+   "sha256": "d97827d032ee3c1a8179b7fe06683de6f70111533881d0b9ec73e718f4c2e55d"
+  },
+  {
+   "path": "predictions/validation/E030/R2.parquet",
+   "fold": "R2",
+   "rows": 185674,
+   "size": 1512497,
+   "sha256": "7114f286f1523a8209945e5e3af4dc14043bbd755c1cec5d83f220626cf21550"
+  },
+  {
+   "path": "predictions/validation/E030/R3.parquet",
+   "fold": "R3",
+   "rows": 162332,
+   "size": 1347896,
+   "sha256": "72bd44d279d09ca8e19b0581152995004ad0005689d52e2f1ed8c9d031d5b327"
+  },
+  {
+   "path": "predictions/validation/E030/S1.parquet",
+   "fold": "S1",
+   "rows": 190713,
+   "size": 1562900,
+   "sha256": "b9a397942838908f59dcd86a4b085db0679f53602c7abb81352f2b79463aa996"
+  },
+  {
+   "path": "predictions/validation/E030/W1.parquet",
+   "fold": "W1",
+   "rows": 143732,
+   "size": 1174213,
+   "sha256": "9afbd32b2a6bab38df5e3af838514a11bfb16df5e233fff1ef4b188f69d4f4ee"
+  },
+  {
+   "path": "predictions/validation/E030/S1c.parquet",
+   "fold": "S1c",
+   "rows": 190713,
+   "size": 1581164,
+   "sha256": "98d1e564542ad164b596d0ade3a64ef8667595b0006531ab39f62fdf6a50db29"
+  },
+  {
+   "path": "predictions/validation/E030/W1c.parquet",
+   "fold": "W1c",
+   "rows": 143732,
+   "size": 1165067,
+   "sha256": "745bfe8f716bef15622471852abe7277adf9aa968993541202df79f96b7b1273"
+  },
+  {
+   "path": "predictions/validation/E030/H.parquet",
+   "fold": "H",
+   "rows": 165677,
+   "size": 1354898,
+   "sha256": "1cccbe70301f727cd53ce016cb2343dd30d37c1bd4ffa7b5ea04f3815f813bbc"
+  }
+ ],
+ "format": "parquet [MVT_ID_mvt, pred]",
+ "code_commit": "d8407e0cac08d733f85dfb9fe1c757d606e0cf01",
+ "polars_threads": 16,
+ "python": "3.13.15",
+ "environment": {
+  "uv_lock_sha256": "efa4fd78eaa6dfd2d6d72142388e2d55e7ce4c6a25060f64b6adaf7c1774fa67",
+  "libraries": {
+   "numpy": "2.5.3",
+   "scipy": "1.18.1",
+   "sklearn": "1.9.1",
+   "polars": "1.44.2",
+   "lightgbm": "4.7.0",
+   "catboost": "1.2.10",
+   "xgboost": "3.4.1",
+   "pandas": "3.0.6"
+  },
+  "thread_variables": {}
+ },
+ "silver_sha256": "efde426225040cd657e2a8c1be7576c6dd03cb2729fea5b303b6c4b9e9ec9c60",
+ "reproduce": "uv run python scripts/run_experiment.py E030  (a reproduction needs a fresh E### from scripts/gate.py)"
+}

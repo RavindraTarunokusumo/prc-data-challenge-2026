@@ -1,0 +1,50 @@
+schema: advisor-task-envelope-v1
+exchange_id: X-D05-S05-0001
+session: D05-S05
+sender: claude-researcher
+recipient: advisor-subagent
+purpose: phase_close_review
+proposal_ids: [PHASE_CLOSE_D05]
+proposal_paths:
+  - research/day-05/proposals/PHASE_CLOSE_D05_v1.md
+proposal_sha256:
+  - ca9fff72ecc60effd757e1df132ae606cf6dfdbca3a29043bf1829073041ee00
+review_output_dir: research/day-05/advisor/
+context_paths:
+  - research/day-05/DAY_SUMMARY.md
+  - research/EXPERIMENT_JOURNAL.md
+  - research/STATE.md
+  - experiments/E025/
+  - experiments/E026/
+  - experiments/E027/
+  - experiments/E028/
+  - experiments/E029/
+  - experiments/E030/
+  - experiments/E031/
+  - experiments/E032/
+  - experiments/E033/
+  - experiments/E034/
+  - research/comparisons/
+  - research/day-05/proposals/
+  - research/day-05/advisor/
+  - research/day-05/acks/
+  - research/day-05/eda/
+  - research/day-05/sessions/
+  - research/day-04/DAY_SUMMARY.md
+  - research/day-04/advisor/PHASE_CLOSE_D04_review_v1.md
+  - research/day-03/advisor/PHASE_CLOSE_D03_review_v1.md
+  - models/champion/CURRENT.json
+  - docs/incidents/INC-0006-owner-instruction-sonnet-delegation-D05.md
+  - docs/incidents/INC-0007-laptop-environment-D05.md
+  - docs/incidents/INC-0008-concurrent-oom-E025-D05.md
+  - docs/incidents/INC-0009-owner-instruction-wandb-D05.md
+  - docs/incidents/INC-0010-swap-and-interpreter-D05.md
+  - docs/incidents/INC-0011-owner-pause-after-E031-D05.md
+  - docs/incidents/INC-0004-researcher-launch-configuration-D03.md
+  - config/splits.yaml
+constraints:
+  - Phase-close review for Day 5. Review file is PHASE_CLOSE_D05_review_v1.md. Be especially adversarial (advisor policy): try to show the proposed champion is wrong.
+  - Rule on the Day 5 holdout access (proposed E033 NEW vs E026 reference, frozen revert_on LOSS). Do NOT run holdout_check.py and do not read December 2025 DEP targets; the researcher runs the access after the ruling.
+  - Rule L v2 (instances, environment binding) and owner decisions in INC-0010 apply. Standing rules 1-12, B1-B4, rulings H, B, R, H3, H4 and the hand-off base ruling apply.
+  - Read-only checks only. Comparing existing prediction files, target-free checks and synthetic tests are fine. No fit or score on a real fold with a real target. Check the experiment lock first and keep memory light (INC-0008).
+created_utc: 2026-10-02T12:49:17Z
