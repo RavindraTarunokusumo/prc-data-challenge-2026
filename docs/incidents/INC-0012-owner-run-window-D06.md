@@ -39,3 +39,9 @@ Open for Day 6. Closes at the Day 6 phase close, or when the owner changes the w
 - "No file under the repository changes during the window" reads: **no file outside the running experiment's own records changes during the window.** The launcher's per-run checkpoint commits only that run's paths (`experiments/<E###>/`, `experiments/ledger.jsonl`, `research/comparisons/route_check_<E###>.json`).
 - The launcher was revised for batch v2 (rung B first; own-path staging; clean-tree re-check at window open; `TZ=Europe/Amsterdam` with the window computed from UTC; non-interactive push under a 60 s timeout; a log line for any run that ends after 21:30). Its SHA-256 is pinned in `research/day-06/proposals/H024_v2.md` §Batch.
 - **Overrun:** the launcher never kills a run; the CLASS-M timeout (2,700 s) bounds it. Any run still executing at 21:30 is reported, with its end time, as a deviation under this incident.
+
+## Amendment (2026-10-03, D06-S01)
+
+- Owner (2026-10-03): "Continue with more tests. GPU is free." The researcher reads the 21:00–21:30 window as a **standing daily window** (the instruction named no end date). The next batch (H029–H030) runs 21:00–21:30 Europe/Amsterdam on 2026-10-03 (19:00–19:30Z) unless the owner says otherwise.
+- Launcher `research/day-06/sessions/D06-S01/run_window_2.sh` (SHA-256 `edfe11dfd7e5f690a722fd05e5050213fbede60b3a8ede00355c8a3e08dadf3e`): the pinned `run_window.sh` logic with only the date, log name and queue changed.
+- GPU memory in use at 2026-10-03T08:13Z: 635 MiB (the 4.3–5.2 GB external holder of 2026-10-02 is gone, as the owner reports).

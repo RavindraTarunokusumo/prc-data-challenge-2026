@@ -1,0 +1,44 @@
+schema: advisor-task-envelope-v1
+exchange_id: X-D06-S01-0003
+session: D06-S01
+sender: claude-researcher
+recipient: advisor-subagent
+purpose: proposal_review
+proposal_ids: [H029, H030]
+proposal_paths:
+  - research/day-06/proposals/H029_v1.md
+  - research/day-06/proposals/H030_v1.md
+proposal_sha256:
+  - 8511f3a17462e52634efcbe58aa7b141b40a277b10dadb6a3288df5c8944a802
+  - 7695dc11a594aafec0e45149cdda3b94bcbab8f17e5614be6a5bfd08faeefd8a
+review_output_dir: research/day-06/advisor/
+context_paths:
+  - research/STATE.md
+  - research/EXPERIMENT_JOURNAL.md
+  - research/day-06/advisor/H024_review_v2.md
+  - research/day-06/sessions/D06-S01/run_window.sh
+  - research/day-06/sessions/D06-S01/run_window_2.sh
+  - research/day-06/sessions/D06-S01/PRE_WINDOW.md
+  - research/day-06/eda/d06_diagnostics.py
+  - docs/incidents/INC-0012-owner-run-window-D06.md
+  - research/day-05/proposals/H021_v3.md
+  - research/day-05/advisor/H021_review_v3.md
+  - research/day-05/advisor/PHASE_CLOSE_D05_review_v1.md
+  - research/day-05/acks/PHASE_CLOSE_D05_ack_v1.md
+  - experiments/E031/config.yaml
+  - experiments/E033/config.yaml
+  - research/comparisons/E033_vs_E026.json
+  - research/comparisons/repro_E034_of_E033.json
+  - research/comparisons/repro_E032_of_E031.json
+  - research/comparisons/E032_vs_E031_mech_NM_present_excl_LIRF.json
+  - research/comparisons/E034_vs_E029_mech_NM_present_excl_LIRF.json
+  - scripts/run_experiment.py
+  - config/splits.yaml
+constraints:
+  - Batched proposal review (Day 6; second batch). Review files are H029_review_v1.md and H030_review_v1.md, one decision each. H029 §Batch is shared text.
+  - The first Day 6 batch (E035-E039) is complete and analysed (journal Day 6 section; experiments/E035-E039/analysis.md).
+  - Owner (2026-10-03) - "Continue with more tests. GPU is free." The researcher reads INC-0012's window as standing daily (amendment in INC-0012). Window today 19:00-19:30Z.
+  - run_window_2.sh differs from the pinned run_window.sh only in date, log name and queue (diff shown in the pre-window record once armed).
+  - The tools-freeze anchor is the commit that submits this envelope.
+  - Read-only checks only. Do not read December 2025 DEP targets; do not run holdout_check.py; no fit or score on a real fold with a real target. Check the experiment lock first and keep memory light (INC-0008).
+created_utc: 2026-10-03T08:16:02Z
