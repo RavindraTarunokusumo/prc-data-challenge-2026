@@ -1,0 +1,11 @@
+hypothesis_id: H033
+proposal_version: 1
+purpose: primary
+model: blend
+feature_set: FS0
+params:
+  components: [E042, E043]
+  weights: [0.5, 0.5]
+folds: [SUBMIT_JAN, SUBMIT_JUL]
+seed: 42
+job_class: CLASS-S

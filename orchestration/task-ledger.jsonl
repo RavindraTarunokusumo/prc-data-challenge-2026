@@ -67,3 +67,7 @@
 {"ts": "2026-10-03T16:27:58Z", "event": "advisor_result", "exchange_id": "X-D06-S01-0004", "decisions": {"PHASE_CLOSE_D06": "ACCEPT"}}
 {"event": "holdout_closed_unused", "phase": "day-06", "utc": "2026-10-03T16:27:58Z", "ruling": "H6 (X-D06-S01-0004)", "note": "Day 6: 0 of 1, closed unused; no comparison made (not a TIE); no carry-over"}
 {"ts": "2026-10-03T17:00:07Z", "event": "advisor_request", "exchange_id": "X-D07-S01-0001", "proposals": ["H031", "H032", "H033"]}
+{"ts": "2026-10-03T17:20:44Z", "event": "advisor_result", "exchange_id": "X-D07-S01-0001", "decisions": {"H031": "ACCEPT", "H032": "ACCEPT", "H033": "ACCEPT"}}
+{"event": "allocate", "utc": "2026-10-03T17:22:08Z", "experiment_id": "E042", "hypothesis_id": "H031", "version": "v1", "purpose": "primary", "proposal_sha256": "560ee530f3c2e1adeb18beb1e4ab6b9602d22e9bab8188a4fb29c2cc01815cf6", "review_sha256": "0caad6a1cd0d21e31e69b43fd28858120ceda8f4d779af182dc52437f68c1abe"}
+{"event": "allocate", "utc": "2026-10-03T17:22:09Z", "experiment_id": "E043", "hypothesis_id": "H032", "version": "v1", "purpose": "primary", "proposal_sha256": "139205d4964a47720b9032ad58ef147a7f83821dfa1220fb3f1e3dca2376657c", "review_sha256": "c69ac98f7c0277e0de916cb01b61d391f85fdc4fe9c4491b80b38001bd279248"}
+{"event": "allocate", "utc": "2026-10-03T17:22:09Z", "experiment_id": "E044", "hypothesis_id": "H033", "version": "v1", "purpose": "primary", "proposal_sha256": "c908b3bedf691067020bca2bf86c826eae72a0082caad52e49710bef52649adc", "review_sha256": "33b536e33857f5ac262ea9b3d10e3b343f1010946a782f9e11f2ff13c0485482"}
