@@ -1,0 +1,846 @@
+{
+ "E035": {
+  "R1": {
+   "NM_present_other": {
+    "bulk_rows": 166897,
+    "below_0": 0,
+    "above_3600": 17
+   },
+   "NM_present_LIRF": {
+    "bulk_rows": 14364,
+    "below_0": 0,
+    "above_3600": 4
+   },
+   "NM_missing_other": {
+    "bulk_rows": 2289,
+    "below_0": 5,
+    "above_3600": 6
+   },
+   "NM_missing_LIRF": {
+    "bulk_rows": 94,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "total": {
+    "bulk_rows": 183644,
+    "below_0": 5,
+    "above_3600": 27
+   }
+  },
+  "R2": {
+   "NM_present_other": {
+    "bulk_rows": 169624,
+    "below_0": 0,
+    "above_3600": 8
+   },
+   "NM_present_LIRF": {
+    "bulk_rows": 13890,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "NM_missing_other": {
+    "bulk_rows": 1789,
+    "below_0": 3,
+    "above_3600": 1
+   },
+   "NM_missing_LIRF": {
+    "bulk_rows": 58,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "total": {
+    "bulk_rows": 185361,
+    "below_0": 3,
+    "above_3600": 9
+   }
+  },
+  "R3": {
+   "NM_present_other": {
+    "bulk_rows": 149571,
+    "below_0": 0,
+    "above_3600": 12
+   },
+   "NM_present_LIRF": {
+    "bulk_rows": 11235,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "NM_missing_other": {
+    "bulk_rows": 1287,
+    "below_0": 4,
+    "above_3600": 1
+   },
+   "NM_missing_LIRF": {
+    "bulk_rows": 16,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "total": {
+    "bulk_rows": 162109,
+    "below_0": 4,
+    "above_3600": 13
+   }
+  },
+  "S1": {
+   "NM_present_other": {
+    "bulk_rows": 171669,
+    "below_0": 0,
+    "above_3600": 36
+   },
+   "NM_present_LIRF": {
+    "bulk_rows": 14603,
+    "below_0": 0,
+    "above_3600": 12
+   },
+   "NM_missing_other": {
+    "bulk_rows": 3567,
+    "below_0": 6,
+    "above_3600": 3
+   },
+   "NM_missing_LIRF": {
+    "bulk_rows": 218,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "total": {
+    "bulk_rows": 190057,
+    "below_0": 6,
+    "above_3600": 51
+   }
+  },
+  "W1": {
+   "NM_present_other": {
+    "bulk_rows": 131498,
+    "below_0": 0,
+    "above_3600": 10
+   },
+   "NM_present_LIRF": {
+    "bulk_rows": 10601,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "NM_missing_other": {
+    "bulk_rows": 856,
+    "below_0": 7,
+    "above_3600": 2
+   },
+   "NM_missing_LIRF": {
+    "bulk_rows": 14,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "total": {
+    "bulk_rows": 142969,
+    "below_0": 7,
+    "above_3600": 12
+   }
+  },
+  "S1c": {
+   "NM_present_other": {
+    "bulk_rows": 171669,
+    "below_0": 0,
+    "above_3600": 50
+   },
+   "NM_present_LIRF": {
+    "bulk_rows": 14603,
+    "below_0": 0,
+    "above_3600": 9
+   },
+   "NM_missing_other": {
+    "bulk_rows": 3567,
+    "below_0": 14,
+    "above_3600": 6
+   },
+   "NM_missing_LIRF": {
+    "bulk_rows": 218,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "total": {
+    "bulk_rows": 190057,
+    "below_0": 14,
+    "above_3600": 65
+   }
+  },
+  "W1c": {
+   "NM_present_other": {
+    "bulk_rows": 131498,
+    "below_0": 0,
+    "above_3600": 16
+   },
+   "NM_present_LIRF": {
+    "bulk_rows": 10601,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "NM_missing_other": {
+    "bulk_rows": 856,
+    "below_0": 23,
+    "above_3600": 13
+   },
+   "NM_missing_LIRF": {
+    "bulk_rows": 14,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "total": {
+    "bulk_rows": 142969,
+    "below_0": 23,
+    "above_3600": 29
+   }
+  },
+  "bands_dev5": {
+   "<1h": {
+    "bulk_rows": 2760,
+    "below_0": 23,
+    "above_3600": 6,
+    "total": 29
+   },
+   "1-3h": {
+    "bulk_rows": 6500,
+    "below_0": 1,
+    "above_3600": 2,
+    "total": 3
+   },
+   ">3h": {
+    "bulk_rows": 528,
+    "below_0": 1,
+    "above_3600": 5,
+    "total": 6
+   }
+  }
+ },
+ "E037": {
+  "R1": {
+   "NM_present_other": {
+    "bulk_rows": 166897,
+    "below_0": 0,
+    "above_3600": 15
+   },
+   "NM_present_LIRF": {
+    "bulk_rows": 14364,
+    "below_0": 0,
+    "above_3600": 5
+   },
+   "NM_missing_other": {
+    "bulk_rows": 2289,
+    "below_0": 14,
+    "above_3600": 3
+   },
+   "NM_missing_LIRF": {
+    "bulk_rows": 94,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "total": {
+    "bulk_rows": 183644,
+    "below_0": 14,
+    "above_3600": 23
+   }
+  },
+  "R2": {
+   "NM_present_other": {
+    "bulk_rows": 169624,
+    "below_0": 0,
+    "above_3600": 10
+   },
+   "NM_present_LIRF": {
+    "bulk_rows": 13890,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "NM_missing_other": {
+    "bulk_rows": 1789,
+    "below_0": 5,
+    "above_3600": 1
+   },
+   "NM_missing_LIRF": {
+    "bulk_rows": 58,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "total": {
+    "bulk_rows": 185361,
+    "below_0": 5,
+    "above_3600": 11
+   }
+  },
+  "R3": {
+   "NM_present_other": {
+    "bulk_rows": 149571,
+    "below_0": 0,
+    "above_3600": 13
+   },
+   "NM_present_LIRF": {
+    "bulk_rows": 11235,
+    "below_0": 0,
+    "above_3600": 1
+   },
+   "NM_missing_other": {
+    "bulk_rows": 1287,
+    "below_0": 6,
+    "above_3600": 1
+   },
+   "NM_missing_LIRF": {
+    "bulk_rows": 16,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "total": {
+    "bulk_rows": 162109,
+    "below_0": 6,
+    "above_3600": 15
+   }
+  },
+  "S1": {
+   "NM_present_other": {
+    "bulk_rows": 171669,
+    "below_0": 0,
+    "above_3600": 39
+   },
+   "NM_present_LIRF": {
+    "bulk_rows": 14603,
+    "below_0": 0,
+    "above_3600": 12
+   },
+   "NM_missing_other": {
+    "bulk_rows": 3567,
+    "below_0": 28,
+    "above_3600": 3
+   },
+   "NM_missing_LIRF": {
+    "bulk_rows": 218,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "total": {
+    "bulk_rows": 190057,
+    "below_0": 28,
+    "above_3600": 54
+   }
+  },
+  "W1": {
+   "NM_present_other": {
+    "bulk_rows": 131498,
+    "below_0": 0,
+    "above_3600": 9
+   },
+   "NM_present_LIRF": {
+    "bulk_rows": 10601,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "NM_missing_other": {
+    "bulk_rows": 856,
+    "below_0": 17,
+    "above_3600": 1
+   },
+   "NM_missing_LIRF": {
+    "bulk_rows": 14,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "total": {
+    "bulk_rows": 142969,
+    "below_0": 17,
+    "above_3600": 10
+   }
+  },
+  "S1c": {
+   "NM_present_other": {
+    "bulk_rows": 171669,
+    "below_0": 0,
+    "above_3600": 50
+   },
+   "NM_present_LIRF": {
+    "bulk_rows": 14603,
+    "below_0": 0,
+    "above_3600": 12
+   },
+   "NM_missing_other": {
+    "bulk_rows": 3567,
+    "below_0": 27,
+    "above_3600": 7
+   },
+   "NM_missing_LIRF": {
+    "bulk_rows": 218,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "total": {
+    "bulk_rows": 190057,
+    "below_0": 27,
+    "above_3600": 69
+   }
+  },
+  "W1c": {
+   "NM_present_other": {
+    "bulk_rows": 131498,
+    "below_0": 0,
+    "above_3600": 18
+   },
+   "NM_present_LIRF": {
+    "bulk_rows": 10601,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "NM_missing_other": {
+    "bulk_rows": 856,
+    "below_0": 31,
+    "above_3600": 11
+   },
+   "NM_missing_LIRF": {
+    "bulk_rows": 14,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "total": {
+    "bulk_rows": 142969,
+    "below_0": 31,
+    "above_3600": 29
+   }
+  },
+  "bands_dev5": {
+   "<1h": {
+    "bulk_rows": 2760,
+    "below_0": 69,
+    "above_3600": 4,
+    "total": 73
+   },
+   "1-3h": {
+    "bulk_rows": 6500,
+    "below_0": 1,
+    "above_3600": 3,
+    "total": 4
+   },
+   ">3h": {
+    "bulk_rows": 528,
+    "below_0": 0,
+    "above_3600": 2,
+    "total": 2
+   }
+  }
+ },
+ "E039": {
+  "R1": {
+   "NM_present_other": {
+    "bulk_rows": 166897,
+    "below_0": 0,
+    "above_3600": 20
+   },
+   "NM_present_LIRF": {
+    "bulk_rows": 14364,
+    "below_0": 0,
+    "above_3600": 7
+   },
+   "NM_missing_other": {
+    "bulk_rows": 2289,
+    "below_0": 14,
+    "above_3600": 4
+   },
+   "NM_missing_LIRF": {
+    "bulk_rows": 94,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "total": {
+    "bulk_rows": 183644,
+    "below_0": 14,
+    "above_3600": 31
+   }
+  },
+  "R2": {
+   "NM_present_other": {
+    "bulk_rows": 169624,
+    "below_0": 1,
+    "above_3600": 8
+   },
+   "NM_present_LIRF": {
+    "bulk_rows": 13890,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "NM_missing_other": {
+    "bulk_rows": 1789,
+    "below_0": 6,
+    "above_3600": 2
+   },
+   "NM_missing_LIRF": {
+    "bulk_rows": 58,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "total": {
+    "bulk_rows": 185361,
+    "below_0": 7,
+    "above_3600": 10
+   }
+  },
+  "R3": {
+   "NM_present_other": {
+    "bulk_rows": 149571,
+    "below_0": 0,
+    "above_3600": 8
+   },
+   "NM_present_LIRF": {
+    "bulk_rows": 11235,
+    "below_0": 0,
+    "above_3600": 2
+   },
+   "NM_missing_other": {
+    "bulk_rows": 1287,
+    "below_0": 5,
+    "above_3600": 1
+   },
+   "NM_missing_LIRF": {
+    "bulk_rows": 16,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "total": {
+    "bulk_rows": 162109,
+    "below_0": 5,
+    "above_3600": 11
+   }
+  },
+  "S1": {
+   "NM_present_other": {
+    "bulk_rows": 171669,
+    "below_0": 0,
+    "above_3600": 37
+   },
+   "NM_present_LIRF": {
+    "bulk_rows": 14603,
+    "below_0": 0,
+    "above_3600": 18
+   },
+   "NM_missing_other": {
+    "bulk_rows": 3567,
+    "below_0": 23,
+    "above_3600": 4
+   },
+   "NM_missing_LIRF": {
+    "bulk_rows": 218,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "total": {
+    "bulk_rows": 190057,
+    "below_0": 23,
+    "above_3600": 59
+   }
+  },
+  "W1": {
+   "NM_present_other": {
+    "bulk_rows": 131498,
+    "below_0": 0,
+    "above_3600": 14
+   },
+   "NM_present_LIRF": {
+    "bulk_rows": 10601,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "NM_missing_other": {
+    "bulk_rows": 856,
+    "below_0": 18,
+    "above_3600": 2
+   },
+   "NM_missing_LIRF": {
+    "bulk_rows": 14,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "total": {
+    "bulk_rows": 142969,
+    "below_0": 18,
+    "above_3600": 16
+   }
+  },
+  "S1c": {
+   "NM_present_other": {
+    "bulk_rows": 171669,
+    "below_0": 0,
+    "above_3600": 44
+   },
+   "NM_present_LIRF": {
+    "bulk_rows": 14603,
+    "below_0": 0,
+    "above_3600": 10
+   },
+   "NM_missing_other": {
+    "bulk_rows": 3567,
+    "below_0": 29,
+    "above_3600": 16
+   },
+   "NM_missing_LIRF": {
+    "bulk_rows": 218,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "total": {
+    "bulk_rows": 190057,
+    "below_0": 29,
+    "above_3600": 70
+   }
+  },
+  "W1c": {
+   "NM_present_other": {
+    "bulk_rows": 131498,
+    "below_0": 1,
+    "above_3600": 16
+   },
+   "NM_present_LIRF": {
+    "bulk_rows": 10601,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "NM_missing_other": {
+    "bulk_rows": 856,
+    "below_0": 42,
+    "above_3600": 8
+   },
+   "NM_missing_LIRF": {
+    "bulk_rows": 14,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "total": {
+    "bulk_rows": 142969,
+    "below_0": 43,
+    "above_3600": 24
+   }
+  },
+  "bands_dev5": {
+   "<1h": {
+    "bulk_rows": 2760,
+    "below_0": 63,
+    "above_3600": 5,
+    "total": 68
+   },
+   "1-3h": {
+    "bulk_rows": 6500,
+    "below_0": 1,
+    "above_3600": 6,
+    "total": 7
+   },
+   ">3h": {
+    "bulk_rows": 528,
+    "below_0": 2,
+    "above_3600": 2,
+    "total": 4
+   }
+  }
+ },
+ "E033": {
+  "R1": {
+   "NM_present_other": {
+    "bulk_rows": 166897,
+    "below_0": 0,
+    "above_3600": 21
+   },
+   "NM_present_LIRF": {
+    "bulk_rows": 14364,
+    "below_0": 0,
+    "above_3600": 7
+   },
+   "NM_missing_other": {
+    "bulk_rows": 2289,
+    "below_0": 17,
+    "above_3600": 2
+   },
+   "NM_missing_LIRF": {
+    "bulk_rows": 94,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "total": {
+    "bulk_rows": 183644,
+    "below_0": 17,
+    "above_3600": 30
+   }
+  },
+  "R2": {
+   "NM_present_other": {
+    "bulk_rows": 169624,
+    "below_0": 0,
+    "above_3600": 8
+   },
+   "NM_present_LIRF": {
+    "bulk_rows": 13890,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "NM_missing_other": {
+    "bulk_rows": 1789,
+    "below_0": 6,
+    "above_3600": 1
+   },
+   "NM_missing_LIRF": {
+    "bulk_rows": 58,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "total": {
+    "bulk_rows": 185361,
+    "below_0": 6,
+    "above_3600": 9
+   }
+  },
+  "R3": {
+   "NM_present_other": {
+    "bulk_rows": 149571,
+    "below_0": 0,
+    "above_3600": 9
+   },
+   "NM_present_LIRF": {
+    "bulk_rows": 11235,
+    "below_0": 0,
+    "above_3600": 1
+   },
+   "NM_missing_other": {
+    "bulk_rows": 1287,
+    "below_0": 5,
+    "above_3600": 1
+   },
+   "NM_missing_LIRF": {
+    "bulk_rows": 16,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "total": {
+    "bulk_rows": 162109,
+    "below_0": 5,
+    "above_3600": 11
+   }
+  },
+  "S1": {
+   "NM_present_other": {
+    "bulk_rows": 171669,
+    "below_0": 0,
+    "above_3600": 37
+   },
+   "NM_present_LIRF": {
+    "bulk_rows": 14603,
+    "below_0": 0,
+    "above_3600": 11
+   },
+   "NM_missing_other": {
+    "bulk_rows": 3567,
+    "below_0": 32,
+    "above_3600": 3
+   },
+   "NM_missing_LIRF": {
+    "bulk_rows": 218,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "total": {
+    "bulk_rows": 190057,
+    "below_0": 32,
+    "above_3600": 51
+   }
+  },
+  "W1": {
+   "NM_present_other": {
+    "bulk_rows": 131498,
+    "below_0": 0,
+    "above_3600": 10
+   },
+   "NM_present_LIRF": {
+    "bulk_rows": 10601,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "NM_missing_other": {
+    "bulk_rows": 856,
+    "below_0": 20,
+    "above_3600": 2
+   },
+   "NM_missing_LIRF": {
+    "bulk_rows": 14,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "total": {
+    "bulk_rows": 142969,
+    "below_0": 20,
+    "above_3600": 12
+   }
+  },
+  "S1c": {
+   "NM_present_other": {
+    "bulk_rows": 171669,
+    "below_0": 0,
+    "above_3600": 49
+   },
+   "NM_present_LIRF": {
+    "bulk_rows": 14603,
+    "below_0": 0,
+    "above_3600": 10
+   },
+   "NM_missing_other": {
+    "bulk_rows": 3567,
+    "below_0": 27,
+    "above_3600": 6
+   },
+   "NM_missing_LIRF": {
+    "bulk_rows": 218,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "total": {
+    "bulk_rows": 190057,
+    "below_0": 27,
+    "above_3600": 65
+   }
+  },
+  "W1c": {
+   "NM_present_other": {
+    "bulk_rows": 131498,
+    "below_0": 0,
+    "above_3600": 16
+   },
+   "NM_present_LIRF": {
+    "bulk_rows": 10601,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "NM_missing_other": {
+    "bulk_rows": 856,
+    "below_0": 35,
+    "above_3600": 17
+   },
+   "NM_missing_LIRF": {
+    "bulk_rows": 14,
+    "below_0": 0,
+    "above_3600": 0
+   },
+   "total": {
+    "bulk_rows": 142969,
+    "below_0": 35,
+    "above_3600": 33
+   }
+  },
+  "bands_dev5": {
+   "<1h": {
+    "bulk_rows": 2760,
+    "below_0": 78,
+    "above_3600": 4,
+    "total": 82
+   },
+   "1-3h": {
+    "bulk_rows": 6500,
+    "below_0": 1,
+    "above_3600": 3,
+    "total": 4
+   },
+   ">3h": {
+    "bulk_rows": 528,
+    "below_0": 1,
+    "above_3600": 2,
+    "total": 3
+   }
+  }
+ }
+}

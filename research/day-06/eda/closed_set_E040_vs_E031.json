@@ -1,0 +1,60 @@
+{
+ "schema": "d06-closed-set-v1",
+ "candidate": "E040",
+ "reference": "E031",
+ "allowed_differences": [
+  "max_ctr_complexity"
+ ],
+ "per_fold": {
+  "R1": {
+   "only_in_candidate": [],
+   "only_in_reference": [],
+   "differ": {},
+   "n_equal": 58
+  },
+  "R2": {
+   "only_in_candidate": [],
+   "only_in_reference": [],
+   "differ": {},
+   "n_equal": 58
+  },
+  "R3": {
+   "only_in_candidate": [],
+   "only_in_reference": [],
+   "differ": {},
+   "n_equal": 58
+  },
+  "S1": {
+   "only_in_candidate": [],
+   "only_in_reference": [],
+   "differ": {},
+   "n_equal": 58
+  },
+  "W1": {
+   "only_in_candidate": [],
+   "only_in_reference": [],
+   "differ": {},
+   "n_equal": 58
+  },
+  "S1c": {
+   "only_in_candidate": [],
+   "only_in_reference": [],
+   "differ": {},
+   "n_equal": 58
+  },
+  "W1c": {
+   "only_in_candidate": [],
+   "only_in_reference": [],
+   "differ": {},
+   "n_equal": 58
+  },
+  "H": {
+   "only_in_candidate": [],
+   "only_in_reference": [],
+   "differ": {},
+   "n_equal": 58
+  }
+ },
+ "violation": false,
+ "violations": []
+}

@@ -412,3 +412,62 @@ The chain runs sequentially: H009, then H010, then H012, then H011.
   D3-C2 is retired as a defect, and D4-C9 is superseded.
 - **Corrections D5-C8 to D5-C16**, including D5-C11 (CatBoost alone's S1 WIN is 62 % one row) and D5-C12 (attribution scopes).
 - **Standing rule 13** (stochastic components: disclose the re-draw spread). INC-0006 closed (no delegation).
+
+## Day 6 (D06-S01): adversarial attribution ladder (batch X-D06-S01-0002; controls, no candidate)
+
+Exchanges: X-D06-S01-0001 (v1, REVISE ×5: bounded readings, rung A relabelled, H027 seed refused, launcher pinning), X-D06-S01-0002 (v2, ACCEPT ×5, conditions C1–C7). All five runs inside the owner's 21:00–21:30 window (INC-0012); no deviation. Freeze diff empty. Never NEW (ruling). Readings on `NM_present_excl_LIRF` against E033 (D), all rows beside.
+
+### E035 · H026 v2 · rung B (E029 + codes CatBoost E030) · statistics carry part
+
+- D +1.34 s (q95 +1.65), LOSS 5/5 dev folds. G −2.62 s (66 % of E033's −3.96). All rows: −1.77 vs E029, +1.81 vs E033.
+- E030 disagrees with E029 more than E031 does (RMS 93 against 81 s) but is 4.6 s less accurate: the statistics' contribution runs through accuracy.
+
+### E036 · H024 v2 · CatBoost complexity 1 · own reading INCONCLUSIVE (closed set)
+
+- `data_partition` DocParallel against E031's FeatureParallel (CatBoost's GPU choice): violation, pre-registered → INCONCLUSIVE.
+- Values: +4.96 s against E031 (5/5 LOSS), +0.04 s against the codes arm E030. Per-key statistics alone recover none of E031's advantage on normal taxis. Dev mean 444.46; 354 s (E031 1,523 s).
+
+### E037 · H025 v2 · rung C (E029 + E036) · combinations carry part (with the C6 disclosure)
+
+- D +1.65 s (q95 +1.98), LOSS 5/5. G −2.31 s (58 %). All rows: −2.41 vs E029, +1.17 vs E033 (better than rung B on all rows, worse on normal taxis).
+- Missed: expected D +0.1 to +1.4; Advisor P(carries) 0.60.
+
+### E038 · H027 v2 · LightGBM twin (subsampling 0.8/0.8, seed 42)
+
+- Dev mean 442.03 (E029 442.46); −0.42 s all rows. Residual correlation with E029 0.977–0.980 on normal taxis; RMS disagreement 46 s. 909 s (no speed-up).
+
+### E039 · H028 v2 · rung A (E029 + twin) · the twin does not reproduce the gain
+
+- D +2.43 s (q95 +2.99), LOSS 4/5 (W1 TIE). **Averaging floor at seed 42: G −1.53 s** (39 %), larger than expected (−0.2 to −1.2). Not evidence about learner families.
+
+### Batch conclusion (bounded, H024 v2 §Batch; C5)
+
+At equal weight, neither the codes CatBoost, nor the per-key CatBoost, nor a perturbation twin of E029 substitutes for E031 in the blend. Each rung keeps 39–66 % of E033's gain on normal taxis; the remainder needs E031's configuration, and the complexity-4 combinations are where E031's accuracy comes from (E036 values, with the closed-set disclosure). E033's performance claim was not under test. The Day 5 reading "this CatBoost configuration as a whole" survives; no family claim is made or widened.
+
+## Day 6 (D06-S01), batch 2: champion draw-robustness (X-D06-S01-0003; controls, no candidate)
+
+ACCEPT ×2 with conditions N1–N8. Run at once on the owner's instruction ("No, run now.", INC-0012 amendment) by direct `run_experiment.py` calls. Freeze diff empty.
+
+### E040 · H029 v1 · seed-42 GPU refit of E031 · pure fixed-seed re-draw
+
+- Not byte-identical; resolved parameters identical on every fold. Dev mean 440.97 (E031 440.76). Largest development-fold change +0.84 s (W1). S1 reproduced to floating point (max 5.7e-7 s); other folds RMS change 21–33 s.
+- CatBoost-alone three-draw spread (E031, E032, E040): up to 1.06 s (R1) and 1.57 s (W1). 1,497 s, 7.13 GB (within CLASS-M as well).
+
+### E041 · H030 v1 · E033's construction on E040 · robust to one further fixed-seed (GPU-only) draw
+
+- Against E026: criteria 1–3 pass, −5.52 s (q95 −4.67), 7/7 WIN. Against E033: |Δ| ≤ 0.40 s on every development fold.
+- Blend three-draw spread (E033, E034, E041): ≤ 0.60 s (W1). All three draws keep 7/7 WIN against E026.
+- Not the Day 7 SUBMIT draw (N4; the SUBMIT fit trains on 12 months). Low-power test by design (review finding 3).
+
+### X-D06-S01-0004 · Day 6 phase close · ACCEPT (0.84); holdout closed unused (ruling H6); E033 remains champion
+
+- **The decisions stand.** No Day 6 result contradicts the Day 5 promotion; all three blend draws meet criteria 1–3 against E026 with 7/7 WIN (−5.62, −5.54, −5.52 s). Neither Day 6 batch had real power against the performance claim; the SUBMIT procedure and D3-C3 were not attacked.
+- **Ruling H6:** "Day 6: 0 of 1, closed unused" (no comparison; not a TIE). No `holdout_check.py` with E035–E041 as NEW, in any phase.
+- **Standing rule 14** (several draws of a stochastic reference: report the point contrast against each draw; disclosure only).
+- **Appended corrections to the Day 6 entries above (D6-C6 to D6-C10; the entries themselves are unchanged):**
+  - **D6-C6:** rung B is at its threshold and depends on the draw: D +1.07 s against E034, **+0.97 s against E041**, +1.13 s against the three-draw mean. Rungs A and C hold against every draw.
+  - **D6-C7 / D6-C8:** "statistics" and "combinations" are not separated from `data_partition` (FeatureParallel appears only at complexity 4). "The complexity-4 combinations are where E031's accuracy comes from" (batch conclusion) is withdrawn: the E036 values are only *consistent with* it. Day 5 finding 1 is read "as CatBoost resolves the configuration, `data_partition` included".
+  - **D6-C9:** "the remainder needs E031's configuration" is withdrawn; the batch conclusion is the pre-registered non-substitution sentence only.
+  - **D6-C10:** rung C against rung B on all rows (−0.64 s) is exploratory.
+  - **D6-C11:** clause 1's W1 gain on normal taxis by draw: −1.59, −0.31, +0.40 s (spread 2.00 s); 69 % of E033's W1 gain sits outside normal taxis. Updates D5-C9.
+- **Incidents:** INC-0012 and INC-0013 closed; INC-0009 (W&B: E036–E039 never mirrored, D6-C13), INC-0010, INC-0004 open.

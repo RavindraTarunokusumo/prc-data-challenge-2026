@@ -52,3 +52,7 @@ Stays open while the mirror is in use, and is reviewed at the Day 5 phase close.
   - **the holdout gets no validation curve** (`truth_frame` refuses H as well).
 - **Selection hazard, stated:** a validation curve invites picking `num_boost_round` at its minimum. That would be validation-guided tuning, and any proposal using it must say so and pre-register it.
 - Experiments before E027 have no curves: their per-iteration values were never recorded.
+
+## Amendment (Day 6 phase close, X-D06-S01-0004; D6-C13)
+
+- E036, E037, E038 and E039 failed to initialise their W&B runs at completion on 2026-10-02 ("runupserter: failed to init run", context deadline exceeded). E035 synced at completion; E040 and E041 synced on 2026-10-03. Two post-window re-syncs (E035–E039) failed. The W&B mirror therefore lacks E036–E039; the repository records are complete. Stays open.

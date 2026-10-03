@@ -1,0 +1,22 @@
+{
+ "experiment_id": "E040",
+ "hypothesis_id": "H029",
+ "proposal_version": 1,
+ "purpose": "primary",
+ "day": "day-06",
+ "session": "D06-S01",
+ "proposal_sha256": "8511f3a17462e52634efcbe58aa7b141b40a277b10dadb6a3288df5c8944a802",
+ "review_sha256": "d6eaf072026d4824aee894f2fe39b9e2d27dbfb28dade1a0799dc53159bd91dd",
+ "ack_sha256": "58c1e969c6f93541041f46040a9f49f01f5da4b7303b9ff7d9a6965768c64675",
+ "frozen_sha256": "32c41c0f93313ae6844b310a4ccdbc26e678bd89c2b4993dec14185b75ccb316",
+ "allocated_utc": "2026-10-03T08:46:23Z",
+ "allocated_commit": "adbedcd7ab6a32c29c5aaa701c6ba391cb05fe26",
+ "status": "ALLOCATED",
+ "proposal": "research/day-06/proposals/H029_v1.md",
+ "review": "research/day-06/advisor/H029_review_v1.md",
+ "ack": "research/day-06/acks/H029_ack_v1.md",
+ "advisor_definition_sha256": "30fff5dd3c545a574af3151c7fcf58d305d9ab9748eb831ef83052f72b8d0d19",
+ "gate_sha256": "28e0977c65bf329b73cc13ac13141bcbbf6145f6f4a8f334e16e72994bb94b47",
+ "uv_lock_sha256": "efa4fd78eaa6dfd2d6d72142388e2d55e7ce4c6a25060f64b6adaf7c1774fa67",
+ "git_dirty_at_allocation": false
+}

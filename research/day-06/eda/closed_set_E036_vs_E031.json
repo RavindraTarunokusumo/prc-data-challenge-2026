@@ -1,0 +1,141 @@
+{
+ "schema": "d06-closed-set-v1",
+ "candidate": "E036",
+ "reference": "E031",
+ "allowed_differences": [
+  "max_ctr_complexity"
+ ],
+ "per_fold": {
+  "R1": {
+   "only_in_candidate": [],
+   "only_in_reference": [],
+   "differ": {
+    "data_partition": {
+     "candidate": "DocParallel",
+     "reference": "FeatureParallel"
+    },
+    "max_ctr_complexity": {
+     "candidate": 1,
+     "reference": 4
+    }
+   },
+   "n_equal": 56
+  },
+  "R2": {
+   "only_in_candidate": [],
+   "only_in_reference": [],
+   "differ": {
+    "data_partition": {
+     "candidate": "DocParallel",
+     "reference": "FeatureParallel"
+    },
+    "max_ctr_complexity": {
+     "candidate": 1,
+     "reference": 4
+    }
+   },
+   "n_equal": 56
+  },
+  "R3": {
+   "only_in_candidate": [],
+   "only_in_reference": [],
+   "differ": {
+    "data_partition": {
+     "candidate": "DocParallel",
+     "reference": "FeatureParallel"
+    },
+    "max_ctr_complexity": {
+     "candidate": 1,
+     "reference": 4
+    }
+   },
+   "n_equal": 56
+  },
+  "S1": {
+   "only_in_candidate": [],
+   "only_in_reference": [],
+   "differ": {
+    "data_partition": {
+     "candidate": "DocParallel",
+     "reference": "FeatureParallel"
+    },
+    "max_ctr_complexity": {
+     "candidate": 1,
+     "reference": 4
+    }
+   },
+   "n_equal": 56
+  },
+  "W1": {
+   "only_in_candidate": [],
+   "only_in_reference": [],
+   "differ": {
+    "data_partition": {
+     "candidate": "DocParallel",
+     "reference": "FeatureParallel"
+    },
+    "max_ctr_complexity": {
+     "candidate": 1,
+     "reference": 4
+    }
+   },
+   "n_equal": 56
+  },
+  "S1c": {
+   "only_in_candidate": [],
+   "only_in_reference": [],
+   "differ": {
+    "data_partition": {
+     "candidate": "DocParallel",
+     "reference": "FeatureParallel"
+    },
+    "max_ctr_complexity": {
+     "candidate": 1,
+     "reference": 4
+    }
+   },
+   "n_equal": 56
+  },
+  "W1c": {
+   "only_in_candidate": [],
+   "only_in_reference": [],
+   "differ": {
+    "data_partition": {
+     "candidate": "DocParallel",
+     "reference": "FeatureParallel"
+    },
+    "max_ctr_complexity": {
+     "candidate": 1,
+     "reference": 4
+    }
+   },
+   "n_equal": 56
+  },
+  "H": {
+   "only_in_candidate": [],
+   "only_in_reference": [],
+   "differ": {
+    "data_partition": {
+     "candidate": "DocParallel",
+     "reference": "FeatureParallel"
+    },
+    "max_ctr_complexity": {
+     "candidate": 1,
+     "reference": 4
+    }
+   },
+   "n_equal": 56
+  }
+ },
+ "violation": true,
+ "violations": [
+  "R1: differing key outside allowed set: data_partition",
+  "R2: differing key outside allowed set: data_partition",
+  "R3: differing key outside allowed set: data_partition",
+  "S1: differing key outside allowed set: data_partition",
+  "W1: differing key outside allowed set: data_partition",
+  "S1c: differing key outside allowed set: data_partition",
+  "W1c: differing key outside allowed set: data_partition",
+  "H: differing key outside allowed set: data_partition"
+ ]
+}

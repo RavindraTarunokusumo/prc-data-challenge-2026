@@ -1,0 +1,48 @@
+schema: advisor-task-envelope-v1
+exchange_id: X-D06-S01-0002
+session: D06-S01
+sender: claude-researcher
+recipient: advisor-subagent
+purpose: proposal_review
+proposal_ids: [H024, H025, H026, H027, H028]
+proposal_paths:
+  - research/day-06/proposals/H024_v2.md
+  - research/day-06/proposals/H025_v2.md
+  - research/day-06/proposals/H026_v2.md
+  - research/day-06/proposals/H027_v2.md
+  - research/day-06/proposals/H028_v2.md
+proposal_sha256:
+  - 483ed0ab9995a2b067905062213b628b63f85d8f4cebdb10e25aa2188a1b71db
+  - 44db30f7e22dda4d21d5d6bbcd88e649b234a1b7563cde2033b6e301f2cd26df
+  - a4a9ae5000626b1eb92b110ddb4a0f6d3813729b012b8a89352cf78ebc5d6bbc
+  - eb9168eaef588209b22946f6cde4f4b68bcac8ebada5fe1c171ae559912ccc95
+  - 65b8f3fbc816a7bde428c7f39a8c40525dfb1ea4c9595b56444e14d4567d70a2
+review_output_dir: research/day-06/advisor/
+context_paths:
+  - research/day-06/advisor/H024_review_v1.md
+  - research/day-06/advisor/H025_review_v1.md
+  - research/day-06/advisor/H026_review_v1.md
+  - research/day-06/advisor/H027_review_v1.md
+  - research/day-06/advisor/H028_review_v1.md
+  - orchestration/advisor-exchanges/X-D06-S01-0001/response.md
+  - research/day-06/proposals/H024_v1.md
+  - research/day-06/proposals/H025_v1.md
+  - research/day-06/proposals/H026_v1.md
+  - research/day-06/proposals/H027_v1.md
+  - research/day-06/proposals/H028_v1.md
+  - research/day-06/sessions/D06-S01/run_window.sh
+  - docs/incidents/INC-0012-owner-run-window-D06.md
+  - docs/incidents/INC-0013-owner-instruction-sonnet-delegation-D06.md
+  - research/comparisons/E034_vs_E029_mech_NM_present_excl_LIRF.json
+  - research/comparisons/E033_vs_E029_mech_NM_present_excl_LIRF.json
+  - scripts/run_experiment.py
+  - config/splits.yaml
+constraints:
+  - Delta review of v2 against the v1 reviews' required revisions (the v1 reviews offered a delta review). Review files are H024_review_v2.md to H028_review_v2.md, one decision each.
+  - H024 v2 §Batch is shared text that H025-H028 v2 adopt by reference.
+  - Run order changed on the Advisor's recommendation (rung B first), so ids map H026->E035, H024->E036, H025->E037, H027->E038, H028->E039. The launcher was revised (new SHA-256 pinned in H024 v2 §Batch).
+  - Owner instruction INC-0013 (delegation of coding tasks to claude-sonnet-5-5 permitted) is recorded; this batch needs no code change.
+  - The owner's run window (INC-0012) opens at 21:00 CEST (19:00Z) today.
+  - The tools-freeze anchor is the commit that submits this envelope.
+  - Read-only checks only. Do not read December 2025 DEP targets; do not run holdout_check.py; no fit or score on a real fold with a real target. Check the experiment lock first and keep memory light (INC-0008).
+created_utc: 2026-10-02T17:53:04Z

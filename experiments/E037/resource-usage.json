@@ -1,0 +1,22 @@
+{
+ "experiment_id": "E037",
+ "status": "COMPLETE",
+ "exit_code": 0,
+ "runtime_s": 10.4,
+ "peak_rss_gb": 3.397,
+ "job_class": "CLASS-S",
+ "class_limits": {
+  "runtime_min": 5,
+  "ram_gb": 4
+ },
+ "hard_ram_gb": 11,
+ "timeout_s": 450.0,
+ "within_class": true,
+ "cpu_count": 16,
+ "gpu_mib_at_start": 4253,
+ "swap_out_pages_during_run": 0,
+ "gpu_mib_peak": 4254,
+ "run_commit": "563891b684eb236d94ea0efba8b53e4d6924e92d",
+ "git_dirty_at_run": false,
+ "finished_utc": "2026-10-02T19:08:29Z"
+}
