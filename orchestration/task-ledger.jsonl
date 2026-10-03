@@ -66,3 +66,4 @@
 {"ts": "2026-10-03T16:06:52Z", "event": "advisor_request", "exchange_id": "X-D06-S01-0004", "proposals": ["PHASE_CLOSE_D06_v1"]}
 {"ts": "2026-10-03T16:27:58Z", "event": "advisor_result", "exchange_id": "X-D06-S01-0004", "decisions": {"PHASE_CLOSE_D06": "ACCEPT"}}
 {"event": "holdout_closed_unused", "phase": "day-06", "utc": "2026-10-03T16:27:58Z", "ruling": "H6 (X-D06-S01-0004)", "note": "Day 6: 0 of 1, closed unused; no comparison made (not a TIE); no carry-over"}
+{"ts": "2026-10-03T17:00:07Z", "event": "advisor_request", "exchange_id": "X-D07-S01-0001", "proposals": ["H031", "H032", "H033"]}
