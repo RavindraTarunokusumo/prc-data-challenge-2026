@@ -443,3 +443,18 @@ Exchanges: X-D06-S01-0001 (v1, REVISE ×5: bounded readings, rung A relabelled, 
 ### Batch conclusion (bounded, H024 v2 §Batch; C5)
 
 At equal weight, neither the codes CatBoost, nor the per-key CatBoost, nor a perturbation twin of E029 substitutes for E031 in the blend. Each rung keeps 39–66 % of E033's gain on normal taxis; the remainder needs E031's configuration, and the complexity-4 combinations are where E031's accuracy comes from (E036 values, with the closed-set disclosure). E033's performance claim was not under test. The Day 5 reading "this CatBoost configuration as a whole" survives; no family claim is made or widened.
+
+## Day 6 (D06-S01), batch 2: champion draw-robustness (X-D06-S01-0003; controls, no candidate)
+
+ACCEPT ×2 with conditions N1–N8. Run at once on the owner's instruction ("No, run now.", INC-0012 amendment) by direct `run_experiment.py` calls. Freeze diff empty.
+
+### E040 · H029 v1 · seed-42 GPU refit of E031 · pure fixed-seed re-draw
+
+- Not byte-identical; resolved parameters identical on every fold. Dev mean 440.97 (E031 440.76). Largest development-fold change +0.84 s (W1). S1 reproduced to floating point (max 5.7e-7 s); other folds RMS change 21–33 s.
+- CatBoost-alone three-draw spread (E031, E032, E040): up to 1.06 s (R1) and 1.57 s (W1). 1,497 s, 7.13 GB (within CLASS-M as well).
+
+### E041 · H030 v1 · E033's construction on E040 · robust to one further fixed-seed (GPU-only) draw
+
+- Against E026: criteria 1–3 pass, −5.52 s (q95 −4.67), 7/7 WIN. Against E033: |Δ| ≤ 0.40 s on every development fold.
+- Blend three-draw spread (E033, E034, E041): ≤ 0.60 s (W1). All three draws keep 7/7 WIN against E026.
+- Not the Day 7 SUBMIT draw (N4; the SUBMIT fit trains on 12 months). Low-power test by design (review finding 3).

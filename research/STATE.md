@@ -5,11 +5,12 @@
 - **Phase:** **Day 6 OPEN** (adversarial science day), branch `day-6`, session D06-S01.
   - Splits, metric and availability definition are FROZEN (`config/frozen.json`).
   - Days 1–5 are complete.
-- **Last completed exchange:** X-D06-S01-0002 (H024–H028 v2 ACCEPT, conditions C1–C7). **Pending:** none.
+- **Last completed exchange:** X-D06-S01-0003 (H029, H030 v1 ACCEPT, conditions N1–N8). **Pending:** none.
 - **Day 6 so far:** the attribution ladder (E035–E039, controls, all COMPLETE inside the owner's window). Readings: rung B (codes CatBoost) and rung C (per-key CatBoost) "carry part"; rung A (LightGBM twin) does not reproduce the gain (averaging floor −1.53 s at seed 42); H024's own reading INCONCLUSIVE (closed set: `data_partition`). See the journal's Day 6 section and `experiments/E035…E039/analysis.md`.
-- **Never NEW, in any phase (added):** E035–E039 (X-D06-S01-0001 ruling); rule 10 covers their configurations; any Day 7 use states the selection.
-- **Owner instructions:** INC-0012 (runs only 21:00–21:30 local), INC-0013 (Sonnet delegation of coding permitted; used once: `research/day-06/eda/d06_diagnostics.py`).
-- **Next action:** further Day 6 work or the Day 6 phase close (one holdout access available, named by the phase close). **E033 remains champion.** Next experiment id: E040.
+- **Day 6 batch 2:** E040 (seed-42 GPU refit of E031; resolved parameters identical; not byte-identical) and E041 (E033 on that draw): **robust to one further fixed-seed (GPU-only) draw**, criteria 1–3 against E026 hold with 7/7 WIN; blend three-draw spread ≤ 0.60 s per development fold. Not the Day 7 SUBMIT draw (N4).
+- **Never NEW, in any phase (added):** E035–E041 (X-D06-S01-0001 ruling, extended to E040–E041 by X-D06-S01-0003); rule 10 covers their configurations; any Day 7 use states the selection.
+- **Owner instructions:** INC-0012 (runs 21:00–21:30 local on 2026-10-02; batch 2 run at once on the owner's "No, run now."; no standing window assumed), INC-0013 (Sonnet delegation of coding permitted; used once: `research/day-06/eda/d06_diagnostics.py`).
+- **Next action:** further Day 6 work or the Day 6 phase close (one holdout access available, named by the phase close). **E033 remains champion.** Next experiment id: E042.
 
 ## Champion: E033 (H023 v3), since the Day 5 phase close
 
