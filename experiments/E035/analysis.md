@@ -40,3 +40,9 @@ On `NM_present_excl_LIRF`, development folds: residual correlation 0.904–0.926
 ## Rule 12 (bands, 5 development folds, `NM_missing_other` bulk)
 
 < 1 h 29, 1–3 h 3, > 3 h 6 (E033: 82, 4, 3). Disclosure only.
+
+## Appended correction (D6-C6, D6-C7)
+
+*Appended at the Day 6 phase close (X-D06-S01-0004; `research/day-06/acks/PHASE_CLOSE_D06_ack_v1.md`). The text above is unchanged.*
+- **D6-C6:** rung B's D against the other champion draws: E034 +1.07 s, **E041 +0.97 s** (below the +1.0 s line), three-draw mean +1.13 s. The reading against E033 stands (pre-registered), but it is **at the threshold and depends on the draw**. E033 is the most favourable champion draw on normal taxis.
+- **D6-C7:** "the statistics" here means "as CatBoost resolves the configuration, `data_partition` included" (E030 DocParallel, E031 FeatureParallel).

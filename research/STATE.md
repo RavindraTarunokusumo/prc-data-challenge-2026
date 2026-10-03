@@ -1,16 +1,12 @@
 # Research State
 
-*Updated 2026-10-02T19:35:34Z (measured with `date -u` at writing; D06-S01, after the Day 6 ladder batch).*
+*Updated 2026-10-03T16:29:53Z (measured with `date -u` at writing; D06-S01, at the Day 6 phase close).*
 
-- **Phase:** **Day 6 OPEN** (adversarial science day), branch `day-6`, session D06-S01.
+- **Phase:** **Day 6 CLOSED** (adversarial science). Phase close X-D06-S01-0004: **ACCEPT** (0.84); **holdout closed unused (ruling H6)**.
   - Splits, metric and availability definition are FROZEN (`config/frozen.json`).
-  - Days 1–5 are complete.
-- **Last completed exchange:** X-D06-S01-0003 (H029, H030 v1 ACCEPT, conditions N1–N8). **Pending:** none.
-- **Day 6 so far:** the attribution ladder (E035–E039, controls, all COMPLETE inside the owner's window). Readings: rung B (codes CatBoost) and rung C (per-key CatBoost) "carry part"; rung A (LightGBM twin) does not reproduce the gain (averaging floor −1.53 s at seed 42); H024's own reading INCONCLUSIVE (closed set: `data_partition`). See the journal's Day 6 section and `experiments/E035…E039/analysis.md`.
-- **Day 6 batch 2:** E040 (seed-42 GPU refit of E031; resolved parameters identical; not byte-identical) and E041 (E033 on that draw): **robust to one further fixed-seed (GPU-only) draw**, criteria 1–3 against E026 hold with 7/7 WIN; blend three-draw spread ≤ 0.60 s per development fold. Not the Day 7 SUBMIT draw (N4).
-- **Never NEW, in any phase (added):** E035–E041 (X-D06-S01-0001 ruling, extended to E040–E041 by X-D06-S01-0003); rule 10 covers their configurations; any Day 7 use states the selection.
-- **Owner instructions:** INC-0012 (runs 21:00–21:30 local on 2026-10-02; batch 2 run at once on the owner's "No, run now."; no standing window assumed), INC-0013 (Sonnet delegation of coding permitted; used once: `research/day-06/eda/d06_diagnostics.py`).
-- **Next action:** further Day 6 work or the Day 6 phase close (one holdout access available, named by the phase close). **E033 remains champion.** Next experiment id: E042.
+  - Days 1–6 are complete. Day 7 (final synthesis, submission, freeze) remains.
+- **Sessions:** D06-S01, on branch `day-6`. **Last completed exchange:** X-D06-S01-0004. **Pending:** none.
+- **Next action:** Day 7 opens `day-7` from `main` after the Day 6 PR merges. **E033 is its phase-opening champion.** Next experiment id: **E042**.
 
 ## Champion: E033 (H023 v3), since the Day 5 phase close
 
@@ -30,16 +26,24 @@
     - January 2026 has 435 non-LIRF NM-missing rows with `d_sched` > 3 h and 92 > 5 h, 2.0–2.6 times the 2025 maximum. H does not test it.
     - E033's development out-of-range share in the > 3 h band is 0.57 %, against E019's 15.3 %.
   - **D5-C8 (composition).** Of the −5.62 s margin, −2.04 s is E029's D3-C2 treatment (E023's Day 4 margin) and −3.58 s is the CatBoost half. S1's WIN is entirely the CatBoost half (+0.20 s, then −4.38 s).
-  - **D5-C9 (stochastic champion).**
-    - The figures are one draw. The blend's re-draw is at most 0.48 s per development fold, with an RMS prediction change of 15–23 s (37 s on W1c).
-    - Clause 1's W1 reading moved from WIN to TIE.
-    - **SUBMIT predictions will be a further draw.**
+  - **D5-C9 (stochastic champion), updated by D6-C11.**
+    - Three draws exist: E033; E034 (seed + GPU); E041 (fixed seed, Day 6). On all rows the per-fold spread is ≤ 0.60 s and every draw has 7/7 WIN against E026 (−5.62, −5.54, −5.52 s).
+    - **On the mechanism population the W1 spread is 2.00 s:** clause 1's W1 gain over E029 is −1.59, −0.31, +0.40 s by draw. 69 % of E033's W1 gain sits outside normal taxis (8.2 % of W1 rows). CatBoost alone: W1 spread 1.57 s all rows, 3.94 s normal taxis.
+    - The evaluated and H figures are one draw. **SUBMIT predictions will be a further draw** (and SUBMIT trains on 12 months).
   - **D5-C10 (single rows).**
     - S1 is −3.76 s without row 192622644; the blend predicts 9,008 s there (y 87,002).
     - W1 is −2.56 s without row 183910286 (blend 15,086 s; y 13,865), and that row's W1 prediction rests on post-validation months.
   - **The 1,000-iteration budget.** CatBoost was still improving at 1,000 (−0.73 s over iterations 800–1,000). A change of iterations is a new configuration.
+  - **Day 6 attribution (X-D06-S01-0004 item 3).** At equal weight, three substitutes for E031 fall short (D against E033 on normal taxis: codes CatBoost +1.34 s, per-key CatBoost +1.65 s, LightGBM twin +2.43 s). They keep 39–66 % of E033's gain against the most favourable of three champion draws (41–70 % against their mean). Rung B is at its threshold (+0.97 s against E041; D6-C6). "Statistics" and "combinations" are not separated from CatBoost's `data_partition` (D6-C7). No necessity claim (D6-C9): scope "this CatBoost configuration as a whole".
   - **Retired:** D3-C2 is treated (> 3 h band 3 against 81) and kept as history. D4-C9 is superseded for E033 by D5-C10.
 - **Previous champions:** E019 (H015 v2, Day 3; development mean 444.49); E005 (H004, Day 1; 482.73).
+
+## Day 6 results (`research/day-06/DAY_SUMMARY.md`, FINAL)
+
+- **No Day 6 result contradicts the champion's promotion; neither batch had real power against its performance claim** (D6-C12). The SUBMIT procedure and D3-C3 were not attacked.
+- **Ladder (E035–E039, controls):** rung B (E029 + codes CatBoost) "statistics carry part" (draw-dependent, D6-C6); rung C (E029 + per-key CatBoost E036) "combinations carry part" (with the `data_partition` disclosure); rung A (E029 + LightGBM twin) does not reproduce the gain (averaging floor −1.53 s at seed 42). E036's own reading INCONCLUSIVE (closed set: `data_partition`); its values (+0.04 s vs codes, +4.96 s vs complexity 4) are only consistent with the combinations carrying E031's advantage (D6-C8).
+- **Draw robustness (E040–E041):** robust to one further fixed-seed (GPU-only) draw on all rows; W1 normal-taxi spread 2.00 s (D6-C11).
+- **Corrections D5-… and D6-C1 to D6-C15:** `research/day-06/acks/PHASE_CLOSE_D06_ack_v1.md`. D6-C5 corrects Day 5 §1's "a second learner family adds signal" (broader than the accepted scope).
 
 ## Day 5 results (`research/day-05/DAY_SUMMARY.md`, FINAL)
 
@@ -66,21 +70,23 @@
 
   A change ends the instances and needs a new ruling. Every run records its environment in its manifest.
 - **Open incidents:**
-  - **INC-0012** (owner run window), **INC-0013** (Sonnet delegation, Day 6);
   - **INC-0004** (Day 3 launch configuration; owner decision);
-  - **INC-0009** (W&B mirror and learning curves);
+  - **INC-0009** (W&B mirror and learning curves; **E036–E039 never mirrored**, D6-C13);
   - **INC-0010** (swap kept; CPython 3.13 kept: owner decisions).
-- **Closed in Day 5:** INC-0006 (no delegation), INC-0007, INC-0008, INC-0011. Delegation on Days 6–7 needs a new incident.
+- **Closed in Day 5:** INC-0006 (no delegation), INC-0007, INC-0008, INC-0011.
+- **Closed in Day 6:** INC-0012 (owner run window; no deviation), INC-0013 (Sonnet delegation; one script). **Any owner instruction on run timing or delegation in Day 7 needs a new incident.**
 - **Practice:** one experiment at a time under the experiment lock (INC-0008). No commit under `src/` or `scripts/` while an experiment runs (D5-C6). No allocation beyond a review's stated scope (D5-C5).
 
 ## Holdout
 
 - Day 1: used (WIN). Day 2: closed unused (ruling H). Day 3: used (WIN, E019 against E005). Day 4: closed unused (ruling H4).
 - **Day 5: 1 of 1 used (WIN, E033 against E026).**
-- Day 6 has one access, which needs a Day 6 allocation as NEW (not E035–E039).
+- **Day 6: 0 of 1, closed unused (ruling H6).**
+- **Day 7 has one access,** through a Day 7 allocation as NEW, named by the Day 7 phase close.
 - Never NEW, in any phase:
   - E012–E018 and E020–E024 (rule 9; ruling H4);
-  - E026–E032 and E034 (rule L v2; the H021 and H022 authorizations; the phase-close review).
+  - E026–E032 and E034 (rule L v2; the H021 and H022 authorizations; the phase-close review);
+  - **E035–E041** (X-D06-S01-0001 ruling, extended by X-D06-S01-0003; ruling H6 (e)).
 
 - **Standing Advisor rules:**
   1. tail attribution;
@@ -105,6 +111,7 @@
   It states that its evaluated and H figures are one draw. Disclosure only.
 
   Batch conditions B1–B4 are carried.
+- **Standing rule 14 (X-D06-S01-0004).** When several draws of a stochastic reference exist, any reading against that reference also reports the point contrast against each draw (exact identity, same rows). The pre-registered reference governs. Disclosure only. Batch conditions B1–B4 are carried.
 - **Rulings:**
   - **H:** Day 2 holdout closed unused.
   - **B:** the +6,500 s criterion 8 bound is not re-derived.
@@ -112,9 +119,10 @@
   - **H3:** the Day 3 access (WIN); figures recorded only.
   - **H4:** the Day 4 holdout closed unused; no carry-over.
   - **H5:** the Day 5 access E033 against E026 (WIN). The figures are recorded only. H is a joint test on one draw, with the routed rows excluded by construction.
+  - **H6:** the Day 6 holdout closed unused ("0 of 1, closed unused"; not a TIE); no carry-over; no substitute comparison; no `holdout_check.py` with E035–E041 as NEW in any phase; H does not test the SUBMIT procedure.
   - **Rule L v2** (X-D05-S04-0002): laptop instances, the route-integrity reference, the boundary-disclosure table, and the environment binding.
   - **Hand-off base ruling** (X-D04-S02-0001 (e)): E023 (now E029) is the matched reference for `route_train_exclude` candidates on FS2. Rule 10 covers backend-only re-draws.
-- **Rule 10 now also covers** E030's, E031's and E033's configurations: no unchanged re-submission as a candidate. **E031 alone, any other weight or any other component** is a candidate only through a new proposal.
+- **Rule 10 now also covers** E030–E041's configurations (and E033's): no unchanged re-submission as a candidate. **E031 alone, any other weight or any other component** is a candidate only through a new proposal.
 - **Known leakage hazards:**
   - P/T/F labels. `MVT − AOBT_3` and `d_sched` are T.
   - The hour-resolution schedule-delay proxy is T.
@@ -124,10 +132,12 @@
   - NM-missing rows are 0.8–2.1 % of each fold and carry 14–66 % of the SSE; there are 20,821 in Jan–Nov.
   - LIRF: 83 % of tail rows are block-at-schedule, and 931 of 932 NM-present ones have a normal anchor.
   - Every fold except W1c trains on more than 200,000 rows, the LightGBM bin-sample threshold.
-- **Open questions for Days 6–7** (DAY_SUMMARY §9):
-  1. CatBoost alone or other weights (selection hazard; new proposals only);
-  2. submission reproducibility of a GPU re-draw (rule 13);
-  3. D3-C3's January exposure;
-  4. "LightGBM already holds the keys" (D4-C7) remains untested as stated;
-  5. neural models (not attempted).
+- **Open questions for Day 7** (Day 6 DAY_SUMMARY §9):
+  1. **the SUBMIT procedure** (12 training months, a fresh draw): untested by any development fold; H cannot test it;
+  2. **D3-C3's January exposure** (untested);
+  3. the causal-only variant anticipated by the dataset audit;
+  4. the 1,000-iteration budget;
+  5. CatBoost alone, other weights or draw averages (selection hazards; new proposals stating the selection);
+  6. neural models (not attempted);
+  7. named, not required: `data_partition` equalised between complexity 1 and 4; a second draw of E030.
 - **Open blockers:** none.

@@ -1,0 +1,28 @@
+# Acknowledgement — PHASE_CLOSE_D06 v1 (exchange X-D06-S01-0004)
+
+- proposal: `research/day-06/proposals/PHASE_CLOSE_D06_v1.md`, sha256 `b777deb6ef9faf6de2f9339b131aabde1d765e9f2726abb113b14e61b27347f7`
+- review: `research/day-06/advisor/PHASE_CLOSE_D06_review_v1.md`, sha256 `80cab9817e18dbe124771c46853aeb95633726fa63a3505710e3879061e5cc08`
+- decision received: **ACCEPT** (0.84). Both hashes verified by the researcher at 2026-10-03T16:27:58Z.
+
+The researcher adopts the review's Execution Authorization as written: the Day 6 decisions stand; E033 remains champion; no ledger decision changes; the "Not authorized" list (no Day 6 holdout access, run or fit; no re-reading against another reference as a decision; no relabelling of rung C; no edit to a completed record or review; no Day 7 candidate use of E030–E041 configurations, draw averages or other weights without a new proposal stating the selection).
+
+## Ruling H6 (recorded)
+
+The Day 6 holdout is **closed unused: "Day 6: 0 of 1, closed unused"** (not a TIE; no comparison was made). No carry-over; Day 7 has one access through a Day 7 allocation as NEW named by the Day 7 phase close. No substitute comparison. No `holdout_check.py` invocation with any of E035–E041 as NEW is authorized, in any phase. H does not test the SUBMIT procedure (SUBMIT trains on December).
+
+## Standing rule 14 (recorded; disclosure only)
+
+When several draws of a stochastic reference exist, any reading against that reference also reports the point contrast against each draw, using the exact identity on the same rows. The pre-registered reference governs; no threshold, population or count changes. Batch conditions B1–B4 are carried.
+
+## Corrections appended (D6-C6 to D6-C15; text as in the review's Execution Authorization item 4)
+
+- **D6-C6. Rung B and the reference draw.** Rung B's D against E034 is +1.07 s, against E041 +0.97 s, against the three-draw mean +1.13 s: **at the threshold; depends on the draw.** E033 is the most favourable champion draw on normal taxis (G −3.96 against −3.70 and −3.60). Noise reference: blend re-draws on normal taxis +0.26 and +0.36 s (W1 +1.28 and +2.00), so 1.0 s is 2.8× the larger shift. Rungs A and C hold against every draw.
+- **D6-C7. `data_partition`.** (a) The partition follows the CTR configuration, not GPU memory (E030 and E031 both started at 853 MiB and resolved differently; FeatureParallel appears only at complexity 4). (b) H022 v3's exemption premise is contradicted by E036 (9 categorical features, DocParallel); its "layout, not capacity" argument is untested on real data. (c) Day 5 finding 1, rung B and rung C are each "as CatBoost resolves the configuration, `data_partition` included". Day 5's clause 1 reading stands under its closed set (rule 10).
+- **D6-C8. INCONCLUSIVE values read as a finding.** "The combinations hold all of it" (E036 analysis), "the complexity-4 combinations are where E031's accuracy comes from" (journal), and finding 2's heading and "the combinations carry +1.65 s" (draft DAY_SUMMARY §6) are replaced by values-only wording ("consistent with"; "not separated from `data_partition`").
+- **D6-C9. No necessity claim.** "Needs E031's configuration", "the rest needs E031" and "each removed ingredient carries a measurable part" become the pre-registered non-substitution sentence plus the per-rung readings with their disclosures.
+- **D6-C10. Finding 3** (rung C against rung B on all rows, −0.64 s) is exploratory: a difference of two all-rows means, not pre-registered, not bootstrapped, two draws, heavy-tailed rows.
+- **D6-C11. The draw record on the mechanism population.** Clause 1's gain over E029 on `NM_present_excl_LIRF` by draw: W1 −1.59 (E033), −0.31 (E034), +0.40 (E041); per-fold spread R1 0.24, R2 0.18, R3 0.08, S1 0.07, **W1 2.00**, S1c 0.41, W1c 0.24 s; 5-fold mean −3.96, −3.70, −3.60. 69 % of E033's W1 gain sits outside normal taxis (ΔSSE shares: `NM_present_LIRF` 0.30, `NM_missing_other` 0.39, normal taxis 0.31; 8.2 % of W1's rows). CatBoost alone on W1's normal taxis: E031 is 2.77 s (E032) and 3.94 s (E040) more favourable. Updates D5-C9.
+- **D6-C12. §1 wording:** no Day 6 result contradicts the promotion; neither batch had real power against the performance claim; the attacks that do (SUBMIT procedure, D3-C3) were not run. "39–66 %" carries its denominator (the most favourable of three draws; 41–70 % against their mean).
+- **D6-C13. W&B.** E036–E039 failed to initialise their W&B runs at completion ("failed to init run", context deadline exceeded); only E035 (at completion), E040 and E041 synced; the two post-window E035 re-sync attempts failed. "The W&B mirror synced each run at completion" (`PRE_WINDOW.md`) and "runs were mirrored at completion" (draft DAY_SUMMARY §7) are wrong for E036–E039.
+- **D6-C14. Clerical.** (a) `d06_diagnostics.py`, the launcher-log copy (19:29:37Z) and `closed_set_E036_vs_E031.json` (19:29:39Z) were written after the queue ended (19:29:21Z) but about 21 s before the window closed; no consequence (no truth read, no lock, no run). The truth-reading diversity diagnostic ran at 19:31:49Z. (b) `d06_diagnostics_test.py` lacked INC-0013's provenance line (added at this phase close). (c) The lock file's `E041` text is a stale stamp; no lock is held.
+- **D6-C15. Missed forecasts.** E036 − E030: Advisor −1.9 to −4.7 s (central −3.6), researcher −1.5 to −4.5 (central −3.4); realised +0.04. Closed-set violation: Advisor P 0.08; violated. Rung C: Advisor P("carries part") 0.12, D −0.15 to +1.4 s; realised +1.65. H029: Advisor ±0.7 s on the normal-taxi mean (P 0.75); realised +0.74. The Day 6 reviews and the researcher both expected per-key statistics to carry most of E031's advantage over codes; wrong in the same direction.

@@ -3,7 +3,7 @@ schema: incident-v1
 incident_id: INC-0013
 type: protocol_deviation
 created_utc: 2026-10-02T17:51:24Z
-status: open
+status: closed
 ---
 
 # Day 6: owner permission to delegate coding tasks to `claude-sonnet-5-5` subagents
@@ -33,3 +33,7 @@ The batch in review (H024–H028 v2) needs no code change (existing code paths).
 ## Resolution
 
 Closes at the Day 6 phase close, with the delegated-work list.
+
+## Closure (Day 6 phase close, X-D06-S01-0004)
+
+**Delegated work:** `research/day-06/eda/d06_diagnostics.py` (SHA-256 `5fc21113…10b7`) and `research/day-06/eda/d06_diagnostics_test.py`, implemented by a `claude-sonnet-5-5` worker to the researcher's specification; reviewed by the researcher. The worker wrote only in the scratchpad while experiments ran. D6-C14 (b): the test file lacked the provenance line; added at this phase close. Delegation in Day 7 needs a new incident.

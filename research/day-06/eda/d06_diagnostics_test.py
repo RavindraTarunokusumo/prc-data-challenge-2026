@@ -1,5 +1,8 @@
 """Synthetic tests for d06_diagnostics.py (no real data). Run from the repo root:
-PYTHONDONTWRITEBYTECODE=1 uv run python <this file>"""
+PYTHONDONTWRITEBYTECODE=1 uv run python <this file>
+
+Implemented by a claude-sonnet-5-5 worker to the researcher's specification; reviewed by the researcher (INC-0013).
+"""
 import json
 import sys
 import tempfile

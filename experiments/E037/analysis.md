@@ -36,3 +36,9 @@
 ## Rule 12 (bands)
 
 < 1 h 73, 1–3 h 4, > 3 h 2 (E033: 82, 4, 3).
+
+## Appended correction (D6-C7, D6-C10)
+
+*Appended at the Day 6 phase close (X-D06-S01-0004; `research/day-06/acks/PHASE_CLOSE_D06_ack_v1.md`). The text above is unchanged.*
+- **D6-C7:** "the combinations" means "as CatBoost resolves the configuration, `data_partition` included". The reading stands with the C6 disclosure (no relabelling; rule 10). It holds against every champion draw (E034 +1.39 s, E041 +1.29 s).
+- **D6-C10:** the "population split" (E037 − E035 = −0.64 s on all rows) is **exploratory**: a difference of two means, not pre-registered or bootstrapped, two GPU draws, heavy-tailed rows. "Per-key statistics help outside `NM_present_excl_LIRF`" is not a finding.

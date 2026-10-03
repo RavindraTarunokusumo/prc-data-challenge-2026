@@ -458,3 +458,16 @@ ACCEPT ×2 with conditions N1–N8. Run at once on the owner's instruction ("No,
 - Against E026: criteria 1–3 pass, −5.52 s (q95 −4.67), 7/7 WIN. Against E033: |Δ| ≤ 0.40 s on every development fold.
 - Blend three-draw spread (E033, E034, E041): ≤ 0.60 s (W1). All three draws keep 7/7 WIN against E026.
 - Not the Day 7 SUBMIT draw (N4; the SUBMIT fit trains on 12 months). Low-power test by design (review finding 3).
+
+### X-D06-S01-0004 · Day 6 phase close · ACCEPT (0.84); holdout closed unused (ruling H6); E033 remains champion
+
+- **The decisions stand.** No Day 6 result contradicts the Day 5 promotion; all three blend draws meet criteria 1–3 against E026 with 7/7 WIN (−5.62, −5.54, −5.52 s). Neither Day 6 batch had real power against the performance claim; the SUBMIT procedure and D3-C3 were not attacked.
+- **Ruling H6:** "Day 6: 0 of 1, closed unused" (no comparison; not a TIE). No `holdout_check.py` with E035–E041 as NEW, in any phase.
+- **Standing rule 14** (several draws of a stochastic reference: report the point contrast against each draw; disclosure only).
+- **Appended corrections to the Day 6 entries above (D6-C6 to D6-C10; the entries themselves are unchanged):**
+  - **D6-C6:** rung B is at its threshold and depends on the draw: D +1.07 s against E034, **+0.97 s against E041**, +1.13 s against the three-draw mean. Rungs A and C hold against every draw.
+  - **D6-C7 / D6-C8:** "statistics" and "combinations" are not separated from `data_partition` (FeatureParallel appears only at complexity 4). "The complexity-4 combinations are where E031's accuracy comes from" (batch conclusion) is withdrawn: the E036 values are only *consistent with* it. Day 5 finding 1 is read "as CatBoost resolves the configuration, `data_partition` included".
+  - **D6-C9:** "the remainder needs E031's configuration" is withdrawn; the batch conclusion is the pre-registered non-substitution sentence only.
+  - **D6-C10:** rung C against rung B on all rows (−0.64 s) is exploratory.
+  - **D6-C11:** clause 1's W1 gain on normal taxis by draw: −1.59, −0.31, +0.40 s (spread 2.00 s); 69 % of E033's W1 gain sits outside normal taxis. Updates D5-C9.
+- **Incidents:** INC-0012 and INC-0013 closed; INC-0009 (W&B: E036–E039 never mirrored, D6-C13), INC-0010, INC-0004 open.

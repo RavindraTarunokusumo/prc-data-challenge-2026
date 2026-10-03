@@ -41,3 +41,18 @@
 - Rule 12 bands: < 1 h 79, 1–3 h 4, > 3 h 3 (E033: 82, 4, 3).
 - **Scope (review finding 3):** this test had almost no power to show E033 wrong; it is a reproducibility measurement. The untested part of the Day 7 claim is the 12-month composite SUBMIT procedure.
 - Predictions met: reading "draw-robust" (researcher P 0.85; Advisor 0.93); E041 − E026 −5.52 (expected −5.0 to −6.0; Advisor ≈ −5.6); |E041 − E033| ≤ 0.6 s on all five (realised ≤ 0.40). RMS change 11–17 s on four folds (expected 13–25), 0 on S1.
+
+## Appended correction (D6-C11; rule 13 on the mechanism population)
+
+*Appended at the Day 6 phase close (X-D06-S01-0004; `research/day-06/acks/PHASE_CLOSE_D06_ack_v1.md`). The text above is unchanged.*
+
+Clause 1's gain over E029 on `NM_present_excl_LIRF`, by draw (s):
+
+| Draw | R1 | R2 | R3 | S1 | **W1** | S1c | W1c | 5-fold mean |
+|---|---|---|---|---|---|---|---|---|
+| E033 | −3.90 | −4.47 | −4.03 | −5.81 | **−1.59** | −7.29 | −8.29 | −3.96 |
+| E034 | −3.66 | −4.54 | −4.10 | −5.87 | **−0.31** | −7.70 | −8.45 | −3.70 |
+| E041 | −3.84 | −4.65 | −4.09 | −5.81 | **+0.40** | −7.43 | −8.21 | −3.60 |
+| Spread | 0.24 | 0.18 | 0.08 | 0.07 | **2.00** | 0.41 | 0.24 | 0.36 |
+
+- On W1 (February 2025, the January analogue) the gain on normal taxis is present in one draw, near zero in one, reversed in one. On all rows W1 improves over E029 in all three draws (−2.31, −2.51, −1.91 s), and 69 % of E033's W1 gain sits outside normal taxis (8.2 % of W1 rows). W1 is WIN against E026 in all three draws. Updates D5-C9.

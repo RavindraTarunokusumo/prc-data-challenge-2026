@@ -3,7 +3,7 @@ schema: incident-v1
 incident_id: INC-0012
 type: owner_intervention
 created_utc: 2026-10-02T17:20:00Z
-status: open
+status: closed
 ---
 
 # Day 6: owner restricts experiment runs to 21:00–21:30 local time
@@ -51,3 +51,7 @@ Open for Day 6. Closes at the Day 6 phase close, or when the owner changes the w
 - Owner (verbatim, replying to the plan to arm at 20:43 for the 21:00–21:30 window): "No, run now."
 - The researcher reads this as an owner decision (brief §1: the owner may start the run) that **replaces the 21:00–21:30 window for batch 2 (E040, E041)**. The standing-daily-window reading of the 2026-10-03 amendment is withdrawn as unconfirmed; future windows follow the owner's next instruction.
 - The scheduled arming was cancelled. The pinned `run_window_2.sh` is not used (its window is fixed) and not edited. Per N2/C3 of the reviews, the runs are started by **direct `scripts/run_experiment.py` calls**, in order (E040, then E041 only if E040 is COMPLETE and passes `route_check.py E040 - E029`), with the same own-path checkpoint commits. Not a deviation from the reviews: the window is the owner's to set.
+
+## Closure (Day 6 phase close, X-D06-S01-0004)
+
+Closed by its resolution clause. Batch 1 (E035–E039) ran inside the 2026-10-02 window, all ending by 19:29:17Z; batch 2 (E040–E041) ran on the owner's recorded instruction "No, run now." (an amendment, not a deviation). No run executed past a window. Any new owner instruction on run timing in Day 7 needs a new incident.

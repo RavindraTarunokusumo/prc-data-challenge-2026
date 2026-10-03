@@ -31,3 +31,8 @@
 
 - **The averaging floor is larger than predicted:** G expected −0.2 to −1.2 s; realised −1.53 s (39 % of E033's gain on normal taxis; 28 % on all rows). Generic averaging at half the disagreement buys a real part of the gain; the rest needs E031.
 - On W1 the twin's blend is level with E033 (−0.86 s, TIE).
+
+## Appended correction (D6-C9)
+
+*Appended at the Day 6 phase close (X-D06-S01-0004; `research/day-06/acks/PHASE_CLOSE_D06_ack_v1.md`). The text above is unchanged.*
+- **D6-C9:** "the rest needs E031" is withdrawn (no necessity claim). The reading is: a perturbation twin of E029 at its measured disagreement does not reproduce the gain; the averaging floor is −1.53 s at seed 42. It holds against every champion draw (E034 +2.16 s, E041 +2.06 s).

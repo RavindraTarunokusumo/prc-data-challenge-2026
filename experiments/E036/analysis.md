@@ -34,3 +34,9 @@
 - All rows: E036 − E029 +2.01 s (q95 +3.23); LOSS on R1, R2, R3, W1, W1c; EDDM, LEMD and LSZH degrade beyond +3 %.
 - **Plain reading of the values:** on normal taxis, per-key statistics alone recover none of E031's −4.91 s advantage over the codes arm; the combinations hold all of it. The magnitude is far beyond the 1.5 s threshold and the 0.68 s re-draw, but the closed-set violation means it is not a pre-registered reading.
 - **Missed prediction:** E036 − E031 expected +0.5 to +3.5 s (Advisor +0.2 to +3.0); realised +4.96.
+
+## Appended correction (D6-C7, D6-C8)
+
+*Appended at the Day 6 phase close (X-D06-S01-0004; `research/day-06/acks/PHASE_CLOSE_D06_ack_v1.md`). The text above is unchanged.*
+- **D6-C8:** "the combinations hold all of it" is withdrawn. Values only: E036 − E031 +4.96 s and E036 − E030 +0.04 s on normal taxis are **consistent with** the combinations carrying E031's advantage, but **not separated from `data_partition`** (E036 DocParallel, E031 FeatureParallel). H024's own reading is INCONCLUSIVE.
+- **D6-C7:** the partition follows the CTR configuration, not GPU memory (E030 and E031 both started at 853 MiB). The external holder during E036 is therefore an unlikely cause, though not excluded.
