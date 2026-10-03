@@ -45,3 +45,9 @@ Open for Day 6. Closes at the Day 6 phase close, or when the owner changes the w
 - Owner (2026-10-03): "Continue with more tests. GPU is free." The researcher reads the 21:00–21:30 window as a **standing daily window** (the instruction named no end date). The next batch (H029–H030) runs 21:00–21:30 Europe/Amsterdam on 2026-10-03 (19:00–19:30Z) unless the owner says otherwise.
 - Launcher `research/day-06/sessions/D06-S01/run_window_2.sh` (SHA-256 `edfe11dfd7e5f690a722fd05e5050213fbede60b3a8ede00355c8a3e08dadf3e`): the pinned `run_window.sh` logic with only the date, log name and queue changed.
 - GPU memory in use at 2026-10-03T08:13Z: 635 MiB (the 4.3–5.2 GB external holder of 2026-10-02 is gone, as the owner reports).
+
+## Amendment (2026-10-03T08:53:32Z, D06-S01): owner moves batch 2 into an immediate run
+
+- Owner (verbatim, replying to the plan to arm at 20:43 for the 21:00–21:30 window): "No, run now."
+- The researcher reads this as an owner decision (brief §1: the owner may start the run) that **replaces the 21:00–21:30 window for batch 2 (E040, E041)**. The standing-daily-window reading of the 2026-10-03 amendment is withdrawn as unconfirmed; future windows follow the owner's next instruction.
+- The scheduled arming was cancelled. The pinned `run_window_2.sh` is not used (its window is fixed) and not edited. Per N2/C3 of the reviews, the runs are started by **direct `scripts/run_experiment.py` calls**, in order (E040, then E041 only if E040 is COMPLETE and passes `route_check.py E040 - E029`), with the same own-path checkpoint commits. Not a deviation from the reviews: the window is the owner's to set.

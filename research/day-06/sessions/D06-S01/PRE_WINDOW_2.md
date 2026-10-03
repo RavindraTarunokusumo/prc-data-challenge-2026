@@ -9,3 +9,8 @@
 - **GPU:** NVIDIA GeForce RTX 5060 Laptop GPU, driver 591.91, CUDA 13.1; 673 MiB of 8,151 MiB in use at this writing.
 - **E040's overrun bound: the CLASS-L timeout of 8,100 s** (replacing INC-0012's 2,700 s for this run). In the worst case E040, started at 21:00, could run to about 23:15 local; the launcher never kills a run, and any run still executing at 21:30 is reported as an INC-0012 deviation with its end time.
 - **Arming:** close to the window (recommended in the review), by a one-shot session schedule at about 20:43 local. If the session is not running then, the batch is not armed and the runs count as deferred (N3).
+
+## Owner instruction: run now (2026-10-03T08:53:32Z)
+
+- "No, run now." (INC-0012 amendment.) Scheduled arming cancelled; runs started by direct `run_experiment.py` calls (N2/C3), E040 then E041 (status-only gating, route check, own-path checkpoints).
+- **GPU at start:** 688 MiB of 8,151 MiB in use (2026-10-03T08:53:32Z). Tree clean; no lock held.
