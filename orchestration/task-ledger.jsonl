@@ -63,3 +63,4 @@
 {"ts": "2026-10-03T08:46:23Z", "event": "advisor_result", "exchange_id": "X-D06-S01-0003", "decisions": {"H029": "ACCEPT", "H030": "ACCEPT"}}
 {"event": "allocate", "utc": "2026-10-03T08:46:23Z", "experiment_id": "E040", "hypothesis_id": "H029", "version": "v1", "purpose": "primary", "proposal_sha256": "8511f3a17462e52634efcbe58aa7b141b40a277b10dadb6a3288df5c8944a802", "review_sha256": "d6eaf072026d4824aee894f2fe39b9e2d27dbfb28dade1a0799dc53159bd91dd"}
 {"event": "allocate", "utc": "2026-10-03T08:46:23Z", "experiment_id": "E041", "hypothesis_id": "H030", "version": "v1", "purpose": "primary", "proposal_sha256": "7695dc11a594aafec0e45149cdda3b94bcbab8f17e5614be6a5bfd08faeefd8a", "review_sha256": "5aae8ef025af235e09cc9e90fb630b72ac45aa04bddbce1f99ef807946fc92a1"}
+{"ts": "2026-10-03T16:06:52Z", "event": "advisor_request", "exchange_id": "X-D06-S01-0004", "proposals": ["PHASE_CLOSE_D06_v1"]}
