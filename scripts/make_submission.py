@@ -2,6 +2,11 @@
 report the target-free sanity readings pre-registered for it. Never reads a target.
 
     uv run python scripts/make_submission.py BLEND HALF_A HALF_B --ref BLEND_REF REF_A REF_B
+        [--tag TAG]
+
+With --tag (Day 7, a second submission candidate), the outputs go to
+predictions/final/TAG/submitting.parquet and research/day-07/submission/
+SUBMISSION_RECORD_TAG.json, so an earlier recorded submission is never overwritten.
 
 BLEND is the gate-allocated blend experiment that predicted the final folds SUBMIT_JAN and
 SUBMIT_JUL; HALF_A / HALF_B are its components. REF_* are the champion and its components
@@ -18,6 +23,9 @@ Integrity checks (any failure exits 1 and writes no submission file):
   I2  every prediction file matches its experiment's manifest (prc.blending);
   I3  the blend's IDs equal the template's IDs, 1:1, all finite;
   I4  the blend equals w_a * HALF_A + w_b * HALF_B within 1e-9 s (weights from its config);
+      for an `override` experiment (Day 7, H037), HALF_A is its base and HALF_B its override:
+      every row equals HALF_B on the subgroup (LIRF without an NM match) and HALF_A
+      elsewhere, exactly;
   I5  |rounded - raw| <= 0.5 s on every row.
 The submission bucket is never touched (docs/governance/LEADERBOARD_POLICY.md).
 """
@@ -103,6 +111,12 @@ def fold_reading(blend: str, a: str, b: str, fold: str, sub: pl.DataFrame) -> di
 
 
 def main(a: argparse.Namespace) -> None:
+    out, record_path = OUT, RECORD
+    if getattr(a, "tag", None):
+        if not a.tag.isalnum():
+            fail("--tag must be alphanumeric")
+        out = OUT.parent / a.tag / OUT.name
+        record_path = RECORD.parent / f"{RECORD.stem}_{a.tag}{RECORD.suffix}"
     # I1
     entry = next(f for f in json.loads(RAW_MANIFEST.read_text())["files"]
                  if f["path"].endswith("submitting.parquet"))
@@ -112,10 +126,13 @@ def main(a: argparse.Namespace) -> None:
     tid = template["MVT_ID_mvt"]
     if tid.null_count() or tid.is_duplicated().any() or (tid != tid.round(0)).any():
         fail("template IDs are not unique integers")
-    weights = yaml.safe_load((EXPERIMENTS / a.blend / "config.yaml").read_text())["params"]
-    if weights["components"] != [a.half_a, a.half_b]:
-        fail(f"{a.blend}'s components are {weights['components']}, not {[a.half_a, a.half_b]}")
-    wa, wb = weights["weights"]
+    cfg = yaml.safe_load((EXPERIMENTS / a.blend / "config.yaml").read_text())
+    params, is_override = cfg["params"], cfg.get("model") == "override"
+    comps = [params["base"], params["override"]] if is_override else params["components"]
+    if comps != [a.half_a, a.half_b]:
+        fail(f"{a.blend}'s components are {comps}, not {[a.half_a, a.half_b]}")
+    wa, wb = (None, None) if is_override else params["weights"]
+    sub = subgroups()
 
     # I2 (inside stored_predictions), I3, I4
     parts, sources = [], {}
@@ -127,9 +144,17 @@ def main(a: argparse.Namespace) -> None:
         j = p.join(h, on="MVT_ID_mvt", how="full", coalesce=True, validate="1:1")
         if j.null_count().sum_horizontal().item() or j.height != p.height:
             fail(f"{fold}: blend and halves cover different rows")
-        dev = np.abs(j["pred"].to_numpy() - wa * j["pa"].to_numpy() - wb * j["pb"].to_numpy())
+        if is_override:
+            m = j.join(sub, on="MVT_ID_mvt", how="left").select(
+                (pl.col("ADEP_mvt") == "LIRF") & pl.col("nm_missing"))[:, 0].to_numpy()
+            dev = np.abs(j["pred"].to_numpy() - np.where(m, j["pb"].to_numpy(),
+                                                         j["pa"].to_numpy()))
+        else:
+            dev = np.abs(j["pred"].to_numpy() - wa * j["pa"].to_numpy()
+                         - wb * j["pb"].to_numpy())
         if float(dev.max()) > 1e-9:
-            fail(f"{fold}: blend differs from the weighted halves by {dev.max():.3g} s")
+            what = "its base/override rows" if is_override else "the weighted halves"
+            fail(f"{fold}: {a.blend} differs from {what} by {dev.max():.3g} s")
         parts.append(p)
         sources[fold] = {e: manifest_sha(e, fold) for e in (a.blend, a.half_a, a.half_b)}
     allp = pl.concat(parts)
@@ -158,20 +183,20 @@ def main(a: argparse.Namespace) -> None:
     if sub_df.schema != template.schema or not sub_df["MVT_ID_mvt"].equals(tid):
         fail("output schema or row order differs from the template")
 
-    sub = subgroups()
     readings = {f: fold_reading(a.blend, a.half_a, a.half_b, f, sub) for f in FINAL_FOLDS}
     ref = {f: fold_reading(a.ref[0], a.ref[1], a.ref[2], f, sub) for f in REF_FOLDS}
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    sub_df.write_parquet(OUT)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    sub_df.write_parquet(out)
     record = {
         "schema": "submission-record-v1",
-        "blend": a.blend, "halves": [a.half_a, a.half_b], "weights": [wa, wb],
+        "blend": a.blend, "model": cfg.get("model"), "halves": [a.half_a, a.half_b],
+        "weights": [wa, wb],
         "reference": {"blend": a.ref[0], "halves": a.ref[1:]},
         "template": {"path": str(TEMPLATE.relative_to(ROOT)), "sha256": entry["sha256"],
                      "rows": template.height, "schema": {k: str(v) for k, v in
                                                          template.schema.items()}},
-        "submission": {"path": str(OUT.relative_to(ROOT)), "sha256": sha256_file(OUT),
-                       "size": OUT.stat().st_size, "rows": sub_df.height,
+        "submission": {"path": str(out.relative_to(ROOT)), "sha256": sha256_file(out),
+                       "size": out.stat().st_size, "rows": sub_df.height,
                        "post_processing": "round to nearest integer (half to even), Int32; "
                                           "nothing else"},
         "source_prediction_sha256": sources,
@@ -181,8 +206,8 @@ def main(a: argparse.Namespace) -> None:
         "final_folds": readings,
         "reference_folds": ref,
     }
-    RECORD.parent.mkdir(parents=True, exist_ok=True)
-    RECORD.write_text(json.dumps(record, indent=1) + "\n")
+    record_path.parent.mkdir(parents=True, exist_ok=True)
+    record_path.write_text(json.dumps(record, indent=1) + "\n")
     print(json.dumps({"rows": sub_df.height, "sha256": record["submission"]["sha256"],
                       "rounding_rms_s": record["rounding"]["rms_s"],
                       **{f: {"mean": r["distribution"]["mean"],
@@ -190,7 +215,7 @@ def main(a: argparse.Namespace) -> None:
                              "above3600": r["out_of_range"]["all"]["above3600"],
                              "rms_half_difference": r["rms_half_difference"]}
                          for f, r in readings.items()}}, indent=1))
-    print(f"-> {OUT.relative_to(ROOT)}, {RECORD.relative_to(ROOT)}")
+    print(f"-> {out.relative_to(ROOT)}, {record_path.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":
@@ -199,4 +224,5 @@ if __name__ == "__main__":
     ap.add_argument("half_a")
     ap.add_argument("half_b")
     ap.add_argument("--ref", nargs=3, required=True, metavar=("BLEND", "HALF_A", "HALF_B"))
+    ap.add_argument("--tag")
     main(ap.parse_args())

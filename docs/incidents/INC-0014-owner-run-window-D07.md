@@ -39,3 +39,7 @@ Open for Day 7. Closes at the Day 7 phase close, or when the owner changes the w
 - After each checkpoint the launcher logged `WARNING: tree not clean … M orchestration/task-ledger.jsonl` only: the final-fold unmasking append pre-registered as S3 of `research/day-07/advisor/H031_review_v1.md` (not a deviation). The lines were committed after the window.
 - `make_submission.py` (formatting stored files, not a run) was run at 20:00Z, after the window closed (S8).
 - GPU in use: 2,938 MiB at arming (external holder), 704 MiB at window open.
+
+## Amendment (2026-10-03T20:17Z): a second Day 7 window
+
+- The owner set a further run window at 02:00 CEST on 2026-10-04 for the routing candidate (INC-0015, which records it and its 00:00–01:00Z reading).

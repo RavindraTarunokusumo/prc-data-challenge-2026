@@ -24,6 +24,8 @@ def _preds(eid, fold, *, drop=None):
     ids = [i for i in IDS.get(fold, [202512001]) if i != drop]
     if eid in HALVES:
         vals = [HALVES[eid].get(i, 1.0) for i in ids]
+    elif eid == "OV":  # override: B on the subgroup (202601001 only), A elsewhere
+        vals = [HALVES["B" if i == 202601001 else "A"].get(i, 1.0) for i in ids]
     else:  # the blend
         vals = [0.5 * HALVES["A"].get(i, 1.0) + 0.5 * HALVES["B"].get(i, 1.0) for i in ids]
     return pl.DataFrame({"MVT_ID_mvt": pl.Series(ids, dtype=pl.Int64), "pred": vals})
@@ -44,6 +46,9 @@ def env(tmp_path, monkeypatch):
     (exps / "BL").mkdir(parents=True)
     (exps / "BL" / "config.yaml").write_text(
         "params:\n  components: [A, B]\n  weights: [0.5, 0.5]\n")
+    (exps / "OV").mkdir()
+    (exps / "OV" / "config.yaml").write_text(
+        "model: override\nparams:\n  base: A\n  override: B\n  subgroup: LIRF_NM_missing\n")
     monkeypatch.setattr(ms, "TEMPLATE", tpath)
     monkeypatch.setattr(ms, "RAW_MANIFEST", manifest)
     monkeypatch.setattr(ms, "EXPERIMENTS", exps)
@@ -104,3 +109,28 @@ def test_refuses_tampered_template(env):
     template.head(4).write_parquet(tmp / "submitting.parquet")
     with pytest.raises(SystemExit, match="raw_manifest"):
         ms.main(ARGS)
+
+
+def test_override_experiment_with_tag_keeps_the_first_submission(env):
+    tmp, _ = env
+    ms.main(ARGS)
+    first = (tmp / "predictions" / "final" / "submitting.parquet").read_bytes()
+    ms.main(Namespace(blend="OV", half_a="A", half_b="B", ref=["BL", "A", "B"], tag="E048"))
+    assert (tmp / "predictions" / "final" / "submitting.parquet").read_bytes() == first
+    out = pl.read_parquet(tmp / "predictions" / "final" / "E048" / "submitting.parquet")
+    # template order: 07002 (A 5000), 01001 (subgroup: B 300), 01003 (A -10), 07001 (A 800),
+    # 01002 (A 2000.25 -> 2000)
+    assert out["TAXITIME_SEC_mvt"].to_list() == [5000, 300, -10, 800, 2000]
+    rec = json.loads((tmp / "rec" / "SUBMISSION_RECORD_E048.json").read_text())
+    assert rec["model"] == "override" and rec["weights"] == [None, None]
+
+
+def test_override_refuses_rows_that_follow_the_wrong_source(env, monkeypatch):
+    def bad(e, f):
+        p = _preds(e, f)
+        return p.with_columns(pl.lit(1.0).alias("pred")) if e == "OV" else p
+    monkeypatch.setattr(ms, "stored_predictions", bad)
+    with pytest.raises(SystemExit, match="base/override rows"):
+        ms.main(Namespace(blend="OV", half_a="A", half_b="B", ref=["BL", "A", "B"], tag="X"))
+    with pytest.raises(SystemExit, match="alphanumeric"):
+        ms.main(Namespace(blend="OV", half_a="A", half_b="B", ref=["BL", "A", "B"], tag="../x"))

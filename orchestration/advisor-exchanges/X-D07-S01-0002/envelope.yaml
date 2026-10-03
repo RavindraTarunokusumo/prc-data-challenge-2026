@@ -1,0 +1,58 @@
+schema: advisor-task-envelope-v1
+exchange_id: X-D07-S01-0002
+session: D07-S01
+sender: claude-researcher
+recipient: advisor-subagent
+purpose: proposal_review
+proposal_ids: [H034, H035, H036, H037]
+proposal_paths:
+  - research/day-07/proposals/H034_v1.md
+  - research/day-07/proposals/H035_v1.md
+  - research/day-07/proposals/H036_v1.md
+  - research/day-07/proposals/H037_v1.md
+proposal_sha256:
+  - 2ccb7401113d8f4dad356978d95720cae08cd47e1f7c30dada5fa3f0b070a62f
+  - ece127cbbec41fa96bc91950add8d6604be548e9607cf85522ef91f095cfff81
+  - 413475f20b4a404a73134ea5bc73867d86ddb4bdb6d13c3cc17bc19251adb698
+  - 8e9c3f39082af5e613ef2b25715a6c884b4235463928769f14004d99ab2c3966
+review_output_dir: research/day-07/advisor/
+context_paths:
+  - research/STATE.md
+  - docs/incidents/INC-0015-owner-decision-routing-candidate-D07.md
+  - docs/incidents/INC-0014-owner-run-window-D07.md
+  - research/day-03/advisor/PHASE_CLOSE_D03_review_v1.md
+  - research/day-03/acks/PHASE_CLOSE_D03_ack_v1.md
+  - research/day-03/DAY_SUMMARY.md
+  - research/day-03/proposals/H016_v2.md
+  - research/day-02/proposals/H009_v3.md
+  - research/day-02/advisor/H013_review_v2.md
+  - experiments/E020/config.yaml
+  - experiments/E020/metrics.json
+  - experiments/E019/metrics.json
+  - experiments/E033/config.yaml
+  - experiments/E033/metrics.json
+  - experiments/E044/analysis.md
+  - research/day-07/advisor/H031_review_v1.md
+  - research/day-07/sessions/D07-S01/run_window.sh
+  - research/day-07/sessions/D07-S01/run_window_2.sh
+  - src/prc/blending.py
+  - src/prc/worker.py
+  - src/prc/models/routed.py
+  - scripts/make_submission.py
+  - tests/test_make_submission.py
+  - tests/test_worker.py
+  - scripts/route_check.py
+  - scripts/compare.py
+  - scripts/mechanism_check.py
+  - scripts/reproduce_check.py
+  - scripts/holdout_check.py
+  - config/splits.yaml
+constraints:
+  - Batched proposal review (Day 7, second batch). Review files H034_review_v1.md to H037_review_v1.md, one decision each. H035 §Batch is shared text. H035 is a promotion candidate against the champion E033.
+  - The candidate follows from X-D03-S01-0003 (e) (routing price, break-even, admissibility conditions). The researcher raised it after the SUBMIT batch; the owner chose to test it (INC-0015, a recorded owner decision among researcher-written options).
+  - Run window 2026-10-04 00:00-01:00Z (owner "02:00 tomorrow"; end read as one hour, INC-0015). The launcher must be armed before 00:00Z.
+  - The launcher run_window_2.sh (sha256 f76db6fa15abf5c8a3712cea39e6454f1f4290295a25b3a109505076ada05eed) is run_window.sh with date, window, log name, queue and a two-argument route check changed.
+  - New code (prc.blending.override, worker dispatch, make_submission override mode and --tag) is committed at the submission commit, which is the tools-freeze anchor. The revised formatter reproduced E044's recorded submission file byte for byte (scratchpad rerun).
+  - E044's recorded submission (sha256 d57ff7db...) stays unchanged whatever this batch decides.
+  - Read-only checks only. Do not read December 2025 DEP targets; do not run holdout_check.py, run_experiment.py or make_submission.py; no fit or score on a real fold. Reading stored prediction files and computing target-free statistics is allowed. Check the experiment lock first and keep memory light (INC-0008). Unit tests may be run.
+created_utc: 2026-10-03T20:20:36Z
