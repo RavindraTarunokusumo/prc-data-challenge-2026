@@ -1,0 +1,19 @@
+hypothesis_id: H036
+proposal_version: 1
+purpose: primary
+model: lightgbm
+feature_set: FS2
+params:
+  objective: regression
+  learning_rate: 0.05
+  num_leaves: 255
+  min_data_in_leaf: 100
+  feature_fraction: 1.0
+  bagging_fraction: 1.0
+  bagging_freq: 0
+  bin_construct_sample_cnt: 5000000
+  num_threads: 4
+  num_boost_round: 1000
+folds: [SUBMIT_JAN, SUBMIT_JUL]
+seed: 42
+job_class: CLASS-M
