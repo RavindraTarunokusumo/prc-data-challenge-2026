@@ -1,12 +1,12 @@
 # Research State
 
-*Updated 2026-10-03T16:29:53Z (measured with `date -u` at writing; D06-S01, at the Day 6 phase close).*
+*Updated 2026-10-03T20:15Z (D07-S01, after the SUBMIT batch; the Day 7 phase close is pending).*
 
-- **Phase:** **Day 6 CLOSED** (adversarial science). Phase close X-D06-S01-0004: **ACCEPT** (0.84); **holdout closed unused (ruling H6)**.
+- **Phase:** **Day 7 open** (final synthesis, submission, freeze). Days 1–6 are complete.
   - Splits, metric and availability definition are FROZEN (`config/frozen.json`).
-  - Days 1–6 are complete. Day 7 (final synthesis, submission, freeze) remains.
-- **Sessions:** D06-S01, on branch `day-6`. **Last completed exchange:** X-D06-S01-0004. **Pending:** none.
-- **Next action:** Day 7 opens `day-7` from `main` after the Day 6 PR merges. **E033 is its phase-opening champion.** Next experiment id: **E042**.
+  - **The SUBMIT batch is done** (X-D07-S01-0001 ACCEPT ×3; E042–E044 COMPLETE in the owner's 21:00–22:00 window, INC-0014). The submission file exists and passes every blocking check: `predictions/final/submitting.parquet`, SHA-256 `d57ff7db7dfa34e13934aa524464ea13dbe9f5f904fae400a85f87e62c95af73` (`research/day-07/submission/SUBMISSION_RECORD.json`). No sanity flag; no flag analysis open.
+- **Sessions:** D07-S01, on branch `day-7`. **Last completed exchange:** X-D07-S01-0001. **Pending:** the Day 7 phase close (and the FROZEN state).
+- **Next action:** the Day 7 phase-close review; then FROZEN; then the upload, once, **by the owner's decision** (LEADERBOARD_POLICY; S6). Next experiment id: **E045**.
 
 ## Champion: E033 (H023 v3), since the Day 5 phase close
 
@@ -70,8 +70,9 @@
 
   A change ends the instances and needs a new ruling. Every run records its environment in its manifest.
 - **Open incidents:**
+  - **INC-0014** (Day 7 owner run window 21:00–22:00 CEST; no deviation);
   - **INC-0004** (Day 3 launch configuration; owner decision);
-  - **INC-0009** (W&B mirror and learning curves; **E036–E039 never mirrored**, D6-C13);
+  - **INC-0009** (W&B mirror and learning curves; **E036–E039, E042, E043 never mirrored**);
   - **INC-0010** (swap kept; CPython 3.13 kept: owner decisions).
 - **Closed in Day 5:** INC-0006 (no delegation), INC-0007, INC-0008, INC-0011.
 - **Closed in Day 6:** INC-0012 (owner run window; no deviation), INC-0013 (Sonnet delegation; one script). **Any owner instruction on run timing or delegation in Day 7 needs a new incident.**
@@ -86,7 +87,8 @@
 - Never NEW, in any phase:
   - E012–E018 and E020–E024 (rule 9; ruling H4);
   - E026–E032 and E034 (rule L v2; the H021 and H022 authorizations; the phase-close review);
-  - **E035–E041** (X-D06-S01-0001 ruling, extended by X-D06-S01-0003; ruling H6 (e)).
+  - **E035–E041** (X-D06-S01-0001 ruling, extended by X-D06-S01-0003; ruling H6 (e));
+  - **E042–E044** (the SUBMIT fits; X-D07-S01-0001).
 
 - **Standing Advisor rules:**
   1. tail attribution;

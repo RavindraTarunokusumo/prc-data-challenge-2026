@@ -32,3 +32,10 @@ No reason was stated. The laptop clock is CEST (UTC+2; measured 18:56 CEST = 16:
 ## Resolution
 
 Open for Day 7. Closes at the Day 7 phase close, or when the owner changes the window.
+
+## Outcome of the window (2026-10-03, D07-S01)
+
+- Armed 17:22:54Z as a detached process; window opened 19:00:05Z; queue E042 → E043 → E044 ran in order and ended **19:15:43Z**. No run executed outside the window; **no deviation.**
+- After each checkpoint the launcher logged `WARNING: tree not clean … M orchestration/task-ledger.jsonl` only: the final-fold unmasking append pre-registered as S3 of `research/day-07/advisor/H031_review_v1.md` (not a deviation). The lines were committed after the window.
+- `make_submission.py` (formatting stored files, not a run) was run at 20:00Z, after the window closed (S8).
+- GPU in use: 2,938 MiB at arming (external holder), 704 MiB at window open.

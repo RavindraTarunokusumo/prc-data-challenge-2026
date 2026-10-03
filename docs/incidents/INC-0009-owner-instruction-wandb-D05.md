@@ -56,3 +56,7 @@ Stays open while the mirror is in use, and is reviewed at the Day 5 phase close.
 ## Amendment (Day 6 phase close, X-D06-S01-0004; D6-C13)
 
 - E036, E037, E038 and E039 failed to initialise their W&B runs at completion on 2026-10-02 ("runupserter: failed to init run", context deadline exceeded). E035 synced at completion; E040 and E041 synced on 2026-10-03. Two post-window re-syncs (E035–E039) failed. The W&B mirror therefore lacks E036–E039; the repository records are complete. Stays open.
+
+## Amendment (Day 7, D07-S01)
+
+- E042 and E043 (the SUBMIT fits) failed to sync at completion on 2026-10-03 (CommError; each attempt took about 2 min after the run). E044 synced. The W&B mirror therefore lacks E042 and E043; the repository records are complete. Stays open.

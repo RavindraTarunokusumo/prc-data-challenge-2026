@@ -471,3 +471,22 @@ ACCEPT ×2 with conditions N1–N8. Run at once on the owner's instruction ("No,
   - **D6-C10:** rung C against rung B on all rows (−0.64 s) is exploratory.
   - **D6-C11:** clause 1's W1 gain on normal taxis by draw: −1.59, −0.31, +0.40 s (spread 2.00 s); 69 % of E033's W1 gain sits outside normal taxis. Updates D5-C9.
 - **Incidents:** INC-0012 and INC-0013 closed; INC-0009 (W&B: E036–E039 never mirrored, D6-C13), INC-0010, INC-0004 open.
+
+## Day 7 (D07-S01): the SUBMIT procedure (batch X-D07-S01-0001; procedure runs, no candidate)
+
+ACCEPT ×3 (0.85, 0.83, 0.85) with conditions S1–S9. Owner window 21:00–22:00 CEST (INC-0014); pinned launcher; freeze diff empty. The champion's construction (E033) applied to the frozen final folds `SUBMIT_JAN` / `SUBMIT_JUL` (train 2025-01..12). No truth: nothing scored.
+
+### E042 · H031 v1 · SUBMIT fit of E029's configuration (LightGBM half) · COMPLETE
+
+- 279.7 s, 7.02 GB. Mean prediction JAN 1,062.7 s, JUL 1,002.8 s. W&B sync failed (INC-0009).
+
+### E043 · H032 v1 · SUBMIT fit of E031's configuration (CatBoost GPU half; one draw) · COMPLETE
+
+- 419.3 s, 7.69 GB, GPU peak 3,784 MiB. Route check against E042 PASS (0.0 s on 107 / 276 routed rows). Resolved parameters equal E031's (S5; `data_partition` FeatureParallel). W&B sync failed.
+
+### E044 · H033 v1 · SUBMIT blend [E042, E043] 0.5/0.5 · COMPLETE; the submission
+
+- `make_submission.py`: I1–I5 hold; 344,841 rows in the template's order and dtypes; nearest-integer rounding only (RMS 0.288 s). **Submission SHA-256 `d57ff7db7dfa34e13934aa524464ea13dbe9f5f904fae400a85f87e62c95af73`** (`research/day-07/submission/SUBMISSION_RECORD.json`).
+- **No sanity flag.** January is close to two limits (0.219 % above 3,600 s, limit 0.25 %; mean 1,062.8 s, limit 1,070). Both halves agree on January's level. January 2026's delay inputs are near summer-peak levels (mean schedule delay 36.4 min; January 2025 30.0). D3-C3 rows (435 > 3 h, 92 > 5 h): none predicted above 3,600 s.
+- **Missed:** "July's mean above January's" and both mean-prediction ranges (H031 §Batch, H033). Kept.
+- The submission's accuracy is measured by no fold and not by H; it carries one CatBoost draw (S9).
