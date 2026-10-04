@@ -1,0 +1,933 @@
+{
+ "schema": "submission-record-v1",
+ "blend": "E050",
+ "model": "override",
+ "halves": [
+  "E044",
+  "E049"
+ ],
+ "weights": [
+  null,
+  null
+ ],
+ "reference": {
+  "blend": "E046",
+  "halves": [
+   "E033",
+   "E045"
+  ]
+ },
+ "template": {
+  "path": "data/raw/prc-2026-datasets/submitting.parquet",
+  "sha256": "0d383408ed5ac27bfcfd12d6b961cee77c8a6364b10dad9fe3ec81115c79652b",
+  "rows": 344841,
+  "schema": {
+   "MVT_ID_mvt": "Float64",
+   "TAXITIME_SEC_mvt": "Int32"
+  }
+ },
+ "submission": {
+  "path": "predictions/final/E050/submitting.parquet",
+  "sha256": "f0dc2c7c40063e238ef57f51d31192008e37c5327afcdc67d563868af17d06e8",
+  "size": 1094599,
+  "rows": 344841,
+  "post_processing": "round to nearest integer (half to even), Int32; nothing else"
+ },
+ "source_prediction_sha256": {
+  "SUBMIT_JAN": {
+   "E050": "d39a8ce21f0ad0ece802b75855fe683d247765668d3b977c9721609c92349377",
+   "E044": "3f3359f711801a7776db98e9158e3c35f2a5a9953288e5672d5854f98bfbc73b",
+   "E049": "87318ac3e6561878ae6a77a9e432dc1978cfa47f316fb559c1c19f26f670f1dd"
+  },
+  "SUBMIT_JUL": {
+   "E050": "ea813f83a782817efda7795e8a97b79cc42b688d2284e727de26c7497895eda7",
+   "E044": "efb3381ddc174df5d27895440f5c92992ff039a978c5b99da1152627d014cd84",
+   "E049": "2c1f80e16ee6ee333942459232f544f9e3938648d135c33be9e1961031b78cf5"
+  }
+ },
+ "rounding": {
+  "max_abs_s": 0.4999983640091159,
+  "rms_s": 0.28841915654796424
+ },
+ "integrity": {
+  "I1": true,
+  "I2": true,
+  "I3": true,
+  "I4": true,
+  "I5": true
+ },
+ "final_folds": {
+  "SUBMIT_JAN": {
+   "distribution": {
+    "rows": 152719,
+    "mean": 1066.6725432725057,
+    "std": 525.3911966211597,
+    "min": -847.9554879531732,
+    "max": 61975.53978247043,
+    "q0.001": 220.1673692085412,
+    "q0.01": 392.21490374417294,
+    "q0.05": 562.8717767398003,
+    "q0.5": 976.7382321448698,
+    "q0.95": 1845.7602572418082,
+    "q0.99": 2707.4026228257712,
+    "q0.999": 4337.368735951481
+   },
+   "out_of_range": {
+    "NM_present_other": {
+     "rows": 139312,
+     "below0": 0,
+     "above3600": 325
+    },
+    "NM_present_LIRF": {
+     "rows": 10954,
+     "below0": 0,
+     "above3600": 2
+    },
+    "NM_missing_other": {
+     "rows": 2346,
+     "below0": 19,
+     "above3600": 8
+    },
+    "NM_missing_LIRF": {
+     "rows": 107,
+     "below0": 5,
+     "above3600": 73
+    },
+    "all": {
+     "rows": 152719,
+     "below0": 24,
+     "above3600": 408
+    }
+   },
+   "rms_half_difference": 285.54328940757404,
+   "routed_rows": 107,
+   "mean_pred_by_airport": {
+    "EDDF": {
+     "rows": 15667,
+     "mean_pred": 1017.9361788494309
+    },
+    "EDDM": {
+     "rows": 10953,
+     "mean_pred": 990.5839940408514
+    },
+    "EGLL": {
+     "rows": 19283,
+     "mean_pred": 1341.2457307960744
+    },
+    "EHAM": {
+     "rows": 16232,
+     "mean_pred": 902.9991428100651
+    },
+    "LEBL": {
+     "rows": 12201,
+     "mean_pred": 904.0806368162156
+    },
+    "LEMD": {
+     "rows": 16802,
+     "mean_pred": 1017.3093758804338
+    },
+    "LFPG": {
+     "rows": 18129,
+     "mean_pred": 1061.5137885313195
+    },
+    "LIRF": {
+     "rows": 11061,
+     "mean_pred": 1106.1381943273823
+    },
+    "LSZH": {
+     "rows": 9995,
+     "mean_pred": 889.2450699379785
+    },
+    "LTFM": {
+     "rows": 22396,
+     "mean_pred": 1209.674295638923
+    }
+   }
+  },
+  "SUBMIT_JUL": {
+   "distribution": {
+    "rows": 192122,
+    "mean": 1009.6286877392212,
+    "std": 614.8683482308128,
+    "min": -1243.9689881919526,
+    "max": 74383.30763078114,
+    "q0.001": 231.2376011169128,
+    "q0.01": 394.44851825135987,
+    "q0.05": 559.2305482336347,
+    "q0.5": 951.9936557679298,
+    "q0.95": 1584.8765830643324,
+    "q0.99": 2048.6200636141384,
+    "q0.999": 4074.8098807498413
+   },
+   "out_of_range": {
+    "NM_present_other": {
+     "rows": 173723,
+     "below0": 0,
+     "above3600": 49
+    },
+    "NM_present_LIRF": {
+     "rows": 15562,
+     "below0": 0,
+     "above3600": 70
+    },
+    "NM_missing_other": {
+     "rows": 2561,
+     "below0": 22,
+     "above3600": 1
+    },
+    "NM_missing_LIRF": {
+     "rows": 276,
+     "below0": 7,
+     "above3600": 138
+    },
+    "all": {
+     "rows": 192122,
+     "below0": 29,
+     "above3600": 258
+    }
+   },
+   "rms_half_difference": 504.30087426584817,
+   "routed_rows": 276,
+   "mean_pred_by_airport": {
+    "EDDF": {
+     "rows": 20650,
+     "mean_pred": 873.5398054592561
+    },
+    "EDDM": {
+     "rows": 15013,
+     "mean_pred": 782.8520951153439
+    },
+    "EGLL": {
+     "rows": 20557,
+     "mean_pred": 1378.3442073479898
+    },
+    "EHAM": {
+     "rows": 21950,
+     "mean_pred": 846.3865556987419
+    },
+    "LEBL": {
+     "rows": 17879,
+     "mean_pred": 990.2042767609731
+    },
+    "LEMD": {
+     "rows": 20152,
+     "mean_pred": 1032.4969193963057
+    },
+    "LFPG": {
+     "rows": 21743,
+     "mean_pred": 988.2383322761517
+    },
+    "LIRF": {
+     "rows": 15838,
+     "mean_pred": 1357.7298839956245
+    },
+    "LSZH": {
+     "rows": 13155,
+     "mean_pred": 753.7223341044053
+    },
+    "LTFM": {
+     "rows": 25185,
+     "mean_pred": 1026.4272797563694
+    }
+   }
+  }
+ },
+ "reference_folds": {
+  "R1": {
+   "distribution": {
+    "rows": 183950,
+    "mean": 997.7324163260664,
+    "std": 479.60779813445873,
+    "min": -2110.3350536100716,
+    "max": 59280.50145730765,
+    "q0.001": 220.2848355927312,
+    "q0.01": 373.4118662427867,
+    "q0.05": 536.786822865645,
+    "q0.5": 945.2051550737388,
+    "q0.95": 1581.9343392306332,
+    "q0.99": 1981.2631708713236,
+    "q0.999": 3669.062310450931
+   },
+   "out_of_range": {
+    "NM_present_other": {
+     "rows": 166986,
+     "below0": 0,
+     "above3600": 53
+    },
+    "NM_present_LIRF": {
+     "rows": 14499,
+     "below0": 0,
+     "above3600": 52
+    },
+    "NM_missing_other": {
+     "rows": 2297,
+     "below0": 17,
+     "above3600": 2
+    },
+    "NM_missing_LIRF": {
+     "rows": 168,
+     "below0": 10,
+     "above3600": 86
+    },
+    "all": {
+     "rows": 183950,
+     "below0": 27,
+     "above3600": 193
+    }
+   },
+   "rms_half_difference": 332.8283356634844,
+   "routed_rows": 168,
+   "mean_pred_by_airport": {
+    "EDDF": {
+     "rows": 21004,
+     "mean_pred": 866.976575188763
+    },
+    "EDDM": {
+     "rows": 15936,
+     "mean_pred": 797.8265642103896
+    },
+    "EGLL": {
+     "rows": 20138,
+     "mean_pred": 1423.6554687387545
+    },
+    "EHAM": {
+     "rows": 21466,
+     "mean_pred": 746.5638152236454
+    },
+    "LEBL": {
+     "rows": 16144,
+     "mean_pred": 983.3886450669459
+    },
+    "LEMD": {
+     "rows": 17671,
+     "mean_pred": 1035.9423216414389
+    },
+    "LFPG": {
+     "rows": 20682,
+     "mean_pred": 1055.0913912034162
+    },
+    "LIRF": {
+     "rows": 14667,
+     "mean_pred": 1246.5697312761747
+    },
+    "LSZH": {
+     "rows": 12178,
+     "mean_pred": 737.5306964370246
+    },
+    "LTFM": {
+     "rows": 24064,
+     "mean_pred": 1024.1429067990794
+    }
+   }
+  },
+  "R2": {
+   "distribution": {
+    "rows": 185674,
+    "mean": 992.2277451890646,
+    "std": 368.3701257176827,
+    "min": -1096.1185870279496,
+    "max": 26651.354837278108,
+    "q0.001": 221.12183325415606,
+    "q0.01": 370.7823719926091,
+    "q0.05": 534.648456344276,
+    "q0.5": 942.1225618404414,
+    "q0.95": 1576.9061336012387,
+    "q0.99": 1960.2795538991938,
+    "q0.999": 3173.0107853929812
+   },
+   "out_of_range": {
+    "NM_present_other": {
+     "rows": 169734,
+     "below0": 0,
+     "above3600": 38
+    },
+    "NM_present_LIRF": {
+     "rows": 14027,
+     "below0": 0,
+     "above3600": 41
+    },
+    "NM_missing_other": {
+     "rows": 1798,
+     "below0": 6,
+     "above3600": 1
+    },
+    "NM_missing_LIRF": {
+     "rows": 115,
+     "below0": 4,
+     "above3600": 52
+    },
+    "all": {
+     "rows": 185674,
+     "below0": 10,
+     "above3600": 132
+    }
+   },
+   "rms_half_difference": 148.48503420168123,
+   "routed_rows": 115,
+   "mean_pred_by_airport": {
+    "EDDF": {
+     "rows": 21239,
+     "mean_pred": 854.0025764275454
+    },
+    "EDDM": {
+     "rows": 15469,
+     "mean_pred": 800.3514676132777
+    },
+    "EGLL": {
+     "rows": 20657,
+     "mean_pred": 1375.451877291193
+    },
+    "EHAM": {
+     "rows": 21784,
+     "mean_pred": 722.6840676653901
+    },
+    "LEBL": {
+     "rows": 16300,
+     "mean_pred": 978.196420886981
+    },
+    "LEMD": {
+     "rows": 18892,
+     "mean_pred": 1031.6416614726843
+    },
+    "LFPG": {
+     "rows": 20809,
+     "mean_pred": 1043.1050401283026
+    },
+    "LIRF": {
+     "rows": 14142,
+     "mean_pred": 1196.277889306531
+    },
+    "LSZH": {
+     "rows": 12302,
+     "mean_pred": 733.3073030778676
+    },
+    "LTFM": {
+     "rows": 24080,
+     "mean_pred": 1099.5506879437946
+    }
+   }
+  },
+  "R3": {
+   "distribution": {
+    "rows": 162332,
+    "mean": 991.2730418616347,
+    "std": 383.35170940453384,
+    "min": -33.05726402674352,
+    "max": 38921.82192208464,
+    "q0.001": 216.0614177542019,
+    "q0.01": 367.04727426161656,
+    "q0.05": 527.8738156514581,
+    "q0.5": 941.7420811914967,
+    "q0.95": 1600.9586520191083,
+    "q0.99": 2024.4586041919963,
+    "q0.999": 3078.9451520961143
+   },
+   "out_of_range": {
+    "NM_present_other": {
+     "rows": 149700,
+     "below0": 0,
+     "above3600": 48
+    },
+    "NM_present_LIRF": {
+     "rows": 11276,
+     "below0": 0,
+     "above3600": 13
+    },
+    "NM_missing_other": {
+     "rows": 1304,
+     "below0": 5,
+     "above3600": 1
+    },
+    "NM_missing_LIRF": {
+     "rows": 52,
+     "below0": 0,
+     "above3600": 34
+    },
+    "all": {
+     "rows": 162332,
+     "below0": 5,
+     "above3600": 96
+    }
+   },
+   "rms_half_difference": 168.24031694471915,
+   "routed_rows": 52,
+   "mean_pred_by_airport": {
+    "EDDF": {
+     "rows": 18122,
+     "mean_pred": 875.4597304524023
+    },
+    "EDDM": {
+     "rows": 12562,
+     "mean_pred": 819.2655047668461
+    },
+    "EGLL": {
+     "rows": 19423,
+     "mean_pred": 1353.0617782195834
+    },
+    "EHAM": {
+     "rows": 19232,
+     "mean_pred": 745.9796973696602
+    },
+    "LEBL": {
+     "rows": 13332,
+     "mean_pred": 926.2656105530998
+    },
+    "LEMD": {
+     "rows": 17419,
+     "mean_pred": 1014.7694118427664
+    },
+    "LFPG": {
+     "rows": 18646,
+     "mean_pred": 1069.890476455276
+    },
+    "LIRF": {
+     "rows": 11328,
+     "mean_pred": 1090.4898926323497
+    },
+    "LSZH": {
+     "rows": 10078,
+     "mean_pred": 747.4004340529498
+    },
+    "LTFM": {
+     "rows": 22190,
+     "mean_pred": 1093.810277615052
+    }
+   }
+  },
+  "S1": {
+   "distribution": {
+    "rows": 190713,
+    "mean": 1033.8690742592569,
+    "std": 643.0018461967974,
+    "min": -2387.109197379934,
+    "max": 62962.574252306964,
+    "q0.001": 224.55720443277656,
+    "q0.01": 379.8554278330022,
+    "q0.05": 546.8246047796276,
+    "q0.5": 970.1677387128026,
+    "q0.95": 1643.557871811113,
+    "q0.99": 2226.7667343245357,
+    "q0.999": 4981.103708091543
+   },
+   "out_of_range": {
+    "NM_present_other": {
+     "rows": 171901,
+     "below0": 0,
+     "above3600": 127
+    },
+    "NM_present_LIRF": {
+     "rows": 14874,
+     "below0": 0,
+     "above3600": 82
+    },
+    "NM_missing_other": {
+     "rows": 3601,
+     "below0": 32,
+     "above3600": 3
+    },
+    "NM_missing_LIRF": {
+     "rows": 337,
+     "below0": 15,
+     "above3600": 204
+    },
+    "all": {
+     "rows": 190713,
+     "below0": 47,
+     "above3600": 416
+    }
+   },
+   "rms_half_difference": 515.1744460196204,
+   "routed_rows": 337,
+   "mean_pred_by_airport": {
+    "EDDF": {
+     "rows": 21334,
+     "mean_pred": 885.6244619673674
+    },
+    "EDDM": {
+     "rows": 15825,
+     "mean_pred": 797.1976637091168
+    },
+    "EGLL": {
+     "rows": 20790,
+     "mean_pred": 1447.1143686137484
+    },
+    "EHAM": {
+     "rows": 22489,
+     "mean_pred": 809.2338932158651
+    },
+    "LEBL": {
+     "rows": 16752,
+     "mean_pred": 999.6702882659279
+    },
+    "LEMD": {
+     "rows": 18818,
+     "mean_pred": 1045.3678759145314
+    },
+    "LFPG": {
+     "rows": 21712,
+     "mean_pred": 1048.2975793100136
+    },
+    "LIRF": {
+     "rows": 15211,
+     "mean_pred": 1412.2319467197872
+    },
+    "LSZH": {
+     "rows": 12611,
+     "mean_pred": 750.5529209842271
+    },
+    "LTFM": {
+     "rows": 25171,
+     "mean_pred": 1082.7066577938633
+    }
+   }
+  },
+  "W1": {
+   "distribution": {
+    "rows": 143732,
+    "mean": 981.0654749875206,
+    "std": 415.27226729694365,
+    "min": -753.0920109338003,
+    "max": 55529.94852770128,
+    "q0.001": 205.68297417808137,
+    "q0.01": 345.26407401194734,
+    "q0.05": 529.0773100126828,
+    "q0.5": 920.1451613290028,
+    "q0.95": 1610.0742966584385,
+    "q0.99": 2281.903604546944,
+    "q0.999": 3461.3980008098724
+   },
+   "out_of_range": {
+    "NM_present_other": {
+     "rows": 131977,
+     "below0": 0,
+     "above3600": 71
+    },
+    "NM_present_LIRF": {
+     "rows": 10645,
+     "below0": 0,
+     "above3600": 8
+    },
+    "NM_missing_other": {
+     "rows": 1052,
+     "below0": 20,
+     "above3600": 2
+    },
+    "NM_missing_LIRF": {
+     "rows": 58,
+     "below0": 3,
+     "above3600": 36
+    },
+    "all": {
+     "rows": 143732,
+     "below0": 23,
+     "above3600": 117
+    }
+   },
+   "rms_half_difference": 200.09347745222763,
+   "routed_rows": 58,
+   "mean_pred_by_airport": {
+    "EDDF": {
+     "rows": 15099,
+     "mean_pred": 847.0907721366708
+    },
+    "EDDM": {
+     "rows": 10381,
+     "mean_pred": 836.9742639968586
+    },
+    "EGLL": {
+     "rows": 17956,
+     "mean_pred": 1298.9283248570935
+    },
+    "EHAM": {
+     "rows": 17852,
+     "mean_pred": 799.2753634311638
+    },
+    "LEBL": {
+     "rows": 12169,
+     "mean_pred": 910.7043441986248
+    },
+    "LEMD": {
+     "rows": 15390,
+     "mean_pred": 977.9226305419343
+    },
+    "LFPG": {
+     "rows": 16806,
+     "mean_pred": 998.5811501023685
+    },
+    "LIRF": {
+     "rows": 10703,
+     "mean_pred": 1072.3066924371435
+    },
+    "LSZH": {
+     "rows": 9048,
+     "mean_pred": 736.3629121025987
+    },
+    "LTFM": {
+     "rows": 18328,
+     "mean_pred": 1139.5227653690072
+    }
+   }
+  },
+  "S1c": {
+   "distribution": {
+    "rows": 190713,
+    "mean": 1034.7788620147387,
+    "std": 600.6802267804848,
+    "min": -5607.7497331297845,
+    "max": 58039.43425619344,
+    "q0.001": 211.29840430560282,
+    "q0.01": 380.00848482399067,
+    "q0.05": 548.3712733033574,
+    "q0.5": 969.35701041591,
+    "q0.95": 1648.9612761331978,
+    "q0.99": 2246.679040439651,
+    "q0.999": 5102.269167812563
+   },
+   "out_of_range": {
+    "NM_present_other": {
+     "rows": 171901,
+     "below0": 0,
+     "above3600": 146
+    },
+    "NM_present_LIRF": {
+     "rows": 14874,
+     "below0": 0,
+     "above3600": 63
+    },
+    "NM_missing_other": {
+     "rows": 3601,
+     "below0": 27,
+     "above3600": 6
+    },
+    "NM_missing_LIRF": {
+     "rows": 337,
+     "below0": 23,
+     "above3600": 207
+    },
+    "all": {
+     "rows": 190713,
+     "below0": 50,
+     "above3600": 422
+    }
+   },
+   "rms_half_difference": 462.18303211291146,
+   "routed_rows": 337,
+   "mean_pred_by_airport": {
+    "EDDF": {
+     "rows": 21334,
+     "mean_pred": 883.697017409506
+    },
+    "EDDM": {
+     "rows": 15825,
+     "mean_pred": 791.2818863382245
+    },
+    "EGLL": {
+     "rows": 20790,
+     "mean_pred": 1452.8227905817448
+    },
+    "EHAM": {
+     "rows": 22489,
+     "mean_pred": 811.2695648901927
+    },
+    "LEBL": {
+     "rows": 16752,
+     "mean_pred": 995.8940938131434
+    },
+    "LEMD": {
+     "rows": 18818,
+     "mean_pred": 1048.567259400301
+    },
+    "LFPG": {
+     "rows": 21712,
+     "mean_pred": 1038.6678665250884
+    },
+    "LIRF": {
+     "rows": 15211,
+     "mean_pred": 1402.9746050062802
+    },
+    "LSZH": {
+     "rows": 12611,
+     "mean_pred": 757.1818676394713
+    },
+    "LTFM": {
+     "rows": 25171,
+     "mean_pred": 1099.1198408959979
+    }
+   }
+  },
+  "W1c": {
+   "distribution": {
+    "rows": 143732,
+    "mean": 978.4586059315791,
+    "std": 373.85191066698775,
+    "min": -241.10176366216353,
+    "max": 16345.174497057184,
+    "q0.001": 197.7751718216139,
+    "q0.01": 367.0035044454475,
+    "q0.05": 540.2994456499907,
+    "q0.5": 918.3680234917155,
+    "q0.95": 1588.0926714617829,
+    "q0.99": 2246.1741577528915,
+    "q0.999": 3388.42561111223
+   },
+   "out_of_range": {
+    "NM_present_other": {
+     "rows": 131977,
+     "below0": 0,
+     "above3600": 58
+    },
+    "NM_present_LIRF": {
+     "rows": 10645,
+     "below0": 0,
+     "above3600": 1
+    },
+    "NM_missing_other": {
+     "rows": 1052,
+     "below0": 35,
+     "above3600": 19
+    },
+    "NM_missing_LIRF": {
+     "rows": 58,
+     "below0": 0,
+     "above3600": 35
+    },
+    "all": {
+     "rows": 143732,
+     "below0": 35,
+     "above3600": 113
+    }
+   },
+   "rms_half_difference": 150.91535068787175,
+   "routed_rows": 58,
+   "mean_pred_by_airport": {
+    "EDDF": {
+     "rows": 15099,
+     "mean_pred": 849.1408419898725
+    },
+    "EDDM": {
+     "rows": 10381,
+     "mean_pred": 839.8398307425335
+    },
+    "EGLL": {
+     "rows": 17956,
+     "mean_pred": 1287.2455382179253
+    },
+    "EHAM": {
+     "rows": 17852,
+     "mean_pred": 830.9613072426757
+    },
+    "LEBL": {
+     "rows": 12169,
+     "mean_pred": 900.4899165374895
+    },
+    "LEMD": {
+     "rows": 15390,
+     "mean_pred": 980.12805403509
+    },
+    "LFPG": {
+     "rows": 16806,
+     "mean_pred": 998.9567532854468
+    },
+    "LIRF": {
+     "rows": 10703,
+     "mean_pred": 1049.48842707679
+    },
+    "LSZH": {
+     "rows": 9048,
+     "mean_pred": 741.1508973314753
+    },
+    "LTFM": {
+     "rows": 18328,
+     "mean_pred": 1111.89696937795
+    }
+   }
+  },
+  "H": {
+   "distribution": {
+    "rows": 165677,
+    "mean": 996.2685616652948,
+    "std": 447.2469412760708,
+    "min": -1544.2678274944851,
+    "max": 59876.67976418187,
+    "q0.001": 212.20290028535806,
+    "q0.01": 378.52432193432963,
+    "q0.05": 548.7771687041479,
+    "q0.5": 936.2686640335628,
+    "q0.95": 1618.8217809645685,
+    "q0.99": 2124.9259415493884,
+    "q0.999": 3255.8353634298514
+   },
+   "out_of_range": {
+    "NM_present_other": {
+     "rows": 152048,
+     "below0": 0,
+     "above3600": 56
+    },
+    "NM_present_LIRF": {
+     "rows": 11980,
+     "below0": 0,
+     "above3600": 8
+    },
+    "NM_missing_other": {
+     "rows": 1561,
+     "below0": 17,
+     "above3600": 0
+    },
+    "NM_missing_LIRF": {
+     "rows": 88,
+     "below0": 5,
+     "above3600": 57
+    },
+    "all": {
+     "rows": 165677,
+     "below0": 22,
+     "above3600": 121
+    }
+   },
+   "rms_half_difference": 277.8829157039616,
+   "routed_rows": 88,
+   "mean_pred_by_airport": {
+    "EDDF": {
+     "rows": 17324,
+     "mean_pred": 885.919678233734
+    },
+    "EDDM": {
+     "rows": 12035,
+     "mean_pred": 924.7096642635871
+    },
+    "EGLL": {
+     "rows": 20000,
+     "mean_pred": 1386.7489342929582
+    },
+    "EHAM": {
+     "rows": 19458,
+     "mean_pred": 778.0372254309559
+    },
+    "LEBL": {
+     "rows": 13835,
+     "mean_pred": 931.3443597254279
+    },
+    "LEMD": {
+     "rows": 17985,
+     "mean_pred": 1007.8494831588902
+    },
+    "LFPG": {
+     "rows": 19778,
+     "mean_pred": 1033.7819553576107
+    },
+    "LIRF": {
+     "rows": 12068,
+     "mean_pred": 1115.8372700922953
+    },
+    "LSZH": {
+     "rows": 10585,
+     "mean_pred": 748.6733450186198
+    },
+    "LTFM": {
+     "rows": 22609,
+     "mean_pred": 1011.1067690132335
+    }
+   }
+  }
+ }
+}

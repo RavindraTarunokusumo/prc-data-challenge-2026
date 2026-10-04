@@ -166,3 +166,34 @@ def test_blend_refuses_a_file_that_does_not_match_its_manifest(tmp_path, monkeyp
     monkeypatch.setattr(blending, "ROOT", tmp_path)
     with pytest.raises(RuntimeError, match="does not match"):
         blending.stored_predictions("E900", "R1")
+
+
+def test_override_takes_the_subgroup_from_the_second_experiment(monkeypatch):
+    """Day 7: rows of the routed subgroup (LIRF, no NM match) come from the override
+    experiment, every other row from the base; the subgroup equals routed.route_mask."""
+    import numpy as np
+    import polars as pl
+    import pytest
+
+    from prc import blending
+    from prc.models.routed import route_mask
+
+    ids = np.arange(1, 7, dtype=np.int64)
+    val = pl.DataFrame({"MVT_ID_mvt": ids,
+                        "ADEP_mvt": ["LIRF", "LIRF", "EDDF", "EDDF", "LIRF", "EGLL"],
+                        "flt_missing": [1, 0, 1, 0, 1, 1]})
+    assert (val.select(route_mask())[:, 0].to_list()
+            == val.select(blending.OVERRIDE_SUBGROUPS["LIRF_NM_missing"])[:, 0].to_list())
+    stored = {"E900": pl.DataFrame({"MVT_ID_mvt": ids[::-1], "pred": [1.0] * 6}),
+              "E901": pl.DataFrame({"MVT_ID_mvt": ids, "pred": [9.0] * 6})}
+    status = {"E900": "COMPLETE", "E901": "COMPLETE", "E902": "ALLOCATED"}
+    monkeypatch.setattr(blending.ledger, "get", lambda eid: {"status": status[eid]})
+    load = lambda eid, fold: stored[eid]
+    params = {"base": "E900", "override": "E901", "subgroup": "LIRF_NM_missing"}
+    out = blending.override(val, params, "R1", loader=load).sort("MVT_ID_mvt")
+    assert out["pred"].to_list() == [9.0, 1.0, 1.0, 1.0, 9.0, 1.0]
+    with pytest.raises(ValueError, match="not COMPLETE"):
+        blending.override(val, {**params, "override": "E902"}, "R1", loader=load)
+    short = {**stored, "E901": stored["E901"].head(5)}
+    with pytest.raises(ValueError, match="lacks predictions"):
+        blending.override(val, params, "R1", loader=lambda e, f: short[e])

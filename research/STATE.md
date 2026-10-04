@@ -1,14 +1,20 @@
 # Research State
 
-*Updated 2026-10-03T16:29:53Z (measured with `date -u` at writing; D06-S01, at the Day 6 phase close).*
+*Updated 2026-10-04T22:05:46Z (measured with `date -u`; D07-S01, at the project freeze).*
 
-- **Phase:** **Day 6 CLOSED** (adversarial science). Phase close X-D06-S01-0004: **ACCEPT** (0.84); **holdout closed unused (ruling H6)**.
-  - Splits, metric and availability definition are FROZEN (`config/frozen.json`).
-  - Days 1–6 are complete. Day 7 (final synthesis, submission, freeze) remains.
-- **Sessions:** D06-S01, on branch `day-6`. **Last completed exchange:** X-D06-S01-0004. **Pending:** none.
-- **Next action:** Day 7 opens `day-7` from `main` after the Day 6 PR merges. **E033 is its phase-opening champion.** Next experiment id: **E042**.
+- **Phase: FROZEN** (since this commit; P7 of X-D07-S01-0003). Days 1–7 are complete.
+  - **Final champion: E046** (H035 v1): E033 with the LIRF NM-missing subgroup predicted by E045 (E020's configuration). Development mean 314.42; December 2025, E046 against E033, one access: WIN, −124.24 s (244.94 against 369.18).
+  - **Final submission: `predictions/final/E050/submitting.parquet`, SHA-256 `f0dc2c7c40063e238ef57f51d31192008e37c5327afcdc67d563868af17d06e8`** (E050; selected by P4). Manifest: `research/day-07/submission/FINAL_SUBMISSION.md`. E044's file (`d57ff7db…`, E033's procedure) is kept, not submitted.
+  - **U6 stands:** the submission carries a bet that LIRF's block-at-schedule recording convention persists in 2026, with a downside of similar size. Neither the development margin nor the December ΔRMSE is its expected gain.
+  - Final report: `docs/reports/FINAL_REPORT.md`. Day 7 summary: `research/day-07/DAY_SUMMARY.md` (FINAL).
+- **After FROZEN (P7 (c), (d)):** only appended files (corrections, the owner's upload record, an external-evaluation record). There is no allocation, run, fit, holdout read, formatter run or code change. **The owner uploads the recorded file once**, after recomputing its SHA-256. The researcher neither uploads nor reads the leaderboard. FROZEN is enforced by records only.
+- **Sessions:** D07-S01 ended at the freeze, on branch `day-7`. **Last exchange:** X-D07-S01-0003. **Pending:** the owner's upload; a content-neutral PR of `day-7` into `main`.
 
-## Champion: E033 (H023 v3), since the Day 5 phase close
+## Champion: E046 (H035 v1), since the Day 7 phase close
+
+- See Phase above and `models/champion/CURRENT.json`. Standing disclosures: E033's (below), plus U6, U7 (December only), rule 6 (W1 0.79 one row), rule 12 (subgroup bulk rows above 3,600 s), D7-C7, and the H exposure (88 rows on 26 days).
+
+## Previous champion: E033 (H023 v3), Day 5 phase close to Day 7 phase close
 
 - **What it is:** a fixed 0.5/0.5 blend (`prc.blending`) of two routed models:
   - **E029:** routed LightGBM on FS2 with `route_train_exclude` (H018 v2's configuration; E023's laptop instance);
@@ -71,10 +77,11 @@
   A change ends the instances and needs a new ruling. Every run records its environment in its manifest.
 - **Open incidents:**
   - **INC-0004** (Day 3 launch configuration; owner decision);
-  - **INC-0009** (W&B mirror and learning curves; **E036–E039 never mirrored**, D6-C13);
+  - **INC-0009** (W&B mirror and learning curves; **E036–E039, E042, E043, E045–E050 never mirrored**);
   - **INC-0010** (swap kept; CPython 3.13 kept: owner decisions).
 - **Closed in Day 5:** INC-0006 (no delegation), INC-0007, INC-0008, INC-0011.
-- **Closed in Day 6:** INC-0012 (owner run window; no deviation), INC-0013 (Sonnet delegation; one script). **Any owner instruction on run timing or delegation in Day 7 needs a new incident.**
+- **Closed in Day 6:** INC-0012 (owner run window; no deviation), INC-0013 (Sonnet delegation; one script).
+- **Closed in Day 7:** INC-0014 (run window, no deviation), INC-0015 (routing candidate decision and window), INC-0016 (E049/E050 on the owner's word; one deviation: the run-script defect, D7-C14).
 - **Practice:** one experiment at a time under the experiment lock (INC-0008). No commit under `src/` or `scripts/` while an experiment runs (D5-C6). No allocation beyond a review's stated scope (D5-C5).
 
 ## Holdout
@@ -82,11 +89,14 @@
 - Day 1: used (WIN). Day 2: closed unused (ruling H). Day 3: used (WIN, E019 against E005). Day 4: closed unused (ruling H4).
 - **Day 5: 1 of 1 used (WIN, E033 against E026).**
 - **Day 6: 0 of 1, closed unused (ruling H6).**
+- **Day 7: 1 of 1 used (WIN, E046 against E033). Ruling H7: the project's last H read.**
 - **Day 7 has one access,** through a Day 7 allocation as NEW, named by the Day 7 phase close.
 - Never NEW, in any phase:
   - E012–E018 and E020–E024 (rule 9; ruling H4);
   - E026–E032 and E034 (rule L v2; the H021 and H022 authorizations; the phase-close review);
-  - **E035–E041** (X-D06-S01-0001 ruling, extended by X-D06-S01-0003; ruling H6 (e)).
+  - **E035–E041** (X-D06-S01-0001 ruling, extended by X-D06-S01-0003; ruling H6 (e));
+  - **E042–E044** (the SUBMIT fits; X-D07-S01-0001);
+  - **E045, E047–E050** (components, reproductions and SUBMIT fits; U5). **E046** may be NEW in the Day 7 access only, if the phase close names it.
 
 - **Standing Advisor rules:**
   1. tail attribution;

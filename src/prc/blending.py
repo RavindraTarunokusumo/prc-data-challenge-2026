@@ -53,3 +53,38 @@ def blend(val_ids: pl.Series, params: dict, fold: str, loader=stored_predictions
             raise ValueError(f"blend: {eid} lacks predictions for some {fold} rows")
         out = out.with_columns((pl.col("pred") + w * pl.col("c")).alias("pred")).drop("c")
     return out
+
+
+# Day 7 (H035/H037): the routed subgroup of prc.models.routed (LIRF departures without an
+# NM match; label P). Kept identical to routed.route_mask (tests/test_worker.py) without
+# importing model code here.
+OVERRIDE_SUBGROUPS = {"LIRF_NM_missing": (pl.col("ADEP_mvt") == "LIRF")
+                      & (pl.col("flt_missing") == 1)}
+
+
+def override(val: pl.DataFrame, params: dict, fold: str, loader=stored_predictions
+             ) -> pl.DataFrame:
+    """Day 7: a base experiment's stored predictions, with the rows of one named, target-free
+    subgroup taken from a second experiment instead. Fits nothing.
+
+    `val`: the fold's validation rows with MVT_ID_mvt, ADEP_mvt and flt_missing.
+    params: {"base": E###, "override": E###, "subgroup": "LIRF_NM_missing"}. Both
+    experiments must be COMPLETE and cover every row (the override's predictions outside the
+    subgroup are read and discarded)."""
+    base, over, name = params["base"], params["override"], params["subgroup"]
+    if base == over:
+        raise ValueError("override: base and override must differ")
+    for eid in (base, over):
+        rec = ledger.get(eid)
+        if rec is None or rec["status"] != "COMPLETE":
+            raise ValueError(f"override: {eid} is not COMPLETE")
+    rows = val.select(pl.col("MVT_ID_mvt").cast(pl.Int64),
+                      OVERRIDE_SUBGROUPS[name].alias("sub"))
+    for eid, col in ((base, "pb"), (over, "po")):
+        p = loader(eid, fold).select(pl.col("MVT_ID_mvt").cast(pl.Int64),
+                                     pl.col("pred").alias(col))
+        rows = rows.join(p, on="MVT_ID_mvt", how="left", validate="1:1")
+        if rows[col].null_count():
+            raise ValueError(f"override: {eid} lacks predictions for some {fold} rows")
+    return rows.select("MVT_ID_mvt", pl.when(pl.col("sub")).then(pl.col("po"))
+                       .otherwise(pl.col("pb")).alias("pred"))

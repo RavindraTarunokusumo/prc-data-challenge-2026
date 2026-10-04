@@ -1,0 +1,40 @@
+{
+ "schema": "artifact-manifest-v1",
+ "producing_experiment": "E049",
+ "artifacts": [
+  {
+   "path": "predictions/validation/E049/SUBMIT_JAN.parquet",
+   "fold": "SUBMIT_JAN",
+   "rows": 152719,
+   "size": 1299958,
+   "sha256": "87318ac3e6561878ae6a77a9e432dc1978cfa47f316fb559c1c19f26f670f1dd"
+  },
+  {
+   "path": "predictions/validation/E049/SUBMIT_JUL.parquet",
+   "fold": "SUBMIT_JUL",
+   "rows": 192122,
+   "size": 1633812,
+   "sha256": "2c1f80e16ee6ee333942459232f544f9e3938648d135c33be9e1961031b78cf5"
+  }
+ ],
+ "format": "parquet [MVT_ID_mvt, pred]",
+ "code_commit": "0f9b2eb76ce82219ef6c96f38715347abaf3e291",
+ "polars_threads": 16,
+ "python": "3.13.15",
+ "environment": {
+  "uv_lock_sha256": "efa4fd78eaa6dfd2d6d72142388e2d55e7ce4c6a25060f64b6adaf7c1774fa67",
+  "libraries": {
+   "numpy": "2.5.3",
+   "scipy": "1.18.1",
+   "sklearn": "1.9.1",
+   "polars": "1.44.2",
+   "lightgbm": "4.7.0",
+   "catboost": "1.2.10",
+   "xgboost": "3.4.1",
+   "pandas": "3.0.6"
+  },
+  "thread_variables": {}
+ },
+ "silver_sha256": "efde426225040cd657e2a8c1be7576c6dd03cb2729fea5b303b6c4b9e9ec9c60",
+ "reproduce": "uv run python scripts/run_experiment.py E049  (a reproduction needs a fresh E### from scripts/gate.py)"
+}

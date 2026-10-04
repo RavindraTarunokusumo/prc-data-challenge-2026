@@ -1,0 +1,46 @@
+schema: advisor-task-envelope-v1
+exchange_id: X-D07-S01-0001
+session: D07-S01
+sender: claude-researcher
+recipient: advisor-subagent
+purpose: proposal_review
+proposal_ids: [H031, H032, H033]
+proposal_paths:
+  - research/day-07/proposals/H031_v1.md
+  - research/day-07/proposals/H032_v1.md
+  - research/day-07/proposals/H033_v1.md
+proposal_sha256:
+  - 560ee530f3c2e1adeb18beb1e4ab6b9602d22e9bab8188a4fb29c2cc01815cf6
+  - 139205d4964a47720b9032ad58ef147a7f83821dfa1220fb3f1e3dca2376657c
+  - c908b3bedf691067020bca2bf86c826eae72a0082caad52e49710bef52649adc
+review_output_dir: research/day-07/advisor/
+context_paths:
+  - research/STATE.md
+  - research/day-06/DAY_SUMMARY.md
+  - research/day-07/sessions/D07-S01/SESSION_START.md
+  - docs/incidents/INC-0014-owner-run-window-D07.md
+  - docs/incidents/INC-0012-owner-run-window-D06.md
+  - research/day-07/sessions/D07-S01/run_window.sh
+  - research/day-06/sessions/D06-S01/run_window_2.sh
+  - scripts/make_submission.py
+  - tests/test_make_submission.py
+  - scripts/run_experiment.py
+  - scripts/route_check.py
+  - src/prc/worker.py
+  - src/prc/data.py
+  - src/prc/blending.py
+  - config/splits.yaml
+  - docs/governance/LEADERBOARD_POLICY.md
+  - docs/reproducibility/HANDOFF_D04.md
+  - experiments/E029/config.yaml
+  - experiments/E031/config.yaml
+  - experiments/E033/config.yaml
+  - research/day-06/advisor/PHASE_CLOSE_D06_review_v1.md
+constraints:
+  - Batched proposal review (Day 7, final synthesis). Review files are H031_review_v1.md, H032_review_v1.md and H033_review_v1.md, one decision each. H031 §Batch is shared text.
+  - These are the champion's SUBMIT fits on the frozen final folds, not candidates. No truth exists for the final folds; nothing is scored or promoted.
+  - Owner instruction "Begin Day 7. Schedule experiment runs between 21:00 - 22:00" is recorded as INC-0014. Window today 19:00-20:00Z. The launcher must be armed before 19:00Z, so a decision is needed by about 18:45Z.
+  - run_window.sh is run_window_2.sh (Day 6, pinned logic) with the date, window end, queue and multi-component gating with a per-run route reference changed; the diff is short.
+  - The tools-freeze anchor is the commit that submits this envelope.
+  - Read-only checks only. Do not read December 2025 DEP targets; do not run holdout_check.py, run_experiment.py or make_submission.py; no fit or score on a real fold. Check the experiment lock first and keep memory light (INC-0008). Running the unit tests (uv run pytest -q tests/test_make_submission.py) is allowed.
+created_utc: 2026-10-03T17:00:07Z

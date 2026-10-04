@@ -1,0 +1,30 @@
+{
+ "schema": "submit-flag-v1",
+ "note": "P6 flag (H035 \u00a7Batch; bounds fixed by X-D07-S01-0003 P6: flag if share < 0.226 or > 0.981) and U8 (b) per-month exposure; target-free",
+ "months": {
+  "SUBMIT_JAN": {
+   "subgroup_rows": 107,
+   "subgroup_share_above_3600": 0.6822429906542056,
+   "flag": false,
+   "subgroup_mean_pred_E050": 7274.378165078922,
+   "subgroup_mean_pred_E044": 1759.783874370277,
+   "sum_sq_change": 11499569399.100391,
+   "rms_change_subgroup": 10366.899787619523,
+   "top1_share": 0.31457549841865123,
+   "top10_share": 0.7918337192055461,
+   "nonsubgroup_max_abs_diff": 0.0
+  },
+  "SUBMIT_JUL": {
+   "subgroup_rows": 276,
+   "subgroup_share_above_3600": 0.5,
+   "flag": false,
+   "subgroup_mean_pred_E050": 7072.832020853932,
+   "subgroup_mean_pred_E044": 1760.3650878097983,
+   "sum_sq_change": 47850936968.97378,
+   "rms_change_subgroup": 13167.11661801906,
+   "top1_share": 0.10961509100296593,
+   "top10_share": 0.7436986758453603,
+   "nonsubgroup_max_abs_diff": 0.0
+  }
+ }
+}

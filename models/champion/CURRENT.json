@@ -1,39 +1,60 @@
 {
-  "champion": "E033",
-  "hypothesis_id": "H023",
-  "proposal_version": 3,
-  "model": "blend",
-  "components": [
-    "E029",
-    "E031"
-  ],
-  "weights": [
-    0.5,
-    0.5
-  ],
-  "component_configs": {
-    "E029": "routed LightGBM, FS2, route_train_exclude (H018 v2 config; E023's laptop instance)",
-    "E031": "routed CatBoost GPU, FS2_RAW, CTRs (H021 v3)"
-  },
-  "since_utc": "2026-10-02T13:14:32Z",
-  "since_phase": "day-05",
-  "decided_by": "X-D05-S05-0001 (phase close ACCEPT 0.88) + holdout_E033_vs_E026 WIN (-6.75 s)",
-  "previous": "E019",
-  "reproduction": "E034 (within 0.48 s; not byte-identical: CatBoost GPU re-draw)",
+  "champion": "E046",
+  "hypothesis_id": "H035",
+  "proposal_version": 1,
+  "model": "override",
+  "base": "E033 (blend of E029 and E031 at 0.5/0.5)",
+  "override": "E045 (H034 v1: E020's configuration, unrouted LightGBM on FS2)",
+  "subgroup": "LIRF_NM_missing (LIRF departures without an NM match; label P)",
+  "since_utc": "2026-10-04T17:58:02Z",
+  "since_phase": "day-07",
+  "decided_by": "X-D07-S01-0003 (phase close ACCEPT 0.85) + holdout_E046_vs_E033 WIN (December 2025, E046 against E033, one access); objection F (U7) resolved for December only",
+  "previous": "E033",
+  "reproduction": "E048 (byte-identical component E047; criterion 6 PASS)",
+  "submit_path": "E049 (H036) + E044 -> E050 (H037); final file per P4 of X-D07-S01-0003 (E050's file if E049/E050 COMPLETE, route check, I1-I5 and no open/defect flag; otherwise E044's file, which implements E033's procedure, not the champion's)",
   "environment": "rule L v2 item 6 (CPython 3.13.15, lock efa4fd78, polars 16 threads, owner laptop; INC-0010)",
   "standing_disclosures": [
-    "D3-C1 (lineage)",
-    "D3-C3 (restated by D5-C16)",
-    "D5-C8",
-    "D5-C9",
-    "D5-C10",
-    "1,000-iteration budget"
+    "E033's: D3-C1; D3-C3 (D5-C16); D5-C8; D5-C9 (D6-C11); D5-C10; the 1,000-iteration budget; the Day 6 attribution",
+    "U6 (the gain is a bet on LIRF's block-at-schedule recording convention persisting; downside of similar size; development margin and H dRMSE are not the submission's expected gain)",
+    "U7 (holdout WIN for December only; does not test July's seven-month distance, January's tail or the SUBMIT procedure)",
+    "rule 6: W1 is 0.79 one row (183903219); top-10 share of the SSE change 0.73-0.97 (R2 0.726)",
+    "rule 12: subgroup bulk rows predicted above 3,600 s (e.g. S1 104 of 218; E033 0)",
+    "D7-C7: January 2026's subgroup delay tail is above every 2025 month; July 2026 at the 2025 maximum",
+    "H exposure: 88 subgroup rows on 26 days; top day 0.29; 53 % of E033's H SSE"
   ],
-  "retired": {
-    "D3-C2": "treated (>3 h band 3 vs 81); kept as history",
-    "D4-C9": "superseded for E033 by D5-C10"
-  },
   "history": [
+    {
+      "champion": "E033",
+      "hypothesis_id": "H023",
+      "proposal_version": 3,
+      "model": "blend",
+      "components": [
+        "E029",
+        "E031"
+      ],
+      "weights": [
+        0.5,
+        0.5
+      ],
+      "component_configs": {
+        "E029": "routed LightGBM, FS2, route_train_exclude (H018 v2 config; E023's laptop instance)",
+        "E031": "routed CatBoost GPU, FS2_RAW, CTRs (H021 v3)"
+      },
+      "since_utc": "2026-10-02T13:14:32Z",
+      "since_phase": "day-05",
+      "decided_by": "X-D05-S05-0001 (phase close ACCEPT 0.88) + holdout_E033_vs_E026 WIN (-6.75 s)",
+      "previous": "E019",
+      "reproduction": "E034 (within 0.48 s; not byte-identical: CatBoost GPU re-draw)",
+      "standing_disclosures": [
+        "D3-C1 (lineage)",
+        "D3-C3 (restated by D5-C16)",
+        "D5-C8",
+        "D5-C9",
+        "D5-C10",
+        "1,000-iteration budget"
+      ],
+      "held_through": "day-07 opening; replaced at the Day 7 phase close (X-D07-S01-0003; holdout WIN of E046)"
+    },
     {
       "champion": "E019",
       "hypothesis_id": "H015",
@@ -51,5 +72,12 @@
       ],
       "held_through": "day-04 (X-D04-S02-0001 ACCEPT; held by rule)"
     }
-  ]
+  ],
+  "final_submission": {
+    "file": "predictions/final/E050/submitting.parquet",
+    "sha256": "f0dc2c7c40063e238ef57f51d31192008e37c5327afcdc67d563868af17d06e8",
+    "produced_by": "E050 (H037 v1) via make_submission.py --tag E050",
+    "p4": "all conditions held: E049/E050 COMPLETE within class; route_check E050 E044 E049 PASS; I1-I5 pass; no flag (P6)",
+    "implements": "the champion's procedure (E046's construction on the SUBMIT fits)"
+  }
 }

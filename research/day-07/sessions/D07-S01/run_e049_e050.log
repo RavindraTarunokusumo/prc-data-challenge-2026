@@ -1,0 +1,6 @@
+2026-10-04T20:57:33Z start (owner's go)
+2026-10-04T20:57:34Z E049 START
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from WANDB_API_KEY.
+{"status": "COMPLETE", "runtime_s": 274.9, "peak_rss_gb": 5.391, "within_class": true}
+wandb: sync of E049 failed (CommError); records unaffected
+2026-10-04T21:04:00Z E049 END rc=0 status=COMPLETE

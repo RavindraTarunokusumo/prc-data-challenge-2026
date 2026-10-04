@@ -1,0 +1,12 @@
+hypothesis_id: H035
+proposal_version: 1
+purpose: reproduction
+model: override
+feature_set: FS0
+params:
+  base: E033
+  override: E047
+  subgroup: LIRF_NM_missing
+folds: [R1, R2, R3, S1, W1, S1c, W1c, H]
+seed: 43
+job_class: CLASS-S

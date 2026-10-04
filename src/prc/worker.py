@@ -80,6 +80,10 @@ def main(eid: str) -> None:
         if cfg["model"] == "blend":  # stored component predictions (prc.blending)
             val_ids = feats.filter(pl.col("role") == "val")["MVT_ID_mvt"]
             pred = blending.blend(val_ids, cfg["params"], fold.fold_id)
+        elif cfg["model"] == "override":  # stored predictions, one subgroup swapped (Day 7)
+            val = feats.filter(pl.col("role") == "val").select("MVT_ID_mvt", "ADEP_mvt",
+                                                                "flt_missing")
+            pred = blending.override(val, cfg["params"], fold.fold_id)
         else:
             pred = REGISTRY[cfg["model"]](feats, cfg.get("params", {}), cfg.get("seed", 42))
         curve = curves.take()

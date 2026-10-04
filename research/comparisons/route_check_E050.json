@@ -1,0 +1,35 @@
+{
+ "routed": "E050",
+ "unrouted": "E044",
+ "champion": "E049",
+ "tolerance_champion_s": 1e-06,
+ "folds": {
+  "SUBMIT_JAN": {
+   "rows": 152719,
+   "routed_rows": 107,
+   "max_abs_diff_routed_vs_champion": 0.0,
+   "max_abs_diff_nonrouted_vs_unrouted": 0.0,
+   "routed_rows_differing_from_unrouted": 107,
+   "sha256": {
+    "E050": "d39a8ce21f0ad0ece802b75855fe683d247765668d3b977c9721609c92349377",
+    "E044": "3f3359f711801a7776db98e9158e3c35f2a5a9953288e5672d5854f98bfbc73b",
+    "E049": "87318ac3e6561878ae6a77a9e432dc1978cfa47f316fb559c1c19f26f670f1dd"
+   },
+   "passes": true
+  },
+  "SUBMIT_JUL": {
+   "rows": 192122,
+   "routed_rows": 276,
+   "max_abs_diff_routed_vs_champion": 0.0,
+   "max_abs_diff_nonrouted_vs_unrouted": 0.0,
+   "routed_rows_differing_from_unrouted": 276,
+   "sha256": {
+    "E050": "ea813f83a782817efda7795e8a97b79cc42b688d2284e727de26c7497895eda7",
+    "E044": "efb3381ddc174df5d27895440f5c92992ff039a978c5b99da1152627d014cd84",
+    "E049": "2c1f80e16ee6ee333942459232f544f9e3938648d135c33be9e1961031b78cf5"
+   },
+   "passes": true
+  }
+ },
+ "passes": true
+}

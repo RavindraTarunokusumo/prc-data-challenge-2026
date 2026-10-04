@@ -1,0 +1,10 @@
+{
+ "experiment_id": "E049",
+ "rmse_by_fold": {},
+ "mean_rmse_dev": null,
+ "fold_seconds": {
+  "SUBMIT_JAN": 135.67,
+  "SUBMIT_JUL": 130.85
+ },
+ "scores": {}
+}

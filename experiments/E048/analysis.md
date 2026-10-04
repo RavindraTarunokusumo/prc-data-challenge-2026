@@ -1,0 +1,3 @@
+# E048 analysis: H035 v1 reproduction (override: base E033, override E047; seed 43)
+
+**Outcome: COMPLETE; criterion 6 PASS.** `reproduce_check.py E048 E046 --champion E033`: every development fold within tolerance (identical RMSE: R1 274.34, R2 238.33, R3 294.43, S1 414.44, W1 350.59; S1c 431.56, W1c 434.35), and criteria 1–3 hold against E033 (`research/comparisons/repro_E048_of_E046.json`). Route check `E048 E033 E047` PASS on all 8 folds. 15.6 s, 3.36 GB; finished 00:48:40Z; W&B sync failed. `git_dirty_at_run: false`. Never NEW. The reproduction checks determinism only (U6); it has no power on the forward bet.
