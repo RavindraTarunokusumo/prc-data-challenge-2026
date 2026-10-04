@@ -509,3 +509,10 @@ ACCEPT ×4 with U1–U10. Raised by the researcher from X-D03-S01-0003 (e) after
 ### E047 / E048 · reproductions · byte-identical / criterion 6 PASS
 
 ### E049, E050 · H036 / H037 · DEFERRED (572 s left against a 600 s guard); ALLOCATED; needed only if H035 is promoted
+
+### X-D07-S01-0003 · Day 7 phase close · ACCEPT (0.85); holdout WIN; champion E033 → E046
+
+- **Holdout (ruling H7; December 2025, E046 against E033, one access; the project's last H read):** WIN, −124.24 s (q10/q90 −190.37/−42.98). P2: E033's H RMSE reproduced exactly (369.1811742636602). **H035 promoted.** Objection F is resolved for December only; U6 stands.
+- **P4 (pre-registered before the access):** E050's file is final only if E049/E050 complete, route-check, pass I1–I5 and leave no open or defect flag; otherwise E044's file (E033's procedure) is final.
+- **Appended correction to the E046 entry above (D7-C7):** "both ranking months' subgroup delay q90 above every 2025 month" reads "January 2026 above every 2025 month; July 2026 at the 2025 maximum (July 2025, 14,939 s)".
+- E049/E050: owner's word pending (INC-0016).

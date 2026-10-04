@@ -1,15 +1,19 @@
 # Research State
 
-*Updated 2026-10-04T17:45Z (D07-S01, after the routing-candidate batch; the Day 7 phase close is pending).*
+*Updated 2026-10-04T18:03:01Z (measured with `date -u`; D07-S01, after the Day 7 phase close and holdout WIN; the freeze is pending).*
 
-- **Phase:** **Day 7 open** (final synthesis, submission, freeze). Days 1–6 are complete.
+- **Phase:** **Day 7 closed** (phase close X-D07-S01-0003 ACCEPT 0.85; holdout **WIN**). **Not yet FROZEN.**
   - Splits, metric and availability definition are FROZEN (`config/frozen.json`).
-  - **The SUBMIT batch is done** (X-D07-S01-0001 ACCEPT ×3; E042–E044 COMPLETE in the owner's 21:00–22:00 window, INC-0014). The submission file exists and passes every blocking check: `predictions/final/submitting.parquet`, SHA-256 `d57ff7db7dfa34e13934aa524464ea13dbe9f5f904fae400a85f87e62c95af73` (`research/day-07/submission/SUBMISSION_RECORD.json`). No sanity flag; no flag analysis open.
-  - **The routing candidate H035 (E046)** (X-D07-S01-0002 ACCEPT ×4, U1–U10; INC-0015): E033 with the LIRF NM-missing subgroup predicted by E020's unrouted configuration (E045). Development mean **314.42** (−124.45 s against E033, 7/7 WIN). Criteria 1–4, 6 and the criterion 8 rule are met. **Objection F (U7) is open:** only a WIN of the Day 7 access `holdout_check.py E046 E033` promotes it. Its gain is a bet on LIRF's block-at-schedule recording convention persisting, with a downside of similar size (U6). E049 and E050 (its SUBMIT fits) are DEFERRED and ALLOCATED.
-- **Sessions:** D07-S01, on branch `day-7`. **Last completed exchange:** X-D07-S01-0002. **Pending:** the Day 7 phase close (holdout access for E046; FROZEN).
-- **Next action:** the Day 7 phase-close review. If H035 is promoted, E049 and E050 need an owner window, then formatting with `--tag E050`; otherwise E044's file stands. Then FROZEN, then the upload, once, **by the owner's decision**. Next experiment id: **E051**.
+  - **Champion E046** (H035 v1) since the Day 7 phase close: E033 with the LIRF NM-missing subgroup predicted by E045 (E020's configuration). December 2025, E046 against E033, one access: WIN, −124.24 s (E046 244.94, E033 369.18). Objection F is resolved for December only; U6 stands (the gain is a bet on LIRF's recording convention, with a downside of similar size).
+  - **Final submission file (P4):** E050's (`predictions/final/E050/submitting.parquet`) if E049 and E050 complete and pass every check; otherwise E044's (`predictions/final/submitting.parquet`, SHA-256 `d57ff7db…`, E033's procedure).
+- **Sessions:** D07-S01, on branch `day-7`. **Last completed exchange:** X-D07-S01-0003. **Pending:** E049 and E050 (ALLOCATED), which start on the owner's word (INC-0016, script `run_e049_e050.sh`).
+- **Next action:** on the owner's word, run the script; then `make_submission.py E050 E044 E049 --ref E046 E033 E045 --tag E050`, the P6 flag, then FROZEN (P7). If the owner declines, P4's fallback applies (E044's file) and FROZEN follows. Then the owner uploads once. Next experiment id: **E051** (none planned).
 
-## Champion: E033 (H023 v3), since the Day 5 phase close
+## Champion: E046 (H035 v1), since the Day 7 phase close
+
+- See Phase above and `models/champion/CURRENT.json`. Standing disclosures: E033's (below), plus U6, U7 (December only), rule 6 (W1 0.79 one row), rule 12 (subgroup bulk rows above 3,600 s), D7-C7, and the H exposure (88 rows on 26 days).
+
+## Previous champion: E033 (H023 v3), Day 5 phase close to Day 7 phase close
 
 - **What it is:** a fixed 0.5/0.5 blend (`prc.blending`) of two routed models:
   - **E029:** routed LightGBM on FS2 with `route_train_exclude` (H018 v2's configuration; E023's laptop instance);
@@ -71,8 +75,8 @@
 
   A change ends the instances and needs a new ruling. Every run records its environment in its manifest.
 - **Open incidents:**
-  - **INC-0014** (Day 7 owner run window 21:00–22:00 CEST; no deviation);
   - **INC-0015** (owner decision to test the routing candidate; window 02:00–03:00 CEST, no deviation; E049/E050 deferred);
+  - **INC-0016** (E049/E050 start on the owner's word);
   - **INC-0004** (Day 3 launch configuration; owner decision);
   - **INC-0009** (W&B mirror and learning curves; **E036–E039, E042, E043, E045–E048 never mirrored**);
   - **INC-0010** (swap kept; CPython 3.13 kept: owner decisions).
@@ -85,6 +89,7 @@
 - Day 1: used (WIN). Day 2: closed unused (ruling H). Day 3: used (WIN, E019 against E005). Day 4: closed unused (ruling H4).
 - **Day 5: 1 of 1 used (WIN, E033 against E026).**
 - **Day 6: 0 of 1, closed unused (ruling H6).**
+- **Day 7: 1 of 1 used (WIN, E046 against E033). Ruling H7: the project's last H read.**
 - **Day 7 has one access,** through a Day 7 allocation as NEW, named by the Day 7 phase close.
 - Never NEW, in any phase:
   - E012–E018 and E020–E024 (rule 9; ruling H4);

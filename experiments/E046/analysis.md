@@ -79,3 +79,11 @@ Both are ≤ +6,500 s on every development fold. **The rule holds.** (The predic
 
 - The forward-risk wording of H035 §Batch, and of the researcher's message to the owner, is corrected by U6 (recorded in `research/day-07/acks/H035_ack_v1.md`).
 - E045's runtime was above its forecast and its window guard (above). Together with E047's, it **deferred E049 and E050**: at 00:50:28Z, 572 s remained in the window against E049's 600 s guard. Both remain ALLOCATED with their ids (U10). They need a later owner-set window, recorded in a new incident, and are needed only if H035 is promoted.
+
+## Appended correction (D7-C7, X-D07-S01-0003)
+
+U8 (a) above is corrected. The 2025 maximum subgroup q90 is July 2025's 14,939 s, not 13,865 s. July 2026 (14,945 s) is at the 2025 maximum: above it by 6 s at the nearest rank, below it by linear or lower interpolation. **Only January 2026 lies above every 2025 month** (17,816 s at the nearest rank; 19,592 s linear). The share of subgroup rows more than 1 h late is 81–96 %, not 81–94 %.
+
+## Appended outcome (Day 7 phase close)
+
+Objection F resolved for December only: `holdout_check.py E046 E033` **WIN**, ΔRMSE −124.24 s (q10/q90 −190.37/−42.98); December 2025, E046 against E033, one access (E046 244.94, E033 369.18; P2 instance check exact). **H035 PROMOTED** (ledger E046 and E048 PROMOTE). Per U6 and P8, neither this figure nor the development margin is the submission's expected gain.

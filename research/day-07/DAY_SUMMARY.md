@@ -1,10 +1,13 @@
-# Day 7 summary: final synthesis, submission, freeze (DRAFT for phase close X-D07-S01-0003)
+# Day 7 summary: final synthesis, submission, freeze (phase close X-D07-S01-0003 ACCEPT; holdout WIN; new champion E046; DRAFT until E049/E050 and the freeze)
 
 **Session:** D07-S01, on branch `day-7`, on the owner's laptop.
 
 **Provenance:**
 - The researcher is `claude-opus-5-5` (`--effort high`). The Advisor is the `advisor` subagent (definition `30fff5dd3c54`). No delegation.
-- Owner interventions: INC-0014 (run window 21:00–22:00 CEST on 2026-10-03) and INC-0015 (the decision to test the routing candidate; window 02:00–03:00 CEST on 2026-10-04).
+- Owner interventions:
+  - INC-0014: the run window 21:00–22:00 CEST on 2026-10-03 (closed);
+  - INC-0015: the decision to test the routing candidate, and the window 02:00–03:00 CEST on 2026-10-04;
+  - INC-0016: E049/E050 start on the owner's word.
 - Environment: rule L v2 item 6 throughout (manifests).
 
 ## 1. The Day 7 question and its answer
@@ -13,7 +16,7 @@
 
 **Answer so far:**
 - **The champion's SUBMIT procedure works and gives a complete submission** (E042–E044). The file passes every blocking check and raises no sanity flag (§3). SHA-256: `d57ff7db7dfa34e13934aa524464ea13dbe9f5f904fae400a85f87e62c95af73`.
-- **A routing candidate (H035, E046) meets every development criterion** at a development mean of 314.42 s, against E033's 438.87. Its gain is **a bet that LIRF's block-at-schedule recording convention persists in 2026**, with a downside of similar size (U6). It is promotable only through a WIN on the Day 7 holdout access (objection F, U7). Its outcome is decided at this phase close.
+- **A routing candidate (H035, E046) meets every development criterion** at a development mean of 314.42 s, against E033's 438.87. Its gain is **a bet that LIRF's block-at-schedule recording convention persists in 2026**, with a downside of similar size (U6). It was promotable only through a WIN on the Day 7 holdout access (objection F, U7). **December 2025 (E046 against E033, one access): WIN, −124.24 s. H035 is promoted; E046 is champion.** The final submission file follows P4 (§5).
 
 ## 2. What was built
 
@@ -51,15 +54,19 @@
   - the candidate keeps its advantage only if the 2026 convention rate stays above about 20–57 % of its 2025 level (λ*, by fold);
   - if the convention vanished, it would lose 0.25–1.3 times its 2025 gain;
   - Day 3's wording ("would lose only if the convention nearly vanished") understated this; so did the researcher's message to the owner.
-- **The development folds cannot test the bet:** they recompute Day 3's recorded contrast. December (H) is the only fresh month, and both ranking months' subgroup delay tails lie above every 2025 month.
+- **The development folds cannot test the bet:** they recompute Day 3's recorded contrast. December (H) was the only fresh month; it gave a WIN, for December only. January 2026's subgroup delay tail lies above every 2025 month, and July 2026's is at the 2025 maximum (D7-C7).
 
 ## 5. Champion
 
-E033 at the phase opening. The phase close decides between E033 (E044's file) and H035 (E046; E050's file), under U7.
+- **E046 (H035 v1) since the Day 7 phase close**; previous E033. Reproduction E048 (byte-identical component).
+- **Standing disclosures:** E033's, plus U6, U7 (December only), rule 6 (W1 0.79 one row), rule 12 (subgroup bulk rows above 3,600 s), D7-C7, and the H exposure (88 rows on 26 days; 53 % of E033's H SSE).
+- **Final file (P4):** E050's if E049 and E050 complete and pass every check (route check, I1–I5, no open or defect flag). Otherwise E044's, which implements E033's procedure, not the champion's. E049/E050 start on the owner's word (INC-0016).
 
 ## 6. Holdout
 
-Day 7 has one access. Requested: `holdout_check.py E046 E033` (U7's statistic), named by this phase close.
+- **Day 7: 1 of 1 used.** `holdout_check.py E046 E033`: **WIN**, ΔRMSE −124.24 s (q10/q90 −190.37/−42.98); E046 244.94, E033 369.18.
+- P2 instance check: E033's H RMSE reproduced exactly (369.1811742636602).
+- **Ruling H7:** this is the project's last H read. The figure is recorded as "December 2025, E046 against E033, one access" and is not the submission's expected gain.
 
 ## 7. Missed or corrected predictions (kept)
 
@@ -77,6 +84,15 @@ Day 7 has one access. Requested: `holdout_check.py E046 E033` (U7's statistic), 
 2. The SUBMIT procedure's accuracy (untestable without truth).
 3. D3-C3's January exposure; the 1,000-iteration budget; neural models (not attempted); a causal-only variant (not built).
 
+- **D7-C6 to D7-C13** (X-D07-S01-0003, appended in `research/day-07/acks/PHASE_CLOSE_D07_ack_v1.md`):
+  - C6: a pre-written STATE timestamp;
+  - C7: forward support (applied in §4 here; appended to the E046 analysis and the journal);
+  - C8–C11 and C13: final-report accuracy (applied);
+  - C12: the submission manifest fields, appended at FROZEN.
+
 ## 9. Phase close
 
-Pending (X-D07-S01-0003).
+- **X-D07-S01-0003: ACCEPT (0.85)**, with conditions P1–P9 and ruling H7.
+- The holdout WIN promoted H035, and **E046 is champion**.
+- INC-0014 closed. INC-0015 and INC-0016 close when E049/E050 are done or P4's fallback is invoked.
+- FROZEN follows once P4 has decided the final file (P7).
