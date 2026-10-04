@@ -46,3 +46,14 @@ Closes when E049 and E050 are COMPLETE and checked, or when P4's fallback is inv
 
 - Owner (verbatim): "Begin experiment". The window opens now; the script is started immediately after this record is committed and pushed.
 - Pre-start checks: script SHA-256 db6f7d883dc23ec8a43fb9270f6db445ff9314192b9e5a6547b9eaf4d2a4dced (equals the pin); freeze diff from `76e80f1` over `src scripts config pyproject.toml uv.lock`: empty; E049 and E050 ALLOCATED; GPU not used.
+
+## Deviation: the run script stopped after E049 (2026-10-04T22:01:27Z)
+
+- **What happened.** E049 ran 20:57:34Z–21:03:xxZ and is COMPLETE (274.9 s, 5.39 GB, within CLASS-M). The script then stopped in its first checkpoint, at 21:04:00Z, with `line 21: eid: unbound variable`. E049's records were not committed and **E050 never started** (still ALLOCATED).
+- **Cause: the researcher's defect.** `local eid=$1 paths=("experiments/$eid" …)` expands `$eid` before assigning it. In the pinned launchers, a global `$eid` from the queue loop masked this; in the standalone script there is none, so `set -u` aborted. The script was syntax-checked but its checkpoint was not exercised before the window.
+- **Effect.** No experiment output is affected. E049's records are as the runner wrote them. The window had no fixed end, and no run executed after the stop. Log: `research/day-07/sessions/D07-S01/run_e049_e050.log`.
+- **Handling (U10 deferral; E050 keeps its id and runs unchanged under the owner's word "Begin experiment", which covered both runs):**
+  1. E049's own records (`experiments/E049`, `experiments/ledger.jsonl`) are committed by hand in exactly the checkpoint's path set, with this amendment and the fixed script. The task-ledger line (E049's unmasking) stays unstaged, so E050 runs in the pre-registered tree state (U3: the task ledger as the only entry).
+  2. Fixed script `research/day-07/sessions/D07-S01/run_e050.sh`, SHA-256 fd066b3a85fdbe1af1863a043440306eac62fca74a587a22f9802515137df922: the original with the one-line fix (`local eid=$1` on its own line), the E049 steps removed, and a start check that the tree holds only the task-ledger change, E049 is COMPLETE and E050 is ALLOCATED. Its checkpoint was exercised in a scratch git repository under `set -u` before use (committed only the run's own paths).
+  3. Then `setsid nohup bash research/day-07/sessions/D07-S01/run_e050.sh`: E050, route check `E050 E044 E049`, checkpoint.
+- **This hand commit is a deviation from P5's "nothing committed by hand during the window".** It is recorded here and goes to the final records as D7-C14.
