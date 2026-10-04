@@ -3,7 +3,7 @@ schema: incident-v1
 incident_id: INC-0014
 type: owner_intervention
 created_utc: 2026-10-03T16:58:00Z
-status: open
+status: closed
 ---
 
 # Day 7: owner restricts experiment runs to 21:00–22:00 local time
@@ -43,3 +43,7 @@ Open for Day 7. Closes at the Day 7 phase close, or when the owner changes the w
 ## Amendment (2026-10-03T20:17Z): a second Day 7 window
 
 - The owner set a further run window at 02:00 CEST on 2026-10-04 for the routing candidate (INC-0015, which records it and its 00:00–01:00Z reading).
+
+## Closure (Day 7 phase close, X-D07-S01-0003, P9)
+
+Closed: the 2026-10-03 window is complete with no deviation. The second Day 7 window is recorded under INC-0015.
