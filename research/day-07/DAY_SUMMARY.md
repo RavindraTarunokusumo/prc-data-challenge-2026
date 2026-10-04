@@ -1,4 +1,4 @@
-# Day 7 summary: final synthesis, submission, freeze (phase close X-D07-S01-0003 ACCEPT; holdout WIN; new champion E046; DRAFT until E049/E050 and the freeze)
+# Day 7 summary: final synthesis, submission, freeze (FINAL; phase close X-D07-S01-0003 ACCEPT; holdout WIN; champion E046; submission E050; FROZEN)
 
 **Session:** D07-S01, on branch `day-7`, on the owner's laptop.
 
@@ -16,7 +16,7 @@
 
 **Answer so far:**
 - **The champion's SUBMIT procedure works and gives a complete submission** (E042–E044). The file passes every blocking check and raises no sanity flag (§3). SHA-256: `d57ff7db7dfa34e13934aa524464ea13dbe9f5f904fae400a85f87e62c95af73`.
-- **A routing candidate (H035, E046) meets every development criterion** at a development mean of 314.42 s, against E033's 438.87. Its gain is **a bet that LIRF's block-at-schedule recording convention persists in 2026**, with a downside of similar size (U6). It was promotable only through a WIN on the Day 7 holdout access (objection F, U7). **December 2025 (E046 against E033, one access): WIN, −124.24 s. H035 is promoted; E046 is champion.** The final submission file follows P4 (§5).
+- **A routing candidate (H035, E046) meets every development criterion** at a development mean of 314.42 s, against E033's 438.87. Its gain is **a bet that LIRF's block-at-schedule recording convention persists in 2026**, with a downside of similar size (U6). It was promotable only through a WIN on the Day 7 holdout access (objection F, U7). **December 2025 (E046 against E033, one access): WIN, −124.24 s. H035 is promoted; E046 is champion.** Under P4 the final submission is **E050's file** (SHA-256 `f0dc2c7c…`): E049 and E050 completed and passed every check.
 
 ## 2. What was built
 
@@ -37,7 +37,8 @@
 | **E046** | **H035 v1** | **candidate** | **dev 314.42; −124.45 s against E033, 7/7 WIN; criteria 1–4, 6 and the criterion 8 rule met; objection F open** |
 | E047 | H034 v1 repro | criterion 6 component | byte-identical to E045 |
 | E048 | H035 v1 repro | criterion 6 | PASS |
-| E049, E050 | H036, H037 v1 | the candidate's SUBMIT fits | **DEFERRED** (572 s left against a 600 s guard); ALLOCATED |
+| E049 | H036 v1 | the candidate's SUBMIT fit (unrouted LightGBM) | DEFERRED on 2026-10-04 (572 s left against a 600 s guard); then COMPLETE on the owner's word (INC-0016), 275 s |
+| **E050** | **H037 v1** | **E044 with the subgroup from E049** | **COMPLETE; route check PASS; I1–I5 pass; no P6 flag; the final submission** |
 
 **SUBMIT sanity (E044):**
 - January 2026 sits close to two pre-registered limits without crossing either: the mean prediction is 1,062.8 s against a limit of 1,070; 0.219 % of predictions are above 3,600 s against a limit of 0.25 %.
@@ -60,7 +61,8 @@
 
 - **E046 (H035 v1) since the Day 7 phase close**; previous E033. Reproduction E048 (byte-identical component).
 - **Standing disclosures:** E033's, plus U6, U7 (December only), rule 6 (W1 0.79 one row), rule 12 (subgroup bulk rows above 3,600 s), D7-C7, and the H exposure (88 rows on 26 days; 53 % of E033's H SSE).
-- **Final file (P4):** E050's if E049 and E050 complete and pass every check (route check, I1–I5, no open or defect flag). Otherwise E044's, which implements E033's procedure, not the champion's. E049/E050 start on the owner's word (INC-0016).
+- **Final file (P4): `predictions/final/E050/submitting.parquet`, SHA-256 `f0dc2c7c40063e238ef57f51d31192008e37c5327afcdc67d563868af17d06e8`.** Every P4 condition held. E044's file is kept and recorded, not submitted. Manifest: `research/day-07/submission/FINAL_SUBMISSION.md`.
+- **Exposure (U8 (b)):** E050 differs from E044 only on 383 Rome rows, by hours (subgroup RMS change 10,367 s in January and 13,167 s in July). That is of the order of a month's whole squared error, so the convention bet moves each month's RMSE by tens to hundreds of seconds, in either direction.
 
 ## 6. Holdout
 
@@ -84,6 +86,10 @@
 2. The SUBMIT procedure's accuracy (untestable without truth).
 3. D3-C3's January exposure; the 1,000-iteration budget; neural models (not attempted); a causal-only variant (not built).
 
+- **D7-C14:** the researcher's E049/E050 run script stopped after E049, in its checkpoint, on an unbound variable (a function copied out of the launcher's loop, where a global variable had masked the bug). It was not exercised before use.
+  - E049's records were then committed by hand in the checkpoint's path set. That is a deviation from P5's "nothing committed by hand during the window", recorded in INC-0016.
+  - E050 ran under a fixed script whose checkpoint was first tested in a scratch repository.
+  - No experiment output was affected.
 - **D7-C6 to D7-C13** (X-D07-S01-0003, appended in `research/day-07/acks/PHASE_CLOSE_D07_ack_v1.md`):
   - C6: a pre-written STATE timestamp;
   - C7: forward support (applied in §4 here; appended to the E046 analysis and the journal);
@@ -94,5 +100,5 @@
 
 - **X-D07-S01-0003: ACCEPT (0.85)**, with conditions P1–P9 and ruling H7.
 - The holdout WIN promoted H035, and **E046 is champion**.
-- INC-0014 closed. INC-0015 and INC-0016 close when E049/E050 are done or P4's fallback is invoked.
-- FROZEN follows once P4 has decided the final file (P7).
+- INC-0014, INC-0015 and INC-0016 are closed.
+- **FROZEN** at this summary's commit (P7): STATE, the task-ledger `frozen` event, the final report and the submission manifest. The upload is the owner's, once.

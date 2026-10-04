@@ -3,7 +3,7 @@ schema: incident-v1
 incident_id: INC-0015
 type: owner_intervention
 created_utc: 2026-10-03T20:17:09Z
-status: open
+status: closed
 ---
 
 # Day 7: owner chooses to test an unrouted-subgroup candidate before the freeze, and sets a run window at 02:00
@@ -34,3 +34,7 @@ Open. Closes at the Day 7 phase close.
 - Armed 2026-10-03T20:54:26Z; window opened 00:00:08Z. E045, E046, E047, E048 ran in order, all COMPLETE, all within the window (E048 finished 00:48:40Z; launcher END 00:50:23Z). **No deviation.**
 - **E049 and E050 were DEFERRED** at 00:50:28Z (E049 needs 600 s; 572 s were left). E045's and E047's runtimes (1,196 s and 1,339 s) exceeded their 1,100 s guards, and four failed W&B syncs took about 100 s each. Both stay ALLOCATED (U10); they are needed only if H035 is promoted, and they need a later owner-set window recorded in a new incident.
 - No WARNING (tree clean after each checkpoint); no unmasking event for E045–E048 (U3, U4).
+
+## Closure (P9 of X-D07-S01-0003)
+
+Closed: H035 was promoted on the Day 7 holdout WIN, and E049 and E050 are COMPLETE and checked (INC-0016). The 2026-10-04 00:00–01:00Z window had no deviation.

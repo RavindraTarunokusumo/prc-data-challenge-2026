@@ -3,7 +3,7 @@ schema: incident-v1
 incident_id: INC-0016
 type: owner_intervention
 created_utc: 2026-10-04T18:01:43Z
-status: open
+status: closed
 ---
 
 # Day 7: the deferred SUBMIT runs E049 and E050 start on the owner's word
@@ -57,3 +57,7 @@ Closes when E049 and E050 are COMPLETE and checked, or when P4's fallback is inv
   2. Fixed script `research/day-07/sessions/D07-S01/run_e050.sh`, SHA-256 fd066b3a85fdbe1af1863a043440306eac62fca74a587a22f9802515137df922: the original with the one-line fix (`local eid=$1` on its own line), the E049 steps removed, and a start check that the tree holds only the task-ledger change, E049 is COMPLETE and E050 is ALLOCATED. Its checkpoint was exercised in a scratch git repository under `set -u` before use (committed only the run's own paths).
   3. Then `setsid nohup bash research/day-07/sessions/D07-S01/run_e050.sh`: E050, route check `E050 E044 E049`, checkpoint.
 - **This hand commit is a deviation from P5's "nothing committed by hand during the window".** It is recorded here and goes to the final records as D7-C14.
+
+## Closure
+
+Closed: E049 (COMPLETE, 274.9 s) and E050 (COMPLETE, 14.7 s; route check PASS; I1–I5 pass; no P6 flag) are done, and P4 selects E050's file. One deviation is recorded above: the run-script defect and the hand commit of E049's records (D7-C14). No run executed outside the owner's word, and no experiment output was affected.

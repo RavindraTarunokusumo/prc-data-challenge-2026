@@ -1,13 +1,14 @@
 # Research State
 
-*Updated 2026-10-04T18:03:01Z (measured with `date -u`; D07-S01, after the Day 7 phase close and holdout WIN; the freeze is pending).*
+*Updated 2026-10-04T22:05:46Z (measured with `date -u`; D07-S01, at the project freeze).*
 
-- **Phase:** **Day 7 closed** (phase close X-D07-S01-0003 ACCEPT 0.85; holdout **WIN**). **Not yet FROZEN.**
-  - Splits, metric and availability definition are FROZEN (`config/frozen.json`).
-  - **Champion E046** (H035 v1) since the Day 7 phase close: E033 with the LIRF NM-missing subgroup predicted by E045 (E020's configuration). December 2025, E046 against E033, one access: WIN, −124.24 s (E046 244.94, E033 369.18). Objection F is resolved for December only; U6 stands (the gain is a bet on LIRF's recording convention, with a downside of similar size).
-  - **Final submission file (P4):** E050's (`predictions/final/E050/submitting.parquet`) if E049 and E050 complete and pass every check; otherwise E044's (`predictions/final/submitting.parquet`, SHA-256 `d57ff7db…`, E033's procedure).
-- **Sessions:** D07-S01, on branch `day-7`. **Last completed exchange:** X-D07-S01-0003. **Pending:** E049 and E050 (ALLOCATED), which start on the owner's word (INC-0016, script `run_e049_e050.sh`).
-- **Next action:** on the owner's word, run the script; then `make_submission.py E050 E044 E049 --ref E046 E033 E045 --tag E050`, the P6 flag, then FROZEN (P7). If the owner declines, P4's fallback applies (E044's file) and FROZEN follows. Then the owner uploads once. Next experiment id: **E051** (none planned).
+- **Phase: FROZEN** (since this commit; P7 of X-D07-S01-0003). Days 1–7 are complete.
+  - **Final champion: E046** (H035 v1): E033 with the LIRF NM-missing subgroup predicted by E045 (E020's configuration). Development mean 314.42; December 2025, E046 against E033, one access: WIN, −124.24 s (244.94 against 369.18).
+  - **Final submission: `predictions/final/E050/submitting.parquet`, SHA-256 `f0dc2c7c40063e238ef57f51d31192008e37c5327afcdc67d563868af17d06e8`** (E050; selected by P4). Manifest: `research/day-07/submission/FINAL_SUBMISSION.md`. E044's file (`d57ff7db…`, E033's procedure) is kept, not submitted.
+  - **U6 stands:** the submission carries a bet that LIRF's block-at-schedule recording convention persists in 2026, with a downside of similar size. Neither the development margin nor the December ΔRMSE is its expected gain.
+  - Final report: `docs/reports/FINAL_REPORT.md`. Day 7 summary: `research/day-07/DAY_SUMMARY.md` (FINAL).
+- **After FROZEN (P7 (c), (d)):** only appended files (corrections, the owner's upload record, an external-evaluation record). There is no allocation, run, fit, holdout read, formatter run or code change. **The owner uploads the recorded file once**, after recomputing its SHA-256. The researcher neither uploads nor reads the leaderboard. FROZEN is enforced by records only.
+- **Sessions:** D07-S01 ended at the freeze, on branch `day-7`. **Last exchange:** X-D07-S01-0003. **Pending:** the owner's upload; a content-neutral PR of `day-7` into `main`.
 
 ## Champion: E046 (H035 v1), since the Day 7 phase close
 
@@ -75,13 +76,12 @@
 
   A change ends the instances and needs a new ruling. Every run records its environment in its manifest.
 - **Open incidents:**
-  - **INC-0015** (owner decision to test the routing candidate; window 02:00–03:00 CEST, no deviation; E049/E050 deferred);
-  - **INC-0016** (E049/E050 start on the owner's word);
   - **INC-0004** (Day 3 launch configuration; owner decision);
-  - **INC-0009** (W&B mirror and learning curves; **E036–E039, E042, E043, E045–E048 never mirrored**);
+  - **INC-0009** (W&B mirror and learning curves; **E036–E039, E042, E043, E045–E050 never mirrored**);
   - **INC-0010** (swap kept; CPython 3.13 kept: owner decisions).
 - **Closed in Day 5:** INC-0006 (no delegation), INC-0007, INC-0008, INC-0011.
-- **Closed in Day 6:** INC-0012 (owner run window; no deviation), INC-0013 (Sonnet delegation; one script). **Any owner instruction on run timing or delegation in Day 7 needs a new incident.**
+- **Closed in Day 6:** INC-0012 (owner run window; no deviation), INC-0013 (Sonnet delegation; one script).
+- **Closed in Day 7:** INC-0014 (run window, no deviation), INC-0015 (routing candidate decision and window), INC-0016 (E049/E050 on the owner's word; one deviation: the run-script defect, D7-C14).
 - **Practice:** one experiment at a time under the experiment lock (INC-0008). No commit under `src/` or `scripts/` while an experiment runs (D5-C6). No allocation beyond a review's stated scope (D5-C5).
 
 ## Holdout

@@ -1,6 +1,6 @@
 # PRC Data Challenge 2026: final report (team genuine-cabbage)
 
-*DRAFT. The Day 7 phase close (X-D07-S01-0003) is accepted and its holdout access is done. Items marked {{…}} depend on E049/E050 (INC-0016) and P4 of that review, and are filled in at the freeze. Corrections D7-C8 to D7-C13 are applied.*
+*FINAL, at the project freeze (Day 7; phase close X-D07-S01-0003 ACCEPT). Corrections D7-C8 to D7-C14 are applied.*
 
 ## 1. What this project was
 
@@ -51,14 +51,14 @@
 | E005 (Day 1 champion) | 482.73 | 411.29 | — |
 | E019 (Day 3 champion) | 444.49 | 375.93 | — |
 | E033 (Day 5 champion) | 438.87 | 369.18 | E044: `predictions/final/submitting.parquet`, SHA-256 `d57ff7db7dfa34e13934aa524464ea13dbe9f5f904fae400a85f87e62c95af73` |
-| **E046 (Day 7 champion)** | 314.42 | 244.94 (December 2025, E046 against E033, one access) | E050: {{…}} |
+| **E046 (Day 7 champion)** | 314.42 | 244.94 (December 2025, E046 against E033, one access) | **E050: `predictions/final/E050/submitting.parquet`, SHA-256 `f0dc2c7c40063e238ef57f51d31192008e37c5327afcdc67d563868af17d06e8`** |
 
-**Final champion: E046. Submitted file:** {{per P4: E050's file if E049/E050 complete and pass every check; otherwise E044's file, in which case the submission implements E033's procedure, not the champion's}}.
+**Final champion: E046. Submission: E050's file.** P4 (pre-registered before the December access) selected it because E049 and E050 completed, the route check passed, I1–I5 passed and no flag was raised. E044's file (E033's procedure) is kept and recorded, not submitted. Manifest: `research/day-07/submission/FINAL_SUBMISSION.md`.
 
 **What the submission's accuracy rests on.**
 - No development fold and no holdout measures the submission itself.
 - It is refit on all 12 months and carries one GPU draw of the CatBoost half.
-- **Under E050, it also carries the recording-convention bet on 383 rows** (107 in January, 276 in July; §5).
+- **It also carries the recording-convention bet on 383 rows** (107 in January, 276 in July; §5). On those rows it predicts hours where E033's procedure predicts about 29 minutes. The squared difference is of the order of each month's whole squared error, so the bet moves each month's RMSE by tens to hundreds of seconds, in either direction.
 - The figures above belong to the evaluated models, not to the submission. Neither E046's development margin nor its December ΔRMSE is the submission's expected gain.
 
 ## 5. The recording-convention bet (LIRF)
@@ -84,13 +84,13 @@
 - **Environment:** Days 1–4 ran on a 4-vCPU cloud container and Days 5–7 on the owner's laptop. Laptop instances replaced cloud references under rule L v2.
 - **Open incidents:**
   - **INC-0004:** Day 3 launch configuration (model and effort against the registered configuration); open, owner decision.
-  - **INC-0009:** the W&B mirror. E036–E039, E042, E043 and E045–E048 were never mirrored; the repository records are complete.
+  - **INC-0009:** the W&B mirror. E036–E039, E042, E043 and E045–E050 were never mirrored; the repository records are complete.
   - **INC-0010:** laptop swap and CPython 3.13 kept by owner decision; the rule L v2 environment binding.
 - **FROZEN is enforced by records only** (STATE, the task ledger and append-only history). No code lock prevents a later change.
 
 ## 7. Governance record
 
-- **Experiments:** 50 allocated by the gate (E001–E050); one resource failure (E025); {{E049, E050 status}}.
+- **Experiments:** 50 allocated by the gate (E001–E050), all run; one resource failure (E025). E049's run script failed after the run, in its checkpoint (the researcher's defect, D7-C14, INC-0016); no output was affected.
 - **Advisor exchanges:** 27 (X-D01-S01-0001 to X-D07-S01-0003). Every proposal was reviewed before its runs, and every decision and condition is mirrored under `orchestration/advisor-exchanges/`.
 - **Holdout:** Day 1 WIN; Day 2 closed unused; Day 3 WIN; Day 4 closed unused; Day 5 WIN; Day 6 closed unused; **Day 7 WIN** (E046 against E033). The Day 7 access is the project's last H read (ruling H7).
 - **Leaderboard and bucket:** zero leaderboard reads and zero submissions before FROZEN. The submission bucket was never listed or read.

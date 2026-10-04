@@ -61,3 +61,4 @@ Stays open while the mirror is in use, and is reviewed at the Day 5 phase close.
 
 - E042 and E043 (the SUBMIT fits) failed to sync at completion on 2026-10-03 (CommError; each attempt took about 2 min after the run). E044 synced. The W&B mirror therefore lacks E042 and E043; the repository records are complete. Stays open.
 - E045, E046, E047 and E048 also failed to sync (CommError, 2026-10-04 window). Stays open.
+- E049 and E050 also failed to sync (CommError, 2026-10-04). The mirror lacks E036–E039, E042, E043 and E045–E050. Stays open.

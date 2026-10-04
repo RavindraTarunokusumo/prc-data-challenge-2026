@@ -72,5 +72,12 @@
       ],
       "held_through": "day-04 (X-D04-S02-0001 ACCEPT; held by rule)"
     }
-  ]
+  ],
+  "final_submission": {
+    "file": "predictions/final/E050/submitting.parquet",
+    "sha256": "f0dc2c7c40063e238ef57f51d31192008e37c5327afcdc67d563868af17d06e8",
+    "produced_by": "E050 (H037 v1) via make_submission.py --tag E050",
+    "p4": "all conditions held: E049/E050 COMPLETE within class; route_check E050 E044 E049 PASS; I1-I5 pass; no flag (P6)",
+    "implements": "the champion's procedure (E046's construction on the SUBMIT fits)"
+  }
 }

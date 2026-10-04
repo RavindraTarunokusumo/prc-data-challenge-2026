@@ -88,3 +88,4 @@
 {"ts": "2026-10-04T17:58:02Z", "event": "champion_change", "from": "E033", "to": "E046", "phase": "day-07", "basis": "X-D07-S01-0003 ACCEPT; holdout WIN (December 2025, E046 against E033, one access: -124.24 s, q10/q90 -190.37/-42.98; E046 244.94 vs E033 369.18); objection F resolved for December only (U7)"}
 {"event": "holdout_targets_unmasked_for_final_training", "experiment_id": "E049", "utc": "2026-10-04T20:57:44Z"}
 {"event": "holdout_targets_unmasked_for_final_training", "experiment_id": "E050", "utc": "2026-10-04T22:01:39Z"}
+{"ts": "2026-10-04T22:05:46Z", "event": "frozen", "submission": "predictions/final/E050/submitting.parquet", "submission_sha256": "f0dc2c7c40063e238ef57f51d31192008e37c5327afcdc67d563868af17d06e8", "champion": "E046", "basis": "X-D07-S01-0003 P7; P4 selected E050"}
