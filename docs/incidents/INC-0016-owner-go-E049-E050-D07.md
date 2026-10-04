@@ -41,3 +41,8 @@ The researcher asked when the two runs may execute (options: tonight 21:00–22:
 ## Resolution
 
 Closes when E049 and E050 are COMPLETE and checked, or when P4's fallback is invoked.
+
+## The owner's word (2026-10-04T20:57:31Z)
+
+- Owner (verbatim): "Begin experiment". The window opens now; the script is started immediately after this record is committed and pushed.
+- Pre-start checks: script SHA-256 db6f7d883dc23ec8a43fb9270f6db445ff9314192b9e5a6547b9eaf4d2a4dced (equals the pin); freeze diff from `76e80f1` over `src scripts config pyproject.toml uv.lock`: empty; E049 and E050 ALLOCATED; GPU not used.
