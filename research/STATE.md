@@ -1,12 +1,13 @@
 # Research State
 
-*Updated 2026-10-03T20:15Z (D07-S01, after the SUBMIT batch; the Day 7 phase close is pending).*
+*Updated 2026-10-04T17:45Z (D07-S01, after the routing-candidate batch; the Day 7 phase close is pending).*
 
 - **Phase:** **Day 7 open** (final synthesis, submission, freeze). Days 1–6 are complete.
   - Splits, metric and availability definition are FROZEN (`config/frozen.json`).
   - **The SUBMIT batch is done** (X-D07-S01-0001 ACCEPT ×3; E042–E044 COMPLETE in the owner's 21:00–22:00 window, INC-0014). The submission file exists and passes every blocking check: `predictions/final/submitting.parquet`, SHA-256 `d57ff7db7dfa34e13934aa524464ea13dbe9f5f904fae400a85f87e62c95af73` (`research/day-07/submission/SUBMISSION_RECORD.json`). No sanity flag; no flag analysis open.
-- **Sessions:** D07-S01, on branch `day-7`. **Last completed exchange:** X-D07-S01-0001. **Pending:** the Day 7 phase close (and the FROZEN state).
-- **Next action:** the Day 7 phase-close review; then FROZEN; then the upload, once, **by the owner's decision** (LEADERBOARD_POLICY; S6). Next experiment id: **E045**.
+  - **The routing candidate H035 (E046)** (X-D07-S01-0002 ACCEPT ×4, U1–U10; INC-0015): E033 with the LIRF NM-missing subgroup predicted by E020's unrouted configuration (E045). Development mean **314.42** (−124.45 s against E033, 7/7 WIN). Criteria 1–4, 6 and the criterion 8 rule are met. **Objection F (U7) is open:** only a WIN of the Day 7 access `holdout_check.py E046 E033` promotes it. Its gain is a bet on LIRF's block-at-schedule recording convention persisting, with a downside of similar size (U6). E049 and E050 (its SUBMIT fits) are DEFERRED and ALLOCATED.
+- **Sessions:** D07-S01, on branch `day-7`. **Last completed exchange:** X-D07-S01-0002. **Pending:** the Day 7 phase close (holdout access for E046; FROZEN).
+- **Next action:** the Day 7 phase-close review. If H035 is promoted, E049 and E050 need an owner window, then formatting with `--tag E050`; otherwise E044's file stands. Then FROZEN, then the upload, once, **by the owner's decision**. Next experiment id: **E051**.
 
 ## Champion: E033 (H023 v3), since the Day 5 phase close
 
@@ -71,8 +72,9 @@
   A change ends the instances and needs a new ruling. Every run records its environment in its manifest.
 - **Open incidents:**
   - **INC-0014** (Day 7 owner run window 21:00–22:00 CEST; no deviation);
+  - **INC-0015** (owner decision to test the routing candidate; window 02:00–03:00 CEST, no deviation; E049/E050 deferred);
   - **INC-0004** (Day 3 launch configuration; owner decision);
-  - **INC-0009** (W&B mirror and learning curves; **E036–E039, E042, E043 never mirrored**);
+  - **INC-0009** (W&B mirror and learning curves; **E036–E039, E042, E043, E045–E048 never mirrored**);
   - **INC-0010** (swap kept; CPython 3.13 kept: owner decisions).
 - **Closed in Day 5:** INC-0006 (no delegation), INC-0007, INC-0008, INC-0011.
 - **Closed in Day 6:** INC-0012 (owner run window; no deviation), INC-0013 (Sonnet delegation; one script). **Any owner instruction on run timing or delegation in Day 7 needs a new incident.**
@@ -88,7 +90,8 @@
   - E012–E018 and E020–E024 (rule 9; ruling H4);
   - E026–E032 and E034 (rule L v2; the H021 and H022 authorizations; the phase-close review);
   - **E035–E041** (X-D06-S01-0001 ruling, extended by X-D06-S01-0003; ruling H6 (e));
-  - **E042–E044** (the SUBMIT fits; X-D07-S01-0001).
+  - **E042–E044** (the SUBMIT fits; X-D07-S01-0001);
+  - **E045, E047–E050** (components, reproductions and SUBMIT fits; U5). **E046** may be NEW in the Day 7 access only, if the phase close names it.
 
 - **Standing Advisor rules:**
   1. tail attribution;

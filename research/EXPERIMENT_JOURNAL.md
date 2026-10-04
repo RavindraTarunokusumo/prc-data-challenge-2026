@@ -490,3 +490,22 @@ ACCEPT ×3 (0.85, 0.83, 0.85) with conditions S1–S9. Owner window 21:00–22:0
 - **No sanity flag.** January is close to two limits (0.219 % above 3,600 s, limit 0.25 %; mean 1,062.8 s, limit 1,070). Both halves agree on January's level. January 2026's delay inputs are near summer-peak levels (mean schedule delay 36.4 min; January 2025 30.0). D3-C3 rows (435 > 3 h, 92 > 5 h): none predicted above 3,600 s.
 - **Missed:** "July's mean above January's" and both mean-prediction ranges (H031 §Batch, H033). Kept.
 - The submission's accuracy is measured by no fold and not by H; it carries one CatBoost draw (S9).
+
+## Day 7 (D07-S01), batch 2: the routing candidate (X-D07-S01-0002; H035 a candidate)
+
+ACCEPT ×4 with U1–U10. Raised by the researcher from X-D03-S01-0003 (e) after the SUBMIT batch; the owner chose to test it and set the window (INC-0015). **U6 corrects the forward-risk wording** (the proposal's, the researcher's message to the owner and Day 3 (e)'s). **U7 pre-registers objection F:** only a WIN of the Day 7 holdout access promotes H035. Window 2026-10-04 00:00–01:00Z; freeze diff empty.
+
+### E045 · H034 v1 · E020's configuration (laptop instance) · reproduces E020 exactly
+
+- Per-fold RMSE equal to E020's to 0.0 s. 1,196 s (above its 1,100 s guard), 5.38 GB. Component; never NEW.
+
+### E046 · H035 v1 · E033 with the LIRF NM-missing subgroup from E045 · development criteria met; objection F open
+
+- Development mean **314.42** against E033's 438.87: −124.45 s (q95 −82.85), 7/7 WIN; only LIRF changes. The pre-registered derivation held to 0.05 s per fold.
+- Criterion 4: tail-row share of the gain 1.003–1.127 on every development fold; non-subgroup rows unchanged. Criterion 8 rule: worst S1 +4,292 s (≤ +6,500) against E033 and E028.
+- U8: recording-change break-even λ* 0.20–0.57; a convention-absent loss of 0.25–1.30 × the 2025 gain; W1 without row 183903219 −32.9 s; both ranking months' subgroup delay q90 above every 2025 month.
+- **The development margin is not the submission's expected gain (U6).**
+
+### E047 / E048 · reproductions · byte-identical / criterion 6 PASS
+
+### E049, E050 · H036 / H037 · DEFERRED (572 s left against a 600 s guard); ALLOCATED; needed only if H035 is promoted
