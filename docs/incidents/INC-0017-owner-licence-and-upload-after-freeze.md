@@ -3,7 +3,7 @@ schema: incident-v1
 incident_id: INC-0017
 type: owner_intervention
 created_utc: 2026-10-04T22:26:33Z
-status: open
+status: closed
 ---
 
 # After FROZEN: owner instructs the licence and a researcher upload
@@ -27,3 +27,7 @@ status: open
 ## Resolution
 
 Open until the upload record is appended (P7 (d): upload time, SHA-256 `f0dc2c7c40063e238ef57f51d31192008e37c5327afcdc67d563868af17d06e8`, FROZEN commit `4c21eff`).
+
+## Closure
+
+The owner uploaded `genuine-cabbage_v1.parquet` by hand; recorded in `research/day-07/submission/UPLOAD_RECORD.md`.
