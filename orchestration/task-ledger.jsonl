@@ -86,3 +86,5 @@
 {"ts": "2026-10-04T17:56:03Z", "event": "advisor_result", "exchange_id": "X-D07-S01-0003", "decisions": {"PHASE_CLOSE_D07": "ACCEPT"}}
 {"event": "holdout_access", "phase": "day-07", "utc": "2026-10-04T17:57:38Z", "experiments": ["E046", "E033"], "reason": "Day 7 phase close (X-D07-S01-0003): phase-closing candidate E046 (H035 v1) vs phase-opening champion E033; objection F (U7 of X-D07-S01-0002)"}
 {"ts": "2026-10-04T17:58:02Z", "event": "champion_change", "from": "E033", "to": "E046", "phase": "day-07", "basis": "X-D07-S01-0003 ACCEPT; holdout WIN (December 2025, E046 against E033, one access: -124.24 s, q10/q90 -190.37/-42.98; E046 244.94 vs E033 369.18); objection F resolved for December only (U7)"}
+{"event": "holdout_targets_unmasked_for_final_training", "experiment_id": "E049", "utc": "2026-10-04T20:57:44Z"}
+{"event": "holdout_targets_unmasked_for_final_training", "experiment_id": "E050", "utc": "2026-10-04T22:01:39Z"}
