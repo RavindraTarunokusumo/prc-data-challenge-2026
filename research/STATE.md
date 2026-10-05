@@ -1,6 +1,28 @@
 # Research State
 
-*Updated 2026-10-04T22:05:46Z (measured with `date -u`; D07-S01, at the project freeze).*
+*Updated 2026-10-05T09:55:59Z (measured with `date -u`; D08-S01, cloud, at its session end).*
+
+## Days 8–12 (reopening after FROZEN; INC-0017)
+
+- **Phase: FROZEN in effect, reopening ACCEPTED but pending G1.**
+  - PHASE_OPEN_D08 v1 was accepted (X-D08-S01-0001, 0.80) with G1–G12, ruling H8 and rule 15 (G5). Ack: `research/day-08/acks/PHASE_OPEN_D08_ack_v1.md`.
+  - **The `reopened` event is not written.** G1 must be committed first, in the owner's own words, appended to INC-0017:
+    - (a) commitments: no leaderboard reads or relays until the challenge closes; no upload before the refreeze; after it, no further upload or reopening;
+    - (b) a statement of what was known at reopening (any leaderboard content or E050 figure seen since FROZEN; the origin of the owner's target);
+    - (c) the completed E050 upload line in `research/day-07/submission/UPLOAD_RECORD.md` (object name, time, path, SHA-256, whether recomputed);
+    - (d) the "submit once" deviation recorded as the owner's decision.
+  - Until then: no allocation, run, fit or code change.
+- **After G1:** Phase OPEN (Days 8–12); champion E046; **H: closed (H8)**; rule 15 (G5) binds every candidate.
+  - **Compute:** the owner's laptop only, under rule L v2 item 6. Next ID **E051**, allocated on the laptop after confirming that its ledger holds E001–E050.
+  - **Cloud sessions:** governance and text only (G6); no overlapping sessions.
+  - **Uploads (G2, G7):** at most one new file, the latest Day 8–12 champion's checked SUBMIT file, complete before 2026-10-11T12:00:00Z. Otherwise "no new upload; E050 stands". No hedge; no re-upload of E044 or E050.
+  - **The owner's target is not a criterion (G3).** Proposals cite INC-0017, not the number. No figure is related to it or to the leaderboard. No challenge pages are opened.
+  - **Agenda notes (G9)** bind later proposals. The last phase close is committed by 2026-10-11T12:00:00Z.
+- **Open incidents:** INC-0004, INC-0009, INC-0010, **INC-0017**, **INC-0018** (Sonnet delegation).
+- **Sessions:** D08-S01 (cloud) ended at the commit of this update, on branch `day-8`. Last exchange: **X-D08-S01-0001**.
+
+## Days 1–7 state at the freeze (kept as written)
+
 
 - **Phase: FROZEN** (since this commit; P7 of X-D07-S01-0003). Days 1–7 are complete.
   - **Final champion: E046** (H035 v1): E033 with the LIRF NM-missing subgroup predicted by E045 (E020's configuration). Development mean 314.42; December 2025, E046 against E033, one access: WIN, −124.24 s (244.94 against 369.18).
