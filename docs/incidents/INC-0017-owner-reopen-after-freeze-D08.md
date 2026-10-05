@@ -58,6 +58,6 @@ The researcher listed G1's four items: commitments, what was known at reopening,
   - Under a "best" rule, the external evaluation discloses that the ranked figure may be the better of two files (G2).
 - **G1 (a) and (b) are pending** ("later"). The owner's G1 (b) statement should say where the ranking rule was read.
 - **G1 (c), the upload line, is still missing.**
-- **The  event stays unwritten.**
+- **The `reopened` event stays unwritten.**
 
 Appended by the cloud session D08-S01 after its session-end line (records only; no laptop session had started).
