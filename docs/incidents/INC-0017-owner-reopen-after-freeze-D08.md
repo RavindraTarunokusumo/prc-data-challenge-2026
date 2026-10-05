@@ -61,3 +61,23 @@ The researcher listed G1's four items: commitments, what was known at reopening,
 - **The `reopened` event stays unwritten.**
 
 Appended by the cloud session D08-S01 after its session-end line (records only; no laptop session had started).
+
+## Amendment (2026-10-05T14:15:05Z): the owner waives G1 (X-D08-S01-0001)
+
+The researcher reported that the reopening waited on G1's four items. The owner answered (D08-S02, cloud, verbatim):
+
+> Ignore the 4 items.
+
+**Reading.**
+- **G1 (a), (b) and (c) are waived by the owner's decision** (brief §1). G1 (d) was already recorded above.
+  - G1 was a binding condition of X-D08-S01-0001, so this waiver is itself a protocol deviation, and this incident records it.
+  - **Consequences, disclosed in every Day 8–12 record and in the external evaluation:**
+    - leaderboard isolation for Days 8–12 rests on no recorded commitment;
+    - what was known at reopening is not stated;
+    - E050's upload is unverified (no object name, time or recomputed hash).
+- **Unchanged by the waiver:**
+  - G2–G12, ruling H8 and rule 15;
+  - **G3:** the owner's target is not a criterion;
+  - **G7:** at most one new upload, the latest Day 8–12 champion's checked SUBMIT file, complete before 2026-10-11T12:00:00Z; no hedge;
+  - the researcher's own isolation: no leaderboard or ranking page is read, and no board content is accepted into records.
+- **The `reopened` event is written on the owner's authority** (`orchestration/task-ledger.jsonl`). It cites this amendment, not G1.

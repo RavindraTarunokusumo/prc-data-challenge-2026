@@ -27,6 +27,11 @@ allowed_hosts:
       purpose: Weights & Biases API, project PRC-Data-Challenge-2026 (scripts/wandb_sync.py, prc.tracking)
     - host: storage.googleapis.com
       purpose: W&B signed-URL uploads of run files (config, summary, segment tables) only
+  weather:   # owner decision INC-0019 (Day 8): external weather for agenda item 3; DATA_POLICY rule 7
+    - host: mesonet.agron.iastate.edu
+      purpose: Iowa Environmental Mesonet ASOS/METAR archive (/cgi-bin/request/asos.py) for the ten challenge airports
+    - host: archive-api.open-meteo.com
+      purpose: Open-Meteo historical hourly weather (CC BY 4.0), fallback at airport coordinates
 package_indexes: [pypi.org, files.pythonhosted.org]   # allowed by the platform by default
 rules:
   - Web search is allowed for general methodology. Always exclude github.com and kaggle.com, and never search for other PRC 2026 teams, solutions or leaderboards (LEADERBOARD_POLICY).

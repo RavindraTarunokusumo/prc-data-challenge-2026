@@ -1,25 +1,27 @@
 # Research State
 
-*Updated 2026-10-05T09:55:59Z (measured with `date -u`; D08-S01, cloud, at its session end).*
+*Updated 2026-10-05T14:15:43Z (measured with `date -u`; D08-S02, cloud, governance only).*
 
 ## Days 8–12 (reopening after FROZEN; INC-0017)
 
-- **Phase: FROZEN in effect, reopening ACCEPTED but pending G1.**
-  - PHASE_OPEN_D08 v1 was accepted (X-D08-S01-0001, 0.80) with G1–G12, ruling H8 and rule 15 (G5). Ack: `research/day-08/acks/PHASE_OPEN_D08_ack_v1.md`.
-  - **The `reopened` event is not written.** G1 must be committed first, in the owner's own words, appended to INC-0017:
-    - (a) commitments: no leaderboard reads or relays until the challenge closes; no upload before the refreeze; after it, no further upload or reopening;
-    - (b) a statement of what was known at reopening (any leaderboard content or E050 figure seen since FROZEN; the origin of the owner's target);
-    - (c) the completed E050 upload line in `research/day-07/submission/UPLOAD_RECORD.md` (object name, time, path, SHA-256, whether recomputed);
-    - (d) the "submit once" deviation recorded as the owner's decision.
-  - Until then: no allocation, run, fit or code change.
-- **After G1:** Phase OPEN (Days 8–12); champion E046; **H: closed (H8)**; rule 15 (G5) binds every candidate.
-  - **Compute:** the owner's laptop only, under rule L v2 item 6. Next ID **E051**, allocated on the laptop after confirming that its ledger holds E001–E050.
-  - **Cloud sessions:** governance and text only (G6); no overlapping sessions.
-  - **Uploads (G2, G7):** at most one new file, the latest Day 8–12 champion's checked SUBMIT file, complete before 2026-10-11T12:00:00Z. Otherwise "no new upload; E050 stands". No hedge; no re-upload of E044 or E050.
-  - **The owner's target is not a criterion (G3).** Proposals cite INC-0017, not the number. No figure is related to it or to the leaderboard. No challenge pages are opened.
-  - **Agenda notes (G9)** bind later proposals. The last phase close is committed by 2026-10-11T12:00:00Z.
-- **Open incidents:** INC-0004, INC-0009, INC-0010, **INC-0017**, **INC-0018** (Sonnet delegation).
-- **Sessions:** D08-S01 (cloud) ended at the commit of this update, on branch `day-8`. Last exchange: **X-D08-S01-0001**.
+*Section updated 2026-10-05T14:15:43Z (D08-S02, cloud, governance only).*
+
+- **Phase: OPEN (Days 8–12).** The `reopened` event was written at 2026-10-05T14:15Z on the owner's authority: **the owner waived G1 (a)–(c)** ("Ignore the 4 items"; INC-0017 amendment).
+  - **Disclosed in every Day 8–12 record:** leaderboard isolation rests on no recorded commitment; what was known at reopening is not stated; E050's upload is unverified.
+  - **Still binding:** G2–G12, ruling H8 (H closed for Days 8–12), rule 15 (G5), G3 (the owner's target is not a criterion), G7 (at most one new upload, before 2026-10-11T12:00:00Z; no hedge), and G9's agenda notes.
+- **Champion:** E046.
+- **Compute:** the owner's laptop only. Next ID **E051**, allocated on the laptop after confirming that its ledger holds E001–E050. **Cloud sessions:** governance and text only (G6).
+- **External weather data approved (INC-0019).**
+  - Hosts allowlisted in `config/network.yaml`: `mesonet.agron.iastate.edu` (METAR archive, primary) and `archive-api.open-meteo.com` (CC BY 4.0, fallback).
+  - The cloud environment's network policy currently refuses both; the fetch runs on the laptop.
+  - Use needs its own proposal: DATA_POLICY rule 7, and only observations issued before the anchor time.
+- **Research agenda (non-binding; each item needs its own proposal and G9's notes):**
+  1. recording conventions in the tail beyond LIRF;
+  2. the routed LIRF subgroup;
+  3. LTFM winter with weather;
+  4. the CatBoost iteration budget.
+- **Open incidents:** INC-0004, INC-0009, INC-0010, **INC-0017**, **INC-0018** (Sonnet delegation), **INC-0019** (weather).
+- **Sessions:** D08-S01 (cloud) ended. D08-S02 (cloud, governance) recorded the waiver and INC-0019. Last exchange: **X-D08-S01-0001**.
 
 ## Days 1–7 state at the freeze (kept as written)
 
