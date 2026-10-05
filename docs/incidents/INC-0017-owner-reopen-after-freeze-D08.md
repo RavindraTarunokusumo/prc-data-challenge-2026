@@ -43,3 +43,21 @@ Asked about resubmission (the researcher did not open the challenge's ranking pa
 ## Resolution
 
 Open. Closes at the last Day 8–12 phase close (the refreeze), with the final upload record.
+
+## Amendment (2026-10-05T09:56:49Z): G1 (d), the owner's words (X-D08-S01-0001)
+
+The researcher listed G1's four items: commitments, what was known at reopening, the upload line, and the "submit once" deviation. The owner answered (D08-S01, verbatim):
+
+> I'll do the first two later, the last one should be the best score that counts.
+
+**Reading:**
+- **G1 (d) is recorded:** going beyond the leaderboard policy's "submit once" is the owner's decision. The owner's stated reason is that the challenge counts a team's best score.
+- **The owner's statement of the ranking rule ("best score counts") is recorded as the owner's statement, not verified.**
+  - Under G2, no proposal, phase close or final-file rule may cite it as a motivation or an input.
+  - G7's final-file rule is unchanged: at most one new upload, the latest Day 8–12 champion's checked SUBMIT file; otherwise "no new upload; E050 stands"; no hedge.
+  - Under a "best" rule, the external evaluation discloses that the ranked figure may be the better of two files (G2).
+- **G1 (a) and (b) are pending** ("later"). The owner's G1 (b) statement should say where the ranking rule was read.
+- **G1 (c), the upload line, is still missing.**
+- **The  event stays unwritten.**
+
+Appended by the cloud session D08-S01 after its session-end line (records only; no laptop session had started).
