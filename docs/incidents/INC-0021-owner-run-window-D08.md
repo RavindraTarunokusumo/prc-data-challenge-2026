@@ -31,3 +31,15 @@ After the proposal went to review:
 ## Resolution
 
 Open. Closes when the H038 queue has run or been deferred, recorded in the session.
+
+## Amendment (2026-10-06T21:28:44Z): the window is 2 hours
+
+The owner, after E051 and E052 were allocated (D08-S03, verbatim):
+
+> Replace window with 2hrs. Wait for my go ahead.
+
+**Reading.**
+- The window is **at most 2 hours**: the launcher's END = START + 2 h. This replaces the 30 minutes above.
+- **The start is unchanged:** only on the owner's explicit go-ahead. Nothing is armed before it.
+- The launcher (`54ee5ab8…`) and its guards (840 s per run) are unchanged. The window is passed to it as arguments, so the pinned file is not edited.
+- **Effect on H038 v2's scope** (ack v2: "END = START + 30 minutes"): the window is the owner's decision (G3; brief §1), and this amendment supersedes that line. A longer window only lowers the chance that E052 is deferred. No run, fold, guard or reading changes. The phase close records it.

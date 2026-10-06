@@ -59,3 +59,7 @@ Rulings (D) and (E) of X-D08-S03-0001 stand (ack v1).
   - any run outside the owner's window;
   - any change to a model component after results are seen.
 - **A deferred E052 leaves criterion 6 open:** nothing is promoted until it runs.
+
+## Appended (2026-10-06T21:28:44Z): the owner's window
+
+The owner changed the run window to at most 2 hours, still starting only on the owner's go-ahead (INC-0021 amendment). The scope line "END = START + 30 minutes" above now reads **END = START + 2 hours**. Nothing else in the scope changes.
