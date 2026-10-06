@@ -45,3 +45,4 @@ Open. Closes when the ruling is acknowledged and the queue has run, or been defe
 - **Why an amendment and not a v3.** The change is one predicted-only fold, required by the frozen runner. It changes no model, parameter, scored fold, reading or criterion, and both runs were refused before start. A v3 would need new IDs, and with them a new launcher. The envelope purpose `scope_amendment` is not one of the contract's listed purposes. It is recorded here as a deviation of form, ruled acceptable by the Advisor.
 - **Fix applied:** `- H` appended to both configs (ack `H038_ack_v2_A1.md`).
 - **Re-arm:** allowed only by 2026-10-07T00:12:51Z, with the same window arguments. The re-arm time is appended below when it happens.
+- **Re-armed at 2026-10-06T23:02:52Z** on the owner's "Yes" (D08-S03, verbatim, in answer to "Shall I relaunch now?"), before the 2026-10-07T00:12:51Z limit, with the same window arguments.
