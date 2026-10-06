@@ -43,3 +43,7 @@ The owner, after E051 and E052 were allocated (D08-S03, verbatim):
 - **The start is unchanged:** only on the owner's explicit go-ahead. Nothing is armed before it.
 - The launcher (`54ee5ab8…`) and its guards (840 s per run) are unchanged. The window is passed to it as arguments, so the pinned file is not edited.
 - **Effect on H038 v2's scope** (ack v2: "END = START + 30 minutes"): the window is the owner's decision (G3; brief §1), and this amendment supersedes that line. A longer window only lowers the chance that E052 is deferred. No run, fold, guard or reading changes. The phase close records it.
+
+## Go-ahead (2026-10-06T22:40:51Z)
+
+The owner (D08-S03, verbatim): "Run now". The window is **2026-10-06T22:40:51Z to 2026-10-07T00:40:51Z** (START + 2 h). The launcher is armed with these arguments in the next action.
