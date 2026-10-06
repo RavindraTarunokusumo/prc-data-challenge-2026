@@ -14,6 +14,8 @@ protected holdout never gets a validation curve.
 
 from __future__ import annotations
 
+from contextlib import contextmanager
+
 import numpy as np
 
 STEP = 10
@@ -61,3 +63,15 @@ def take() -> dict | None:
     out = dict(_state) if "staged" in _state else None
     _state.clear()
     return out
+
+
+@contextmanager
+def paused():
+    """No curve is recorded inside (Day 8: the convention mixture's component fits, whose
+    staged predictions are not the experiment's predictions)."""
+    was = active()
+    _state["on"] = False
+    try:
+        yield
+    finally:
+        _state["on"] = was

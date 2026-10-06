@@ -88,3 +88,28 @@ def override(val: pl.DataFrame, params: dict, fold: str, loader=stored_predictio
             raise ValueError(f"override: {eid} lacks predictions for some {fold} rows")
     return rows.select("MVT_ID_mvt", pl.when(pl.col("sub")).then(pl.col("po"))
                        .otherwise(pl.col("pb")).alias("pred"))
+
+
+def override_fitted(val: pl.DataFrame, params: dict, fold: str, sub_pred: pl.DataFrame,
+                    loader=stored_predictions) -> pl.DataFrame:
+    """Day 8: as `override`, but the subgroup's predictions are fitted in this run
+    (`sub_pred`: [MVT_ID_mvt, pred] for exactly the subgroup's rows) instead of read from a
+    second experiment. params: {"base": E###, "subgroup": "LIRF_NM_missing", ...}."""
+    base, name = params["base"], params["subgroup"]
+    rec = ledger.get(base)
+    if rec is None or rec["status"] != "COMPLETE":
+        raise ValueError(f"override: {base} is not COMPLETE")
+    rows = val.select(pl.col("MVT_ID_mvt").cast(pl.Int64),
+                      OVERRIDE_SUBGROUPS[name].alias("sub"))
+    p = loader(base, fold).select(pl.col("MVT_ID_mvt").cast(pl.Int64),
+                                  pl.col("pred").alias("pb"))
+    rows = rows.join(p, on="MVT_ID_mvt", how="left", validate="1:1")
+    if rows["pb"].null_count():
+        raise ValueError(f"override: {base} lacks predictions for some {fold} rows")
+    sub_ids = rows.filter(pl.col("sub"))["MVT_ID_mvt"]
+    fitted = sub_pred.select(pl.col("MVT_ID_mvt").cast(pl.Int64), pl.col("pred").alias("po"))
+    if fitted.height != sub_ids.len() or set(fitted["MVT_ID_mvt"]) != set(sub_ids):
+        raise ValueError(f"override: fitted rows differ from the {name} rows of {fold}")
+    rows = rows.join(fitted, on="MVT_ID_mvt", how="left", validate="1:1")
+    return rows.select("MVT_ID_mvt", pl.when(pl.col("sub")).then(pl.col("po"))
+                       .otherwise(pl.col("pb")).alias("pred"))

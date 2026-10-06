@@ -1,0 +1,37 @@
+# H038 (Day 8): parameters of the convention mixture, fixed before the design pilot
+# (scripts/pilot_mixture_D08.py) and committed before it ran. Not tuned on any data.
+mixture:
+  base: E046
+  subgroup: LIRF_NM_missing
+  convention_tolerance_s: 120          # Day 1 definition (PHASE_CLOSE_D01 review (c))
+  classifier_params:                   # P(convention | x) on the subgroup's training rows
+    learning_rate: 0.05
+    num_leaves: 15
+    min_data_in_leaf: 20
+    feature_fraction: 1.0
+    bagging_fraction: 1.0
+    bagging_freq: 0
+    num_threads: 4
+    num_boost_round: 200
+  normal_params:                       # g on LIRF training rows with c = 0 (E045's parameters)
+    objective: regression
+    learning_rate: 0.05
+    num_leaves: 255
+    min_data_in_leaf: 100
+    feature_fraction: 1.0
+    bagging_fraction: 1.0
+    bagging_freq: 0
+    bin_construct_sample_cnt: 5000000
+    num_threads: 4
+    num_boost_round: 1000
+direct_reference:                      # E045 / E020's configuration (pilot comparison only)
+  objective: regression
+  learning_rate: 0.05
+  num_leaves: 255
+  min_data_in_leaf: 100
+  feature_fraction: 1.0
+  bagging_fraction: 1.0
+  bagging_freq: 0
+  bin_construct_sample_cnt: 5000000
+  num_threads: 4
+  num_boost_round: 1000
