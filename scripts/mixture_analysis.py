@@ -5,7 +5,10 @@
 Development and diagnostic folds only (truth through prc.evaluate.truth_frame; never H).
 Per fold, on the LIRF NM-missing subgroup (the rows where CANDIDATE and BASE may differ):
   - the SSE change against BASE, split by the Day 1 convention label on the validation rows
-    (c = |y - d_sched| < 120 s) and by the y >= 3,600 s band (bulk / tail);
+    (c = |y - d_sched| < 120 s), by the y >= 3,600 s band (bulk / tail), and for c = 0 by
+    d_sched >= 3,600 s (target-free);
+  - H038 v2 criterion 4 reading (a): where the subgroup SSE change is negative, the
+    convention rows carry at least half of it (`criterion4_reading_a`);
   - ablations from the stored components, with no refit: constant p (the fold's training
     convention rate), the convention component alone, g alone;
   - the classifier's AUC and Brier score against c;
@@ -31,6 +34,7 @@ from prc.paths import EXPERIMENTS, PREDICTIONS_VAL, ROOT
 
 FOLDS = ["R1", "R2", "R3", "S1", "W1", "S1c", "W1c"]
 TOL_S, TAIL_S = 120.0, 3600.0
+CONV_SHARE = 0.5  # H038 v2 criterion 4: convention rows carry at least half the gain
 
 
 def sse(e: np.ndarray) -> float:
@@ -66,6 +70,7 @@ def main(cand: str, base: str) -> None:
         conv = j["conv_component"].fill_null(0.0).to_numpy()
         lab = (has_c & (np.abs(y - j["d_sched"].fill_null(np.nan).to_numpy()) < TOL_S))
         tail = y >= TAIL_S
+        big = j["d_sched"].fill_null(0.0).to_numpy() >= TAIL_S  # target-free
         abl = {"constant_p": np.where(has_c, rate * conv + (1 - rate) * g, g),
                "convention_only": np.where(has_c, conv, g), "g_only": g}
         d = (pred - y) ** 2 - (pb - y) ** 2
@@ -79,6 +84,11 @@ def main(cand: str, base: str) -> None:
              "subgroup_sse_change": float(d.sum()),
              "subgroup_sse_change_convention": float(d[lab].sum()),
              "subgroup_sse_change_other": float(d[~lab].sum()),
+             "subgroup_sse_change_other_dsched_ge_3600": float(d[~lab & big].sum()),
+             "subgroup_sse_change_other_dsched_lt_3600": float(d[~lab & ~big].sum()),
+             "convention_share_of_gain": float(d[lab].sum() / d.sum()) if d.sum() < 0 else None,
+             "criterion4_reading_a": (None if d.sum() >= 0
+                                      else bool(d[lab].sum() <= CONV_SHARE * d.sum())),
              "subgroup_sse_change_tail": float(d[tail].sum()),
              "subgroup_sse_change_bulk": float(d[~tail].sum()),
              "subgroup_rmse": {"candidate": float(np.sqrt(np.mean((pred - y) ** 2))) if y.size else None,

@@ -8,6 +8,8 @@ For every fold the experiment predicted:
   - on the subgroup, MIXTURE must equal its stored components' `pred` (within 1e-6 s), and
     `pred` must equal p * conv + (1 - p) * g (within 1e-6 s; g alone where conv is null);
   - the components cover exactly the subgroup's rows.
+Records each component file's path, size and SHA-256 (their tracked manifest, DATA_POLICY §3;
+the launcher commits this JSON).
 Writes research/comparisons/mixture_check_<eid>.json and exits 1 if any check fails.
 """
 
@@ -24,7 +26,7 @@ import polars as pl
 
 from prc.blending import OVERRIDE_SUBGROUPS
 from prc.data import load_silver
-from prc.paths import EXPERIMENTS, PREDICTIONS_VAL, ROOT
+from prc.paths import EXPERIMENTS, PREDICTIONS_VAL, ROOT, sha256_file
 
 TOL = 1e-6
 
@@ -40,7 +42,8 @@ def main(eid: str, base: str) -> int:
     for fold in folds:
         m = pl.read_parquet(PREDICTIONS_VAL / eid / f"{fold}.parquet")
         b = pl.read_parquet(PREDICTIONS_VAL / base / f"{fold}.parquet").rename({"pred": "pb"})
-        c = pl.read_parquet(PREDICTIONS_VAL / eid / "components" / f"{fold}.parquet")
+        cpath = PREDICTIONS_VAL / eid / "components" / f"{fold}.parquet"
+        c = pl.read_parquet(cpath)
         j = (m.join(b, on="MVT_ID_mvt", how="left", validate="1:1")
              .join(keys, on="MVT_ID_mvt", how="left", validate="1:1")
              .with_columns(sub_expr.alias("sub")))
@@ -56,6 +59,9 @@ def main(eid: str, base: str) -> int:
                  float((sc["pred"] - sc["pc"]).abs().max() or 0.0) if sub.height else 0.0,
              "max_abs_diff_components_formula":
                  float(np.max(np.abs(recon - c["pred"].to_numpy()))) if c.height else 0.0}
+        # DATA_POLICY §3: the component files are git-ignored; this record is their manifest
+        r["components_file"] = {"path": str(cpath.relative_to(ROOT)), "size": cpath.stat().st_size,
+                                "sha256": sha256_file(cpath)}
         r["pass"] = (r["base_missing"] == 0 and r["component_rows"] == r["subgroup_rows"]
                      and sc["pc"].null_count() == 0 and r["max_abs_diff_outside"] == 0.0
                      and r["max_abs_diff_subgroup_vs_components"] <= TOL
