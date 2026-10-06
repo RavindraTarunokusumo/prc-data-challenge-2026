@@ -1,0 +1,40 @@
+schema: advisor-task-envelope-v1
+exchange_id: X-D08-S03-0002
+session: D08-S03
+sender: claude-researcher
+recipient: advisor-subagent
+purpose: proposal_review
+proposal_ids: [H038]
+proposal_paths:
+  - research/day-08/proposals/H038_v2.md
+proposal_sha256:
+  - 3104c018121e46b1a7ba7aafcd453b5781ebe0da41d538ac38ffe9b50cfc294c
+previous_review: research/day-08/advisor/H038_review_v1.md
+previous_ack: research/day-08/acks/H038_ack_v1.md
+launcher_path: research/day-08/sessions/D08-S03/run_window.sh
+launcher_sha256: 54ee5ab8b120530b7f6eaa83e3efc5ceb046ee1be6c650c656f68ce58208b92d
+params_path: research/day-08/proposals/H038_params.yaml
+params_sha256: b22c02c1f79976f268fe62d79fc718a08c7fa5a60691dc71c42b1f2c5091f16c
+review_output_dir: research/day-08/advisor/
+context_paths:
+  - research/day-08/proposals/H038_v1.md
+  - research/day-08/advisor/H038_review_v1.md
+  - research/day-08/acks/H038_ack_v1.md
+  - docs/incidents/INC-0020-divergent-post-freeze-lineage-D08.md
+  - docs/incidents/INC-0021-owner-run-window-D08.md
+  - research/day-08/advisor/PHASE_OPEN_D08_review_v1.md
+  - research/day-08/eda/pilot_mixture.json
+  - scripts/known_row_check.py
+  - scripts/mixture_analysis.py
+  - scripts/mixture_check.py
+  - tests/test_known_rows.py
+  - src/prc/models/mixture.py
+  - experiments/E046/analysis.md
+  - experiments/E046/metrics.json
+  - research/STATE.md
+constraints:
+  - Re-review of H038 after REVISE (X-D08-S03-0001), advisor-review-v1 schema. Check the six revisions and the one unrequested launcher change (queue guards 1,500 to 840 s, for INC-0021's 30-minute window).
+  - Envelopes cite INC-0020 instead of the Day 7 files that hold the disclosed figure (ruling (D)); none is listed here.
+  - Runs on the owner's laptop. Read-only. No gate.py allocate, no run, no fit, no holdout script, no read of December 2025 DEP targets, no read of any development fold's validation-month targets.
+  - Do not access the challenge's ranking page, the leaderboard or the submission bucket.
+created_utc: 2026-10-06T19:51:20Z

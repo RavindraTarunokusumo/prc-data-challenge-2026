@@ -25,8 +25,8 @@ BASE=E046
 
 # id  pessimistic_s
 QUEUE=(
-  "E051 1500"
-  "E052 1500"
+  "E051 840"
+  "E052 840"
 )
 
 log() { echo "$(date -u +%Y-%m-%dT%H:%M:%SZ) $*" | tee -a "$LOG"; }
