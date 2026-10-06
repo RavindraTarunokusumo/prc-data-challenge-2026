@@ -3,7 +3,7 @@ schema: incident-v1
 incident_id: INC-0020
 type: protocol_deviation
 created_utc: 2026-10-06T18:56:45Z
-status: open
+status: closed
 ---
 
 # Day 8: the post-freeze Day 7 commits never reached `main`; duplicate incident IDs; contradicting records on leaderboard exposure and the upload
@@ -53,3 +53,7 @@ The `day-8` records written before this merge stated that no leaderboard figure 
 ## Resolution
 
 Open. It closes when the Advisor has been told (the next exchange's envelope) and any ruling on it is acknowledged.
+
+## Closure (2026-10-06T19:48:02Z)
+
+The Advisor was told in X-D08-S03-0001 and ruled under G10 (review (D)): not a breach of G1–G3; no recovery review. Its conditions (disclosure in every Day 8–12 record, the final report and the external evaluation; the figure never repeated or used; the G10 trigger for any figure of the project's own files) are recorded as binding in `research/day-08/acks/H038_ack_v1.md`. Closed on that acknowledgement, as the ruling allows.

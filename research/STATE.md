@@ -21,9 +21,9 @@
   2. the routed LIRF subgroup;
   3. LTFM winter with weather;
   4. the CatBoost iteration budget.
-- **Open incidents:** INC-0004, INC-0009, INC-0010, **INC-0017**, **INC-0018** (Sonnet delegation), **INC-0018 (D7)** (extension request), **INC-0019** (weather), **INC-0020** (divergent post-freeze lineage; duplicate IDs labelled "(D7)"; next free ID INC-0021).
+- **Open incidents:** INC-0004, INC-0009, INC-0010, **INC-0017**, **INC-0018** (Sonnet delegation), **INC-0018 (D7)** (extension request), **INC-0019** (weather), **INC-0021** (run window for H038: start on the owner's go-ahead, at most 30 min). **INC-0020 closed** (X-D08-S03-0001 (D): not a G1–G3 breach; conditions bind Days 8–12). Next free ID INC-0022.
 - **Merged from `origin/day-7` (INC-0020):** `LICENSE` (GPLv3), D7-C15, the first upload record (`genuine-cabbage_v1.parquet`), `docs/reproducibility/HANDOFF_D07.md` (six-day plan).
-- **Sessions:** D08-S01 (cloud) ended. D08-S02 (cloud, governance) recorded the waiver and INC-0019 (end line appended by D08-S03). **D08-S03 (laptop) is open** on `day-8`. Last exchange: **X-D08-S01-0001**. The next envelope cites INC-0020.
+- **Sessions:** D08-S01 (cloud) ended. D08-S02 (cloud, governance) recorded the waiver and INC-0019 (end line appended by D08-S03). **D08-S03 (laptop) is open** on `day-8`. Last exchange: **X-D08-S03-0001** (H038 v1: REVISE; rulings on INC-0020 and G5 (c) known rows; D8-C7 to D8-C10). H038 v2 in preparation; nothing allocated.
 
 ## Days 1–7 state at the freeze (kept as written)
 
