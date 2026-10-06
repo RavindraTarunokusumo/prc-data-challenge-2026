@@ -35,5 +35,6 @@ folds:
 - W1
 - S1c
 - W1c
+- H
 seed: 43
 job_class: CLASS-M

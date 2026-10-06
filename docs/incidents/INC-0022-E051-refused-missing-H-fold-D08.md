@@ -38,3 +38,10 @@ No development-fold score exists for E051 or E052. The look count is unchanged.
 ## Resolution
 
 Open. Closes when the ruling is acknowledged and the queue has run, or been deferred, under it.
+
+## Amendment (2026-10-06T22:50:11Z): the ruling (X-D08-S03-0003, ACCEPT 0.85)
+
+- **The review's share of the error.** The Advisor's v2 review did not check the configs against the runner's `check_config`. It also listed "any H fold" as not authorized, confusing H **prediction** (required of every non-final run) with H **access** (closed by H8). The error is the researcher's and the review's.
+- **Why an amendment and not a v3.** The change is one predicted-only fold, required by the frozen runner. It changes no model, parameter, scored fold, reading or criterion, and both runs were refused before start. A v3 would need new IDs, and with them a new launcher. The envelope purpose `scope_amendment` is not one of the contract's listed purposes. It is recorded here as a deviation of form, ruled acceptable by the Advisor.
+- **Fix applied:** `- H` appended to both configs (ack `H038_ack_v2_A1.md`).
+- **Re-arm:** allowed only by 2026-10-07T00:12:51Z, with the same window arguments. The re-arm time is appended below when it happens.
