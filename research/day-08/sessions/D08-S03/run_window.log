@@ -1,0 +1,9 @@
+2026-10-06T22:40:58Z launcher armed; window 2026-10-06T22:40:51Z to 2026-10-07T00:40:51Z
+2026-10-06T22:40:58Z window open
+2026-10-06T22:40:58Z E051 START (pessimistic 840s)
+refused: E051 must cover all scored folds plus H; missing ['H']
+2026-10-06T22:41:00Z E051 END rc=1 status=ALLOCATED
+2026-10-06T22:41:00Z E051 nothing to commit
+2026-10-06T22:41:01Z pushed
+2026-10-06T22:41:01Z E052 DEFERRED: E051 failed its run or integrity check
+2026-10-06T22:41:01Z queue done; window ends 2026-10-07T00:40:51Z

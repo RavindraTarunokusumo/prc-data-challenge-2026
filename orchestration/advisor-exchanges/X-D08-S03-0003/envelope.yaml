@@ -1,0 +1,34 @@
+schema: advisor-task-envelope-v1
+exchange_id: X-D08-S03-0003
+session: D08-S03
+sender: claude-researcher
+recipient: advisor-subagent
+purpose: scope_amendment
+proposal_ids: [H038]
+proposal_paths:
+  - research/day-08/proposals/H038_v2_scope_A1.md
+proposal_sha256:
+  - a3cc9bc7139dedd24ba00c3bf9719fb99b6efcec16c65f72f9caae960ef02a66
+review_output_dir: research/day-08/advisor/
+review_path_requested: research/day-08/advisor/H038_review_v2_A1.md
+context_paths:
+  - docs/incidents/INC-0022-E051-refused-missing-H-fold-D08.md
+  - docs/incidents/INC-0021-owner-run-window-D08.md
+  - research/day-08/sessions/D08-S03/run_window.log
+  - research/day-08/proposals/H038_v2.md
+  - research/day-08/advisor/H038_review_v2.md
+  - research/day-08/acks/H038_ack_v2.md
+  - research/day-08/advisor/PHASE_OPEN_D08_review_v1.md
+  - experiments/E051/config.yaml
+  - experiments/E052/config.yaml
+  - experiments/E046/manifest.json
+  - scripts/run_experiment.py
+  - src/prc/worker.py
+  - src/prc/data.py
+  - scripts/mixture_check.py
+constraints:
+  - Narrow scope amendment of an accepted proposal (H038 v2), not a new hypothesis. Time-sensitive: the owner's window ends 2026-10-07T00:40:51Z; a short review is sufficient.
+  - Read-only on the owner's laptop. No gate.py allocate, no run, no fit, no holdout script, no read of December 2025 DEP targets, no read of any development fold's validation-month targets.
+  - Envelopes cite INC-0020 instead of the Day 7 files that hold the disclosed figure; none is listed here.
+  - Do not access the challenge's ranking page, the leaderboard or the submission bucket.
+created_utc: 2026-10-06T22:41:58Z
