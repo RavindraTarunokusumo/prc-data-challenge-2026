@@ -525,3 +525,16 @@ ACCEPT ×4 with U1–U10. Raised by the researcher from X-D03-S01-0003 (e) after
 ### FROZEN
 
 Project state FROZEN at the Day 7 freeze commit (P7). Champion E046; submission E050. The owner uploads once.
+
+## Days 8–12 (reopened after FROZEN; INC-0017. Disclosures: INC-0017, INC-0020)
+
+### E051 · H038 v2 · E046 with the LIRF NM-missing subgroup predicted by a convention mixture (p · `d_sched` + (1 − p) · g) · criterion 2 not met; not promotable
+
+- Development mean **294.32** against E046's 314.42: −20.10 s (q95 −2.98), so criterion 1 is met.
+- Only one WIN (R3); S1 TIE (−7.94); W1 −59.72 TIE (one row); R2 +1.39 TIE. Criterion 2 is not met.
+- Known-row reading (ruling (E)): R3's WIN rests on its two known rows, so no WIN carries weight. With the known rows reverted, R1 and S1 would be WINs. That is reported only.
+- Criterion 4 sign test holds; the classifier beats constant p on 5/5 folds (validation AUC 0.84–0.93). The majority-share reading fails on R3 (non-convention day-scale rows).
+- Criterion 8 holds (worst S1 +4,263 s against E033). The integrity check passes on all 8 folds; H was predicted only.
+- First arming refused (no H fold; INC-0022, the researcher's and the review's error); amendment A1.
+
+### E052 · H038 v2 reproduction · byte-identical; criterion 6 PASS

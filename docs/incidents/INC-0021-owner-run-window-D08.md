@@ -3,7 +3,7 @@ schema: incident-v1
 incident_id: INC-0021
 type: owner_decision
 created_utc: 2026-10-06T19:19:47Z
-status: open
+status: closed
 ---
 
 # Day 8: owner sets the run window for H038 (D08-S03)
@@ -47,3 +47,7 @@ The owner, after E051 and E052 were allocated (D08-S03, verbatim):
 ## Go-ahead (2026-10-06T22:40:51Z)
 
 The owner (D08-S03, verbatim): "Run now". The window is **2026-10-06T22:40:51Z to 2026-10-07T00:40:51Z** (START + 2 h). The launcher is armed with these arguments in the next action.
+
+## Closure (2026-10-06T23:13:28Z)
+
+The H038 queue ran in the owner's window: E051 23:03:00–23:06:51Z and E052 23:06:56–23:10:49Z, both COMPLETE with the mixture check PASS on all 8 folds. Results are in `experiments/E051/analysis.md`.

@@ -11,7 +11,8 @@
   - **INC-0020 (disclosed beside them):** the Day 8 records written before the merge of `origin/day-7` stated that no leaderboard figure had been seen. That was wrong: one had been disclosed to the researcher on 2026-10-04 (INC-0018 (D7)). It is not used.
   - **Still binding:** G2–G12, ruling H8 (H closed for Days 8–12), rule 15 (G5), G3 (the owner's target is not a criterion), G7 (at most one new upload, before 2026-10-11T12:00:00Z; no hedge), and G9's agenda notes.
 - **Champion:** E046.
-- **Compute:** the owner's laptop only. Next ID **E051**, allocated on the laptop after confirming that its ledger holds E001–E050. **Cloud sessions:** governance and text only (G6).
+- **Day 8 results so far:** H038 v2 (convention mixture on the LIRF NM-missing subgroup). **E051:** development mean 294.32 against E046's 314.42 (−20.10 s, q95 −2.98). **Criterion 2 is not met:** one WIN (R3), S1 TIE. Under the known-row reading, no WIN has confirmatory weight. **Not promotable; the decision is recorded at the phase close.** E052 is a byte-identical reproduction. Day 8–12 looks: 2. Analysis: `experiments/E051/analysis.md`.
+- **Compute:** the owner's laptop only. Next ID **E053**. **Cloud sessions:** governance and text only (G6).
 - **External weather data approved (INC-0019).**
   - Hosts allowlisted in `config/network.yaml`: `mesonet.agron.iastate.edu` (METAR archive, primary) and `archive-api.open-meteo.com` (CC BY 4.0, fallback).
   - The cloud environment's network policy currently refuses both; the fetch runs on the laptop.
@@ -21,9 +22,9 @@
   2. the routed LIRF subgroup;
   3. LTFM winter with weather;
   4. the CatBoost iteration budget.
-- **Open incidents:** INC-0004, INC-0009, INC-0010, **INC-0017**, **INC-0018** (Sonnet delegation), **INC-0018 (D7)** (extension request), **INC-0019** (weather), **INC-0021** (run window for H038: start on the owner's go-ahead, at most 30 min). **INC-0020 closed** (X-D08-S03-0001 (D): not a G1–G3 breach; conditions bind Days 8–12). Next free ID INC-0022.
+- **Open incidents:** INC-0004, INC-0009, INC-0010, **INC-0017**, **INC-0018** (Sonnet delegation), **INC-0018 (D7)** (extension request), **INC-0019** (weather). **INC-0020, INC-0021, INC-0022 closed** (INC-0022: E051's first arming refused for a missing H fold, a researcher and review error; amendment A1 added H, predicted only). INC-0020 closed (X-D08-S03-0001 (D): not a G1–G3 breach; conditions bind Days 8–12). Next free ID INC-0023.
 - **Merged from `origin/day-7` (INC-0020):** `LICENSE` (GPLv3), D7-C15, the first upload record (`genuine-cabbage_v1.parquet`), `docs/reproducibility/HANDOFF_D07.md` (six-day plan).
-- **Sessions:** D08-S01 (cloud) ended. D08-S02 (cloud, governance) recorded the waiver and INC-0019 (end line appended by D08-S03). **D08-S03 (laptop) is open** on `day-8`. Last exchange: **X-D08-S03-0001** (H038 v1: REVISE; rulings on INC-0020 and G5 (c) known rows; D8-C7 to D8-C10). H038 v2 in preparation; nothing allocated.
+- **Sessions:** D08-S01 (cloud) ended. D08-S02 (cloud, governance) recorded the waiver and INC-0019 (end line appended by D08-S03). **D08-S03 (laptop) is open** on `day-8`. Last exchange: **X-D08-S03-0003** (H038 v2 scope amendment A1: ACCEPT). Earlier: X-D08-S03-0001 (v1 REVISE; rulings on INC-0020 and the G5 (c) known rows) and X-D08-S03-0002 (v2 ACCEPT; rulings (G) and (E)(vi)).
 
 ## Days 1–7 state at the freeze (kept as written)
 

@@ -1,0 +1,205 @@
+{
+ "candidate": "E051",
+ "base": "E046",
+ "known_rows": {
+  "R1": [
+   196123310,
+   196129531
+  ],
+  "R2": [
+   198934338,
+   198939290,
+   198939422,
+   198941714
+  ],
+  "R3": [
+   200297323,
+   200300302
+  ],
+  "S1": [
+   192615553,
+   192615662,
+   192621162,
+   192626268,
+   192628959
+  ],
+  "W1": [
+   183903219
+  ],
+  "S1c": [
+   192615553,
+   192615662,
+   192621162,
+   192626268,
+   192628959
+  ],
+  "W1c": [
+   183903219
+  ]
+ },
+ "frozen": {
+  "fold_delta_rmse": {
+   "R1": -3.875988995883688,
+   "R2": 1.3916182209295869,
+   "R3": -30.375995685169528,
+   "S1": -7.936014771000828,
+   "W1": -59.722181773929094,
+   "S1c": -16.955781521148992,
+   "W1c": -110.3604270848814
+  },
+  "fold_outcome": {
+   "R1": "TIE",
+   "R2": "TIE",
+   "R3": "WIN",
+   "S1": "TIE",
+   "W1": "TIE",
+   "S1c": "WIN",
+   "W1c": "TIE"
+  },
+  "fold_outcome_counted": {
+   "R1": "TIE",
+   "R2": "TIE",
+   "R3": "WIN",
+   "S1": "TIE",
+   "W1": "TIE"
+  },
+  "criterion_1": true,
+  "criterion_2": false,
+  "criterion_3": true,
+  "passes_criteria_1_to_3": false
+ },
+ "reverted": {
+  "fold_delta_rmse": {
+   "R1": -8.09595003363711,
+   "R2": 3.896935000630606,
+   "R3": -2.4216294277652537,
+   "S1": -11.496416069001043,
+   "W1": -0.451305584099714,
+   "S1c": -8.637493340467927,
+   "W1c": 1.6306627531953382
+  },
+  "fold_delta_q10_q90": {
+   "R1": [
+    -13.663384175519948,
+    -1.970512507655533
+   ],
+   "R2": [
+    -0.07986366808184468,
+    8.076851529932194
+   ],
+   "R3": [
+    -5.918423453876988,
+    0.14919111780068664
+   ],
+   "S1": [
+    -21.389223206752398,
+    -0.6734605388652762
+   ],
+   "W1": [
+    -3.9201117246012585,
+    3.0201921182643288
+   ],
+   "S1c": [
+    -17.79281078873016,
+    -0.47266152820368335
+   ],
+   "W1c": [
+    -0.6803722645666255,
+    4.9117212735274585
+   ]
+  },
+  "fold_outcome": {
+   "R1": "WIN",
+   "R2": "TIE",
+   "R3": "TIE",
+   "S1": "WIN",
+   "W1": "TIE",
+   "S1c": "WIN",
+   "W1c": "TIE"
+  },
+  "fold_outcome_counted": {
+   "R1": "WIN",
+   "R2": "TIE",
+   "R3": "TIE",
+   "S1": "WIN",
+   "W1": "TIE"
+  }
+ },
+ "known_row_shares": {
+  "R1": {
+   "sse_change_all_rows": -388436199.37348914,
+   "sse_change_known_rows": 416623132.1557664,
+   "known_share_of_sse_change": -1.0725651544004913,
+   "known_rows": 2
+  },
+  "R2": {
+   "sse_change_all_rows": 123523311.93301342,
+   "sse_change_known_rows": -224190565.65576753,
+   "known_share_of_sse_change": -1.8149656299480204,
+   "known_rows": 4
+  },
+  "R3": {
+   "sse_change_all_rows": -2753837725.4724445,
+   "sse_change_known_rows": -2523307707.5328283,
+   "known_share_of_sse_change": 0.9162877261040983,
+   "known_rows": 2
+  },
+  "S1": {
+   "sse_change_all_rows": -1242486093.7484398,
+   "sse_change_known_rows": 549620787.7891856,
+   "known_share_of_sse_change": -0.4423556855522157,
+   "known_rows": 5
+  },
+  "W1": {
+   "sse_change_all_rows": -5506254429.340616,
+   "sse_change_known_rows": -5460800315.243044,
+   "known_share_of_sse_change": 0.9917450029451299,
+   "known_rows": 1
+  },
+  "S1c": {
+   "sse_change_all_rows": -2736257362.2284994,
+   "sse_change_known_rows": -1328670075.614264,
+   "known_share_of_sse_change": 0.4855793515461392,
+   "known_rows": 5
+  },
+  "W1c": {
+   "sse_change_all_rows": -12029132059.382164,
+   "sse_change_known_rows": -12233120311.286564,
+   "known_share_of_sse_change": 1.0169578528939083,
+   "known_rows": 1
+  }
+ },
+ "weight": {
+  "R1": {
+   "frozen": "TIE",
+   "reverted": "WIN",
+   "confirmatory_weight": false
+  },
+  "R2": {
+   "frozen": "TIE",
+   "reverted": "TIE",
+   "confirmatory_weight": false
+  },
+  "R3": {
+   "frozen": "WIN",
+   "reverted": "TIE",
+   "confirmatory_weight": false
+  },
+  "S1": {
+   "frozen": "TIE",
+   "reverted": "WIN",
+   "confirmatory_weight": false
+  },
+  "W1": {
+   "frozen": "TIE",
+   "reverted": "TIE",
+   "confirmatory_weight": false
+  }
+ },
+ "frozen_wins": [
+  "R3"
+ ],
+ "weighted_wins": [],
+ "g5_consequence": false,
+ "note": "g5_consequence is true when criteria 1-3 pass as frozen but S1's WIN or the third WIN lacks confirmatory weight (INCONCLUSIVE, never uploaded)"
+}

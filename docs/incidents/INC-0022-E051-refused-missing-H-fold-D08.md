@@ -3,7 +3,7 @@ schema: incident-v1
 incident_id: INC-0022
 type: researcher_error
 created_utc: 2026-10-06T22:41:38Z
-status: open
+status: closed
 ---
 
 # Day 8: E051 refused by the runner before it started (no H fold in the config); E052 deferred
@@ -46,3 +46,7 @@ Open. Closes when the ruling is acknowledged and the queue has run, or been defe
 - **Fix applied:** `- H` appended to both configs (ack `H038_ack_v2_A1.md`).
 - **Re-arm:** allowed only by 2026-10-07T00:12:51Z, with the same window arguments. The re-arm time is appended below when it happens.
 - **Re-armed at 2026-10-06T23:02:52Z** on the owner's "Yes" (D08-S03, verbatim, in answer to "Shall I relaunch now?"), before the 2026-10-07T00:12:51Z limit, with the same window arguments.
+
+## Closure (2026-10-06T23:13:28Z)
+
+The H038 queue ran in the owner's window: E051 23:03:00–23:06:51Z and E052 23:06:56–23:10:49Z, both COMPLETE with the mixture check PASS on all 8 folds. Results are in `experiments/E051/analysis.md`.
