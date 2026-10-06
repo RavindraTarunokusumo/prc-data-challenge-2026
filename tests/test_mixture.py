@@ -38,6 +38,10 @@ def test_mixture_combines_its_components_on_the_subgroup_only():
     p, g, c = (out[k].to_numpy() for k in ("p_conv", "g_normal", "conv_component"))
     assert ((p > 0) & (p < 1)).all() and (c >= 0).all()
     assert np.allclose(out["pred"].to_numpy(), p * c + (1 - p) * g)
+    tr = feats.filter((pl.col("role") == "train") & route_mask())
+    rate = tr.select(convention_label(120).mean())[0, 0]
+    assert np.allclose(out["p_train_rate"].to_numpy(), rate)
+    assert np.allclose(c, np.maximum(out["d_sched"].to_numpy(), 0))
     again = convention_mixture(feats, PARAMS, 42)
     assert np.array_equal(out["pred"].to_numpy(), again["pred"].to_numpy())
 

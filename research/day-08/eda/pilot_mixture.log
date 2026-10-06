@@ -1,0 +1,2 @@
+P1 {"subgroup_rows": 185, "convention_rate_val": 0.4918918918918919, "classifier_auc": 0.6670563479074118, "mixture_minus_direct_rmse": -1242.2534551188382, "seconds": 75.1}
+P2 {"subgroup_rows": 99, "convention_rate_val": 0.46464646464646464, "classifier_auc": 0.677194421657096, "mixture_minus_direct_rmse": -749.1640930143349, "seconds": 72.2}

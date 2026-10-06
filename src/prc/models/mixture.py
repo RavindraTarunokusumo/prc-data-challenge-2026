@@ -17,7 +17,8 @@ review (c); label T). Under squared error the best point forecast is the conditi
 
 Both fits use the fold's training rows only, with fixed a-priori parameters. A subgroup row
 with `d_sched` null takes g. Returns the subgroup's validation rows only, with the
-components beside the prediction (diagnostics; the worker stores them apart).
+components beside the prediction (diagnostics; the worker stores them apart): p, g, the
+convention component, the raw `d_sched` and the training subgroup's convention rate.
 """
 
 from __future__ import annotations
@@ -29,7 +30,8 @@ from prc import curves
 from prc.models import gbm
 from prc.models.routed import ROUTE_AIRPORT, route_mask
 
-COMPONENT_COLUMNS = ["MVT_ID_mvt", "pred", "p_conv", "g_normal", "conv_component"]
+COMPONENT_COLUMNS = ["MVT_ID_mvt", "pred", "p_conv", "g_normal", "conv_component", "d_sched",
+                     "p_train_rate"]
 
 
 def convention_label(tolerance_s: float) -> pl.Expr:
@@ -45,7 +47,7 @@ def convention_mixture(feats: pl.DataFrame, params: dict, seed: int) -> pl.DataF
     va_sub = feats.filter((pl.col("role") == "val") & route_mask())
     if va_sub.height == 0:
         return pl.DataFrame(schema={c: pl.Float64 for c in COMPONENT_COLUMNS}
-                            | {"MVT_ID_mvt": pl.Int64})
+                            | {"MVT_ID_mvt": pl.Int64})  # no subgroup row in this fold
     tr_sub = tr.filter(route_mask()).with_columns(
         convention_label(tol).cast(pl.Float64).alias("y"))
     tr_normal = tr.filter((pl.col("ADEP_mvt") == ROUTE_AIRPORT) & ~convention_label(tol))
@@ -66,4 +68,7 @@ def convention_mixture(feats: pl.DataFrame, params: dict, seed: int) -> pl.DataF
     pred = np.where(out["conv_component"].is_null().to_numpy(), out["g_normal"].to_numpy(),
                     out["p_conv"].to_numpy() * out["conv_component"].fill_null(0.0).to_numpy()
                     + (1.0 - out["p_conv"].to_numpy()) * out["g_normal"].to_numpy())
-    return out.with_columns(pl.Series("pred", pred)).select(COMPONENT_COLUMNS)
+    # p_train_rate: the training subgroup's convention rate (the constant-p ablation)
+    return out.with_columns(pl.Series("pred", pred), pl.col("d_sched").cast(pl.Float64),
+                            pl.lit(float(tr_sub["y"].mean())).alias("p_train_rate")
+                            ).select(COMPONENT_COLUMNS)
