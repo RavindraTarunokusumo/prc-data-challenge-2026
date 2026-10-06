@@ -1,0 +1,48 @@
+schema: advisor-task-envelope-v1
+exchange_id: X-D08-S03-0001
+session: D08-S03
+sender: claude-researcher
+recipient: advisor-subagent
+purpose: proposal_review
+proposal_ids: [H038]
+proposal_paths:
+  - research/day-08/proposals/H038_v1.md
+proposal_sha256:
+  - 36747a9357e54fd36618908ae2eaa4daeccecbbe6d3230b1b22ec4244c3d68ad
+launcher_path: research/day-08/sessions/D08-S03/run_window.sh
+launcher_sha256: 903b5a48d9c1b56faf7130553f26652f3986b6b7fe396acdd6493b39bb8a542a
+params_path: research/day-08/proposals/H038_params.yaml
+params_sha256: b22c02c1f79976f268fe62d79fc718a08c7fa5a60691dc71c42b1f2c5091f16c
+review_output_dir: research/day-08/advisor/
+context_paths:
+  - docs/incidents/INC-0020-divergent-post-freeze-lineage-D08.md
+  - docs/incidents/INC-0018-owner-post-freeze-extension.md
+  - docs/incidents/INC-0017-owner-reopen-after-freeze-D08.md
+  - research/day-08/advisor/PHASE_OPEN_D08_review_v1.md
+  - research/day-08/acks/PHASE_OPEN_D08_ack_v1.md
+  - research/day-08/sessions/D08-S03/SESSION_START.md
+  - research/STATE.md
+  - docs/reproducibility/HANDOFF_D07.md
+  - research/day-08/eda/pilot_mixture.json
+  - scripts/pilot_mixture_D08.py
+  - src/prc/models/mixture.py
+  - src/prc/blending.py
+  - src/prc/worker.py
+  - src/prc/curves.py
+  - tests/test_mixture.py
+  - scripts/mixture_check.py
+  - scripts/mixture_analysis.py
+  - research/day-07/sessions/D07-S01/run_window_2.sh
+  - research/day-07/proposals/H035_v1.md
+  - research/day-07/advisor/H035_review_v1.md
+  - experiments/E045/config.yaml
+  - experiments/E046/config.yaml
+  - experiments/E046/metrics.json
+  - experiments/E046/analysis.md
+  - research/day-01/advisor/PHASE_CLOSE_D01_review_v1.md
+  - config/splits.yaml
+constraints:
+  - Hypothesis review with the advisor-review-v1 schema. Rule first, before ACCEPT, on G5 (c) confirmatory weight per development fold given the stated footprint (Day 1 (c) read every validation month's LIRF tail rows at segment level and listed four rows), and on INC-0020 under G10.
+  - Runs on the owner's laptop, where stored predictions E025-E050 and runtime/ledger.sqlite (50 allocated) are present. Read-only. No gate.py allocate, no run, no fit on validation months, no holdout script, no read of December 2025 DEP targets, no read of any development fold's validation-month targets.
+  - Do not access the challenge's ranking page, the leaderboard or the submission bucket.
+created_utc: 2026-10-06T19:17:17Z
