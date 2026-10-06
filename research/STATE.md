@@ -1,13 +1,14 @@
 # Research State
 
-*Updated 2026-10-05T14:15:43Z (measured with `date -u`; D08-S02, cloud, governance only).*
+*Updated 2026-10-06T18:57:28Z (measured with `date -u`; D08-S03, owner's laptop).*
 
 ## Days 8–12 (reopening after FROZEN; INC-0017)
 
-*Section updated 2026-10-05T14:15:43Z (D08-S02, cloud, governance only).*
+*Section updated 2026-10-06T18:57:28Z (D08-S03, laptop).*
 
 - **Phase: OPEN (Days 8–12).** The `reopened` event was written at 2026-10-05T14:15Z on the owner's authority: **the owner waived G1 (a)–(c)** ("Ignore the 4 items"; INC-0017 amendment).
   - **Disclosed in every Day 8–12 record:** leaderboard isolation rests on no recorded commitment; what was known at reopening is not stated; E050's upload is unverified.
+  - **INC-0020 (disclosed beside them):** the Day 8 records written before the merge of `origin/day-7` stated that no leaderboard figure had been seen. That was wrong: one had been disclosed to the researcher on 2026-10-04 (INC-0018 (D7)). It is not used.
   - **Still binding:** G2–G12, ruling H8 (H closed for Days 8–12), rule 15 (G5), G3 (the owner's target is not a criterion), G7 (at most one new upload, before 2026-10-11T12:00:00Z; no hedge), and G9's agenda notes.
 - **Champion:** E046.
 - **Compute:** the owner's laptop only. Next ID **E051**, allocated on the laptop after confirming that its ledger holds E001–E050. **Cloud sessions:** governance and text only (G6).
@@ -20,8 +21,9 @@
   2. the routed LIRF subgroup;
   3. LTFM winter with weather;
   4. the CatBoost iteration budget.
-- **Open incidents:** INC-0004, INC-0009, INC-0010, **INC-0017**, **INC-0018** (Sonnet delegation), **INC-0019** (weather).
-- **Sessions:** D08-S01 (cloud) ended. D08-S02 (cloud, governance) recorded the waiver and INC-0019. Last exchange: **X-D08-S01-0001**.
+- **Open incidents:** INC-0004, INC-0009, INC-0010, **INC-0017**, **INC-0018** (Sonnet delegation), **INC-0018 (D7)** (extension request), **INC-0019** (weather), **INC-0020** (divergent post-freeze lineage; duplicate IDs labelled "(D7)"; next free ID INC-0021).
+- **Merged from `origin/day-7` (INC-0020):** `LICENSE` (GPLv3), D7-C15, the first upload record (`genuine-cabbage_v1.parquet`), `docs/reproducibility/HANDOFF_D07.md` (six-day plan).
+- **Sessions:** D08-S01 (cloud) ended. D08-S02 (cloud, governance) recorded the waiver and INC-0019 (end line appended by D08-S03). **D08-S03 (laptop) is open** on `day-8`. Last exchange: **X-D08-S01-0001**. The next envelope cites INC-0020.
 
 ## Days 1–7 state at the freeze (kept as written)
 
