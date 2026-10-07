@@ -1,32 +1,46 @@
 # Research State
 
-*Updated 2026-10-06T18:57:28Z (measured with `date -u`; D08-S03, owner's laptop).*
+*Updated 2026-10-07T22:12:57Z (measured with `date -u`; D08-S03, owner's laptop; Day 8 phase close).*
 
 ## Days 8–12 (reopening after FROZEN; INC-0017)
 
-*Section updated 2026-10-06T18:57:28Z (D08-S03, laptop).*
+*Section updated 2026-10-07T22:12:57Z (D08-S03, laptop; Day 8 phase close X-D08-S03-0004).*
 
 - **Phase: OPEN (Days 8–12).** The `reopened` event was written at 2026-10-05T14:15Z on the owner's authority: **the owner waived G1 (a)–(c)** ("Ignore the 4 items"; INC-0017 amendment).
   - **Disclosed in every Day 8–12 record:** leaderboard isolation rests on no recorded commitment; what was known at reopening is not stated; E050's upload is unverified.
   - **INC-0020 (disclosed beside them):** the Day 8 records written before the merge of `origin/day-7` stated that no leaderboard figure had been seen. That was wrong: one had been disclosed to the researcher on 2026-10-04 (INC-0018 (D7)). It is not used.
   - **Still binding:** G2–G12, ruling H8 (H closed for Days 8–12), rule 15 (G5), G3 (the owner's target is not a criterion), G7 (at most one new upload, before 2026-10-11T12:00:00Z; no hedge), and G9's agenda notes.
 - **Champion:** E046.
-- **Day 8 results so far:** H038 v2 (convention mixture on the LIRF NM-missing subgroup). **E051:** development mean 294.32 against E046's 314.42 (−20.10 s, q95 −2.98). **Criterion 2 is not met:** one WIN (R3), S1 TIE. Under the known-row reading, no WIN has confirmatory weight. **Not promotable; the decision is recorded at the phase close.** E052 is a byte-identical reproduction. Day 8–12 looks: 2. Analysis: `experiments/E051/analysis.md`.
+- **Day 8 is CLOSED (X-D08-S03-0004 ACCEPT 0.85).** `research/day-08/DAY_SUMMARY.md` (FINAL).
+  - **H038 v2: REJECT** (E051, E052). Rule 10's list gains E051's configuration.
+  - Weather: not pursued (INC-0019 closed). Item 1: no lead.
+  - H: closed (H8). No Day 8 upload; **E050 stands.**
+  - Corrections D8-C14 to D8-C22 are in the acknowledgement.
+  - Day 8–12 looks: 2.
+- **Owner decision pending: continue (Days 9–12) or refreeze.** This is the only question put to the owner (Q3).
+  - **If the owner refreezes (Q6, Branch A),** X-D08-S03-0004 is the last Day 8–12 phase close. The records needed:
+    - a `frozen` event;
+    - STATE "Phase: FROZEN";
+    - the FINAL_REPORT Days 8–12 section (G8);
+    - INC-0017 and INC-0018 (D8) closed.
+  - **If Days 9–12 continue (Q5, Branch B):**
+    - no Day 8-motivated candidate: no LIRF NM-missing subgroup change, no weather, no non-LIRF convention candidate;
+    - any other candidate is designed on design months only, and either leaves E046's subgroup unchanged or carries the extended known-row reading;
+    - its SUBMIT path must finish before 2026-10-11T12:00:00Z;
+    - Day 9 branches from `main` after a content-neutral merge of `day-8`.
 - **Compute:** the owner's laptop only. Next ID **E053**. **Cloud sessions:** governance and text only (G6).
-- **External weather data approved (INC-0019).**
-  - Hosts allowlisted in `config/network.yaml`: `mesonet.agron.iastate.edu` (METAR archive, primary) and `archive-api.open-meteo.com` (CC BY 4.0, fallback).
-  - The cloud environment's network policy currently refuses both; the fetch runs on the laptop.
-  - Use needs its own proposal: DATA_POLICY rule 7, and only observations issued before the anchor time.
-  - **Weather fetched for all ten airports (by the owner). The design pilot failed its pre-registered rule (+1.43 / −0.48 s; needed ≤ −1.0 s in both): agenda item 3 is not pursued.** `research/day-08/eda/weather_LTFM_coverage.md`.
-- **Research agenda (non-binding; each item needs its own proposal and G9's notes):**
-  - **Item 1 looked at on design months only: no recording convention outside LIRF (no signature met the pre-set rule); closed with no lead.** `research/day-08/eda/conventions.md`. Item 3: not pursued (weather pilot).
-  1. recording conventions in the tail beyond LIRF;
-  2. the routed LIRF subgroup;
-  3. LTFM winter with weather;
-  4. the CatBoost iteration budget.
-- **Open incidents:** INC-0004, INC-0009, INC-0010, **INC-0017**, **INC-0018** (Sonnet delegation), **INC-0018 (D7)** (extension request), **INC-0019** (weather). **INC-0020, INC-0021, INC-0022 closed** (INC-0022: E051's first arming refused for a missing H fold, a researcher and review error; amendment A1 added H, predicted only). INC-0020 closed (X-D08-S03-0001 (D): not a G1–G3 breach; conditions bind Days 8–12). Next free ID INC-0023.
+- **External weather data (INC-0019, closed).**
+  - The owner fetched all ten airports, and the bronze files and manifests are kept.
+  - The design pilot failed its pre-registered rule (+1.43 / −0.48 s). No weather proposal is made in Days 8–12.
+  - The IEM licence fit is unsettled.
+- **Research agenda after Day 8:**
+  1. **Recording conventions beyond LIRF:** no lead (`research/day-08/eda/conventions.md`; D8-C19).
+  2. **The routed LIRF subgroup:** H038 v2 REJECT. Any further subgroup candidate carries G5's consequence (Q5 B1 (a)).
+  3. **Weather:** not pursued (D8-C20).
+  4. **The CatBoost iteration budget:** not attempted. If proposed, Q5 B3 applies.
+- **Open incidents:** INC-0004, INC-0009, INC-0010, **INC-0017**, **INC-0018** (Sonnet delegation), **INC-0023** (the owner's choices among research options; Q3). **Closed at the Day 8 phase close:** INC-0019 (weather) and INC-0018 (D7) (its own condition was met; the file is unedited). **INC-0020, INC-0021, INC-0022 closed** (INC-0022: E051's first arming refused for a missing H fold, a researcher and review error; amendment A1 added H, predicted only). INC-0020 closed (X-D08-S03-0001 (D): not a G1–G3 breach; conditions bind Days 8–12). Next free ID INC-0024.
 - **Merged from `origin/day-7` (INC-0020):** `LICENSE` (GPLv3), D7-C15, the first upload record (`genuine-cabbage_v1.parquet`), `docs/reproducibility/HANDOFF_D07.md` (six-day plan).
-- **Sessions:** D08-S01 (cloud) ended. D08-S02 (cloud, governance) recorded the waiver and INC-0019 (end line appended by D08-S03). **D08-S03 (laptop) is open** on `day-8`. Last exchange: **X-D08-S03-0003** (H038 v2 scope amendment A1: ACCEPT). Earlier: X-D08-S03-0001 (v1 REVISE; rulings on INC-0020 and the G5 (c) known rows) and X-D08-S03-0002 (v2 ACCEPT; rulings (G) and (E)(vi)).
+- **Sessions:** D08-S01 (cloud) ended. D08-S02 (cloud, governance) recorded the waiver and INC-0019 (end line appended by D08-S03). **D08-S03 (laptop) is open** on `day-8`. Last exchange: **X-D08-S03-0004** (the Day 8 phase close: ACCEPT 0.85). Before it, X-D08-S03-0003 (H038 v2 scope amendment A1: ACCEPT). Earlier: X-D08-S03-0001 (v1 REVISE; rulings on INC-0020 and the G5 (c) known rows) and X-D08-S03-0002 (v2 ACCEPT; rulings (G) and (E)(vi)).
 
 ## Days 1–7 state at the freeze (kept as written)
 
@@ -161,7 +175,7 @@
   - **H6:** the Day 6 holdout closed unused ("0 of 1, closed unused"; not a TIE); no carry-over; no substitute comparison; no `holdout_check.py` with E035–E041 as NEW in any phase; H does not test the SUBMIT procedure.
   - **Rule L v2** (X-D05-S04-0002): laptop instances, the route-integrity reference, the boundary-disclosure table, and the environment binding.
   - **Hand-off base ruling** (X-D04-S02-0001 (e)): E023 (now E029) is the matched reference for `route_train_exclude` candidates on FS2. Rule 10 covers backend-only re-draws.
-- **Rule 10 now also covers** E030–E041's configurations (and E033's): no unchanged re-submission as a candidate. **E031 alone, any other weight or any other component** is a candidate only through a new proposal.
+- **Rule 10 now also covers** E051's configuration (X-D08-S03-0004 Q1), and E030–E041's configurations (and E033's): no unchanged re-submission as a candidate. **E031 alone, any other weight or any other component** is a candidate only through a new proposal.
 - **Known leakage hazards:**
   - P/T/F labels. `MVT − AOBT_3` and `d_sched` are T.
   - The hour-resolution schedule-delay proxy is T.

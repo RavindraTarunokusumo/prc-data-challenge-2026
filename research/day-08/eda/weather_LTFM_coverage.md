@@ -73,3 +73,17 @@ Segment readings (reported only; the rule says they do not override it):
 - **LIRF:** +8.95 s and +2.02 s.
 - **LTFM:** +2.41 s and +1.68 s.
 - **Reading:** the weather columns help the ordinary rows a little, and the trees spend them on the few hundred tail rows, where they lose more. These readings are post hoc. A restricted weather candidate (bulk or NM-present only) would choose its population after seeing them, and would need its own proposal stating that selection (rule 10).
+
+## Corrections (2026-10-07T22:12:16Z; X-D08-S03-0004)
+
+- **D8-C17.** Consequence 1's "No development fold can learn a snow or freezing effect from its training months" is wrong as stated.
+  - R1–R3, S1 and S1c train on February and March 2025 (270 LTFM snow reports).
+  - W1 and W1c, the only folds whose validation month has snow, have 2 and 0 in training.
+  - So **no fold can both learn and score a snow effect.** The consequence for criterion 2 is unchanged.
+- **D8-C20.** The pilot section's restricted-candidate sentence is corrected by the review's finding 2. No implementable or oracle restriction reaches −1.0 s in both pilots:
+  - bulk (oracle): −0.91 / −0.80 s;
+  - NM-present: +0.17 / −0.63 s;
+  - EHAM only: −0.61 / −0.36 s;
+  - the four in-sample airports: −1.28 / −0.59 s.
+
+  **Weather is not a lead.**

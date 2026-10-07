@@ -3,7 +3,7 @@ schema: incident-v1
 incident_id: INC-0019
 type: owner_decision
 created_utc: 2026-10-05T14:15:21Z
-status: open
+status: closed
 ---
 
 # Day 8: owner approves external weather data (agenda item 3, G9)
@@ -70,3 +70,26 @@ Open. Closes when the weather proposal is decided, or at the refreeze.
 - **The weather design pilot did not meet its pre-registered rule** (+1.43 s and −0.48 s; it needed ≤ −1.0 s in both). See `research/day-08/eda/weather_LTFM_coverage.md`.
 - **Agenda item 3 is not pursued in Days 8–12** on the researcher's rule. Nothing was allocated.
 - This incident stays open until the owner confirms or overrides that, or until the refreeze.
+
+## Closure (2026-10-07T22:11:35Z, D08-S03; appended; X-D08-S03-0004 Q4)
+
+- **The owner's words.** These are verbatim (INC-0023, exchange 3). The chat UTC was not measured; the reply came between 21:34:39Z and 21:41:44Z on 2026-10-07.
+  > Option 1, go ahead with the recording quirks look
+
+  Option 1 began "**Accept dropping weather.**" **The researcher reads this as the owner accepting that weather is not pursued in Days 8–12.**
+- **Outcome.**
+  - Weather was tested on design months only (2025-01, 04, 05, 06).
+  - The pre-registered rule was not met (+1.43 / −0.48 s).
+  - No weather proposal is made in Days 8–12 (X-D08-S03-0004 Q5 B1 (b)).
+  - X-D08-S03-0004 finding 2: no implementable or oracle restriction reaches −1.0 s in both pilots.
+- **Data kept.**
+  - The bronze files for the ten airports (git-ignored) and their tracked manifests are kept.
+  - `data/processed/weather_reports.parquet` rebuilds byte for byte (SHA-256 `bf5c256d…6314`; verified by the Advisor).
+- **The owner's network change.** The owner changed something on the owner's side between the failed and the successful fetch, and it is not recorded. It does not affect integrity: every month file's SHA-256 was verified against its manifest at build time.
+- **The IEM licence fit is unsettled.** Any later use of this data needs:
+  - the licence settled;
+  - a new owner decision recorded as an incident;
+  - a reviewed proposal.
+- **Reading of §3.** "Any use needs its own H proposal" was read as covering experiments, not design pilots, as with H038's pilot.
+
+**Status: closed.**

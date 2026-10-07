@@ -145,3 +145,14 @@ The researcher's misses:
 - With the known rows removed, R1 and S1 look better (both WINs). Under the frozen rules, that cannot be credited.
 - **No further variant is proposed here.** Any follow-up is a new proposal at the phase close's discretion.
 - **The champion stays E046.**
+
+## Corrections appended at the Day 8 phase close (2026-10-07T22:12:16Z; X-D08-S03-0004)
+
+- **Decision: REJECT** (H038 v2's falsification criterion; precedent E011, E023, E024). E052: REJECT, as the reproduction.
+- **D8-C18.** § Ruling (E)'s "On R1, R2 and S1, the known rows go against the candidate" is wrong for R2.
+  - On R2 the known rows favour the candidate: the fold's SSE change is +1.24e8 s², the known rows' −2.24e8 s². Reverting them moves R2 to +3.90 s, with q10 −0.08 s.
+  - The reverted computation fails criterion 2 by itself (2 WINs). Its R1 and S1 WINs come from deleting the candidate's losses on known rows. **No computation on record passes H038 v2.**
+- **D8-C21.**
+  - `range_check.py E051` was pre-registered, and its output was never recorded. The rule 12 counts above come from `mixture_analysis.py`. By the mixture check, the other rule 7 cells equal `range_check_E046.json`.
+  - Rule 15 (b), the mechanism-population ΔRMSE (subgroup RMSE, E051 minus E046), with spread 0: R1 −237.8, R2 +177.5, R3 −2,619.0, S1 −315.1, W1 −6,510.1, S1c −669.7, W1c −9,586.4 s.
+- **The review's weakest-assumption note.** E046 stands by the frozen rules' asymmetry, not because it was shown to be the better subgroup predictor. This record does not imply that E051 is the worse one.

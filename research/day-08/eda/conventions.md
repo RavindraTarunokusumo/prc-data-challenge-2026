@@ -35,3 +35,11 @@ Notes:
 - **Hour shifts are rare.** All shift signatures together cover 0–19 tail rows per airport. EDDM's 5 rows against a bulk share of 0.000 are below the 30-row floor.
 - **Round-hour and repeated block times are absent** (0–1 tail rows outside LIRF).
 - **Agenda item 1 is closed with no lead.** The non-LIRF tail looks like real long taxi-outs or unrecorded causes, not a recording convention a model can decode. No proposal follows.
+
+## Corrections (2026-10-07T22:12:16Z; X-D08-S03-0004, D8-C19)
+
+- The look tested **18** signatures, not 15.
+- The ratio test is vacuous for the hour- and day-shift signatures, because such a row is in the tail by construction. Only the 30-row floor applied to them.
+- Pooled across the nine airports, "block 1 h before AOBT_3" covers 30 of 554 non-LIRF tail rows. Its oracle stake is about 0.8 s of all-rows RMSE.
+- The last bullet's second sentence reads: **"No tested signature explains the non-LIRF tail; the look does not show what those rows are."**
+- The pre-registration commit is `a37f95e`.

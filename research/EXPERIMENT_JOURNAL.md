@@ -538,3 +538,18 @@ Project state FROZEN at the Day 7 freeze commit (P7). Champion E046; submission 
 - First arming refused (no H fold; INC-0022, the researcher's and the review's error); amendment A1.
 
 ### E052 · H038 v2 reproduction · byte-identical; criterion 6 PASS
+
+### Design-month analyses (no E###): weather pilot (rule not met) and item 1 conventions look (no finding)
+
+- **Weather** (INC-0019): ten airports, FS2 against FS2 plus 16 METAR columns, design months only.
+  - +1.43 s (June) and −0.48 s (May). The pre-registered rule needed ≤ −1.0 s in both. Not pursued.
+  - No restricted variant reaches −1.0 s in both pilots (X-D08-S03-0004 finding 2).
+- **Item 1:** 18 recording signatures at the nine non-LIRF airports, design months only. None meets the pre-set rule (D8-C19).
+
+### X-D08-S03-0004 · Day 8 phase close · ACCEPT (0.85); E046 remains champion; H closed (H8); no Day 8 upload
+
+- **H038 v2: REJECT** (E051; E052 as the reproduction).
+- **Appended correction to the E051 entry above (D8-C18).** "With the known rows reverted, R1 and S1 would be WINs" is read with this: on R2 the known rows favour the candidate, and the reverted computation fails criterion 2 by itself. No computation on record passes H038 v2.
+- **Q5:** no Day 8-motivated candidate in Days 9–12.
+- **Q6:** a refreeze here would make this review the last Day 8–12 phase close (G7: no new upload; E050 stands).
+- The owner's branch decision is pending.
