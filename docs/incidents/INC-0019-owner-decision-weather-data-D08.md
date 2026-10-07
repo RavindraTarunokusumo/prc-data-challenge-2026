@@ -3,7 +3,7 @@ schema: incident-v1
 incident_id: INC-0019
 type: owner_decision
 created_utc: 2026-10-05T14:15:21Z
-status: open
+status: closed
 ---
 
 # Day 8: owner approves external weather data (agenda item 3, G9)
@@ -48,3 +48,48 @@ status: open
 ## Resolution
 
 Open. Closes when the weather proposal is decided, or at the refreeze.
+
+## Amendment (2026-10-07T18:50:07Z, D08-S03, laptop; appended)
+
+- **The laptop session cannot reach either weather host either.** `scripts/fetch_weather.py` (commit 930b788) has not run.
+  - `mesonet.agron.iastate.edu` and `archive-api.open-meteo.com` resolve, and TCP connects. The connection is then reset during the TLS handshake, after the server hello. `api.wandb.ai` behaves the same. `pypi.org` and `arxiv.org` answer 200 from the same shell.
+  - No proxy variable is set, and no project or user Claude Code settings file configures the sandbox's network.
+  - The researcher asked to run one probe outside the Claude Code sandbox. The harness refused it. The researcher does not pursue the fetch by any other route.
+- **Owner decision needed:** (a) the owner runs the fetch from their own terminal; (b) the owner permits these hosts for the session; or (c) agenda item 3 is dropped for Days 8–12.
+- No weather data exists in the repository. Nothing has been allocated for weather.
+
+## Correction (2026-10-07T19:21:12Z, D08-S03; appended)
+
+- **The cause is not the Claude Code sandbox.** The session's shell runs without one: there is no bubblewrap process and no proxy, and PID 1 is the host's systemd. Commit 930b788's message ("the session sandbox resets connections") and the amendment above were wrong to point to the sandbox. This was the researcher's error.
+- The reset happens in the network path between the laptop and the hosts: in WSL, Windows, a security product, or the local network. A Claude Code permission change does not affect it.
+- The owner reports that the fetch script also fails when the owner runs it.
+
+## Amendment (2026-10-07T21:34:39Z, D08-S03; appended)
+
+- **The owner ran the fetch** for all ten airports from the owner's terminal: 19 months each, 277,489 reports. The manifests are tracked and every hash was verified.
+- **The weather design pilot did not meet its pre-registered rule** (+1.43 s and −0.48 s; it needed ≤ −1.0 s in both). See `research/day-08/eda/weather_LTFM_coverage.md`.
+- **Agenda item 3 is not pursued in Days 8–12** on the researcher's rule. Nothing was allocated.
+- This incident stays open until the owner confirms or overrides that, or until the refreeze.
+
+## Closure (2026-10-07T22:11:35Z, D08-S03; appended; X-D08-S03-0004 Q4)
+
+- **The owner's words.** These are verbatim (INC-0023, exchange 3). The chat UTC was not measured; the reply came between 21:34:39Z and 21:41:44Z on 2026-10-07.
+  > Option 1, go ahead with the recording quirks look
+
+  Option 1 began "**Accept dropping weather.**" **The researcher reads this as the owner accepting that weather is not pursued in Days 8–12.**
+- **Outcome.**
+  - Weather was tested on design months only (2025-01, 04, 05, 06).
+  - The pre-registered rule was not met (+1.43 / −0.48 s).
+  - No weather proposal is made in Days 8–12 (X-D08-S03-0004 Q5 B1 (b)).
+  - X-D08-S03-0004 finding 2: no implementable or oracle restriction reaches −1.0 s in both pilots.
+- **Data kept.**
+  - The bronze files for the ten airports (git-ignored) and their tracked manifests are kept.
+  - `data/processed/weather_reports.parquet` rebuilds byte for byte (SHA-256 `bf5c256d…6314`; verified by the Advisor).
+- **The owner's network change.** The owner changed something on the owner's side between the failed and the successful fetch, and it is not recorded. It does not affect integrity: every month file's SHA-256 was verified against its manifest at build time.
+- **The IEM licence fit is unsettled.** Any later use of this data needs:
+  - the licence settled;
+  - a new owner decision recorded as an incident;
+  - a reviewed proposal.
+- **Reading of §3.** "Any use needs its own H proposal" was read as covering experiments, not design pilots, as with H038's pilot.
+
+**Status: closed.**

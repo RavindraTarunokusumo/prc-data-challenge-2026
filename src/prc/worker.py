@@ -20,7 +20,7 @@ from prc import blending, curves
 from prc.data import load_silver
 from prc.evaluate import evaluate, truth_frame
 from prc.features import FEATURE_SETS
-from prc.models import REGISTRY
+from prc.models import REGISTRY, mixture
 from prc.paths import EXPERIMENTS, PREDICTIONS_VAL, ROOT, git_commit, sha256_file
 from prc.splits import development_folds, get_fold, masked_view
 
@@ -84,6 +84,14 @@ def main(eid: str) -> None:
             val = feats.filter(pl.col("role") == "val").select("MVT_ID_mvt", "ADEP_mvt",
                                                                 "flt_missing")
             pred = blending.override(val, cfg["params"], fold.fold_id)
+        elif cfg["model"] == "convention_mixture":  # Day 8: base outside, mixture inside
+            val = feats.filter(pl.col("role") == "val").select("MVT_ID_mvt", "ADEP_mvt",
+                                                                "flt_missing")
+            comp = mixture.convention_mixture(feats, cfg["params"], cfg.get("seed", 42))
+            pred = blending.override_fitted(val, cfg["params"], fold.fold_id, comp)
+            comp_dir = out_dir / "components"  # diagnostics, outside the artifact list
+            comp_dir.mkdir(exist_ok=True)
+            comp.sort("MVT_ID_mvt").write_parquet(comp_dir / f"{fold.fold_id}.parquet")
         else:
             pred = REGISTRY[cfg["model"]](feats, cfg.get("params", {}), cfg.get("seed", 42))
         curve = curves.take()

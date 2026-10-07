@@ -1,0 +1,11 @@
+EDDF 27 tail; eq_IOBT_flt 4 (0.15 vs 0.169), eq_LOBT_flt 4 (0.15 vs 0.168), early_1h_AOBT_3_flt 3 (0.11 vs 0.000)
+EDDM 19 tail; early_1h_AOBT_3_flt 5 (0.26 vs 0.000), eq_EOBT_1_flt 3 (0.16 vs 0.277), eq_SCHED_TIME_UTC_mvt 2 (0.11 vs 0.200)
+EGLL 229 tail; eq_SCHED_TIME_UTC_mvt 30 (0.13 vs 0.182), eq_LOBT_flt 28 (0.12 vs 0.204), eq_EOBT_1_flt 27 (0.12 vs 0.266)
+EHAM 57 tail; eq_AOBT_3_flt 12 (0.21 vs 0.438), eq_IOBT_flt 4 (0.07 vs 0.183), eq_LOBT_flt 4 (0.07 vs 0.183)
+LEBL 0 tail; eq_SCHED_TIME_UTC_mvt 0 (0.00 vs 0.172), eq_EOBT_1_flt 0 (0.00 vs 0.248), eq_IOBT_flt 0 (0.00 vs 0.204)
+LEMD 0 tail; eq_SCHED_TIME_UTC_mvt 0 (0.00 vs 0.163), eq_EOBT_1_flt 0 (0.00 vs 0.243), eq_IOBT_flt 0 (0.00 vs 0.203)
+LFPG 162 tail; eq_IOBT_flt 14 (0.09 vs 0.201), eq_LOBT_flt 14 (0.09 vs 0.201), eq_SCHED_TIME_UTC_mvt 11 (0.07 vs 0.153)
+LIRF 557 tail; eq_SCHED_TIME_UTC_mvt 470 (0.84 vs 0.248), eq_IOBT_flt 59 (0.11 vs 0.277), eq_LOBT_flt 59 (0.11 vs 0.277)
+LSZH 13 tail; eq_SCHED_TIME_UTC_mvt 1 (0.08 vs 0.118), eq_EOBT_1_flt 1 (0.08 vs 0.150), eq_IOBT_flt 1 (0.08 vs 0.142)
+LTFM 47 tail; eq_SCHED_TIME_UTC_mvt 6 (0.13 vs 0.202), early_1h_EOBT_1_flt 3 (0.06 vs 0.000), eq_EOBT_1_flt 2 (0.04 vs 0.218)
+findings: none
