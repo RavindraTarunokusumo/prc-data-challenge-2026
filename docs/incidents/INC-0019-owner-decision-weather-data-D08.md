@@ -48,3 +48,12 @@ status: open
 ## Resolution
 
 Open. Closes when the weather proposal is decided, or at the refreeze.
+
+## Amendment (2026-10-07T18:50:07Z, D08-S03, laptop; appended)
+
+- **The laptop session cannot reach either weather host either.** `scripts/fetch_weather.py` (commit 930b788) has not run.
+  - `mesonet.agron.iastate.edu` and `archive-api.open-meteo.com` resolve, and TCP connects. The connection is then reset during the TLS handshake, after the server hello. `api.wandb.ai` behaves the same. `pypi.org` and `arxiv.org` answer 200 from the same shell.
+  - No proxy variable is set, and no project or user Claude Code settings file configures the sandbox's network.
+  - The researcher asked to run one probe outside the Claude Code sandbox. The harness refused it. The researcher does not pursue the fetch by any other route.
+- **Owner decision needed:** (a) the owner runs the fetch from their own terminal; (b) the owner permits these hosts for the session; or (c) agenda item 3 is dropped for Days 8–12.
+- No weather data exists in the repository. Nothing has been allocated for weather.
