@@ -17,7 +17,7 @@
   - H: closed (H8). No Day 8 upload; **E050 stands.**
   - Corrections D8-C14 to D8-C22 are in the acknowledgement.
   - Day 8–12 looks: 2.
-- **Owner decision pending: continue (Days 9–12) or refreeze.** This is the only question put to the owner (Q3).
+- **Owner decision (2026-10-07, after 22:13Z): continue (Branch B; "Continue with Day 9-12 Handoffs").** Hand-over document: `docs/reproducibility/HANDOFF_D08.md`. Q5 B1–B5 bind every Day 9–12 proposal.
   - **If the owner refreezes (Q6, Branch A),** X-D08-S03-0004 is the last Day 8–12 phase close. The records needed:
     - a `frozen` event;
     - STATE "Phase: FROZEN";
@@ -40,7 +40,7 @@
   4. **The CatBoost iteration budget:** not attempted. If proposed, Q5 B3 applies.
 - **Open incidents:** INC-0004, INC-0009, INC-0010, **INC-0017**, **INC-0018** (Sonnet delegation), **INC-0023** (the owner's choices among research options; Q3). **Closed at the Day 8 phase close:** INC-0019 (weather) and INC-0018 (D7) (its own condition was met; the file is unedited). **INC-0020, INC-0021, INC-0022 closed** (INC-0022: E051's first arming refused for a missing H fold, a researcher and review error; amendment A1 added H, predicted only). INC-0020 closed (X-D08-S03-0001 (D): not a G1–G3 breach; conditions bind Days 8–12). Next free ID INC-0024.
 - **Merged from `origin/day-7` (INC-0020):** `LICENSE` (GPLv3), D7-C15, the first upload record (`genuine-cabbage_v1.parquet`), `docs/reproducibility/HANDOFF_D07.md` (six-day plan).
-- **Sessions:** D08-S01 (cloud) ended. D08-S02 (cloud, governance) recorded the waiver and INC-0019 (end line appended by D08-S03). **D08-S03 (laptop) is open** on `day-8`. Last exchange: **X-D08-S03-0004** (the Day 8 phase close: ACCEPT 0.85). Before it, X-D08-S03-0003 (H038 v2 scope amendment A1: ACCEPT). Earlier: X-D08-S03-0001 (v1 REVISE; rulings on INC-0020 and the G5 (c) known rows) and X-D08-S03-0002 (v2 ACCEPT; rulings (G) and (E)(vi)).
+- **Sessions:** D08-S01 (cloud) ended. D08-S02 (cloud, governance) recorded the waiver and INC-0019 (end line appended by D08-S03). **D08-S03 (laptop) ended** at the Day 8 phase close (hand-over: `docs/reproducibility/HANDOFF_D08.md`). Next: D09-S01 on `day-9`, from `main` after the `day-8` merge. Last exchange: **X-D08-S03-0004** (the Day 8 phase close: ACCEPT 0.85). Before it, X-D08-S03-0003 (H038 v2 scope amendment A1: ACCEPT). Earlier: X-D08-S03-0001 (v1 REVISE; rulings on INC-0020 and the G5 (c) known rows) and X-D08-S03-0002 (v2 ACCEPT; rulings (G) and (E)(vi)).
 
 ## Days 1–7 state at the freeze (kept as written)
 

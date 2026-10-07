@@ -64,3 +64,15 @@
   - DAY_SUMMARY §3: "a factor of 6 or more" reads "5.6 or more" (R2).
   - STATE's "Updated" and Days 8–12 section stamps (2026-10-06T18:57:28Z) preceded content dated 2026-10-07. They are re-stamped in this commit.
   - The synthetic weather tests do not cover the `bdcbb83` fix (trailing-space sky codes, VV).
+
+## The owner's branch decision (2026-10-07T22:15:12Z; appended)
+
+- **Owner (verbatim, chat, D08-S03).** The chat UTC was not measured; the reply came after commit `ba14338` (2026-10-07T22:13Z) and before this entry.
+  > Continue with Day 9-12 Handoffs
+- **Reading: Branch B (Q5).** Days 9–12 continue, within Q5's bounds B1–B5. "Handoffs" is read as a request for the hand-over document that opens Day 9: `docs/reproducibility/HANDOFF_D08.md`.
+- **Not authorized by this decision:**
+  - any allocation before a Day 9 proposal is reviewed;
+  - anything Q5 B1 excludes.
+- **Next:**
+  - D08-S03 ends.
+  - Day 9 opens on `day-9` from `main`, after the content-neutral merge of `day-8` (Q5, Branches).
