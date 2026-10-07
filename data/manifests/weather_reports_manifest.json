@@ -1,0 +1,87 @@
+{
+ "schema": "silver-manifest-v1",
+ "path": "data/processed/weather_reports.parquet",
+ "sha256": "bf5c256d9e8b9117f56bc9ce84053f0c5a118fe508ecc12fc5bdabe136706314",
+ "bytes": 2335802,
+ "rows": 277489,
+ "per_station_rows": {
+  "EDDF": 27692,
+  "EDDM": 27694,
+  "EGLL": 27686,
+  "EHAM": 27615,
+  "LEBL": 28015,
+  "LEMD": 28110,
+  "LFPG": 27705,
+  "LIRF": 27605,
+  "LSZH": 27687,
+  "LTFM": 27680
+ },
+ "valid_min": "2025-01-01 00:00:00+00:00",
+ "valid_max": "2026-07-31 23:55:00+00:00",
+ "sources": [
+  {
+   "station": "EDDF",
+   "manifest": "data/manifests/weather_EDDF_manifest.json",
+   "manifest_sha256": "00c3594306650ab2a29a8307e1f397b7f252330c47c504f8dd87658dbbf91c54",
+   "months": 19
+  },
+  {
+   "station": "EDDM",
+   "manifest": "data/manifests/weather_EDDM_manifest.json",
+   "manifest_sha256": "c38f73634f39a6de084d36ccd140589d597a8c8af8317b46255f2ccf54d90a6d",
+   "months": 19
+  },
+  {
+   "station": "EGLL",
+   "manifest": "data/manifests/weather_EGLL_manifest.json",
+   "manifest_sha256": "f59eb302ad5e7691cfdb92f602bd8c2653d78e5e0168f985392df0e991307674",
+   "months": 19
+  },
+  {
+   "station": "EHAM",
+   "manifest": "data/manifests/weather_EHAM_manifest.json",
+   "manifest_sha256": "25bcf30d89e03f536c5ca8e372cddf33bd458f7c462eb3f4842c353a09f85c87",
+   "months": 19
+  },
+  {
+   "station": "LEBL",
+   "manifest": "data/manifests/weather_LEBL_manifest.json",
+   "manifest_sha256": "f017cf3afd6becd251e637be5248ab65b7a25f031fffff4c6b5901a252cf9dd8",
+   "months": 19
+  },
+  {
+   "station": "LEMD",
+   "manifest": "data/manifests/weather_LEMD_manifest.json",
+   "manifest_sha256": "4630defa368533464f8811f50f2694ec4617ed8804352cd71ec3d6fc4036e2ee",
+   "months": 19
+  },
+  {
+   "station": "LFPG",
+   "manifest": "data/manifests/weather_LFPG_manifest.json",
+   "manifest_sha256": "7155c097fd02458e5a00694f161da1c8637eed18f7e4b8ea104dd5432d3a8fdf",
+   "months": 19
+  },
+  {
+   "station": "LIRF",
+   "manifest": "data/manifests/weather_LIRF_manifest.json",
+   "manifest_sha256": "65e74353eb52f40987b6d566b8031fe0b1fbae6d582ddc5bdbfab57c352f9245",
+   "months": 19
+  },
+  {
+   "station": "LSZH",
+   "manifest": "data/manifests/weather_LSZH_manifest.json",
+   "manifest_sha256": "24c6494f11ea70357d4eeea0b62e53175c3ff63351c1733f1a67437f81cd7b16",
+   "months": 19
+  },
+  {
+   "station": "LTFM",
+   "manifest": "data/manifests/weather_LTFM_manifest.json",
+   "manifest_sha256": "d20e901935f18810f5159452fd67110c620bee2c1aa6643ea09044863b91a334",
+   "months": 19
+  }
+ ],
+ "code_commit": "bdcbb832e35f7a6afaaba852f4aa84601bddd91c",
+ "code_dirty": true,
+ "created_utc": "2026-10-07T21:27:03Z",
+ "command": "uv run python scripts/build_weather.py"
+}
