@@ -50,21 +50,31 @@ def _num(c: str) -> pl.Expr:
 
 def reports(raw: pl.DataFrame) -> pl.DataFrame:
     """Typed per-report table from the IEM CSV columns (all strings, 'M' for missing)."""
-    wx = pl.col("wxcodes").replace("M", "").fill_null("")
-    ceil = pl.min_horizontal([
-        pl.when(pl.col(f"skyc{i}").is_in(["BKN", "OVC", "VV"])).then(_num(f"skyl{i}"))
-        for i in range(1, 5)])
-    tmp = (_num("tmpf") - 32) / 1.8
-    out = raw.select(
-        pl.col("station"),
+    sky = [f"skyc{i}" for i in range(1, 5)]
+    # Typed columns first; the ceiling layers become columns before min_horizontal (over
+    # when/then expressions it raised a ShapeError on the real files in polars 1.44.2).
+    t = raw.select(
+        "station",
         pl.col("valid").str.to_datetime("%Y-%m-%d %H:%M", time_zone="UTC"),
-        _num("sknt").alias("wx_wind_kt"),
-        pl.coalesce(_num("gust"), _num("sknt")).alias("wx_gust_kt"),
-        _num("drct").alias("drct"),
-        _num("vsby").alias("wx_vis_mi"),
+        *[_num(c) for c in ("sknt", "gust", "drct", "vsby", "tmpf", "dwpf")],
+        *[_num(f"skyl{i}") for i in range(1, 5)],
+        *[pl.col(c).str.strip_chars() for c in sky],
+        pl.col("wxcodes").replace("M", "").fill_null(""),
+    )
+    t = t.with_columns([
+        pl.when(pl.col(f"skyc{i}").is_in(["BKN", "OVC", "VV"])).then(pl.col(f"skyl{i}"))
+        .alias(f"ceil{i}") for i in range(1, 5)])
+    ceil = pl.min_horizontal("ceil1", "ceil2", "ceil3", "ceil4")
+    wx = pl.col("wxcodes")
+    out = t.select(
+        "station", "valid",
+        pl.col("sknt").alias("wx_wind_kt"),
+        pl.coalesce("gust", "sknt").alias("wx_gust_kt"),
+        "drct",
+        pl.col("vsby").alias("wx_vis_mi"),
         ceil.fill_null(CEILING_NONE).alias("wx_ceiling_ft"),
-        tmp.alias("wx_temp_c"),
-        (tmp - (_num("dwpf") - 32) / 1.8).alias("wx_spread_c"),
+        ((pl.col("tmpf") - 32) / 1.8).alias("wx_temp_c"),
+        ((pl.col("tmpf") - pl.col("dwpf")) / 1.8).alias("wx_spread_c"),
         wx.str.contains(r"RA|DZ").cast(pl.Int32).alias("wx_rain"),
         wx.str.contains(SNOW).cast(pl.Int32).alias("wx_snow"),
         wx.str.contains("FZ").cast(pl.Int32).alias("wx_freezing"),

@@ -1,0 +1,180 @@
+{
+ "schema": "bronze-manifest-v1",
+ "source": "IEM ASOS archive",
+ "host": "mesonet.agron.iastate.edu",
+ "basis": "INC-0019",
+ "station": "EGLL",
+ "months": [
+  {
+   "month": "2025-01",
+   "path": "data/raw/weather/EGLL/EGLL_2025-01.csv",
+   "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=EGLL&data=all&year1=2025&month1=1&day1=1&year2=2025&month2=2&day2=1&tz=Etc%2FUTC&format=onlycomma&latlon=no&elev=no&missing=M&trace=T&direct=no&report_type=3&report_type=4",
+   "retrieved_utc": "2026-10-07T19:28:11Z",
+   "bytes": 278406,
+   "rows": 1489,
+   "sha256": "b6235401734dfa11c89956f4ae6303606414e14bdbda97072bbbe122b6cb2976"
+  },
+  {
+   "month": "2025-02",
+   "path": "data/raw/weather/EGLL/EGLL_2025-02.csv",
+   "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=EGLL&data=all&year1=2025&month1=2&day1=1&year2=2025&month2=3&day2=1&tz=Etc%2FUTC&format=onlycomma&latlon=no&elev=no&missing=M&trace=T&direct=no&report_type=3&report_type=4",
+   "retrieved_utc": "2026-10-07T19:28:13Z",
+   "bytes": 249109,
+   "rows": 1344,
+   "sha256": "90ded1b3d1868028b6388fa6076385bfe3e8f2a9496aeca06568412e7d8d1306"
+  },
+  {
+   "month": "2025-03",
+   "path": "data/raw/weather/EGLL/EGLL_2025-03.csv",
+   "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=EGLL&data=all&year1=2025&month1=3&day1=1&year2=2025&month2=4&day2=1&tz=Etc%2FUTC&format=onlycomma&latlon=no&elev=no&missing=M&trace=T&direct=no&report_type=3&report_type=4",
+   "retrieved_utc": "2026-10-07T19:28:16Z",
+   "bytes": 265214,
+   "rows": 1488,
+   "sha256": "77a6c6c495b2b255e2baf8eb66a78b798f2a84fdc1ff7e83b0894032c0e72781"
+  },
+  {
+   "month": "2025-04",
+   "path": "data/raw/weather/EGLL/EGLL_2025-04.csv",
+   "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=EGLL&data=all&year1=2025&month1=4&day1=1&year2=2025&month2=5&day2=1&tz=Etc%2FUTC&format=onlycomma&latlon=no&elev=no&missing=M&trace=T&direct=no&report_type=3&report_type=4",
+   "retrieved_utc": "2026-10-07T19:28:18Z",
+   "bytes": 253665,
+   "rows": 1440,
+   "sha256": "0c5695b404178f6712d3a1f00f6e5e3b236785c75f8ff1f12399b50fd930328f"
+  },
+  {
+   "month": "2025-05",
+   "path": "data/raw/weather/EGLL/EGLL_2025-05.csv",
+   "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=EGLL&data=all&year1=2025&month1=5&day1=1&year2=2025&month2=6&day2=1&tz=Etc%2FUTC&format=onlycomma&latlon=no&elev=no&missing=M&trace=T&direct=no&report_type=3&report_type=4",
+   "retrieved_utc": "2026-10-07T19:28:20Z",
+   "bytes": 268320,
+   "rows": 1488,
+   "sha256": "f0ee7c0604ee9195bd386a7974eea70314e9012f8e0669d05cab0373b3a83324"
+  },
+  {
+   "month": "2025-06",
+   "path": "data/raw/weather/EGLL/EGLL_2025-06.csv",
+   "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=EGLL&data=all&year1=2025&month1=6&day1=1&year2=2025&month2=7&day2=1&tz=Etc%2FUTC&format=onlycomma&latlon=no&elev=no&missing=M&trace=T&direct=no&report_type=3&report_type=4",
+   "retrieved_utc": "2026-10-07T19:28:25Z",
+   "bytes": 257826,
+   "rows": 1440,
+   "sha256": "f4a62754fdb807f512ce92a1745302f315df0adb7d2b492e1abedcbb568ba269"
+  },
+  {
+   "month": "2025-07",
+   "path": "data/raw/weather/EGLL/EGLL_2025-07.csv",
+   "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=EGLL&data=all&year1=2025&month1=7&day1=1&year2=2025&month2=8&day2=1&tz=Etc%2FUTC&format=onlycomma&latlon=no&elev=no&missing=M&trace=T&direct=no&report_type=3&report_type=4",
+   "retrieved_utc": "2026-10-07T19:28:28Z",
+   "bytes": 270529,
+   "rows": 1488,
+   "sha256": "0162c2cc0e22880e26016ba898b78ae90099d5a82fd3b6100fa7d32cb94c1707"
+  },
+  {
+   "month": "2025-08",
+   "path": "data/raw/weather/EGLL/EGLL_2025-08.csv",
+   "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=EGLL&data=all&year1=2025&month1=8&day1=1&year2=2025&month2=9&day2=1&tz=Etc%2FUTC&format=onlycomma&latlon=no&elev=no&missing=M&trace=T&direct=no&report_type=3&report_type=4",
+   "retrieved_utc": "2026-10-07T19:28:31Z",
+   "bytes": 266708,
+   "rows": 1488,
+   "sha256": "91cbd262d42ff2c8a33974714758b131b7c2d3f981dc75fd63fb6e8d2a47ac1e"
+  },
+  {
+   "month": "2025-09",
+   "path": "data/raw/weather/EGLL/EGLL_2025-09.csv",
+   "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=EGLL&data=all&year1=2025&month1=9&day1=1&year2=2025&month2=10&day2=1&tz=Etc%2FUTC&format=onlycomma&latlon=no&elev=no&missing=M&trace=T&direct=no&report_type=3&report_type=4",
+   "retrieved_utc": "2026-10-07T19:28:33Z",
+   "bytes": 262479,
+   "rows": 1437,
+   "sha256": "cc17be0c5d26027c99ea2e6d62d8cb162e5decc4c0f51078a478bf8e74ac6221"
+  },
+  {
+   "month": "2025-10",
+   "path": "data/raw/weather/EGLL/EGLL_2025-10.csv",
+   "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=EGLL&data=all&year1=2025&month1=10&day1=1&year2=2025&month2=11&day2=1&tz=Etc%2FUTC&format=onlycomma&latlon=no&elev=no&missing=M&trace=T&direct=no&report_type=3&report_type=4",
+   "retrieved_utc": "2026-10-07T19:28:36Z",
+   "bytes": 277939,
+   "rows": 1487,
+   "sha256": "13af1ed07cd0920132b7ea54d0cd2264f568a60c95689d751cd47a84fe5a3d7f"
+  },
+  {
+   "month": "2025-11",
+   "path": "data/raw/weather/EGLL/EGLL_2025-11.csv",
+   "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=EGLL&data=all&year1=2025&month1=11&day1=1&year2=2025&month2=12&day2=1&tz=Etc%2FUTC&format=onlycomma&latlon=no&elev=no&missing=M&trace=T&direct=no&report_type=3&report_type=4",
+   "retrieved_utc": "2026-10-07T19:28:38Z",
+   "bytes": 269025,
+   "rows": 1440,
+   "sha256": "c9eccee6d160069e1885ec56dde45299e24e39d7de05e7401007b7ab2e84fb13"
+  },
+  {
+   "month": "2025-12",
+   "path": "data/raw/weather/EGLL/EGLL_2025-12.csv",
+   "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=EGLL&data=all&year1=2025&month1=12&day1=1&year2=2026&month2=1&day2=1&tz=Etc%2FUTC&format=onlycomma&latlon=no&elev=no&missing=M&trace=T&direct=no&report_type=3&report_type=4",
+   "retrieved_utc": "2026-10-07T19:28:40Z",
+   "bytes": 278352,
+   "rows": 1488,
+   "sha256": "12a9431c581dbfcd55089e965229e575ab950dc2db5ba55cf5ea8c570b76cf85"
+  },
+  {
+   "month": "2026-01",
+   "path": "data/raw/weather/EGLL/EGLL_2026-01.csv",
+   "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=EGLL&data=all&year1=2026&month1=1&day1=1&year2=2026&month2=2&day2=1&tz=Etc%2FUTC&format=onlycomma&latlon=no&elev=no&missing=M&trace=T&direct=no&report_type=3&report_type=4",
+   "retrieved_utc": "2026-10-07T19:28:42Z",
+   "bytes": 285977,
+   "rows": 1488,
+   "sha256": "598a85612d776f2111b42b1413de8dadedbaf2fa390f03c8d0149d37927add05"
+  },
+  {
+   "month": "2026-02",
+   "path": "data/raw/weather/EGLL/EGLL_2026-02.csv",
+   "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=EGLL&data=all&year1=2026&month1=2&day1=1&year2=2026&month2=3&day2=1&tz=Etc%2FUTC&format=onlycomma&latlon=no&elev=no&missing=M&trace=T&direct=no&report_type=3&report_type=4",
+   "retrieved_utc": "2026-10-07T19:28:45Z",
+   "bytes": 258406,
+   "rows": 1343,
+   "sha256": "4a69b2112d273a8782c39c9722a6fe498347091d7972a12170a32345c2a25173"
+  },
+  {
+   "month": "2026-03",
+   "path": "data/raw/weather/EGLL/EGLL_2026-03.csv",
+   "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=EGLL&data=all&year1=2026&month1=3&day1=1&year2=2026&month2=4&day2=1&tz=Etc%2FUTC&format=onlycomma&latlon=no&elev=no&missing=M&trace=T&direct=no&report_type=3&report_type=4",
+   "retrieved_utc": "2026-10-07T19:28:47Z",
+   "bytes": 270026,
+   "rows": 1488,
+   "sha256": "6b656cd32f80c24fcb51aa68b15f7d7b5389152bdecbc915b3a90d010deb4db3"
+  },
+  {
+   "month": "2026-04",
+   "path": "data/raw/weather/EGLL/EGLL_2026-04.csv",
+   "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=EGLL&data=all&year1=2026&month1=4&day1=1&year2=2026&month2=5&day2=1&tz=Etc%2FUTC&format=onlycomma&latlon=no&elev=no&missing=M&trace=T&direct=no&report_type=3&report_type=4",
+   "retrieved_utc": "2026-10-07T19:28:49Z",
+   "bytes": 255745,
+   "rows": 1437,
+   "sha256": "7be1df0eda6612e9d0ef1d51082268c6c8f02d5a6a86c161593b930e8c3ed36a"
+  },
+  {
+   "month": "2026-05",
+   "path": "data/raw/weather/EGLL/EGLL_2026-05.csv",
+   "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=EGLL&data=all&year1=2026&month1=5&day1=1&year2=2026&month2=6&day2=1&tz=Etc%2FUTC&format=onlycomma&latlon=no&elev=no&missing=M&trace=T&direct=no&report_type=3&report_type=4",
+   "retrieved_utc": "2026-10-07T19:28:51Z",
+   "bytes": 259392,
+   "rows": 1488,
+   "sha256": "4ce230918e2530854a17289667b1397571a0941e24c16f490750d57792955e49"
+  },
+  {
+   "month": "2026-06",
+   "path": "data/raw/weather/EGLL/EGLL_2026-06.csv",
+   "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=EGLL&data=all&year1=2026&month1=6&day1=1&year2=2026&month2=7&day2=1&tz=Etc%2FUTC&format=onlycomma&latlon=no&elev=no&missing=M&trace=T&direct=no&report_type=3&report_type=4",
+   "retrieved_utc": "2026-10-07T19:28:53Z",
+   "bytes": 244918,
+   "rows": 1438,
+   "sha256": "18642c36e979bf2fb6eff945764f90073cc23e7d5e5e6a62e44015aae7e187dd"
+  },
+  {
+   "month": "2026-07",
+   "path": "data/raw/weather/EGLL/EGLL_2026-07.csv",
+   "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=EGLL&data=all&year1=2026&month1=7&day1=1&year2=2026&month2=8&day2=1&tz=Etc%2FUTC&format=onlycomma&latlon=no&elev=no&missing=M&trace=T&direct=no&report_type=3&report_type=4",
+   "retrieved_utc": "2026-10-07T19:28:58Z",
+   "bytes": 245560,
+   "rows": 1487,
+   "sha256": "6344ba1b8587632d6896ce93d34c666336540dbfa1c9d790272b4a896ee1201b"
+  }
+ ]
+}
