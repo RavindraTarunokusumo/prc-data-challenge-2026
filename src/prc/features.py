@@ -44,8 +44,11 @@ WEATHER_NUMERIC = ["wx_age_min", "wx_wind_kt", "wx_gust_kt", "wx_headwind_kt",
                    "wx_crosswind_kt", "wx_vis_mi", "wx_ceiling_ft", "wx_temp_c", "wx_spread_c",
                    "wx_rain", "wx_snow", "wx_freezing", "wx_ts", "wx_fog", "wx_precip_3h",
                    "wx_snow_6h"]
+# Day 9 taxi-state columns (same names as prc.taxistate.FEATURES; a test checks they agree).
+TAXISTATE_NUMERIC = ["tx_arr_in_p30", "tx_arr_in_p90", "tx_dep_p30", "tx_dep_p90",
+                     "tx_dep_rwy_p30", "tx_arr_in_during", "tx_dep_during"]
 NUMERIC = (FS0_NUMERIC + FS1_EXTRA_NUMERIC + CONGESTION_NUMERIC + PRIOR_NUMERIC
-           + WEATHER_NUMERIC)
+           + WEATHER_NUMERIC + TAXISTATE_NUMERIC)
 RARE_MIN = 100  # equals LightGBM's default min_data_per_group
 RARE = "__RARE__"
 AIRPORT_TZ = {"EDDF": "Europe/Berlin", "EDDM": "Europe/Berlin", "EGLL": "Europe/London",
