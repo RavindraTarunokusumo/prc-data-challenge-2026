@@ -50,3 +50,26 @@ Columns:
    - Above all, wind direction and speed, which set the runway configuration and therefore taxi distance.
    - Also visibility and precipitation.
    - This needs the other nine airports' reports. Their fetch is the owner's (INC-0019 network path).
+
+## Design pilot result (2026-10-07T21:34:39Z; appended)
+
+- **Run:** `scripts/pilot_weather_D08.py`, parameters and decision rule in `research/day-08/proposals/WX_pilot_params.yaml` (committed at d506516, before the pilot ran). Output: `research/day-08/eda/pilot_weather.json` and `.log`.
+- **Model:** LightGBM (E045 / E020's configuration), FS2 against FS2 plus the 16 weather columns, on all ten airports.
+- **Weather table:** `data/processed/weather_reports.parquet` (277,489 reports; manifest `data/manifests/weather_reports_manifest.json`). Coverage is 100 % of DEP rows at every airport.
+- **Targets read:** the design months only (2025-01, 04, 05, 06), at row level, as in H038's pilot. No validation-month target and no December target was read.
+
+| Pilot | Predicted month | Reference RMSE | With weather | Difference |
+|---|---|---|---|---|
+| P1 | 2025-06 | 373.26 | 374.69 | **+1.43** |
+| P2 | 2025-05 | 327.05 | 326.57 | **−0.48** |
+
+**Decision rule (pre-registered): not met.** It needed at least 1.0 s better in both pilots. Agenda item 3 is not pursued in Days 8–12, and no weather proposal is written.
+
+Segment readings (reported only; the rule says they do not override it):
+- **Bulk (y < 3,600 s):** −1.27 s (P1) and −1.17 s (P2).
+- **Tail (y ≥ 3,600 s):** +71.61 s (P1, 395 rows) and +12.72 s (P2, 219 rows).
+- **NM-missing rows:** +14.24 s and +2.05 s.
+- **EHAM:** −10.62 s and −6.09 s.
+- **LIRF:** +8.95 s and +2.02 s.
+- **LTFM:** +2.41 s and +1.68 s.
+- **Reading:** the weather columns help the ordinary rows a little, and the trees spend them on the few hundred tail rows, where they lose more. These readings are post hoc. A restricted weather candidate (bulk or NM-present only) would choose its population after seeing them, and would need its own proposal stating that selection (rule 10).

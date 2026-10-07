@@ -63,3 +63,10 @@ Open. Closes when the weather proposal is decided, or at the refreeze.
 - **The cause is not the Claude Code sandbox.** The session's shell runs without one: there is no bubblewrap process and no proxy, and PID 1 is the host's systemd. Commit 930b788's message ("the session sandbox resets connections") and the amendment above were wrong to point to the sandbox. This was the researcher's error.
 - The reset happens in the network path between the laptop and the hosts: in WSL, Windows, a security product, or the local network. A Claude Code permission change does not affect it.
 - The owner reports that the fetch script also fails when the owner runs it.
+
+## Amendment (2026-10-07T21:34:39Z, D08-S03; appended)
+
+- **The owner ran the fetch** for all ten airports from the owner's terminal: 19 months each, 277,489 reports. The manifests are tracked and every hash was verified.
+- **The weather design pilot did not meet its pre-registered rule** (+1.43 s and −0.48 s; it needed ≤ −1.0 s in both). See `research/day-08/eda/weather_LTFM_coverage.md`.
+- **Agenda item 3 is not pursued in Days 8–12** on the researcher's rule. Nothing was allocated.
+- This incident stays open until the owner confirms or overrides that, or until the refreeze.
