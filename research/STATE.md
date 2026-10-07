@@ -19,6 +19,7 @@
   - Use needs its own proposal: DATA_POLICY rule 7, and only observations issued before the anchor time.
   - **Weather fetched for all ten airports (by the owner). The design pilot failed its pre-registered rule (+1.43 / −0.48 s; needed ≤ −1.0 s in both): agenda item 3 is not pursued.** `research/day-08/eda/weather_LTFM_coverage.md`.
 - **Research agenda (non-binding; each item needs its own proposal and G9's notes):**
+  - **Item 1 looked at on design months only: no recording convention outside LIRF (no signature met the pre-set rule); closed with no lead.** `research/day-08/eda/conventions.md`. Item 3: not pursued (weather pilot).
   1. recording conventions in the tail beyond LIRF;
   2. the routed LIRF subgroup;
   3. LTFM winter with weather;
