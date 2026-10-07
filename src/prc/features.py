@@ -38,7 +38,14 @@ CONGESTION_NUMERIC = ["cg_dep_taxiing", "cg_dep_taxiing_rwy", "cg_dep_to_p15", "
                       "cg_rwy_gap_prev", "cg_dep_to_rwy_m15"]
 # Day 4 prior columns (same names as prc.priors.FEATURES; a test checks they agree)
 PRIOR_NUMERIC = ["pr_stand_rwy", "pr_stand_rwy_logn", "pr_rwy_hour", "pr_op", "pr_actype"]
-NUMERIC = FS0_NUMERIC + FS1_EXTRA_NUMERIC + CONGESTION_NUMERIC + PRIOR_NUMERIC
+# Day 8 weather columns (same names as prc.weather.FEATURES; a test checks they agree).
+# No FEATURE_SETS entry: the weather table is an input the caller joins (INC-0019).
+WEATHER_NUMERIC = ["wx_age_min", "wx_wind_kt", "wx_gust_kt", "wx_headwind_kt",
+                   "wx_crosswind_kt", "wx_vis_mi", "wx_ceiling_ft", "wx_temp_c", "wx_spread_c",
+                   "wx_rain", "wx_snow", "wx_freezing", "wx_ts", "wx_fog", "wx_precip_3h",
+                   "wx_snow_6h"]
+NUMERIC = (FS0_NUMERIC + FS1_EXTRA_NUMERIC + CONGESTION_NUMERIC + PRIOR_NUMERIC
+           + WEATHER_NUMERIC)
 RARE_MIN = 100  # equals LightGBM's default min_data_per_group
 RARE = "__RARE__"
 AIRPORT_TZ = {"EDDF": "Europe/Berlin", "EDDM": "Europe/Berlin", "EGLL": "Europe/London",

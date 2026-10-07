@@ -1,0 +1,33 @@
+# Day 8 weather design pilot (agenda item 3; INC-0019). Written 2026-10-07T19:30:53Z, committed before
+# scripts/pilot_weather_D08.py ran and before the weather table was joined to any target.
+# Not tuned on any data. Not an experiment: no E###, no fold score, no candidate selected.
+design_months: [2025-01, 2025-04, 2025-05, 2025-06]   # X-D08-S01-0001 (d); as H038's pilot
+pilots:
+  P1: {train: [2025-01, 2025-04, 2025-05], val: [2025-06]}
+  P2: {train: [2025-01, 2025-04, 2025-06], val: [2025-05]}
+reference: FS2                     # E045 / E020 configuration below, all rows, seed 42
+candidate: FS2 + prc.weather.FEATURES (16 columns; lookup t_off - 10 min, max age 3 h)
+model:                             # E045 / E020's LightGBM (H038_params.yaml direct_reference)
+  objective: regression
+  learning_rate: 0.05
+  num_leaves: 255
+  min_data_in_leaf: 100
+  feature_fraction: 1.0
+  bagging_fraction: 1.0
+  bagging_freq: 0
+  bin_construct_sample_cnt: 5000000
+  num_threads: 4
+  num_boost_round: 1000
+seed: 42
+readings:                          # all on the predicted month's DEP rows
+  - all rows: RMSE of each, and the difference (candidate minus reference)
+  - by airport
+  - NM-missing against NM-present rows
+  - tail (y >= 3,600 s) against bulk
+  - rows whose report has precipitation, fog, visibility < 1 mi or ceiling < 500 ft, against the rest
+  - feature coverage (share of rows with a report) by airport
+decision_rule: >-
+  Weather goes forward to an H proposal only if the candidate's all-rows RMSE is at least
+  1.0 s below the reference's in both P1 and P2 (criterion 1's minimum). Otherwise agenda item 3
+  is recorded as not pursued in Days 8-12, and no weather proposal is written. Segment readings
+  do not override this rule.
