@@ -57,3 +57,9 @@ Open. Closes when the weather proposal is decided, or at the refreeze.
   - The researcher asked to run one probe outside the Claude Code sandbox. The harness refused it. The researcher does not pursue the fetch by any other route.
 - **Owner decision needed:** (a) the owner runs the fetch from their own terminal; (b) the owner permits these hosts for the session; or (c) agenda item 3 is dropped for Days 8–12.
 - No weather data exists in the repository. Nothing has been allocated for weather.
+
+## Correction (2026-10-07T19:21:12Z, D08-S03; appended)
+
+- **The cause is not the Claude Code sandbox.** The session's shell runs without one: there is no bubblewrap process and no proxy, and PID 1 is the host's systemd. Commit 930b788's message ("the session sandbox resets connections") and the amendment above were wrong to point to the sandbox. This was the researcher's error.
+- The reset happens in the network path between the laptop and the hosts: in WSL, Windows, a security product, or the local network. A Claude Code permission change does not affect it.
+- The owner reports that the fetch script also fails when the owner runs it.
