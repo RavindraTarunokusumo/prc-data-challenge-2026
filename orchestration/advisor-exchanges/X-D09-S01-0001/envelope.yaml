@@ -1,0 +1,42 @@
+schema: advisor-task-envelope-v1
+exchange_id: X-D09-S01-0001
+session: D09-S01
+sender: claude-researcher
+recipient: advisor-subagent
+purpose: phase_close
+proposal_ids: [PHASE_CLOSE_D09]
+proposal_paths:
+  - research/day-09/proposals/PHASE_CLOSE_D09_v1.md
+proposal_sha256:
+  - 6068b608c8e123efc7b9b8f83be2ebc98ecd4ab039dc3ab19e9aed28ebf355bd
+review_output_dir: research/day-09/advisor/
+review_path_requested: research/day-09/advisor/PHASE_CLOSE_D09_review_v1.md
+context_paths:
+  - research/day-09/DAY_SUMMARY.md
+  - research/day-09/sessions/D09-S01/SESSION_START.md
+  - research/day-09/proposals/TX_pilot_params.yaml
+  - scripts/pilot_taxistate_D09.py
+  - research/day-09/eda/pilot_taxistate.json
+  - research/day-09/eda/pilot_taxistate.md
+  - src/prc/taxistate.py
+  - tests/test_taxistate.py
+  - docs/reports/FINAL_REPORT_D08_D12_draft.md
+  - docs/reports/PROJECT_SUMMARY.md
+  - docs/reports/FINAL_REPORT.md
+  - docs/reproducibility/HANDOFF_D08.md
+  - docs/incidents/INC-0017-owner-reopen-after-freeze-D08.md
+  - docs/incidents/INC-0023-owner-choices-among-research-options-D08.md
+  - docs/incidents/INC-0024-pilot-started-without-owner-go-D09.md
+  - docs/incidents/INC-0020-divergent-post-freeze-lineage-D08.md
+  - research/day-08/DAY_SUMMARY.md
+  - research/day-08/advisor/PHASE_CLOSE_D08_review_v1.md
+  - research/day-08/acks/PHASE_CLOSE_D08_ack_v1.md
+  - research/STATE.md
+  - orchestration/task-ledger.jsonl
+  - experiments/ledger.jsonl
+constraints:
+  - Last Day 8-12 phase close (refreeze). Be adversarial toward the Day 9 reading and toward overclaims in the final-report section and the project summary.
+  - Read-only on the owner's laptop. No gate.py allocate, no run, no fit, no holdout script, no read of December 2025 DEP targets, no read of any development fold's validation-month targets. Design-month targets (2025-01, 04, 05, 06) may be read if needed to verify the pilot.
+  - Do not open INC-0018 (D7) or the Day 7 files that hold the disclosed leaderboard figure (INC-0020); cite INC-0020 instead.
+  - Do not access the challenge's ranking page, the leaderboard or the submission bucket.
+created_utc: 2026-10-08T17:43:53Z
