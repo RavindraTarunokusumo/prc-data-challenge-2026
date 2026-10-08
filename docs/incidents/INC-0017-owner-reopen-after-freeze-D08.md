@@ -81,3 +81,16 @@ The researcher reported that the reopening waited on G1's four items. The owner 
   - **G7:** at most one new upload, the latest Day 8–12 champion's checked SUBMIT file, complete before 2026-10-11T12:00:00Z; no hedge;
   - the researcher's own isolation: no leaderboard or ranking page is read, and no board content is accepted into records.
 - **The `reopened` event is written on the owner's authority** (`orchestration/task-ledger.jsonl`). It cites this amendment, not G1.
+
+## Amendment (2026-10-08T17:41:53Z, D09-S01): the owner ends Days 8–12 (refreeze)
+
+- **The researcher's question,** after the Day 9 pilot failed its rule. It was the only question allowed (X-D08-S03-0004 Q3): "**Your decision: continue or refreeze?**"
+- **The owner's answer (verbatim, chat, D09-S01).** The chat UTC was not measured; the reply came after commit `bd3c73e` and before this entry.
+  > Alright, let's wrap up the experiment. Close session and write a 7-Day summary of what happened.
+- **Reading: refreeze.** Days 8–12 end at Day 9.
+  - Day 9 added a figure after X-D08-S03-0004 (the taxi-state pilot). Q6's "no further exchange" condition therefore does not hold, and a Day 9 phase close (X-D09-S01-0001) reviews:
+    - the Day 9 records;
+    - the FINAL_REPORT Days 8–12 section;
+    - the project summary the owner asked for.
+- **G7's rule applies:** no candidate was promoted in Days 8–12, so there is **no new upload; E050 stands**.
+- This incident closes at that phase close.
