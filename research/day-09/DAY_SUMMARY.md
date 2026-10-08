@@ -1,6 +1,6 @@
-# Day 9 summary: the last reopened phase (DRAFT for the phase close X-D09-S01-0001; refreeze)
+# Day 9 summary: the last reopened phase (FINAL; phase close X-D09-S01-0001 ACCEPT; refreeze; E046 remains champion; no new upload; E050 stands)
 
-*D09-S01, owner's laptop, branch `day-9` (from `main` `3e85b4c`, the content-neutral merge of `day-8`).*
+*D09-S01, owner's laptop, branch `day-9` (from `main` `3e85b4c`, the content-neutral merge of `day-8`). Marked FINAL after the phase close, with D9-C1 to D9-C3 applied in place; the acknowledgement lists D9-C1 to D9-C14.*
 
 **Provenance:**
 - The researcher is `claude-opus-5-5`. The Advisor is the `advisor` subagent (definition `30fff5dd3c54`).
@@ -17,7 +17,7 @@
 - E050's upload is unverified (INC-0017).
 - A leaderboard figure was disclosed to the researcher on 2026-10-04, and it is not used (INC-0020). It also reached the Advisor's context in X-D08-S03-0001 and X-D08-S03-0004.
 
-**G1 status:** waived (INC-0017). No G2 breach. No challenge page was opened. G3: INC-0023 (Day 8) stands. In Day 9 the owner was asked only "continue or refreeze" (Q3).
+**G1 status:** waived (INC-0017). No G2 breach. No challenge page was opened. G3: INC-0023 (Day 8) stands. In Day 9, "continue or refreeze" was the only research-direction question put to the owner (Q3). The owner's "Go" was a run decision (INC-0024) (D9-C3).
 
 ## 1. The Day 9 question and its answer
 
@@ -32,8 +32,11 @@
 | P1 | 2025-06 | 373.26 | 376.15 | **+2.90** | +2.21 |
 | P2 | 2025-05 | 327.05 | 323.96 | **−3.10** | −0.93 |
 
-- The rule needed at least 1.0 s better in both pilots. **H039 was not written.**
-- Segments, reported only: NM-present −1.00 / −1.15 s; LIRF +18.21 / −17.05 s; tail +76.34 / −75.39 s.
+- The rule needed at least 1.0 s better in both pilots. **H039 was not written.** The decision stands as the rule's output (rule 10).
+- **D9-C1. The mechanism is untested in a candidate's form, not refuted.**
+  - The rule's population (all rows, unrouted training) did not match the construction Q5 B2 binds a candidate to: the LIRF NM-missing subgroup overridden from E045, with routed halves.
+  - In P1, the LIRF rows' SSE increase exceeds the whole result.
+  - No record may say that the block was shown not to help, or that it would have passed.
 - HANDOFF_D08 §4.3's stop rule applied, and **the owner chose to refreeze.**
 
 ## 2. What was built
@@ -52,16 +55,17 @@ Tests: 194 pass. Lint clean.
 ## 4. Champion, holdout, upload
 
 - **Champion: E046** (unchanged; development mean 314.42 s).
-- **H: closed (H8).** No holdout access and no unmasking event after Day 7. To be verified by the phase close.
+- **H: closed (H8).** No holdout access and no unmasking event after Day 7, as verified by the phase close.
 - **Upload (G7): none.** No candidate was promoted in Days 8–12. **E050 stands** (`f0dc2c7c…06e8`).
 
 ## 5. Errors and corrections (kept)
 
 - **INC-0024: the researcher started the pilot without the owner's go-ahead.**
-  - The owner stopped it. It ended during the first split, with no output, and no figure was seen.
+  - The owner stopped it. It ended during the first split, with no output.
+  - **D9-C2:** the stopped run's empty log was deleted, which is not append-only. "No figure was seen" and the run's duration rest on the researcher's statement. This does not affect the result: code, parameters and rule are unchanged since `0969550`, the re-run is deterministic, and its log was created after the go-ahead was recorded.
   - The pilot then ran unchanged on the owner's "Go".
   - From then on, no run starts without the owner's explicit go-ahead.
-- No other correction yet; the phase close may add some.
+- **D9-C1 to D9-C14** (the phase-close review) are listed, with where each was applied, in `research/day-09/acks/PHASE_CLOSE_D09_ack_v1.md`.
 
 ## 6. Delegated work (G11)
 
@@ -69,4 +73,7 @@ None.
 
 ## 7. Phase close
 
-Requested in `research/day-09/proposals/PHASE_CLOSE_D09_v1.md` (X-D09-S01-0001), as the last Day 8–12 phase close (refreeze).
+**X-D09-S01-0001: ACCEPT (0.80)**, as the last Day 8–12 phase close (refreeze).
+- Review: `research/day-09/advisor/PHASE_CLOSE_D09_review_v1.md`.
+- Acknowledgement: `research/day-09/acks/PHASE_CLOSE_D09_ack_v1.md` (R1–R6).
+- **Project state: FROZEN.** Champion E046. No new upload in Days 8–12; E050 stands. H: closed (H8).

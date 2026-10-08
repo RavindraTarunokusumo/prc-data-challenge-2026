@@ -107,3 +107,71 @@ Facts beside it (D7-C10):
 - **Delegation:** Day 4 implementation work and experiment launches were delegated to `claude-sonnet-5-5` workers under the researcher's review, on the owner's instruction (INC-0005). One Day 6 analysis script was delegated (INC-0013).
 - **Launch arguments** differed from the registered configuration on Day 2 (INC-0003) and Day 3 (INC-0004).
 - **The Day 7 routing candidate** was tested by the owner's choice among options the researcher wrote and recommended (INC-0015). Its runs started in owner-set windows (INC-0015, INC-0016).
+
+## 9. Days 8–12: the reopening after FROZEN (appended; Days 1–7 above are unchanged)
+
+*Reviewed in X-D09-S01-0001 (ACCEPT 0.80), with D9-C4 to D9-C8 applied.*
+
+### 9.1 What happened
+
+- **The reopening.** On 2026-10-05 the owner reopened the project after the Day 7 FROZEN, with a stated leaderboard aspiration (INC-0017). Under G3 the aspiration is cited, not quoted, and it was never a criterion.
+- **The brief's seven-phase run ended at Day 7:** champion E046, submission E050's file. Nothing in Days 8–12 changes that result.
+- **Governance.** A cloud session reviewed the reopening's rules (X-D08-S01-0001: G1–G12, ruling H8, rule 15). The owner waived G1 (a)–(c) (INC-0017).
+- **The phases.** Days 8–12 ran as two phases, Day 8 and Day 9, and then the owner refroze the project.
+  - D08-S01 and D08-S02 were cloud sessions, governance only.
+  - D08-S03 and D09-S01 ran on the owner's laptop, and all Days 8–12 compute ran there (D9-C4).
+
+### 9.2 Results
+
+| Phase | Idea | Evidence | Outcome |
+|---|---|---|---|
+| 8 | **Convention mixture** for LIRF's NM-missing subgroup (H038 v2) | E051 (candidate) and E052 (byte-identical reproduction), on the development folds | Development mean 294.32 against 314.42. **Criterion 2 not met:** one WIN (R3, carried by its known rows); S1 TIE. **REJECT.** A reading with the known rows reverted also fails criterion 2 (D8-C18). |
+| 8 | **External weather** (METAR, ten airports; INC-0019) | Design-month pilot with a pre-registered rule | +1.43 / −0.48 s; the rule needed ≤ −1.0 s in both pilots. Not pursued. None of the restrictions tested by the review, including an oracle one, reaches the rule (D8-C20). |
+| 8 | **Recording conventions beyond LIRF** | Design-month look at 18 signatures | No finding. No tested signature explains the non-LIRF tail (D8-C19). |
+| 9 | **Recent realised taxi state** (arrival taxi-in; other departures' `MVT − AOBT_3`) | Design-month pilot with a pre-registered rule | +2.90 / −3.10 s. Rule not met; H039 not written. The pilot's population did not match a candidate's construction, so the idea is untested in that form, not refuted (D9-C1). |
+
+**E046 stands by the frozen rules' asymmetry, not because it was shown to be the better subgroup predictor.** E051's development mean is 20.10 s lower, carried mostly by three known rows (X-D08-S03-0004).
+
+### 9.3 Champion, holdout, uploads
+
+- **Champion: E046** (unchanged; development mean 314.42 s).
+- **Holdout:** four reads in total (Days 1, 3, 5 and 7). Days 8–12: closed (H8), with no access and no unmasking event.
+- **Uploads:**
+  - **E050's file only** (`f0dc2c7c…06e8`), uploaded by the owner after the Day 7 FROZEN.
+    - The `day-7` upload record names the object (`genuine-cabbage_v1.parquet`) and the expected hash.
+    - The researcher did not observe the hash being recomputed at upload. **The upload is the owner's report, unverified** (INC-0017; INC-0020 §2; D9-C6).
+  - **Days 8–12: no new upload** (G7: no promotion).
+  - After the challenge closes, the external evaluation follows G2.
+
+### 9.4 Disclosures
+
+- **Leaderboard isolation for Days 8–12 rests on no recorded commitment.** The owner waived G1 (a)–(c), and what was known at the reopening is not stated (INC-0017).
+- **A leaderboard figure was disclosed to the researcher on 2026-10-04** (INC-0020). It was not used in any decision.
+  - **Leaderboard isolation did not hold at the reopening.** The owner's aspiration was stated after the disclosure.
+  - The Day 8 records written before the merge of the `day-7` commits wrongly stated that no figure had been seen (INC-0020).
+  - It reached the Advisor's context twice: X-D08-S03-0001 (2026-10-06) and X-D08-S03-0004 (2026-10-07).
+  - Later records cite INC-0020 instead of repeating it.
+- **The owner chose among researcher-written research options in Day 8** (INC-0023). One offered option was a route around a pre-registered rule; the owner did not take it.
+- **Researcher errors.** This is a selection; the full lists are D8-C1 to D8-C22 and D9-C1 to D9-C14 (D9-C7).
+  - INC-0022: a run configuration without an H fold was refused before start.
+  - D8-C14: the weather-host failure was misattributed to the Claude Code sandbox.
+  - D8-C15: a weather mechanism was overstated to the owner.
+  - D8-C18: E051's reverted known-row reading was presented as stronger than it is.
+  - INC-0024: a design pilot was started without the owner's go-ahead and stopped with no output. The stopped run's empty log was deleted, so "no figure was seen" rests on the researcher's statement (D9-C2).
+- **Fold reuse (G5 (a)):** 2 scored looks in Days 8–12 (E051, E052), after 44 in Days 1–7. The design pilots read only months outside every validation set (2025-01, 04, 05, 06).
+
+### 9.5 Governance record (Days 8–12)
+
+- **Experiments:** E051 and E052 (52 in total). Both REJECT.
+- **Advisor exchanges:** 6 (X-D08-S01-0001, X-D08-S03-0001 to 0004, X-D09-S01-0001); 33 in total.
+- **Incidents:** INC-0017 to INC-0024 (two numbers reused across lineages, labelled "(D7)"; INC-0020). After the refreeze, INC-0004, INC-0009 and INC-0010 remain open.
+- **Delegation:** none. INC-0018 permitted it, and it was not used.
+
+### 9.6 Provenance
+
+Brief §15 is kept verbatim in §8. The Days 8–12 facts beside it:
+- **The reopening:** the owner reopened the project after FROZEN (INC-0017).
+- **Governance sessions:** two cloud sessions did governance only (D08-S01, D08-S02). D08-S02 has no session-start record, and the registry holds neither its served model nor its end time (D9-C8).
+- **Compute:** all Days 8–12 compute ran on the owner's laptop, with the same researcher (`claude-opus-5-5`) and Advisor arrangement. Runs were owner-approved, except the first start of the Day 9 pilot (INC-0024).
+- **External data:** the owner ran the weather fetch from the owner's own terminal (INC-0019). The data is kept and unused, and the IEM licence fit is unsettled (INC-0019 closure).
+- **Delegation:** none.

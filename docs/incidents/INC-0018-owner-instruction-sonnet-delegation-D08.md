@@ -3,7 +3,7 @@ schema: incident-v1
 incident_id: INC-0018
 type: protocol_deviation
 created_utc: 2026-10-05T09:31:17Z
-status: open
+status: closed
 ---
 
 # Days 8–12: owner permission to delegate coding tasks to `claude-sonnet-5-5` subagents
@@ -29,3 +29,7 @@ Every delegated record carries the line *"implemented by a `claude-sonnet-5-5` w
 ## Resolution
 
 Open. Closes at the last Day 8–12 phase close, with the delegated-work list.
+
+## Closure (2026-10-08T18:08:03Z, D09-S01; X-D09-S01-0001 R3)
+
+**Delegated-work list for Days 8–12: none.** No `claude-sonnet-5-5` worker was used in Day 8 or Day 9 (DAY_SUMMARY D8 §8, D9 §6). **Status: closed.**

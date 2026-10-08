@@ -3,7 +3,7 @@ schema: incident-v1
 incident_id: INC-0024
 type: researcher_error
 created_utc: 2026-10-08T00:16:55Z
-status: open
+status: closed
 ---
 
 # Day 9: the taxi-state design pilot was started without the owner's go-ahead, and stopped
@@ -34,3 +34,12 @@ status: open
 ## Resolution
 
 Open. Closes at the Day 9 phase close.
+
+## Closure (2026-10-08T18:08:03Z, D09-S01; X-D09-S01-0001 R3)
+
+**D9-C2.**
+- The stopped run's empty log was deleted before the re-run, which is not append-only.
+- "No figure was seen" and the stopped run's duration rest on the researcher's statement.
+- **This does not affect the result.** Code, parameters and rule are unchanged since `0969550`, and the re-run is deterministic. Its log was created six seconds after this incident's go-ahead record was committed (verified by the Advisor).
+
+The practice adopted above (no run without the owner's explicit go-ahead) held for the rest of Days 8–12. It is disclosed in FINAL_REPORT §9.4 and §9.6. **Status: closed.**

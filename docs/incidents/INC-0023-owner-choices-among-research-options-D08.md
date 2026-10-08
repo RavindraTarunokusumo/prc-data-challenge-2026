@@ -3,7 +3,7 @@ schema: incident-v1
 incident_id: INC-0023
 type: owner_intervention
 created_utc: 2026-10-07T22:10:59Z
-status: open
+status: closed
 ---
 
 # Day 8: owner choices among researcher-written research options (D08-S03, 2026-10-07)
@@ -81,3 +81,10 @@ The request rested on a mechanism the researcher overstated (D8-C15).
 ## Resolution
 
 Open. Closes at the last Day 8–12 phase close, with its disclosure in the final report.
+
+## Closure (2026-10-08T18:08:03Z, D09-S01; X-D09-S01-0001 R3)
+
+- **Disclosed in `docs/reports/FINAL_REPORT.md` §9.4,** with D9-C7. That includes the offered option that was a route around a pre-registered rule, which the owner did not take.
+- In Day 9, "continue or refreeze" was the only research-direction question put to the owner.
+
+**Status: closed.**

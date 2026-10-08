@@ -29,3 +29,15 @@ Segment readings, reported only (the rule says they do not override it):
 - **The other nine airports:** mostly −1 to −4 s in both pilots. EHAM is +1.76 s in P1; LSZH and LTFM are about 0 in P2.
 - **Reading:** the block helps ordinary rows by about 1 s. The sign of the all-rows change is set by a few hundred tail and NM-missing rows, mostly at LIRF, and it flips between the two months.
 - **Not a lead under the rule.** Any restriction (NM-present only, non-LIRF only) would choose its population after seeing these readings (rule 10). It would also offer a route around a pre-registered rule (INC-0023), so none is proposed.
+
+## Corrections (2026-10-08T18:07:50Z; X-D09-S01-0001)
+
+- **D9-C1. The reading above is too strong.** "The block helps ordinary rows by about 1 s" and the segment table are pilot readings of one unrouted learner on all rows. They are not a claim about the mechanism.
+  - The rule's population (all rows, unrouted training) did not match the construction Q5 B2 binds a candidate to: the LIRF NM-missing subgroup overridden from E045, with routed halves.
+  - In P1, the LIRF rows' SSE increase exceeds the whole result.
+  - The decision stands as the rule's output (rule 10).
+  - **The mechanism is untested in a candidate's form.** No record may say that it was shown not to help, or that it would have passed.
+- **D9-C3. Clerical.**
+  - P2's EDDF (−0.13 s) is also about 0.
+  - P1's LSZH (−4.30 s) lies outside "−1 to −4 s".
+  - NM-present in P1 is −0.996 s, shown as −1.00.

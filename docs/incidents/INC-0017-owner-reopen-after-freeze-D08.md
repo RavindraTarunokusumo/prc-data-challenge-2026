@@ -3,7 +3,7 @@ schema: incident-v1
 incident_id: INC-0017
 type: protocol_deviation
 created_utc: 2026-10-05T09:31:17Z
-status: open
+status: closed
 ---
 
 # Day 8: owner reopens the project after FROZEN, for Days 8–12
@@ -94,3 +94,12 @@ The researcher reported that the reopening waited on G1's four items. The owner 
     - the project summary the owner asked for.
 - **G7's rule applies:** no candidate was promoted in Days 8–12, so there is **no new upload; E050 stands**.
 - This incident closes at that phase close.
+
+## Closure (2026-10-08T18:08:03Z, D09-S01; X-D09-S01-0001 R3)
+
+**Final upload record:**
+- **No new upload in Days 8–12** (G7: no candidate was promoted).
+- **E050 stands** (`predictions/final/E050/submitting.parquet`, `f0dc2c7c…06e8`).
+- E050's upload remains the owner's report, unverified (INC-0020 §2). The `day-7` record names the object and the expected hash; the researcher did not observe the hash being recomputed at upload.
+
+Days 8–12 are closed at Day 9 (X-D09-S01-0001), and the project is FROZEN. **Status: closed.**

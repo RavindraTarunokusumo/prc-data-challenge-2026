@@ -1,8 +1,36 @@
 # Research State
 
-*Updated 2026-10-07T22:12:57Z (measured with `date -u`; D08-S03, owner's laptop; Day 8 phase close).*
+*Updated 2026-10-08T18:09:00Z (measured with `date -u`; D09-S01, owner's laptop; the refreeze, X-D09-S01-0001).*
 
-## Days 8–12 (reopening after FROZEN; INC-0017)
+## Phase: FROZEN (Days 8–12 closed at Day 9)
+
+*Section written 2026-10-08T18:09:00Z (D09-S01, laptop; X-D09-S01-0001 ACCEPT 0.80, R4).*
+
+- **Phase: FROZEN.** The owner ended Days 8–12 (INC-0017 refreeze amendment). The `frozen` task-ledger event cites INC-0017 and X-D09-S01-0001.
+  - **P7 (b), (c) and (f) apply:**
+    - a content-neutral merge of `day-9` into `main`;
+    - after FROZEN, only appended files;
+    - enforcement by records only.
+- **Champion: E046** (development mean 314.42 s).
+- **Submission: E050 stands** (`predictions/final/E050/submitting.parquet`, `f0dc2c7c…06e8`).
+  - **No upload in Days 8–12** (G7: no promotion).
+  - E050's upload is the owner's report, unverified (INC-0020 §2).
+- **H: closed (H8).** Four reads in total (Days 1, 3, 5, 7); the last was Day 7 (H7).
+- **Days 8–12 results:**
+  - H038 v2 REJECT (E051, E052);
+  - weather not pursued;
+  - item 1 no lead;
+  - the Day 9 taxi-state pilot did not meet its rule, and is untested in a candidate's form, not refuted (D9-C1).
+- **Reports:** `docs/reports/FINAL_REPORT.md` (§9 appended for Days 8–12) and `docs/reports/PROJECT_SUMMARY.md` (the owner's request). Both are FINAL.
+- **Corrections:** D8-C1 to D8-C22, and D9-C1 to D9-C14 (`research/day-09/acks/PHASE_CLOSE_D09_ack_v1.md`).
+- **Open incidents:** INC-0004, INC-0009 and INC-0010.
+  - Closed at the refreeze: INC-0017, INC-0018 (D8), INC-0023 and INC-0024.
+  - **Next free ID: INC-0025.**
+- **IDs:** E053 is unused; 52 experiments allocated. **Last exchange: X-D09-S01-0001.**
+- **Sessions:** D09-S01 (laptop) ended at the refreeze.
+- **After FROZEN:** no allocation, run, fit, holdout read, formatter run or code change. After the challenge closes, the external evaluation follows G2.
+
+## Days 8–12 (kept as written at the Day 8 phase close, with the Day 9 line added; superseded by the section above)
 
 *Section updated 2026-10-07T22:12:57Z (D08-S03, laptop; Day 8 phase close X-D08-S03-0004).*
 
