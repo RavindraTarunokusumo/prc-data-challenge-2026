@@ -1,0 +1,3 @@
+P1: all rows 373.26 -> 376.15 (+2.90 s); P-only +2.21 s; 157.4 s
+P2: all rows 327.05 -> 323.96 (-3.10 s); P-only -0.93 s; 119.3 s
+not pursued (decision rule); HANDOFF_D08 §4.3

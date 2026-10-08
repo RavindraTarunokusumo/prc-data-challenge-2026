@@ -17,6 +17,7 @@
   - H: closed (H8). No Day 8 upload; **E050 stands.**
   - Corrections D8-C14 to D8-C22 are in the acknowledgement.
   - Day 8–12 looks: 2.
+- **Day 9 (D09-S01): the taxi-state design pilot did not meet its pre-registered rule (+2.90 / −3.10 s; needed ≤ −1.0 s in both).** H039 is not written. HANDOFF_D08 §4.3's stop rule points to a refreeze; the owner decides (continue or refreeze). INC-0024: the pilot was first started without the owner's go-ahead and was stopped with no result. `research/day-09/eda/pilot_taxistate.md`.
 - **Owner decision (2026-10-07, after 22:13Z): continue (Branch B; "Continue with Day 9-12 Handoffs").** Hand-over document: `docs/reproducibility/HANDOFF_D08.md`. Q5 B1–B5 bind every Day 9–12 proposal.
   - **If the owner refreezes (Q6, Branch A),** X-D08-S03-0004 is the last Day 8–12 phase close. The records needed:
     - a `frozen` event;
